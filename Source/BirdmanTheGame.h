@@ -1,6 +1,11 @@
 #pragma once
-#include <Engine\OGLGame.h>
-#include <Engine\Sprite.h>
+
+//LIB
+#include <Engine/OGLGame.h>
+#include <Engine/Sprite.h>
+
+//SELF
+#include "Architecture/GameData.hpp"
 
 namespace ASGE {
 	struct GameTime;
@@ -14,8 +19,7 @@ namespace ASGE {
 *  fuss. The game logic responsible for updating and
 *  rendering the game starts here.
 */
-class BirdmanTheGame 
-	: public ASGE::OGLGame
+class BirdmanTheGame : public ASGE::OGLGame
 {
 public:
 	
@@ -50,7 +54,7 @@ private:
 	*  @param us The ms time between frames and running time
 	*  @see GameTime
 	*/
-	virtual void update(const ASGE::GameTime& ms) override;
+	virtual void update(const ASGE::GameTime& gt) override;
 	
 	/**
 	*  The rendering of the game.
@@ -60,7 +64,7 @@ private:
 	*  @param us The delta time between frames and running time
 	*  @see GameTime
 	*/
-	virtual void render(const ASGE::GameTime& ms) override;
+	virtual void render(const ASGE::GameTime& gt) override;
 
 	/**
 	*  The key handling function for the game.
@@ -74,8 +78,7 @@ private:
 	void keyHandler(const ASGE::SharedEventData data);
 
 private:
-	std::unique_ptr<ASGE::Sprite> backdrop = nullptr;
-	int key_handler_id = -1;  /**< Input Callback ID. 
-							       The callback ID assigned by the game engine. */
+	int key_handler_id = -1;  /**< Input Callback ID. The callback ID assigned by the game engine. */
+	std::unique_ptr<GameData> game_data;
 };
 

@@ -13,6 +13,45 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Architecture">
+      <UniqueIdentifier>{57b6beaf-31e2-4bb3-a3af-586fd29fe485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Architecture\Managers">
+      <UniqueIdentifier>{a1d04aae-faf2-4beb-afdc-87ea22e78452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Architecture\States">
+      <UniqueIdentifier>{d4ad2082-f6ad-4e55-9575-d0ff713ed05c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Architecture\Messages">
+      <UniqueIdentifier>{44c75660-f38e-4c12-830b-bc315b8c8637}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Architecture\Signals">
+      <UniqueIdentifier>{87b99238-50c4-4119-b005-05813263c43e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Architecture">
+      <UniqueIdentifier>{42ac9bd7-42fd-4243-aa28-ad6179d3f3da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Architecture\Managers">
+      <UniqueIdentifier>{1a219221-3517-41e8-83fb-6cb1dcb952f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Architecture\Messages">
+      <UniqueIdentifier>{d091a936-d5ea-4f94-aed4-b85a77256d95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Architecture\UI">
+      <UniqueIdentifier>{c9ec497e-d1c4-44c8-844b-99257348db21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Architecture\UI">
+      <UniqueIdentifier>{5f4ebf6e-b1cb-463a-83f0-c97da877f6a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Architecture\Signals">
+      <UniqueIdentifier>{eeba0ff9-37c6-408f-8714-3d7e62590b71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\States">
+      <UniqueIdentifier>{916aa7f9-edac-4fff-b57b-317efc628ebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\States">
+      <UniqueIdentifier>{921fc7a0-6ab1-40a5-871a-ca78190e20f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\BirdmanTheGame.h">
@@ -24,8 +63,50 @@
     <ClInclude Include="..\..\Source\targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\GameFont.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\Source\Architecture\UI\Button.hpp">
+      <Filter>Header Files\Architecture\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Signals\Connection.hpp">
+      <Filter>Header Files\Architecture\Signals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Signals\Disconnector.hpp">
+      <Filter>Header Files\Architecture\Signals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Managers\FontManager.hpp">
+      <Filter>Header Files\Architecture\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\GameData.hpp">
+      <Filter>Header Files\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Managers\InputManager.hpp">
+      <Filter>Header Files\Architecture\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\UI\Menu.hpp">
+      <Filter>Header Files\Architecture\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Messages\Message.hpp">
+      <Filter>Header Files\Architecture\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Messages\MessageQueue.hpp">
+      <Filter>Header Files\Architecture\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Signals\Signal.hpp">
+      <Filter>Header Files\Architecture\Signals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Signals\Slot.hpp">
+      <Filter>Header Files\Architecture\Signals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Managers\StateManager.hpp">
+      <Filter>Header Files\Architecture\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\States\BaseState.hpp">
+      <Filter>Header Files\Architecture\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\States\MenuState.hpp">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Constants.hpp">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -38,8 +119,32 @@
     <ClCompile Include="..\..\Source\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\GameFont.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\Source\Architecture\UI\Menu.cpp">
+      <Filter>Source Files\Architecture\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\Messages\MessageQueue.cpp">
+      <Filter>Source Files\Architecture\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\Managers\InputManager.cpp">
+      <Filter>Source Files\Architecture\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\GameData.cpp">
+      <Filter>Source Files\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\Managers\StateManager.cpp">
+      <Filter>Source Files\Architecture\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\Managers\FontManager.cpp">
+      <Filter>Source Files\Architecture\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\Signals\Connection.cpp">
+      <Filter>Source Files\Architecture\Signals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\UI\Button.cpp">
+      <Filter>Source Files\Architecture\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\States\MenuState.cpp">
+      <Filter>Source Files\States</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -115,15 +115,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\Architecture\GameData.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Managers\FontManager.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Managers\InputManager.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Managers\StateManager.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Messages\Message.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Messages\MessageQueue.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Signals\Connection.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Signals\Disconnector.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Signals\Signal.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Signals\Slot.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\States\BaseState.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\UI\Button.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\UI\Menu.hpp" />
     <ClInclude Include="..\..\Source\BirdmanTheGame.h" />
-    <ClInclude Include="..\..\Source\GameFont.h" />
+    <ClInclude Include="..\..\Source\Constants.hpp" />
+    <ClInclude Include="..\..\Source\States\MenuState.hpp" />
     <ClInclude Include="..\..\Source\stdafx.h" />
     <ClInclude Include="..\..\Source\targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\Architecture\GameData.cpp" />
+    <ClCompile Include="..\..\Source\Architecture\Managers\FontManager.cpp" />
+    <ClCompile Include="..\..\Source\Architecture\Managers\InputManager.cpp" />
+    <ClCompile Include="..\..\Source\Architecture\Managers\StateManager.cpp" />
+    <ClCompile Include="..\..\Source\Architecture\Messages\MessageQueue.cpp" />
+    <ClCompile Include="..\..\Source\Architecture\Signals\Connection.cpp" />
+    <ClCompile Include="..\..\Source\Architecture\UI\Button.cpp" />
+    <ClCompile Include="..\..\Source\Architecture\UI\Menu.cpp" />
     <ClCompile Include="..\..\Source\BirdmanTheGame.cpp" />
-    <ClCompile Include="..\..\Source\GameFont.cpp" />
     <ClCompile Include="..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\Source\States\MenuState.cpp" />
     <ClCompile Include="..\..\Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugFast|Win32'">Create</PrecompiledHeader>
