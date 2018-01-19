@@ -18,7 +18,6 @@ class StateManager
 {
 public:
 	StateManager(GameData* game_data);
-	~StateManager() = default;
 
 	void update(const ASGE::GameTime& gt);
 	void render() const;

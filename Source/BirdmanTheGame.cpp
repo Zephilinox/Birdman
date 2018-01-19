@@ -1,5 +1,8 @@
 #include "BirdmanTheGame.h"
 
+//STD
+#include <iostream>
+
 //LIB
 #include <Engine/GameTime.h>
 #include <Engine/InputEvents.h>
@@ -23,7 +26,7 @@ bool BirdmanTheGame::init()
 	{
 		return false;
 	}
-	
+
 	game_data = std::make_unique<GameData>(renderer.get());
 
 	renderer->setWindowTitle("Birbie");
@@ -33,16 +36,9 @@ bool BirdmanTheGame::init()
 
 	key_handler_id = inputs->addCallbackFnc(ASGE::EventType::E_KEY, &BirdmanTheGame::keyHandler, this);
 
-	game_data->getMessageQueue()->addListener([](Message* message)
-	{
-		if (message->message_id == "GameMessage")
-		{
-
-		}
-	});
-
-	game_data->getStateManager()->push<MenuState>();
 	game_data->getFontManager()->addFont("../../Resources/Fonts/Comic.ttf", "Default");
+	game_data->getFontManager()->addFont("../../Resources/Fonts/Comic.ttf", "Default");
+	game_data->getStateManager()->push<MenuState>();
 
 	return true;
 }

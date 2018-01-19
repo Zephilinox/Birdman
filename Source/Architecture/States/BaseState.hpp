@@ -12,7 +12,7 @@ class BaseState
 {
 public:
 	BaseState() = delete;
-	virtual ~BaseState() = default;
+	virtual ~BaseState() noexcept = default;
 
 	/**
 	*   @brief   Processes game logic

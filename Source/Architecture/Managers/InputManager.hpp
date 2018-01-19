@@ -29,7 +29,6 @@ class InputManager
 {
 public:
 	InputManager();
-	~InputManager() = default;
 
 	void update();
 	void handleInput(int key, int state);

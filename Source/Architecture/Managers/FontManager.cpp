@@ -9,10 +9,9 @@ FontManager::FontManager(ASGE::Renderer* renderer)
 
 void FontManager::addFont(const std::string& path, const std::string& name)
 {
-	//Font already exists
 	if (fonts.count(name))
 	{
-		throw std::exception();
+		throw std::runtime_error("FontManager::addFont - Font already exists");
 	}
 
 	fonts[name].path = path;
@@ -26,11 +25,6 @@ void FontManager::addFont(const std::string& path, const std::string& name, Font
 
 void FontManager::setFont(const std::string& name, FontSize size)
 {
-	if (!fonts.count(name))
-	{
-		throw std::exception();
-	}
-
 	loadFont(name, size);
 	renderer->setFont(fonts[name].ids[size]);
 }
@@ -39,7 +33,7 @@ void FontManager::loadFont(const std::string& name, FontSize size)
 {
 	if (!fonts.count(name))
 	{
-		throw std::exception();
+		throw std::runtime_error("FontManager::loadFont - Font doesn't exist");
 	}
 
 	if (!fonts[name].ids.count(size))
@@ -55,7 +49,7 @@ void FontManager::loadFont(const std::string& name, FontSize size)
 		//Second call didn't help
 		if (fonts[name].ids[size] < 0)
 		{
-			throw std::exception();
+			throw std::runtime_error("FontManager::loadFont - Could not load font");
 		}
 	}
 }

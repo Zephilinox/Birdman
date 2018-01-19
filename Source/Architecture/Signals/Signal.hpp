@@ -11,6 +11,7 @@
 /*
 Args determines the arguments that the signal can emit
 which is also the parameters functions must accept
+Automatically invalidates all Connections created by calling connect()
 */
 template <typename... Args>
 class Signal
@@ -23,16 +24,13 @@ public:
 		, slot_id_counter(0)
 	{}
 
-	//Automatically invalidates all Connections created by calling connect()
-	~Signal() = default;
-
 	//Connect to a non-member function/lambda/etc.
 	//Connecting to an invalid function, such as a nullptr, will throw an exception.
 	Connection connect(FunctionType function)
 	{
 		if (!function)
 		{
-			throw std::exception();
+			throw std::runtime_error("Signal::connect - Invalid function");
 		}
 
 		slot_id_counter++;

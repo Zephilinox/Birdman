@@ -34,7 +34,7 @@ public:
 	*  memory inside the game's destructor. For example
 	*  game fonts need to be deallocated.
 	*/ 
-	~BirdmanTheGame();
+	~BirdmanTheGame() noexcept;
 
 	/**
 	*  The initialisation of the game.

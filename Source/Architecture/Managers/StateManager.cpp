@@ -6,11 +6,6 @@
 //SELF
 #include "../States/BaseState.hpp"
 
-/**
-*   @brief   Constructor.
-*   @details Needs to store the InvadersGame so that
-it can be passed on to the states.
-*/
 StateManager::StateManager(GameData* game_data)
 	: game_data(game_data)
 {
@@ -20,7 +15,7 @@ void StateManager::update(const ASGE::GameTime& gt)
 {
 	if (states.empty())
 	{
-		throw std::runtime_error("No states left in stack");
+		throw std::runtime_error("StateManager::update - Stack is empty");
 	}
 
 	current_state = states.back();
@@ -55,7 +50,7 @@ BaseState* StateManager::top()
 {
 	if (states.empty())
 	{
-		throw std::runtime_error("No states left in stack");
+		throw std::runtime_error("StateManager::top - Stack is empty");
 	}
 
 	return states.back().get();
@@ -71,7 +66,7 @@ void StateManager::pop()
 {
 	if (states.empty())
 	{
-		throw std::runtime_error("No states left in stack");
+		throw std::runtime_error("StateManager::pop - Stack is empty");
 	}
 	
 	states.pop_back();

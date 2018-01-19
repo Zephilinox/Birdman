@@ -4,13 +4,13 @@
 //SELF
 #include "BirdmanTheGame.h"
 
-#define ENABLE_CONSOLE false
+#define ENABLE_CONSOLE true
 
 #if ENABLE_CONSOLE
 #pragma comment(linker, "/SUBSYSTEM:console /ENTRY:mainCRTStartup")
 int main()
 #else
-#define WINDOWS_32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:WinMainCRTStartup")
 int WINAPI WinMain(

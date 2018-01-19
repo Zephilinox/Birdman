@@ -13,9 +13,6 @@ class MessageQueue
 public:
 	using FunctionType = Signal<Message*>::FunctionType;
 
-	MessageQueue() = default;
-	~MessageQueue() = default;
-
 	//1000 microseconds = 1 millisecond
 	//Note: This is not a hard limit. Highly dependant on the number of listeners.
 	void processMessages(std::chrono::microseconds max_processing_time);

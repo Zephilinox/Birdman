@@ -16,7 +16,7 @@ public:
 
 	struct Font
 	{
-		std::unordered_map<FontID, FontSize> ids;
+		std::unordered_map<FontSize, FontID> ids;
 		std::string path;
 	};
 

@@ -30,6 +30,6 @@ Clients no longer need to care about what type signal is when storing connection
 class Disconnector
 {
 public:
-	virtual ~Disconnector() = default;
+	virtual ~Disconnector() noexcept = default;
 	virtual bool disconnect(Connection& c) = 0;
 };
