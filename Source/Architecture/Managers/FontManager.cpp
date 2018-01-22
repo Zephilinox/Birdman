@@ -23,12 +23,6 @@ void FontManager::addFont(const std::string& path, const std::string& name, Font
 	loadFont(name, size);
 }
 
-void FontManager::setFont(const std::string& name, FontSize size)
-{
-	loadFont(name, size);
-	renderer->setFont(fonts[name].ids[size]);
-}
-
 void FontManager::loadFont(const std::string& name, FontSize size)
 {
 	if (!fonts.count(name))
@@ -42,16 +36,17 @@ void FontManager::loadFont(const std::string& name, FontSize size)
 
 		if (fonts[name].ids[size] < 0)
 		{
-			//NOTE: We have to call this again for some reason. The first call sometimes causes glGenTextures to fail.
-			fonts[name].ids[size] = renderer->loadFont(fonts[name].path.c_str(), size);
-		}
-
-		//Second call didn't help
-		if (fonts[name].ids[size] < 0)
-		{
 			throw std::runtime_error("FontManager::loadFont - Could not load font");
 		}
 	}
 }
 
+void FontManager::setFont(const std::string& name, FontSize size)
+{
+	if (!fonts.count(name) || !fonts[name].ids.count(size))
+	{
+		throw std::runtime_error("FontManager::setFont - Font with that name and size does not exist, did you load it?");
+	}
 
+	renderer->setFont(fonts[name].ids[size]);
+}

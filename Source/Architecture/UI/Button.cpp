@@ -6,11 +6,13 @@
 
 Button::Button()
 {
-
 }
 
 void Button::render(GameData* game_data) const
 {
+	//TODO: FIX
+	game_data->getFontManager()->loadFont("Default", 43);
+	game_data->getFontManager()->loadFont("Default", 44);
 
 	if (selected)
 	{
