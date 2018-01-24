@@ -3,6 +3,7 @@
 //SELF
 #include "../Architecture/States/BaseState.hpp"
 #include "../Architecture/UI/Menu.hpp"
+#include "../Architecture/Dialogues/DialogueTree.hpp"
 
 class GameData;
 
@@ -20,5 +21,8 @@ public:
 	void onInactive() override final;
 
 private:
+	void dialogue_init();
+
 	Menu menu;
+	DialogueTree dialogues;
 };

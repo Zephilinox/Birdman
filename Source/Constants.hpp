@@ -5,7 +5,7 @@
 @details Add any new constants to this file. 
 */
 
-constexpr int WINDOW_WIDTH = 320;  /**< The window width. Defines how wide the game window is. */
+constexpr int WINDOW_WIDTH = 640;  /**< The window width. Defines how wide the game window is. */
 constexpr int WINDOW_HEIGHT = 640;  /**< The window height. Defines the height of the game window */
 constexpr int TILE_SIZE = 32;
 constexpr float PI = 3.14159f;

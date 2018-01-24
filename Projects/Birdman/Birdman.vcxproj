@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Architecture\Animation.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Dialogues\DialogueTree.hpp" />
     <ClInclude Include="..\..\Source\Architecture\GameData.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Managers\FontManager.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Managers\InputManager.hpp" />

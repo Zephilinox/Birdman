@@ -52,6 +52,9 @@
     <Filter Include="Source Files\States">
       <UniqueIdentifier>{921fc7a0-6ab1-40a5-871a-ca78190e20f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Architecture\Dialogues">
+      <UniqueIdentifier>{6a4a8597-8d86-4f86-a4f6-afb65d36fbb1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\BirdmanTheGame.h">
@@ -110,6 +113,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Architecture\Animation.hpp">
       <Filter>Header Files\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Dialogues\DialogueTree.hpp">
+      <Filter>Header Files\Architecture\Dialogues</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
