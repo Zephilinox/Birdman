@@ -6,8 +6,6 @@
 #include <string>
 #include <experimental/vector>
 
-
-
 class Actor
 {
 public:
@@ -21,22 +19,26 @@ public:
 		{
 			if (f == flag)
 			{
+				std::cout << name + ": HAS " + flag + " FLAG\n";
 				return true;
 			}
 		}
 
+		std::cout << name + ": DOES NOT HAVE " + flag + " FLAG\n";
 		return false;
 	}
 
 	void addFlag(const std::string flag)
 	{
+		std::cout << name + ": FLAG " + flag + " ADDED\n";
 		flags.push_back(flag);
 	}
 
 	void removeFlag(const std::string flag)
 	{
-		std::experimental::erase_if(flags, [flag](const auto& f)
+		std::experimental::erase_if(flags, [&](const auto& f)
 		{
+			std::cout << name + ": FLAG " + flag + " REMOVED\n";
 			return f == flag;
 		});
 	}

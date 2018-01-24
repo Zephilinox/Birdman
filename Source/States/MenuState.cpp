@@ -37,11 +37,11 @@ void MenuState::update(const ASGE::GameTime&)
 	{
 		if (!dialogues.playing)
 		{
-			std::cout << dialogues.play("start") << "\n";
+			std::cout << dialogues.play("start") << "\n\n";
 		}
 		else
 		{
-			std::cout << dialogues.next() << "\n";
+			std::cout << dialogues.next() << "\n\n";
 		}
 	}
 }
