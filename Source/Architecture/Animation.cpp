@@ -1,14 +1,12 @@
 #include "Animation.hpp"
 
 //LIB
-#include <Engine\Renderer.h>
+#include <Engine/Renderer.h>
 
 Animation::Animation(ASGE::Renderer* renderer, bool loop)
 	: renderer(renderer)
 	, loop(loop)
-{
-
-}
+{}
 
 void Animation::update(double dt_milli)
 {
