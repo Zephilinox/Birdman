@@ -41,7 +41,28 @@ void MenuState::update(const ASGE::GameTime&)
 		}
 		else
 		{
-			std::cout << dialogues.next() << "\n\n";
+			if (dialogues.player_option)
+			{
+				int i = 0;
+				for (Dialogue* d : dialogues.current_player_options)
+				{
+					++i;
+					std::string txt = d->text();
+					if (txt != "")
+					{
+						std::cout << "Option " << i << ": " << txt << "\n";
+					}
+				}
+
+				int choice = -1;
+				std::cout << "Choice: ";
+				std::cin >> choice;
+				std::cout << dialogues.play(dialogues.current_player_options[choice - 1]->next_dialogue()) << "\n\n";
+			}
+			else
+			{
+				std::cout << dialogues.next() << "\n\n";
+			}
 		}
 	}
 }
@@ -64,66 +85,122 @@ void MenuState::dialogue_init()
 	dialogues.addDialogue("start", "strange_npc",
 	[&]()
 	{	
-		if (dialogues.getPlayer()->hasFlag("npc_found"))
+		if (dialogues.getPlayer()->hasFlag("npc_killed"))
 		{
-			return "*You stand over the dead corpse of the man who stole your sword*";
+			if (dialogues.getSpeaker()->hasFlag("stole_sword"))
+			{
+				return "*You stand over the dead corpse of the man who stole your sword*";
+			}
+			else
+			{
+				return "*You stand over the dead corpse of the man you randomly slaughtered*";
+			}
 		}
 
-		if (dialogues.getPlayer()->hasFlag("looking_for_npc"))
+		if (dialogues.getPlayer()->hasFlag("npc_found"))
 		{
-			dialogues.getPlayer()->addFlag("npc_found");
+			dialogues.getPlayer()->addFlag("npc_killed");
 			return "No! Please! *ARRRGH*";
 		}
 
-		if (dialogues.getActor("strange_npc")->hasFlag("stole_sword"))
+		if (dialogues.getSpeaker()->hasFlag("stole_sword"))
 		{
 			return "*The strange NPC who stole your sword is nowhere to be found...";
 		}
 
-		if (!dialogues.getActor("strange_npc")->hasFlag("met_player"))
+		if (!dialogues.getSpeaker()->hasFlag("met_player"))
 		{
-			return "What? What do you want? Leave me be, peasant. I have no time for beggars.";
+			return "What? Who are you? What do you want?";
 		}
 
 		return "What? You're still here? What is it now.";
 	},
 	[&]()
 	{
-		if (!dialogues.getActor("strange_npc")->hasFlag("met_player"))
-		{
-			dialogues.getActor("strange_npc")->addFlag("met_player");
-		}
+		static bool added_button = false;
 
-		if (dialogues.getPlayer()->hasFlag("npc_found"))
+		dialogues.getSpeaker()->addFlag("met_player");
+
+		if (dialogues.getPlayer()->hasFlag("npc_killed"))
 		{
 			//TODO: remove button function
-			menu.getButton(2).setName("INVALID");
+			if (added_button)
+			{
+				menu.getButton(2).setName("INVALID");
+			}
 
 			return "end";
 		}
 
-		if (dialogues.getActor("strange_npc")->hasFlag("stole_sword"))
+		if (dialogues.getSpeaker()->hasFlag("stole_sword"))
 		{
-			static bool addedButton = false;
+			//hacky
+			//TODO: get button by name
 
-			if (!addedButton)
+			if (!added_button)
 			{
 				menu.addButton(WINDOW_WIDTH / 2 - 80, WINDOW_HEIGHT / 2 - 120, "FIND STRANGE NPC", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 				menu.getButton(2).on_click.connect(
 					[&]()
 				{
-					dialogues.getPlayer()->addFlag("looking_for_npc");
+					dialogues.getPlayer()->addFlag("npc_found");
 					std::cout << "NPC FOUND\n";
 				});
-				addedButton = true;
+				added_button = true;
 			}
 
 			return "";
 		}
 		else
 		{
-			return "start2";
+			return "start_options";
 		}
+	});
+
+	dialogues.addPlayerOption("start_options",
+	[&]()
+	{
+		return "Hello.";
+	},
+	[&]()
+	{
+		return "start2";
+	});
+
+	dialogues.addPlayerOption("start_options",
+	[&]()
+	{
+		return "Howdy.";
+	},
+	[&]()
+	{
+		return "start2";
+	});
+
+	dialogues.addPlayerOption("start_options",
+	[&]()
+	{
+		return "Hey.";
+	},
+	[&]()
+	{
+		return "start2";
+	});
+
+	dialogues.addPlayerOption("start_options",
+	[&]()
+	{
+		if (dialogues.getPlayer()->hasFlag("super_cool_sword_thingy"))
+		{
+			return "Die!";
+		}
+
+		return "";
+	},
+	[&]()
+	{
+		dialogues.getPlayer()->addFlag("npc_found");
+		return "start";
 	});
 
 	dialogues.addDialogue("start2", "strange_npc", "Well I'm quite busy right now.", "bye");
@@ -133,14 +210,14 @@ void MenuState::dialogue_init()
 	{
 		if (dialogues.getPlayer()->hasFlag("super_cool_sword_thingy"))
 		{
-			dialogues.getActor("strange_npc")->addFlag("plans_to_steal_sword");
+			dialogues.getSpeaker()->addFlag("plans_to_steal_sword");
 			return "Wait a minute...";
 		}
 		return "Speak to you another time.";
 	},
 	[&]()
 	{
-		if (dialogues.getActor("strange_npc")->hasFlag("plans_to_steal_sword"))
+		if (dialogues.getSpeaker()->hasFlag("plans_to_steal_sword"))
 		{
 			return "steal_sword";
 		}
@@ -152,8 +229,8 @@ void MenuState::dialogue_init()
 	[&]()
 	{
 		dialogues.getPlayer()->removeFlag("super_cool_sword_thingy");
-		dialogues.getActor("strange_npc")->removeFlag("plans_to_steal_sword");
-		dialogues.getActor("strange_npc")->addFlag("stole_sword");
+		dialogues.getSpeaker()->removeFlag("plans_to_steal_sword");
+		dialogues.getSpeaker()->addFlag("stole_sword");
 
 		return "*Steals Your Sword*";
 	}, "");
@@ -161,8 +238,15 @@ void MenuState::dialogue_init()
 	dialogues.addDialogue("end", "player",
 	[&]()
 	{
-		dialogues.getPlayer()->addFlag("super_cool_sword_thingy");
+		if (dialogues.getSpeaker()->hasFlag("stole_sword"))
+		{
+			dialogues.getPlayer()->addFlag("super_cool_sword_thingy");
 
-		return "He got what he deserved, and now I have my sword back.";
+			return "He got what he deserved, and now I have my sword back.";
+		}
+		else
+		{
+			return "I don't know why I did that...";
+		}
 	}, "");
 }

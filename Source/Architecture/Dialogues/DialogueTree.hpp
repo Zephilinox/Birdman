@@ -3,8 +3,10 @@
 //STD
 #include <functional>
 #include <vector>
+#include <unordered_set>
 #include <string>
 #include <experimental/vector>
+#include <iomanip>
 
 class Actor
 {
@@ -15,38 +17,46 @@ public:
 
 	bool hasFlag(const std::string flag)
 	{
-		for (const auto& f : flags)
+		if (flags.count(flag))
 		{
-			if (f == flag)
-			{
-				std::cout << name + ": HAS " + flag + " FLAG\n";
-				return true;
-			}
+			std::cout << "FLAG " + flag + " IS ON " + name + " FLAG\n";
+			return true;
 		}
-
-		std::cout << name + ": DOES NOT HAVE " + flag + " FLAG\n";
-		return false;
+		else
+		{
+			std::cout << "FLAG " + flag + " IS NOT ON " + name + " FLAG\n";
+			return false;
+		}
 	}
 
-	void addFlag(const std::string flag)
+	void addFlag(std::string flag)
 	{
-		std::cout << name + ": FLAG " + flag + " ADDED\n";
-		flags.push_back(flag);
+		if (flags.insert(flag).second)
+		{
+			std::cout << "FLAG " + flag + " ADDED ON" + name + "\n";
+		}
+		else
+		{
+			std::cout << "FLAG " + flag + " FAILED TO ADD ON " + name + "\n";
+		}
 	}
 
 	void removeFlag(const std::string flag)
 	{
-		std::experimental::erase_if(flags, [&](const auto& f)
+		if (flags.erase(flag))
 		{
-			std::cout << name + ": FLAG " + flag + " REMOVED\n";
-			return f == flag;
-		});
+			std::cout << "FLAG " + flag + " REMOVED ON " + name + "\n";
+		}
+		else
+		{
+			std::cout << "FLAG " + flag + " FAILED TO REMOVE ON " + name + "\n";
+		}
 	}
 
 	const std::string name;
 
 private:
-	std::vector<std::string> flags;
+	std::unordered_set<std::string> flags;
 };
 
 
@@ -145,6 +155,11 @@ public:
 		return getActor("player");
 	}
 
+	Actor* getSpeaker()
+	{
+		return getActor(current_dialogue->speaker);
+	}
+
 	std::string play(std::string dialogue_name)
 	{
 		if (dialogue_name == "")
@@ -153,19 +168,42 @@ public:
 			return "";
 		}
 
+		if (player_option)
+		{
+			current_player_options.clear();
+			player_option = false;
+		}
+
 		for (auto& d : dialogues)
 		{
 			if (d.name == dialogue_name)
 			{
-				current_dialogue = &d;
-				playing = true;
-				return d.speaker + ": " + d.text();
+				if (!player_option && !d.player_option)
+				{
+					current_dialogue = &d;
+					playing = true;
+					return d.speaker + ": " + d.text();
+				}
+				else
+				{
+					current_dialogue = nullptr;
+					playing = true;
+					player_option = true;
+					current_player_options.push_back(&d);
+				}
 			}
 		}
 
-		current_dialogue = nullptr;
-		playing = false;
-		return "";
+		if (player_option)
+		{
+			return "";
+		}
+		else
+		{
+			current_dialogue = nullptr;
+			playing = false;
+			return "";
+		}
 	}
 
 	std::string next()
@@ -180,6 +218,8 @@ public:
 	}
 
 	bool playing = false;
+	bool player_option = false;
+	std::vector<Dialogue*> current_player_options;
 private:
 	std::vector<Dialogue> dialogues;
 	std::vector<Actor> actors;
