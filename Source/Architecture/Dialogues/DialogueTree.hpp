@@ -136,6 +136,24 @@ public:
 		dialogues.emplace_back(std::move(dialogue_name), "player", dialogue_text, next_dialogue, true);
 	}
 
+	void addPlayerOption(std::string dialogue_name,
+		std::string dialogue_text, Dialogue::FunctionType next_dialogue)
+	{
+		dialogues.emplace_back(std::move(dialogue_name), "player", [dialogue_text]() {return dialogue_text; }, next_dialogue, true);
+	}
+
+	void addPlayerOption(std::string dialogue_name,
+		Dialogue::FunctionType dialogue_text, std::string next_dialogue)
+	{
+		dialogues.emplace_back(std::move(dialogue_name), "player", dialogue_text, [next_dialogue]() {return next_dialogue; }, true);
+	}
+
+	void addPlayerOption(std::string dialogue_name,
+		std::string dialogue_text, std::string next_dialogue)
+	{
+		dialogues.emplace_back(std::move(dialogue_name), "player", [dialogue_text]() {return dialogue_text; }, [next_dialogue]() {return next_dialogue; }, true);
+	}
+
 	Actor* getActor(std::string name)
 	{
 		for (int i = 0; i < actors.size(); ++i)
@@ -182,7 +200,21 @@ public:
 				{
 					current_dialogue = &d;
 					playing = true;
-					return d.speaker + ": " + d.text();
+					std::cout << "RUNNING DIALOGUE TEXT DETERMINATOR FOR '" << d.name << "'\n";
+					std::string text = d.text();
+
+					if (text != "")
+					{
+						text = d.speaker + ": " + text;
+						return std::move(text);
+					}
+					else
+					{
+						std::cout << "ERROR: DIALOGUE TEXT FOR '" << d.name << "' IS EMPTY. STOPPING.\n";
+						current_dialogue = nullptr;
+						playing = false;
+						return "";
+					}
 				}
 				else
 				{
@@ -210,7 +242,10 @@ public:
 	{
 		if (current_dialogue)
 		{
-			return play(current_dialogue->next_dialogue());
+			std::cout << "\nRUNNING NEXT DIALOGUE DETERMINATOR FOR '" << current_dialogue->name << "'\n";
+			std::string n = current_dialogue->next_dialogue();
+			std::cout << "GOING TO NEXT DIALOGUE: '" << n << "'\n";
+			return play(n);
 		}
 
 		playing = false;

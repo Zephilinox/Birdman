@@ -157,51 +157,21 @@ void MenuState::dialogue_init()
 		}
 	});
 
-	dialogues.addPlayerOption("start_options",
-	[&]()
-	{
-		return "Hello.";
-	},
-	[&]()
-	{
-		return "start2";
-	});
-
-	dialogues.addPlayerOption("start_options",
-	[&]()
-	{
-		return "Howdy.";
-	},
-	[&]()
-	{
-		return "start2";
-	});
-
-	dialogues.addPlayerOption("start_options",
-	[&]()
-	{
-		return "Hey.";
-	},
-	[&]()
-	{
-		return "start2";
-	});
+	dialogues.addPlayerOption("start_options", "Hello.", "start2");
+	dialogues.addPlayerOption("start_options", "Howdy.", "start2");
+	dialogues.addPlayerOption("start_options", "Hey.", "start2");
 
 	dialogues.addPlayerOption("start_options",
 	[&]()
 	{
 		if (dialogues.getPlayer()->hasFlag("super_cool_sword_thingy"))
 		{
+			dialogues.getPlayer()->addFlag("npc_found");
 			return "Die!";
 		}
 
 		return "";
-	},
-	[&]()
-	{
-		dialogues.getPlayer()->addFlag("npc_found");
-		return "start";
-	});
+	}, "start");
 
 	dialogues.addDialogue("start2", "strange_npc", "Well I'm quite busy right now.", "bye");
 
