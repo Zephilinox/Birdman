@@ -148,7 +148,7 @@ std::string DialogueTree::next()
 	if (current_dialogue)
 	{
 		std::cout << "\nRUNNING NEXT DIALOGUE DETERMINATOR FOR '" << current_dialogue->name << "'\n";
-		std::string n = current_dialogue->next_dialogue();
+		std::string n = current_dialogue->next();
 		std::cout << "GOING TO NEXT DIALOGUE: '" << n << "'\n";
 		return play(n);
 	}

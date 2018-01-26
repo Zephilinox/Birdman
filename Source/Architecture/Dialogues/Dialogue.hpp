@@ -18,5 +18,5 @@ public:
 	const bool player_option;
 
 	const FunctionType text;
-	const FunctionType next_dialogue;
+	const FunctionType next;
 };

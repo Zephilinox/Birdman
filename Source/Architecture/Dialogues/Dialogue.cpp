@@ -4,6 +4,6 @@ Dialogue::Dialogue(std::string dialogue_name, std::string speaker_name, Function
 	: name(dialogue_name)
 	, speaker(speaker_name)
 	, text(dialogue_text)
-	, next_dialogue(next_dialogue)
+	, next(next_dialogue)
 	, player_option(player_option)
 {};

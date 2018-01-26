@@ -13,7 +13,7 @@ bool Actor::hasFlag(const std::string flag)
 	}
 	else
 	{
-		std::cout << "FLAG " + flag + " IS NOT ON " + name + " FLAG\n";
+		//std::cout << "FLAG " + flag + " IS NOT ON " + name + " FLAG\n";
 		return false;
 	}
 }
@@ -26,7 +26,7 @@ void Actor::addFlag(std::string flag)
 	}
 	else
 	{
-		std::cout << "FLAG " + flag + " FAILED TO ADD ON " + name + "\n";
+		//std::cout << "FLAG " + flag + " FAILED TO ADD ON " + name + "\n";
 	}
 }
 
@@ -38,6 +38,6 @@ void Actor::removeFlag(const std::string flag)
 	}
 	else
 	{
-		std::cout << "FLAG " + flag + " FAILED TO REMOVE ON " + name + "\n";
+		//std::cout << "FLAG " + flag + " FAILED TO REMOVE ON " + name + "\n";
 	}
 }
