@@ -55,6 +55,9 @@
     <Filter Include="Header Files\Architecture\Dialogues">
       <UniqueIdentifier>{6a4a8597-8d86-4f86-a4f6-afb65d36fbb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Architecture\Dialogues">
+      <UniqueIdentifier>{deb0fdee-8acc-4362-825b-cf07789740f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\BirdmanTheGame.h">
@@ -117,6 +120,12 @@
     <ClInclude Include="..\..\Source\Architecture\Dialogues\DialogueTree.hpp">
       <Filter>Header Files\Architecture\Dialogues</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Dialogues\Actor.hpp">
+      <Filter>Header Files\Architecture\Dialogues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Dialogues\Dialogue.hpp">
+      <Filter>Header Files\Architecture\Dialogues</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -157,6 +166,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Architecture\Animation.cpp">
       <Filter>Source Files\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\Dialogues\Actor.cpp">
+      <Filter>Source Files\Architecture\Dialogues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\Dialogues\Dialogue.cpp">
+      <Filter>Source Files\Architecture\Dialogues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\Dialogues\DialogueTree.cpp">
+      <Filter>Source Files\Architecture\Dialogues</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

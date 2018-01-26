@@ -44,20 +44,26 @@ void MenuState::update(const ASGE::GameTime&)
 			if (dialogues.player_option)
 			{
 				int i = 0;
+				int skipped_options = 0;
 				for (Dialogue* d : dialogues.current_player_options)
 				{
 					std::string txt = d->text();
+
 					if (txt != "")
 					{
 						++i;
 						std::cout << "Option " << i << ": " << txt << "\n";
+					}
+					else
+					{
+						skipped_options++;
 					}
 				}
 
 				int choice = -1;
 				std::cout << "Choice: ";
 				std::cin >> choice;
-				std::cout << dialogues.play(dialogues.current_player_options[choice - 1]->next_dialogue()) << "\n\n";
+				std::cout << dialogues.play(dialogues.current_player_options[choice - 1 + skipped_options]->next_dialogue()) << "\n\n";
 			}
 			else
 			{
