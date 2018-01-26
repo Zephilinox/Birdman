@@ -46,10 +46,10 @@ void MenuState::update(const ASGE::GameTime&)
 				int i = 0;
 				for (Dialogue* d : dialogues.current_player_options)
 				{
-					++i;
 					std::string txt = d->text();
 					if (txt != "")
 					{
+						++i;
 						std::cout << "Option " << i << ": " << txt << "\n";
 					}
 				}
@@ -105,7 +105,7 @@ void MenuState::dialogue_init()
 
 		if (dialogues.getSpeaker()->hasFlag("stole_sword"))
 		{
-			return "*The strange NPC who stole your sword is nowhere to be found...";
+			return "*The strange NPC who stole your sword is nowhere to be found...*";
 		}
 
 		if (!dialogues.getSpeaker()->hasFlag("met_player"))
@@ -172,6 +172,8 @@ void MenuState::dialogue_init()
 
 		return "";
 	}, "start");
+
+	dialogues.addPlayerOption("start_options", "Bye.", "");
 
 	dialogues.addDialogue("start2", "strange_npc", "Well I'm quite busy right now.", "bye");
 
