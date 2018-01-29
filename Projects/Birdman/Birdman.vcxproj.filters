@@ -58,6 +58,9 @@
     <Filter Include="Source Files\Architecture\Dialogues">
       <UniqueIdentifier>{deb0fdee-8acc-4362-825b-cf07789740f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Dialogue">
+      <UniqueIdentifier>{3fd2e72a-c990-4c5b-958d-8db2e861bcaa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\BirdmanTheGame.h">
@@ -176,5 +179,10 @@
     <ClCompile Include="..\..\Source\Architecture\Dialogues\DialogueTree.cpp">
       <Filter>Source Files\Architecture\Dialogues</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Source\Dialogue\example.cpp">
+      <Filter>Source Files\Dialogue</Filter>
+    </None>
   </ItemGroup>
 </Project>

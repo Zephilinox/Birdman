@@ -10,26 +10,18 @@ void DialogueTree::addDialogue(std::string dialogue_name, std::string speaker_na
 
 void DialogueTree::addDialogue(std::string dialogue_name, std::string speaker_name, std::string dialogue_text, Dialogue::FunctionType next_dialogue)
 {
-	dialogues.emplace_back(std::move(dialogue_name), std::move(speaker_name),
-	[dialogue_text]()
-	{
-		return dialogue_text;
-	}, next_dialogue);
+	dialogues.emplace_back(std::move(dialogue_name), std::move(speaker_name),[dialogue_text](){	return dialogue_text;}, next_dialogue);
 }
 
 void DialogueTree::addDialogue(std::string dialogue_name, std::string speaker_name, Dialogue::FunctionType dialogue_text, std::string next_dialogue)
 {
-	dialogues.emplace_back(std::move(dialogue_name), std::move(speaker_name), dialogue_text,
-	[next_dialogue]()
-	{
-		return next_dialogue;
-	});
+	dialogues.emplace_back(std::move(dialogue_name), std::move(speaker_name), dialogue_text,[next_dialogue](){	return next_dialogue;});
 }
 
 void DialogueTree::addDialogue(std::string dialogue_name, std::string speaker_name, std::string dialogue_text, std::string next_dialogue)
 {
 	dialogues.emplace_back(std::move(dialogue_name), std::move(speaker_name),
-		[dialogue_text]()
+	[dialogue_text]()
 	{
 		return dialogue_text;
 	},
@@ -61,7 +53,7 @@ void DialogueTree::addPlayerOption(std::string dialogue_name, std::string dialog
 
 Actor* DialogueTree::getActor(std::string name)
 {
-	for (int i = 0; i < actors.size(); ++i)
+	for (size_t i = 0; i < actors.size(); ++i)
 	{
 		if (actors[i].name == name)
 		{
@@ -73,18 +65,20 @@ Actor* DialogueTree::getActor(std::string name)
 	return &actors.back();
 }
 
-Actor * DialogueTree::getPlayer()
+Actor* DialogueTree::getPlayer()
 {
 	return getActor("player");
 }
 
-Actor * DialogueTree::getSpeaker()
+Actor* DialogueTree::getSpeaker()
 {
 	return getActor(current_dialogue->speaker);
 }
 
 std::string DialogueTree::play(std::string dialogue_name)
 {
+	//Don't ask how this works. it's a mess.
+
 	if (dialogue_name == "")
 	{
 		playing = false;

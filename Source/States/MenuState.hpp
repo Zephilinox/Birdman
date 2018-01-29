@@ -17,8 +17,6 @@ public:
 
 	void update(const ASGE::GameTime&) override final;
 	void render() const override final;
-	void onActive() override final;
-	void onInactive() override final;
 
 private:
 	void dialogue_init();
