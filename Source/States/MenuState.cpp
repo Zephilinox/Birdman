@@ -81,6 +81,14 @@ void MenuState::render() const
 	menu.render();
 }
 
+void MenuState::onActive()
+{
+}
+
+void MenuState::onInactive()
+{
+}
+
 void MenuState::dialogue_init()
 {
 	//Kinda messy, but this might be the best way to do this depending on how big our dialogue branches become per level.
