@@ -134,6 +134,7 @@
     <ClInclude Include="..\..\Source\Architecture\UI\Menu.hpp" />
     <ClInclude Include="..\..\Source\BirdmanTheGame.h" />
     <ClInclude Include="..\..\Source\Constants.hpp" />
+    <ClInclude Include="..\..\Source\Dialogue\VisualDialogue.hpp" />
     <ClInclude Include="..\..\Source\States\GameState.hpp" />
     <ClInclude Include="..\..\Source\States\MenuState.hpp" />
     <ClInclude Include="..\..\Source\stdafx.h" />
@@ -153,6 +154,7 @@
     <ClCompile Include="..\..\Source\Architecture\UI\Button.cpp" />
     <ClCompile Include="..\..\Source\Architecture\UI\Menu.cpp" />
     <ClCompile Include="..\..\Source\BirdmanTheGame.cpp" />
+    <ClCompile Include="..\..\Source\Dialogue\VisualDialogue.cpp" />
     <ClCompile Include="..\..\Source\main.cpp" />
     <ClCompile Include="..\..\Source\States\GameState.cpp" />
     <ClCompile Include="..\..\Source\States\MenuState.cpp" />

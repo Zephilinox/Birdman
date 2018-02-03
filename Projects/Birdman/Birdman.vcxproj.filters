@@ -61,6 +61,9 @@
     <Filter Include="Source Files\Dialogue">
       <UniqueIdentifier>{3fd2e72a-c990-4c5b-958d-8db2e861bcaa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Dialogue">
+      <UniqueIdentifier>{9b58bce6-73a4-4814-9d7a-0b7b1055cc4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\BirdmanTheGame.h">
@@ -132,6 +135,9 @@
     <ClInclude Include="..\..\Source\States\GameState.hpp">
       <Filter>Header Files\Architecture\States</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Dialogue\VisualDialogue.hpp">
+      <Filter>Header Files\Dialogue</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -184,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\States\GameState.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Dialogue\VisualDialogue.cpp">
+      <Filter>Source Files\Dialogue</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

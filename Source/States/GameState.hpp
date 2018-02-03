@@ -4,6 +4,7 @@
 #include "../Architecture/States/BaseState.hpp"
 #include "../Architecture/UI/Menu.hpp"
 #include "../Architecture/Dialogues/DialogueTree.hpp"
+#include "../Dialogue/VisualDialogue.hpp"
 
 class GameData;
 
@@ -23,8 +24,6 @@ public:
 private:
 	void dialogue_init();
 
-	Menu dialogue_menu;
-	DialogueTree dialogues;
-	std::string dialogue_text;
-	int selected_option = -1;
+	DialogueTree dialogue_tree;
+	VisualDialogue visual_dialogue;
 };
