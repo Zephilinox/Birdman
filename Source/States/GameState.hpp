@@ -26,5 +26,5 @@ private:
 	Menu dialogue_menu;
 	DialogueTree dialogues;
 	std::string dialogue_text;
-	std::vector<std::pair<int, std::string>> player_options;
+	int selected_option = -1;
 };

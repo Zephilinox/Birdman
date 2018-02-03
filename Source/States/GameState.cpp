@@ -25,18 +25,23 @@ void GameState::update(const ASGE::GameTime&)
 
 	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER))
 	{
-		if (!dialogues.player_option)
+		if (selected_option >= 0)
+		{
+			dialogue_text = dialogues.play(dialogues.current_player_options[selected_option]->next());
+			selected_option = -1;
+		}
+		else
 		{
 			const auto& txt = dialogues.next();
 			if (!dialogues.player_option)
 			{
 				dialogue_text = txt;
-
-				if (dialogue_text == "")
-				{
-					dialogue_text = dialogues.play("start_extra");
-				}
 			}
+		}
+
+		if (dialogue_text == "")
+		{
+			dialogue_text = dialogues.play("start_extra");
 		}
 	}
 
@@ -50,13 +55,12 @@ void GameState::update(const ASGE::GameTime&)
 			std::string txt = dialogues.current_player_options[i]->text();
 			if (txt != "")
 			{
-				auto& next = dialogues.current_player_options[i]->next;
 				int id = dialogue_menu.addButton(0, 200 + (validOptions * 50), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 				dialogue_menu.getButton(id).on_click.connect(
-					[&]()
+				[&, i]()
 				{
 					has_set_player_options = false;
-					dialogues.play(next());
+					selected_option = i;
 					dialogue_menu = Menu(game_data);
 				});
 				validOptions++;
@@ -100,10 +104,21 @@ void GameState::dialogue_init()
 	dialogues.addPlayerOption("start_extra",
 	[&]()
 	{
+		if (dialogues.getActor("strange_npc")->hasFlag("stole_sword") && !dialogues.getPlayer()->hasFlag("npc_found"))
+		{
+			return "Find Strange NPC";
+		}
+
 		return "Strange NPC";
 	},
 	[&]()
-	{
+	{	
+		if (dialogues.getActor("strange_npc")->hasFlag("stole_sword") && !dialogues.getPlayer()->hasFlag("npc_found"))
+		{
+			dialogues.getPlayer()->addFlag("npc_found");
+			return "";
+		}
+
 		return "start";
 	});
 
@@ -142,41 +157,15 @@ void GameState::dialogue_init()
 	},
 		[&]()
 	{
-		//hacky, ideally this shouldn't be necessary
-		//we can use a global "actor" to represent global flags
-		//e.g. dialogues.getActor("global")->addFlag("added_button");
-		//but might be useful in some niche cases, so leaving the example of it here for now.
-		static bool added_button = false;
-
 		dialogues.getSpeaker()->addFlag("met_player");
 
 		if (dialogues.getPlayer()->hasFlag("npc_killed"))
 		{
-			//TODO: remove button function
-			if (added_button)
-			{
-				//menu.getButton(2).setName("INVALID");
-			}
-
 			return "end";
 		}
 
 		if (dialogues.getSpeaker()->hasFlag("stole_sword"))
 		{
-			//TODO: get button by name
-
-			if (!added_button)
-			{
-				//menu.addButton(WINDOW_WIDTH / 2 - 80, WINDOW_HEIGHT / 2 - 120, "FIND STRANGE NPC", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
-				//menu.getButton(2).on_click.connect(
-				//	[&]()
-				//{
-				//	dialogues.getPlayer()->addFlag("npc_found");
-				//	std::cout << "NPC FOUND\n";
-				//});
-				//added_button = true;
-			}
-
 			return "";
 		}
 		else

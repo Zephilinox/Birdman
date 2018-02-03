@@ -1,5 +1,8 @@
 #include "DialogueTree.hpp"
 
+//STD
+#include <assert.h>
+
 //SELF
 #include "Actor.hpp"
 
@@ -72,6 +75,11 @@ Actor* DialogueTree::getPlayer()
 
 Actor* DialogueTree::getSpeaker()
 {
+	if (player_option)
+	{
+		return getPlayer();
+	}
+
 	return getActor(current_dialogue->speaker);
 }
 
@@ -101,7 +109,7 @@ std::string DialogueTree::play(std::string dialogue_name)
 				playing = true;
 				std::cout << "RUNNING DIALOGUE TEXT DETERMINATOR FOR '" << d.name << "'\n";
 				std::string text = d.text();
-
+				std::cout << "text = " << text << "\n";
 				if (text != "")
 				{
 					text = d.speaker + ": " + text;
