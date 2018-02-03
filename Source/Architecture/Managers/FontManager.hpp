@@ -20,7 +20,7 @@ public:
 		std::string path;
 	};
 
-	FontManager::FontManager(ASGE::Renderer* renderer);
+	FontManager(ASGE::Renderer* renderer);
 	
 	//Call these to add a new font from a font file
 	void addFont(const std::string& path, const std::string& name);

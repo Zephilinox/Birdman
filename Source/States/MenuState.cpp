@@ -14,7 +14,7 @@ MenuState::MenuState(GameData* game_data)
 	menu.addButton(WINDOW_WIDTH / 2 - 80, WINDOW_HEIGHT / 2 - 120, "PLAY", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 	menu.addButton(WINDOW_WIDTH / 2 - 80, WINDOW_HEIGHT / 2 - 40, "ADD SWORD", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 	menu.addButton(WINDOW_WIDTH / 2 - 80, WINDOW_HEIGHT / 2 + 40, "EXIT", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
-
+	
 	//register actions to button clicks
 	//button lives as long as menu, which lives as long as this menu state
 	//so no need to keep track of Connection lifetime

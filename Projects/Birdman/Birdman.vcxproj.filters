@@ -129,6 +129,9 @@
     <ClInclude Include="..\..\Source\Architecture\Dialogues\Dialogue.hpp">
       <Filter>Header Files\Architecture\Dialogues</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\States\GameState.hpp">
+      <Filter>Header Files\Architecture\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -178,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Architecture\Dialogues\DialogueTree.cpp">
       <Filter>Source Files\Architecture\Dialogues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\States\GameState.cpp">
+      <Filter>Source Files\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
