@@ -12,6 +12,10 @@
 #include "Constants.hpp"
 #include "States/MenuState.hpp"
 
+//Chris - added here too, simply to initialise it. Unsure if needed here.
+#include "Architecture/Managers/SceneManager.h"
+
+
 BirdmanTheGame::~BirdmanTheGame()
 {
 	inputs->unregisterCallback(key_handler_id);
@@ -39,6 +43,12 @@ bool BirdmanTheGame::init()
 
 	game_data->getFontManager()->addFont("../../Resources/Fonts/Comic.ttf", "Default");
 	game_data->getStateManager()->push<MenuState>();
+
+	//Chris - hmmm
+	//Set scene to intro scene? Scene 0 = menu, Scene 1 = Game Over/Fail state? Scene 2 - 5 million = gameplay scenes?
+	//Or just have scenemanager controlling level visuals?
+	SceneManager::getSceneManager()->setCurrentScene(0);
+
 
 	return true;
 }
