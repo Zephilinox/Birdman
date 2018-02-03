@@ -28,8 +28,8 @@ Menu::Menu(GameData* game_data, bool vertical)
 
 void Menu::update()
 {
-	if (game_data->getInputManager()->isKeyPressed(key_increment) ||
-		game_data->getInputManager()->isKeyPressed(key_increment_alt))
+	if (game_data->getInputManager()->isKeyPressed(key_decrement) ||
+		game_data->getInputManager()->isKeyPressed(key_decrement_alt))
 	{
 		if (selected_button_id == buttons.size() - 1)
 		{
@@ -40,9 +40,9 @@ void Menu::update()
 			selectButton(selected_button_id + 1);
 		}
 	}
-
-	if (game_data->getInputManager()->isKeyPressed(key_decrement) ||
-		game_data->getInputManager()->isKeyPressed(key_decrement_alt))
+	
+	if (game_data->getInputManager()->isKeyPressed(key_increment) ||
+		game_data->getInputManager()->isKeyPressed(key_increment_alt))
 	{
 		if (selected_button_id == 0)
 		{

@@ -10,7 +10,6 @@ GameState::GameState(GameData* game_data)
 {
 	//add all the dialogue to the dialogue tree. each level would have its own dialogue tree
 	dialogue_init();
-	dialogue_text = dialogues.play("start");
 }
 
 void GameState::update(const ASGE::GameTime&)
@@ -19,42 +18,48 @@ void GameState::update(const ASGE::GameTime&)
 
 	dialogue_menu.update();
 
+	if (!dialogues.playing)
+	{
+		dialogue_text = dialogues.play("start_extra");
+	}
+
 	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER))
 	{
-		if (!dialogues.playing)
-		{
-			dialogue_text = dialogues.play("start");
-		}
-		else if (!dialogues.player_option)
+		if (!dialogues.player_option)
 		{
 			const auto& txt = dialogues.next();
 			if (!dialogues.player_option)
 			{
 				dialogue_text = txt;
+
+				if (dialogue_text == "")
+				{
+					dialogue_text = dialogues.play("start_extra");
+				}
 			}
 		}
+	}
 
-		if (dialogues.player_option && !has_set_player_options)
+	if (dialogues.player_option && !has_set_player_options)
+	{
+		has_set_player_options = true;
+		std::cout << "PLAYER OPTIONS\n";
+		int validOptions = 0;
+		for (int i = 0; i < dialogues.current_player_options.size(); ++i)
 		{
-			has_set_player_options = true;
-			std::cout << "PLAYER OPTIONS\n";
-			int validOptions = 0;
-			for (int i = 0; i < dialogues.current_player_options.size(); ++i)
+			std::string txt = dialogues.current_player_options[i]->text();
+			if (txt != "")
 			{
-				std::string txt = dialogues.current_player_options[i]->text();
-				if (txt != "")
-				{
-					auto& next = dialogues.current_player_options[i]->next;
-					int id = dialogue_menu.addButton(0, 200 + (validOptions * 50), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
-					dialogue_menu.getButton(id).on_click.connect(
+				auto& next = dialogues.current_player_options[i]->next;
+				int id = dialogue_menu.addButton(0, 200 + (validOptions * 50), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
+				dialogue_menu.getButton(id).on_click.connect(
 					[&]()
-					{
-						has_set_player_options = false;
-						dialogues.play(next());
-						dialogue_menu = Menu(game_data);
-					});
-					validOptions++;
-				}
+				{
+					has_set_player_options = false;
+					dialogues.play(next());
+					dialogue_menu = Menu(game_data);
+				});
+				validOptions++;
 			}
 		}
 	}
@@ -76,6 +81,31 @@ void GameState::onInactive()
 
 void GameState::dialogue_init()
 {
+	dialogues.addPlayerOption("start_extra",
+		[&]()
+	{
+		if (dialogues.getPlayer()->hasFlag("super_cool_sword_thingy"))
+		{
+			return "";
+		}
+
+		return "Get Sword";
+	},
+		[&]()
+	{
+		dialogues.getPlayer()->addFlag("super_cool_sword_thingy");
+		return "";
+	});
+
+	dialogues.addPlayerOption("start_extra",
+	[&]()
+	{
+		return "Strange NPC";
+	},
+	[&]()
+	{
+		return "start";
+	});
 
 	dialogues.addDialogue("start", "strange_npc",
 		[&]()
