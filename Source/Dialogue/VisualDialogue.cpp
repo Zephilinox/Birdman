@@ -5,6 +5,7 @@
 
 //SELF
 #include "../Architecture/Dialogues/DialogueTree.hpp"
+#include "../Constants.hpp"
 
 VisualDialogue::VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree, std::string starting_dialogue)
 	: game_data(game_data)
@@ -52,7 +53,7 @@ void VisualDialogue::update()
 			std::string txt = dialogue_tree->current_player_options[i]->text();
 			if (txt != "")
 			{
-				int id = options.addButton(0, 200 + (validOptions * 50), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
+				int id = options.addButton(WINDOW_WIDTH / 3, 200 + (validOptions * 70), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 				options.getButton(id).on_click.connect(
 					[&, i]()
 				{
@@ -70,6 +71,6 @@ void VisualDialogue::update()
 
 void VisualDialogue::render() const
 {
-	game_data->getRenderer()->renderText(dialogue_text.c_str(), 0, 100);
+	game_data->getRenderer()->renderText(dialogue_text.c_str(), WINDOW_WIDTH / 3, 100);
 	options.render();
 }
