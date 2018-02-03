@@ -50,8 +50,10 @@ void GameState::dialogue_init()
 		[&]()
 	{
 		dialogue_tree.getPlayer()->addFlag("super_cool_sword_thingy");
-		return "";
+		return "sword_got";
 	});
+
+	dialogue_tree.addDialogue("sword_got", "player", "Woo! I found a cool sword!", "");
 
 	dialogue_tree.addPlayerOption("start_extra",
 	[&]()
@@ -140,15 +142,19 @@ void GameState::dialogue_init()
 	{
 		if (dialogue_tree.getPlayer()->hasFlag("super_cool_sword_thingy"))
 		{
-			dialogue_tree.getPlayer()->addFlag("npc_found");
 			return "Die!";
 		}
 
 		return "";
-	}, "start");
+	},
+	[&]()
+	{
+		dialogue_tree.getPlayer()->addFlag("npc_found");
+		return "start";
+	});
 
-	dialogue_tree.addPlayerOption("start_options", "Bye.", "bye");
-
+	dialogue_tree.addPlayerOption("start_options", "Bye.", "bye_ply");
+	dialogue_tree.addDialogue("bye_ply", "player", "Sorry, gotta run.", "bye");
 	dialogue_tree.addDialogue("start2", "strange_npc", "Well I'm quite busy right now.", "bye");
 
 	dialogue_tree.addDialogue("bye", "strange_npc",
