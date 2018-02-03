@@ -30,7 +30,8 @@ bool BirdmanTheGame::init()
 	game_data = std::make_unique<GameData>(renderer.get());
 
 	renderer->setWindowTitle("Birbie");
-	renderer->setClearColour(ASGE::COLOURS::BLACK);
+	float cArray[] = { 0.08f, 0.08f, 0.08f };
+	renderer->setClearColour(cArray);
 	renderer->setSpriteMode(ASGE::SpriteSortMode::BACK_TO_FRONT);
 	toggleFPS();
 

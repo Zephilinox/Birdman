@@ -4,6 +4,7 @@
 #include "../Architecture/GameData.hpp"
 #include "../Constants.hpp"
 #include "GameState.hpp"
+#include "FadeOutState.hpp"
 
 MenuState::MenuState(GameData* game_data)
 	: BaseState(game_data)
@@ -21,7 +22,13 @@ MenuState::MenuState(GameData* game_data)
 	//Take at look at Signal.hpp for more info on how that works.
 	menu.getButton(0).on_click.connect([game_data]()
 	{
-		game_data->getStateManager()->push<GameState>();
+		//game_data->getStateManager()->push<GameState>();
+		auto state = game_data->getStateManager()->push<FadeOutState>();
+		state->setFadeEndCallback(
+		[&]()
+		{
+			game_data->getStateManager()->push<GameState>();
+		});
 	});
 
 	menu.getButton(1).on_click.connect([&]()

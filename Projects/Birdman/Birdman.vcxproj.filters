@@ -138,6 +138,12 @@
     <ClInclude Include="..\..\Source\Dialogue\VisualDialogue.hpp">
       <Filter>Header Files\Dialogue</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\States\FadeInState.hpp">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\States\FadeOutState.hpp">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -193,6 +199,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Dialogue\VisualDialogue.cpp">
       <Filter>Source Files\Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\States\FadeInState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\States\FadeOutState.cpp">
+      <Filter>Source Files\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

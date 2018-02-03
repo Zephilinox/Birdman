@@ -135,6 +135,8 @@
     <ClInclude Include="..\..\Source\BirdmanTheGame.h" />
     <ClInclude Include="..\..\Source\Constants.hpp" />
     <ClInclude Include="..\..\Source\Dialogue\VisualDialogue.hpp" />
+    <ClInclude Include="..\..\Source\States\FadeInState.hpp" />
+    <ClInclude Include="..\..\Source\States\FadeOutState.hpp" />
     <ClInclude Include="..\..\Source\States\GameState.hpp" />
     <ClInclude Include="..\..\Source\States\MenuState.hpp" />
     <ClInclude Include="..\..\Source\stdafx.h" />
@@ -156,6 +158,8 @@
     <ClCompile Include="..\..\Source\BirdmanTheGame.cpp" />
     <ClCompile Include="..\..\Source\Dialogue\VisualDialogue.cpp" />
     <ClCompile Include="..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\Source\States\FadeInState.cpp" />
+    <ClCompile Include="..\..\Source\States\FadeOutState.cpp" />
     <ClCompile Include="..\..\Source\States\GameState.cpp" />
     <ClCompile Include="..\..\Source\States\MenuState.cpp" />
     <ClCompile Include="..\..\Source\stdafx.cpp">
