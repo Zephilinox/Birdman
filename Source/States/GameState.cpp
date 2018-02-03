@@ -6,6 +6,7 @@
 
 GameState::GameState(GameData* game_data)
 	: BaseState(game_data)
+	, dialogue_menu(game_data)
 {
 	//add all the dialogue to the dialogue tree. each level would have its own dialogue tree
 	dialogue_init();
@@ -14,6 +15,10 @@ GameState::GameState(GameData* game_data)
 
 void GameState::update(const ASGE::GameTime&)
 {
+	static bool has_set_player_options = false;
+
+	dialogue_menu.update();
+
 	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER))
 	{
 		if (!dialogues.playing)
@@ -22,26 +27,33 @@ void GameState::update(const ASGE::GameTime&)
 		}
 		else if (!dialogues.player_option)
 		{
-			player_options.clear();
 			const auto& txt = dialogues.next();
 			if (!dialogues.player_option)
 			{
 				dialogue_text = txt;
 			}
-			std::cout << "TEST " << dialogue_text << "\n";
 		}
 
-		if (dialogues.player_option)
+		if (dialogues.player_option && !has_set_player_options)
 		{
-			player_options.clear();
+			has_set_player_options = true;
 			std::cout << "PLAYER OPTIONS\n";
+			int validOptions = 0;
 			for (int i = 0; i < dialogues.current_player_options.size(); ++i)
 			{
 				std::string txt = dialogues.current_player_options[i]->text();
-
 				if (txt != "")
 				{
-					player_options.emplace_back(i, "[" + std::to_string(player_options.size()) + "] " + txt);
+					auto& next = dialogues.current_player_options[i]->next;
+					int id = dialogue_menu.addButton(0, 200 + (validOptions * 50), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
+					dialogue_menu.getButton(id).on_click.connect(
+					[&]()
+					{
+						has_set_player_options = false;
+						dialogues.play(next());
+						dialogue_menu = Menu(game_data);
+					});
+					validOptions++;
 				}
 			}
 		}
@@ -51,11 +63,7 @@ void GameState::update(const ASGE::GameTime&)
 void GameState::render() const
 {
 	game_data->getRenderer()->renderText(dialogue_text.c_str(), 0, 100);
-
-	for (int i = 0; i < player_options.size(); ++i)
-	{
-		game_data->getRenderer()->renderText(player_options[i].second.c_str(), 0, 200 + (i * 50));
-	}
+	dialogue_menu.render();
 }
 
 void GameState::onActive()

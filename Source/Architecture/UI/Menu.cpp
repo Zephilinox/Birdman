@@ -56,7 +56,10 @@ void Menu::update()
 
 	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER))
 	{
-		buttons[selected_button_id].on_click.emit();
+		if (buttons.size())
+		{
+			buttons[selected_button_id].on_click.emit();
+		}
 	}
 }
 
