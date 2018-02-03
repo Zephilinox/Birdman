@@ -3,6 +3,7 @@
 //SELF
 #include "../Architecture/GameData.hpp"
 #include "../Constants.hpp"
+#include "GameState.hpp"
 
 MenuState::MenuState(GameData* game_data)
 	: BaseState(game_data)
@@ -10,6 +11,7 @@ MenuState::MenuState(GameData* game_data)
 {
 	//menu buttons
 	//this is rough and just for prototyping, might need something nicer for the actual game
+	menu.addButton(WINDOW_WIDTH / 2 - 80, WINDOW_HEIGHT / 2 - 120, "PLAY", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 	menu.addButton(WINDOW_WIDTH / 2 - 80, WINDOW_HEIGHT / 2 - 40, "ADD SWORD", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 	menu.addButton(WINDOW_WIDTH / 2 - 80, WINDOW_HEIGHT / 2 + 40, "EXIT", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 
@@ -17,13 +19,18 @@ MenuState::MenuState(GameData* game_data)
 	//button lives as long as menu, which lives as long as this menu state
 	//so no need to keep track of Connection lifetime
 	//Take at look at Signal.hpp for more info on how that works.
-	menu.getButton(0).on_click.connect([&]()
+	menu.getButton(0).on_click.connect([game_data]()
+	{
+		game_data->getStateManager()->push<GameState>();
+	});
+
+	menu.getButton(1).on_click.connect([&]()
 	{
 		dialogues.getPlayer()->addFlag("super_cool_sword_thingy");
 		std::cout << "PLAYER GAINED SWORD\n";
 	});
 
-	menu.getButton(1).on_click.connect([game_data]()
+	menu.getButton(2).on_click.connect([game_data]()
 	{
 		game_data->getStateManager()->pop();
 	});
