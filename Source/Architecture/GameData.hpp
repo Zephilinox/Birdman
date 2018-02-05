@@ -42,7 +42,6 @@ private:
 	Essentially this would let us heavily decouple on class from another by sending events to the queue
 	The other class (or classes) can grab these events and handle them via a function.
 	For instance, an achievement system could read events pushed to the message queue by the dialogue system*/
-
 	MessageQueue message_queue;
 
 	SceneManager scene_manager;

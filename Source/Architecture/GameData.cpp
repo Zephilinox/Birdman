@@ -3,6 +3,9 @@
 
 //TODO ricardo
 //Ricardo - do we add scene manager to this list?????
+	//You only need to add it if you need to pass something to the scene managers constructor
+	//For instance, the state_manager needs a pointer to game_data, so *this* is passed
+	//Where as the font_manager just needs a pointer to ASGE::Renderer, so *renderer* is passed
 GameData::GameData(ASGE::Renderer* renderer)
 	: renderer(renderer)
 	, state_manager(this)

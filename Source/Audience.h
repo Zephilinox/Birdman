@@ -12,6 +12,7 @@ public:
 	float getDark();
 	float getShocking();
 
+	//todo: consider doing this in the constructor instead of having an init function
 	void init();
 	void varyApprovalsBetweenNights();
 
