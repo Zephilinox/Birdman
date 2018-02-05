@@ -4,7 +4,7 @@
 Play::~Play()
 {
 	//it's better to avoid manual memory management, see if you can use std::vector<Scene>> instead.
-	delete scenes;
+	delete[] scenes;
 	scenes = nullptr;
 }
 
