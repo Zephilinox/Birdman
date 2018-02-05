@@ -45,9 +45,8 @@ bool BirdmanTheGame::init()
 	game_data->getStateManager()->push<MenuState>();
 
 	//Chris - hmmm
-	//Set scene to intro scene? Scene 0 = menu, Scene 1 = Game Over/Fail state? Scene 2 - 5 million = gameplay scenes?
-	//Or just have scenemanager controlling level visuals?
-	SceneManager::getSceneManager()->setCurrentScene(0);
+	// TODO use this to initialise the scene at gameplay state start
+	game_data->getSceneManager()->setCurrentScene(0);
 
 
 	return true;

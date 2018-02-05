@@ -1,6 +1,8 @@
 #include "GameData.hpp"
 #include <assert.h>
 
+//TODO ricardo
+//Ricardo - do we add scene manager to this list?????
 GameData::GameData(ASGE::Renderer* renderer)
 	: renderer(renderer)
 	, state_manager(this)
@@ -32,4 +34,9 @@ MessageQueue* GameData::getMessageQueue()
 StateManager* GameData::getStateManager()
 {
 	return &state_manager;
+}
+
+SceneManager* GameData::getSceneManager()
+{
+	return &scene_manager;
 }

@@ -147,6 +147,15 @@
     <ClInclude Include="..\..\Source\Architecture\Managers\SceneManager.h">
       <Filter>Header Files\Architecture\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Play.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audience.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -211,6 +220,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Architecture\Managers\SceneManager.cpp">
       <Filter>Source Files\Architecture\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Play.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Audience.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

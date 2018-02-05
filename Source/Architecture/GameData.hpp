@@ -9,6 +9,8 @@
 #include "Managers/FontManager.hpp"
 #include "Messages/MessageQueue.hpp"
 
+#include "Managers/SceneManager.h"
+
 class GameData
 {
 public:
@@ -19,6 +21,7 @@ public:
 	InputManager* getInputManager();
 	FontManager* getFontManager();
 	MessageQueue* getMessageQueue();
+	SceneManager* getSceneManager();
 
 private:
 	ASGE::Renderer* renderer = nullptr;
@@ -41,4 +44,6 @@ private:
 	For instance, an achievement system could read events pushed to the message queue by the dialogue system*/
 
 	MessageQueue message_queue;
+
+	SceneManager scene_manager;
 };

@@ -1,20 +1,10 @@
 #include "SceneManager.h"
 
 
-SceneManager * SceneManager::getSceneManager()
+
+void SceneManager::setCurrentScene(int new_play)
 {
-	static SceneManager* inst = nullptr;
+	play_id = new_play;
 
-	if(!inst)
-	{
-		inst = new SceneManager();
-	}
-	return inst;
-}
-
-void SceneManager::setCurrentScene(int new_scene)
-{
-	scene_id = new_scene;
-
-	//TODO transition scenes here?
+	//TODO transition plays here?
 }

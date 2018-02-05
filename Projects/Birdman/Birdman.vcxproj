@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="DebugFast|Win32">
@@ -19,7 +19,7 @@
     <ProjectGuid>{503EE74A-5AE3-43A1-B492-438B644DB6EF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Birdman</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -133,9 +133,12 @@
     <ClInclude Include="..\..\Source\Architecture\States\BaseState.hpp" />
     <ClInclude Include="..\..\Source\Architecture\UI\Button.hpp" />
     <ClInclude Include="..\..\Source\Architecture\UI\Menu.hpp" />
+    <ClInclude Include="..\..\Source\Audience.h" />
     <ClInclude Include="..\..\Source\BirdmanTheGame.h" />
     <ClInclude Include="..\..\Source\Constants.hpp" />
     <ClInclude Include="..\..\Source\Dialogue\VisualDialogue.hpp" />
+    <ClInclude Include="..\..\Source\Play.h" />
+    <ClInclude Include="..\..\Source\Scene.h" />
     <ClInclude Include="..\..\Source\States\FadeInState.hpp" />
     <ClInclude Include="..\..\Source\States\FadeOutState.hpp" />
     <ClInclude Include="..\..\Source\States\GameState.hpp" />
@@ -157,9 +160,12 @@
     <ClCompile Include="..\..\Source\Architecture\Signals\Connection.cpp" />
     <ClCompile Include="..\..\Source\Architecture\UI\Button.cpp" />
     <ClCompile Include="..\..\Source\Architecture\UI\Menu.cpp" />
+    <ClCompile Include="..\..\Source\Audience.cpp" />
     <ClCompile Include="..\..\Source\BirdmanTheGame.cpp" />
     <ClCompile Include="..\..\Source\Dialogue\VisualDialogue.cpp" />
     <ClCompile Include="..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\Source\Play.cpp" />
+    <ClCompile Include="..\..\Source\Scene.cpp" />
     <ClCompile Include="..\..\Source\States\FadeInState.cpp" />
     <ClCompile Include="..\..\Source\States\FadeOutState.cpp" />
     <ClCompile Include="..\..\Source\States\GameState.cpp" />

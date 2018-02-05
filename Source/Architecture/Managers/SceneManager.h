@@ -1,18 +1,17 @@
 #pragma once
+#include "..\\..\\Play.h"
 
-//Class implemented as a singleton for safer access and no risk of multiple instances
-//(much like a director)
 class SceneManager
 {
 	SceneManager() = default;
 
 public:
-	static SceneManager* getSceneManager();
+	int getCurrentScene() { return play_id; }
+	void setCurrentScene(int new_play);
 
-	int getCurrentScene() { return scene_id; }
-	void setCurrentScene(int new_scene);
+	//TODO used in testing, REFACTOR
+	Play myPlay;
 
 private:
-
-	int scene_id = 0;
+	int play_id = 0;
 };
