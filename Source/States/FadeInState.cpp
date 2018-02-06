@@ -3,6 +3,7 @@
 //SELF
 #include "FadeInState.hpp"
 #include "../Constants.hpp"
+#include "../Architecture/GameData.hpp"
 
 FadeInState::FadeInState(GameData* game_data)
 	: BaseState(game_data, true)

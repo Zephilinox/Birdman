@@ -21,8 +21,5 @@ public:
 	void onInactive() override final;
 
 private:
-	void dialogue_init();
-
 	Menu menu;
-	DialogueTree dialogues;
 };

@@ -8,7 +8,8 @@
 
 //SELF
 #include "../Architecture/States/BaseState.hpp"
-#include "GameState.hpp"
+
+class GameData;
 
 /**
 *  See BaseState for overriden functions

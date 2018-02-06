@@ -3,6 +3,7 @@
 //SELF
 #include "FadeInState.hpp"
 #include "../Constants.hpp"
+#include "../Architecture/GameData.hpp"
 
 FadeOutState::FadeOutState(GameData* game_data)
 	: BaseState(game_data, true)
@@ -16,6 +17,9 @@ FadeOutState::FadeOutState(GameData* game_data)
 	black_screen->yPos(float(WINDOW_HEIGHT));
 }
 
+//todo: make this and fade in state nicer
+//maybe like curtains?
+//if curtains, find animation for it maybe and use AnimatedSprite? not sure
 void FadeOutState::update(const ASGE::GameTime& gt)
 {
 	black_screen->yPos(black_screen->yPos() - (800 * float((gt.delta_time.count() / 1000.0f))));
