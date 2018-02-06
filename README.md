@@ -1,6 +1,40 @@
 # Birdman The Game 
 A game based on the movie Birdman 
 
+## TODO
+
+- splash screen?
+	- would be neat, not much effort
+- main menu
+	- get some proper menu sprites/text.
+	- Play/Options(?)/Exit
+- game
+	- plays
+		- audience reaction
+		- different nights (preview/actual)
+		- dialogue/story/plot
+			- 2-3 plays worth?
+		- characters
+			- names
+			- sprites/portraits?
+		- UI
+			dialogue text box
+			option menu buttons/boxes
+			fonts
+			audience reaction
+- game over
+	- ?
+	- score?
+- random number generator
+- audio
+	- library
+		- Irrklang like in tutorial?
+		- Or something else?
+	- UI
+	- background music
+	- other SFX (audience reaction?)
+
+
 (todo: remove before merging with master when game is finished)
 ## git cheat sheet
 
