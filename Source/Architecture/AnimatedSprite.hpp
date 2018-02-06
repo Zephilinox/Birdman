@@ -10,7 +10,7 @@
 
 typedef std::chrono::high_resolution_clock Clock;
 
-class Animation
+class AnimatedSprite
 {
 public:
 	struct FrameData
@@ -20,12 +20,12 @@ public:
 		float frame_length_milliseconds;
 	};
 
-	Animation(ASGE::Renderer* renderer, bool loop = true);
+	AnimatedSprite(ASGE::Renderer* renderer, bool loop = true);
 
-	Animation(const Animation& other) = delete;
-	Animation(Animation&& other) = delete;
-	Animation& operator= (const Animation& other) = delete;
-	Animation& operator= (Animation&& other) = delete;
+	AnimatedSprite(const AnimatedSprite& other) = delete;
+	AnimatedSprite(AnimatedSprite&& other) = delete;
+	AnimatedSprite& operator= (const AnimatedSprite& other) = delete;
+	AnimatedSprite& operator= (AnimatedSprite&& other) = delete;
 	
 	void update(double dt);
 

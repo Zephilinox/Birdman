@@ -13,12 +13,12 @@ FadeOutState::FadeOutState(GameData* game_data)
 		throw std::exception("[FadeOutState::FadeOutState()] Failed to load '../../Resources/Textures/BlackScreen.png'\n");
 	}
 
-	black_screen->yPos(WINDOW_HEIGHT);
+	black_screen->yPos(float(WINDOW_HEIGHT));
 }
 
 void FadeOutState::update(const ASGE::GameTime& gt)
 {
-	black_screen->yPos(black_screen->yPos() - (800 * (gt.delta_time.count() / 1000.0f)));
+	black_screen->yPos(black_screen->yPos() - (800 * float((gt.delta_time.count() / 1000.0f))));
 	if (black_screen->yPos() <= 0)
 	{
 		game_data->getStateManager()->pop();

@@ -1,14 +1,14 @@
-#include "Animation.hpp"
+#include "AnimatedSprite.hpp"
 
 //LIB
 #include <Engine/Renderer.h>
 
-Animation::Animation(ASGE::Renderer* renderer, bool loop)
+AnimatedSprite::AnimatedSprite(ASGE::Renderer* renderer, bool loop)
 	: renderer(renderer)
 	, loop(loop)
 {}
 
-void Animation::update(double dt_milli)
+void AnimatedSprite::update(double dt_milli)
 {
 	frames[current_frame].first->xPos(xPos + frames[current_frame].second.relative_x);
 	frames[current_frame].first->yPos(yPos + frames[current_frame].second.relative_y);
@@ -23,7 +23,7 @@ void Animation::update(double dt_milli)
 	}
 }
 
-void Animation::addFrame(std::string texture, float frame_length_milliseconds,  float relative_x, float relative_y)
+void AnimatedSprite::addFrame(std::string texture, float frame_length_milliseconds,  float relative_x, float relative_y)
 {
 	FrameData frame_data;
 	frame_data.frame_length_milliseconds = frame_length_milliseconds;
@@ -38,27 +38,27 @@ void Animation::addFrame(std::string texture, float frame_length_milliseconds,  
 	}
 }
 
-ASGE::Sprite* Animation::getCurrentFrameSprite() const
+ASGE::Sprite* AnimatedSprite::getCurrentFrameSprite() const
 {
 	return frames[current_frame].first.get();
 }
 
-void Animation::play()
+void AnimatedSprite::play()
 {
 	playing = true;
 }
 
-void Animation::pause()
+void AnimatedSprite::pause()
 {
 	playing = false;
 }
 
-bool Animation::isOver()
+bool AnimatedSprite::isOver()
 {
 	return current_frame == frames.size() - 1 && !loop;
 }
 
-void Animation::nextFrame()
+void AnimatedSprite::nextFrame()
 {
 	if (current_frame < frames.size() - 1)
 	{

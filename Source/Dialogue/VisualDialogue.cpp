@@ -48,7 +48,7 @@ void VisualDialogue::update()
 		has_set_player_options = true;
 		std::cout << "PLAYER OPTIONS\n";
 		int validOptions = 0;
-		for (int i = 0; i < dialogue_tree->current_player_options.size(); ++i)
+		for (size_t i = 0; i < dialogue_tree->current_player_options.size(); ++i)
 		{
 			std::string txt = dialogue_tree->current_player_options[i]->text();
 			if (txt != "")

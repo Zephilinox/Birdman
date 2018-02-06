@@ -16,7 +16,7 @@ FadeInState::FadeInState(GameData* game_data)
 
 void FadeInState::update(const ASGE::GameTime& gt)
 {
-	black_screen->yPos(black_screen->yPos() + 800 * (gt.delta_time.count() / 1000.0f));
+	black_screen->yPos(black_screen->yPos() + 800 * float((gt.delta_time.count() / 1000.0f)));
 
 	if (black_screen->yPos() >= WINDOW_HEIGHT)
 	{

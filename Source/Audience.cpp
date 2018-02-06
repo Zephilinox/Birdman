@@ -1,22 +1,22 @@
 #include "Audience.h"
 #include <random>
 
-float Audience::getSad()
+int Audience::getSad()
 {
 	return approval_sad;
 }
 
-float Audience::getLight()
+int Audience::getLight()
 {
 	return approval_light;
 }
 
-float Audience::getDark()
+int Audience::getDark()
 {
 	return approval_dark;
 }
 
-float Audience::getShocking()
+int Audience::getShocking()
 {
 	return approval_shocking;
 }

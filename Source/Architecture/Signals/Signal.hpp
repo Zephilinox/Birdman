@@ -8,6 +8,9 @@
 #include "Connection.hpp"
 #include "Disconnector.hpp"
 
+//todo: fix signal implementation to be r-values?
+//currently too much being copied around, use pointers for non-POD
+
 /*
 Args determines the arguments that the signal can emit
 which is also the parameters functions must accept

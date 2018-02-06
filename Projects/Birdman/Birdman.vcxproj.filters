@@ -120,9 +120,6 @@
     <ClInclude Include="..\..\Source\Constants.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Architecture\Animation.hpp">
-      <Filter>Header Files\Architecture</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Architecture\Dialogues\DialogueTree.hpp">
       <Filter>Header Files\Architecture\Dialogues</Filter>
     </ClInclude>
@@ -155,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\States\GameState.hpp">
       <Filter>Source Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\AnimatedSprite.hpp">
+      <Filter>Header Files\Architecture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,9 +194,6 @@
     <ClCompile Include="..\..\Source\States\MenuState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Architecture\Animation.cpp">
-      <Filter>Source Files\Architecture</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Architecture\Dialogues\Actor.cpp">
       <Filter>Source Files\Architecture\Dialogues</Filter>
     </ClCompile>
@@ -229,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Audience.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\AnimatedSprite.cpp">
+      <Filter>Source Files\Architecture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
