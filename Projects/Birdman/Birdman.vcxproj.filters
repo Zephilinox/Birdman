@@ -66,9 +66,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\BirdmanTheGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -141,20 +138,23 @@
     <ClInclude Include="..\..\Source\Architecture\Managers\SceneManager.h">
       <Filter>Header Files\Architecture\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Play.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Audience.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\States\GameState.hpp">
       <Filter>Source Files\States</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Architecture\AnimatedSprite.hpp">
       <Filter>Header Files\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\BirdmanTheGame.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Audience.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Play.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Scene.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

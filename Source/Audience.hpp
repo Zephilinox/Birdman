@@ -9,9 +9,14 @@ public:
 	~Audience() = default;
 
 	int getSad();
+	//humour?
 	int getLight();
+	//horror?
 	int getDark();
 	int getShocking();
+	//could base it off emotion wheels? maybe too much effort though
+	//https://en.wikipedia.org/wiki/Emotion#/media/File:Plutchik-wheel.svg
+	//gotta work out how the audience is going to work first
 
 	//todo: consider doing this in the constructor instead of having an init function
 	void init();

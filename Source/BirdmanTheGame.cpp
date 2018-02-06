@@ -1,4 +1,4 @@
-#include "BirdmanTheGame.h"
+#include "BirdmanTheGame.hpp"
 
 //STD
 #include <iostream>

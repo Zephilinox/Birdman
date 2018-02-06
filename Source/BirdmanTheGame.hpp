@@ -7,7 +7,8 @@
 //SELF
 #include "Architecture/GameData.hpp"
 
-namespace ASGE {
+namespace ASGE
+{
 	struct GameTime;
 }
 

@@ -1,4 +1,4 @@
-#include "Scene.h"
+#include "Scene.hpp"
 
 std::string Scene::getName() const
 {

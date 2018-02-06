@@ -2,7 +2,7 @@
 #include <Engine/Platform.h>
 
 //SELF
-#include "BirdmanTheGame.h"
+#include "BirdmanTheGame.hpp"
 
 #define ENABLE_CONSOLE true
 

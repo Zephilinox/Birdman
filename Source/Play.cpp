@@ -1,5 +1,7 @@
-#include "Play.h"
-#include "Scene.h"
+#include "Play.hpp"
+
+//SELF
+#include "Scene.hpp"
 
 Play::~Play()
 {

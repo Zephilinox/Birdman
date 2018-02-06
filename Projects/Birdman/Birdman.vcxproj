@@ -133,12 +133,12 @@
     <ClInclude Include="..\..\Source\Architecture\States\BaseState.hpp" />
     <ClInclude Include="..\..\Source\Architecture\UI\Button.hpp" />
     <ClInclude Include="..\..\Source\Architecture\UI\Menu.hpp" />
-    <ClInclude Include="..\..\Source\Audience.h" />
-    <ClInclude Include="..\..\Source\BirdmanTheGame.h" />
+    <ClInclude Include="..\..\Source\Audience.hpp" />
+    <ClInclude Include="..\..\Source\BirdmanTheGame.hpp" />
     <ClInclude Include="..\..\Source\Constants.hpp" />
     <ClInclude Include="..\..\Source\Dialogue\VisualDialogue.hpp" />
-    <ClInclude Include="..\..\Source\Play.h" />
-    <ClInclude Include="..\..\Source\Scene.h" />
+    <ClInclude Include="..\..\Source\Play.hpp" />
+    <ClInclude Include="..\..\Source\Scene.hpp" />
     <ClInclude Include="..\..\Source\States\FadeInState.hpp" />
     <ClInclude Include="..\..\Source\States\FadeOutState.hpp" />
     <ClInclude Include="..\..\Source\States\GameState.hpp" />
