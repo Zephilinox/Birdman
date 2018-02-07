@@ -10,7 +10,8 @@ GameState::GameState(GameData* game_data)
 {
 	//add all the dialogue to the dialogue tree. each level would have its own dialogue tree
 	//dialogue_init();
-	dialogue_init2();
+	//dialogue_init2();
+	dialogue_init3();
 }
 
 void GameState::update(const ASGE::GameTime&)
@@ -237,4 +238,32 @@ void GameState::dialogue_init2()
 		dialogue_tree.getPlayer()->addFlag("named...");
 		return "done_action2";
 	});
-};
+}
+
+void GameState::dialogue_init3()
+{
+	dialogue_tree.addPlayerOption("start_extra", "playgame", 
+		[&]() 
+	{
+		dialogue_tree.getPlayer()->addFlag("playing");
+		return "play";
+	});
+	dialogue_tree.addDialogue("play", "Player", "You are playing the game", "");
+	dialogue_tree.addPlayerOption("start_extra", "maybeplay", "1");
+	dialogue_tree.addDialogue("1", "Jim", "Ya names Jim", "");
+	dialogue_tree.addPlayerOption("start_extra", 
+		[&]()
+	{
+		if (dialogue_tree.getPlayer()->hasFlag("playing"))
+		{
+			
+			return "continue";
+		}
+		return "";
+	}, [&]()
+	{
+		dialogue_tree.getPlayer()->removeFlag("playing");
+		return "con";
+	});
+}
+
