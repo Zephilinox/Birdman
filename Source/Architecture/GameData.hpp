@@ -8,8 +8,11 @@
 #include "Managers/StateManager.hpp"
 #include "Managers/FontManager.hpp"
 #include "Messages/MessageQueue.hpp"
-
 #include "Managers/SceneManager.h"
+
+//todo: make audio manager
+#include "Audio/AudioEngine.hpp"
+#include "Audio/irrKlang/AudioEngineIrrklang.hpp"
 
 class GameData
 {
@@ -22,6 +25,7 @@ public:
 	FontManager* getFontManager();
 	MessageQueue* getMessageQueue();
 	SceneManager* getSceneManager();
+	AudioEngine* getAudioManager();
 
 private:
 	ASGE::Renderer* renderer = nullptr;
@@ -45,4 +49,7 @@ private:
 	MessageQueue message_queue;
 
 	SceneManager scene_manager;
+
+	//todo: replace with audio manager
+	std::unique_ptr<AudioEngine> audio_manager = nullptr;
 };

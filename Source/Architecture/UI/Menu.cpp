@@ -58,6 +58,8 @@ void Menu::update()
 
 	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER))
 	{
+		game_data->getAudioManager()->play("button_click.wav");
+
 		if (buttons.size())
 		{
 			buttons[selected_button_id].on_click.emit();

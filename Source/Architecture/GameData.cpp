@@ -10,6 +10,7 @@ GameData::GameData(ASGE::Renderer* renderer)
 	: renderer(renderer)
 	, state_manager(this)
 	, font_manager(renderer)
+	, audio_manager(new AudioEngineIrrklang("Resources/Sounds/"))
 {
 	assert(renderer);
 }
@@ -42,4 +43,9 @@ StateManager* GameData::getStateManager()
 SceneManager* GameData::getSceneManager()
 {
 	return &scene_manager;
+}
+
+AudioEngine* GameData::getAudioManager()
+{
+	return audio_manager.get();
 }

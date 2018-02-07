@@ -119,6 +119,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Architecture\AnimatedSprite.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Audio\AudioEngine.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Audio\irrKlang\AudioEngineIrrklang.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Dialogues\Actor.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Dialogues\Dialogue.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Dialogues\DialogueTree.hpp" />
@@ -151,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Architecture\AnimatedSprite.cpp" />
+    <ClCompile Include="..\..\Source\Architecture\Audio\irrKlang\AudioEngineIrrklang.cpp" />
     <ClCompile Include="..\..\Source\Architecture\Dialogues\Actor.cpp" />
     <ClCompile Include="..\..\Source\Architecture\Dialogues\Dialogue.cpp" />
     <ClCompile Include="..\..\Source\Architecture\Dialogues\DialogueTree.cpp" />

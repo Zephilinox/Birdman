@@ -64,6 +64,18 @@
     <Filter Include="Header Files\Dialogue">
       <UniqueIdentifier>{9b58bce6-73a4-4814-9d7a-0b7b1055cc4d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Architecture\Audio">
+      <UniqueIdentifier>{a58506fb-61e4-4fba-9198-31d102bf582d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Architecture\Audio">
+      <UniqueIdentifier>{0bb08f9c-e5d9-4f00-81c7-e7f371d29e78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Architecture\Audio\irKlang">
+      <UniqueIdentifier>{e565466f-f59a-41d5-b255-1c1d22207d5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Architecture\Audio\irrKlang">
+      <UniqueIdentifier>{504c0865-d1a7-49bd-bb35-58389bc2d53f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\stdafx.h">
@@ -156,6 +168,12 @@
     <ClInclude Include="..\..\Source\Scene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Audio\AudioEngine.hpp">
+      <Filter>Header Files\Architecture\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Audio\irrKlang\AudioEngineIrrklang.hpp">
+      <Filter>Header Files\Architecture\Audio\irKlang</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -229,6 +247,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Architecture\AnimatedSprite.cpp">
       <Filter>Source Files\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\Audio\irrKlang\AudioEngineIrrklang.cpp">
+      <Filter>Source Files\Architecture\Audio\irrKlang</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
