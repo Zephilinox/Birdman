@@ -6,6 +6,7 @@
 
 //SELF
 #include "Architecture/GameData.hpp"
+#include "Audience.hpp"
 
 namespace ASGE
 {
@@ -24,6 +25,9 @@ class BirdmanTheGame : public ASGE::OGLGame
 {
 public:
 	
+	//TODO:- REMOVE, was here for testing only
+	Audience test;
+
 	/**
 	*  Default constructor for game.
 	*/

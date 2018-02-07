@@ -51,3 +51,8 @@ AudioManager* GameData::getAudioManager()
 {
 	return &audio_manager;
 }
+
+Rng * GameData::getRandomNumberGenerator()
+{
+	return &random_number_gen;
+}

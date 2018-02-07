@@ -10,6 +10,7 @@
 #include "Messages/MessageQueue.hpp"
 #include "Managers/SceneManager.h"
 #include "Managers/AudioManager.hpp"
+#include "Rng.h"
 
 //todo: make audio manager
 #include "Audio/AudioEngine.hpp"
@@ -26,6 +27,7 @@ public:
 	MessageQueue* getMessageQueue();
 	SceneManager* getSceneManager();
 	AudioManager* getAudioManager();
+	Rng* getRandomNumberGenerator();
 
 private:
 	ASGE::Renderer* renderer = nullptr;
@@ -49,6 +51,8 @@ private:
 	MessageQueue message_queue;
 
 	SceneManager scene_manager;
+
+	Rng random_number_gen;
 
 	AudioManager audio_manager;
 };

@@ -23,6 +23,7 @@ public:
 
 private:
 	void dialogue_init();
+	void dialogue_init2();
 
 	DialogueTree dialogue_tree;
 	VisualDialogue visual_dialogue;

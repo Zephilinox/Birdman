@@ -195,6 +195,9 @@
     <ClInclude Include="..\..\Source\Architecture\Audio\None\AudioEngineNone.hpp">
       <Filter>Header Files\Architecture\Audio\None</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Rng.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -280,6 +283,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Architecture\Managers\AudioManager.cpp">
       <Filter>Source Files\Architecture\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Rng.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

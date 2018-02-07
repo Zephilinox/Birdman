@@ -1,0 +1,79 @@
+﻿  BirdmanTheGame.cpp
+  GameData.cpp
+  Generating Code...
+  Compiling...
+  main.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  MenuState.cpp
+  GameState.cpp
+  FadeOutState.cpp
+  FadeInState.cpp
+  VisualDialogue.cpp
+  Menu.cpp
+  Button.cpp
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'LIBCMTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+Engine__Debug_x86.lib(Game.obj) : warning LNK4099: PDB 'Engine_x86.pdb' was not found with 'Engine__Debug_x86.lib(Game.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Engine_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(Input.obj) : warning LNK4099: PDB 'Engine_x86.pdb' was not found with 'Engine__Debug_x86.lib(Input.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Engine_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(OGLGame.obj) : warning LNK4099: PDB 'Engine_x86.pdb' was not found with 'Engine__Debug_x86.lib(OGLGame.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Engine_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(Renderer.obj) : warning LNK4099: PDB 'Engine_x86.pdb' was not found with 'Engine__Debug_x86.lib(Renderer.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Engine_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(Sprite.obj) : warning LNK4099: PDB 'Engine_x86.pdb' was not found with 'Engine__Debug_x86.lib(Sprite.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Engine_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'Engine__Debug_x86.lib(glew.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\vc120.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(GLTextureCache.obj) : warning LNK4099: PDB 'GLRenderer_x86.pdb' was not found with 'Engine__Debug_x86.lib(GLTextureCache.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\GLRenderer_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(GLTexture.obj) : warning LNK4099: PDB 'GLRenderer_x86.pdb' was not found with 'Engine__Debug_x86.lib(GLTexture.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\GLRenderer_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(GLTextRenderer.obj) : warning LNK4099: PDB 'GLRenderer_x86.pdb' was not found with 'Engine__Debug_x86.lib(GLTextRenderer.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\GLRenderer_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(GLSpriteRenderer.obj) : warning LNK4099: PDB 'GLRenderer_x86.pdb' was not found with 'Engine__Debug_x86.lib(GLSpriteRenderer.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\GLRenderer_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(GLSpriteBatch.obj) : warning LNK4099: PDB 'GLRenderer_x86.pdb' was not found with 'Engine__Debug_x86.lib(GLSpriteBatch.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\GLRenderer_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(GLSprite.obj) : warning LNK4099: PDB 'GLRenderer_x86.pdb' was not found with 'Engine__Debug_x86.lib(GLSprite.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\GLRenderer_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(GLShader.obj) : warning LNK4099: PDB 'GLRenderer_x86.pdb' was not found with 'Engine__Debug_x86.lib(GLShader.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\GLRenderer_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(GLRenderer.obj) : warning LNK4099: PDB 'GLRenderer_x86.pdb' was not found with 'Engine__Debug_x86.lib(GLRenderer.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\GLRenderer_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(GLInput.obj) : warning LNK4099: PDB 'GLRenderer_x86.pdb' was not found with 'Engine__Debug_x86.lib(GLInput.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\GLRenderer_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(GLFontSet.obj) : warning LNK4099: PDB 'GLRenderer_x86.pdb' was not found with 'Engine__Debug_x86.lib(GLFontSet.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\GLRenderer_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(GLAtlas.obj) : warning LNK4099: PDB 'GLRenderer_x86.pdb' was not found with 'Engine__Debug_x86.lib(GLAtlas.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\GLRenderer_x86.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(winfnt.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(winfnt.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(type42.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(type42.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(type1cid.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(type1cid.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(type1.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(type1.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(truetype.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(truetype.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(sfnt.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(sfnt.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(raster.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(raster.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(psmodule.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(psmodule.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(pshinter.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(pshinter.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(psaux.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(psaux.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(pfr.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(pfr.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(pcf.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(pcf.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(smooth.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(smooth.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(ftsystem.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(ftsystem.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(ftlzw.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(ftlzw.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(ftinit.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(ftinit.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(ftgzip.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(ftgzip.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(ftdebug.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(ftdebug.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(ftbitmap.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(ftbitmap.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(ftbase.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(ftbase.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(cff.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(cff.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(bdf.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(bdf.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+Engine__Debug_x86.lib(autofit.obj) : warning LNK4099: PDB 'freetype265MTd.pdb' was not found with 'Engine__Debug_x86.lib(autofit.obj)' or at 'C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\freetype265MTd.pdb'; linking object as if no debug info
+  Birdman.vcxproj -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Projects\..\Builds\Debug (x86)\Birdman.exe
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Fonts\Comic.ttf -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Fonts\Comic.ttf
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Sounds\button_click(LICENSE).txt -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Sounds\button_click(LICENSE).txt
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Sounds\button_click.wav -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Sounds\button_click.wav
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Sounds\button_select(LICENSE).txt -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Sounds\button_select(LICENSE).txt
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Sounds\button_select.wav -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Sounds\button_select.wav
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Sounds\popup(LICENSE).txt -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Sounds\popup(LICENSE).txt
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Sounds\popup.wav -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Sounds\popup.wav
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Textures\Backdrop.jpg -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Textures\Backdrop.jpg
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Textures\BlackScreen.png -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Textures\BlackScreen.png
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Textures\theatre.jpg -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Textures\theatre.jpg
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Textures\Props\1.png -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Textures\Props\1.png
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Textures\Props\3.png -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Textures\Props\3.png
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Textures\Props\4.png -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Textures\Props\4.png
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Textures\Props\5.png -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Textures\Props\5.png
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Textures\Props\6.png -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Textures\Props\6.png
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Textures\Props\7.png -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Textures\Props\7.png
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Textures\Props\8.png -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Textures\Props\8.png
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Textures\Props\9.png -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Textures\Props\9.png
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Textures\Props\house_by_oodevexoo-d5lp359.png -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Textures\Props\house_by_oodevexoo-d5lp359.png
+  C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Resources\Textures\Props\Refs.txt -> C:\Users\itfob_000\Desktop\birdman-the-game-teambirb\Builds\Debug (x86)\Resources\Textures\Props\Refs.txt
+  20 File(s) copied

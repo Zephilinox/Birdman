@@ -48,7 +48,6 @@ bool BirdmanTheGame::init()
 	// TODO use this to initialise the scene at gameplay state start
 	game_data->getSceneManager()->setCurrentScene(0);
 
-
 	return true;
 }
 
