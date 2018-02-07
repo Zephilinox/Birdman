@@ -22,5 +22,6 @@ public:
 	void onInactive() override final;
 
 private:
-	std::unique_ptr<ASGE::Sprite> black_screen;
+	std::unique_ptr<ASGE::Sprite> left_curtain;
+	std::unique_ptr<ASGE::Sprite> right_curtain;
 };

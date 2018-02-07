@@ -7,23 +7,34 @@
 
 FadeOutState::FadeOutState(GameData* game_data)
 	: BaseState(game_data, true)
-	, black_screen(game_data->getRenderer()->createRawSprite())
+	, left_curtain(game_data->getRenderer()->createRawSprite())
+	, right_curtain(game_data->getRenderer()->createRawSprite())
 {
-	if (!black_screen->loadTexture("../../Resources/Textures/BlackScreen.png"))
+	if (!left_curtain->loadTexture("../../Resources/Textures/leftcurtain.png"))
 	{
-		throw std::exception("[FadeOutState::FadeOutState()] Failed to load '../../Resources/Textures/BlackScreen.png'\n");
+		throw std::exception("[FadeOutState::FadeOutState()] Failed to load '../../Resources/Textures/leftcurtain.png'\n");
+	}
+	if (!right_curtain->loadTexture("../../Resources/Textures/rightcurtain.png"))
+	{
+		throw std::exception("[FadeOutState::FadeOutState()] Failed to load '../../Resources/Textures/rightcurtain.png'\n");
 	}
 
-	black_screen->yPos(float(WINDOW_HEIGHT));
+	left_curtain->xPos(float(-WINDOW_WIDTH/2));
+	right_curtain->xPos(float(WINDOW_WIDTH));
 }
 
-//todo: make this and fade in state nicer
-//maybe like curtains?
-//if curtains, find animation for it maybe and use AnimatedSprite? not sure
 void FadeOutState::update(const ASGE::GameTime& gt)
 {
-	black_screen->yPos(black_screen->yPos() - (800 * float((gt.delta_time.count() / 1000.0f))));
-	if (black_screen->yPos() <= 0)
+	left_curtain->xPos(left_curtain->xPos() + (360 * float((gt.delta_time.count() / 1000.0f))));
+	if (left_curtain->xPos() >= 0)
+	{
+		game_data->getStateManager()->pop();
+		fade_end_callback();
+		game_data->getStateManager()->top()->update(gt);
+		game_data->getStateManager()->push<FadeInState>();
+	}
+	right_curtain->xPos(right_curtain->xPos() - (360 * float((gt.delta_time.count() / 1000.0f))));
+	if (right_curtain->xPos() <= WINDOW_WIDTH/2)
 	{
 		game_data->getStateManager()->pop();
 		fade_end_callback();
@@ -34,7 +45,8 @@ void FadeOutState::update(const ASGE::GameTime& gt)
 
 void FadeOutState::render() const
 {
-	game_data->getRenderer()->renderSprite(*black_screen);
+	game_data->getRenderer()->renderSprite(*left_curtain);
+	game_data->getRenderer()->renderSprite(*right_curtain);
 }
 
 void FadeOutState::onActive()
