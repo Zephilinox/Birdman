@@ -183,6 +183,9 @@
     <ClInclude Include="..\..\Source\Architecture\Audio\SFML\AudioEngineSFML.hpp">
       <Filter>Header Files\Architecture\Audio\irKlang</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Audio\None\AudioEngineNone.hpp">
+      <Filter>Header Files\Architecture\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -262,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Architecture\Audio\SFML\AudioEngineSFML.cpp">
       <Filter>Source Files\Architecture\Audio\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\Audio\None\AudioEngineNone.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
