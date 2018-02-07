@@ -22,6 +22,8 @@ public:
 	AudioEngine* getAudioEngine();
 	Engine getEngineType();
 
+	void play(const std::string& name, bool loop = false);
+
 private:
 	std::unique_ptr<AudioEngine> audio_engine;
 	Engine engine;
