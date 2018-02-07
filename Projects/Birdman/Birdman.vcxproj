@@ -152,6 +152,8 @@
     <ClInclude Include="..\..\Source\States\FadeOutState.hpp" />
     <ClInclude Include="..\..\Source\States\GameState.hpp" />
     <ClInclude Include="..\..\Source\States\MenuState.hpp" />
+    <ClInclude Include="..\..\Source\States\PlaySelectState.hpp" />
+    <ClInclude Include="..\..\Source\States\SplashState.hpp" />
     <ClInclude Include="..\..\Source\stdafx.h" />
     <ClInclude Include="..\..\Source\targetver.h" />
   </ItemGroup>
@@ -184,6 +186,8 @@
     <ClCompile Include="..\..\Source\States\FadeOutState.cpp" />
     <ClCompile Include="..\..\Source\States\GameState.cpp" />
     <ClCompile Include="..\..\Source\States\MenuState.cpp" />
+    <ClCompile Include="..\..\Source\States\PlaySelectState.cpp" />
+    <ClCompile Include="..\..\Source\States\SplashState.cpp" />
     <ClCompile Include="..\..\Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugFast|Win32'">Create</PrecompiledHeader>

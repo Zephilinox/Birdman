@@ -10,11 +10,10 @@
 //SELF
 #include "Architecture/GameData.hpp"
 #include "Constants.hpp"
-#include "States/MenuState.hpp"
+#include "States/SplashState.hpp"
 
 //Chris - added here too, simply to initialise it. Unsure if needed here.
 #include "Architecture/Managers/SceneManager.h"
-
 
 BirdmanTheGame::~BirdmanTheGame()
 {
@@ -42,7 +41,7 @@ bool BirdmanTheGame::init()
 	key_handler_id = inputs->addCallbackFnc(ASGE::EventType::E_KEY, &BirdmanTheGame::keyHandler, this);
 
 	game_data->getFontManager()->addFont("../../Resources/Fonts/Comic.ttf", "Default");
-	game_data->getStateManager()->push<MenuState>();
+	game_data->getStateManager()->push<SplashState>();
 
 	//Chris - hmmm
 	// TODO use this to initialise the scene at gameplay state start
