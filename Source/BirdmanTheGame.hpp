@@ -25,9 +25,6 @@ class BirdmanTheGame : public ASGE::OGLGame
 {
 public:
 	
-	//TODO:- REMOVE, was here for testing only
-	Audience test;
-
 	/**
 	*  Default constructor for game.
 	*/
