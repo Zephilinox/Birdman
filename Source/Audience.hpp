@@ -1,4 +1,11 @@
 #pragma once
+#include <Engine/Sprite.h>
+
+namespace ASGE
+{
+	class Renderer;
+	class Sprite;
+}
 
 class Audience
 {
@@ -20,6 +27,7 @@ public:
 
 	//todo: consider doing this in the constructor instead of having an init function
 	void varyApprovalsBetweenNights();
+	void loadAudienceSprite();
 
 private:
 	int approval_sad = 0;
@@ -28,4 +36,6 @@ private:
 	int approval_shocking = 0;
 
 	const int max_approval = 100;
+
+	ASGE::Sprite* audience_sprite = nullptr;
 };

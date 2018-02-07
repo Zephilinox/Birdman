@@ -58,3 +58,13 @@ void Audience::varyApprovalsBetweenNights()
 	approval_dark += (int)dark_variance(mt);
 
 }
+
+void Audience::loadAudienceSprite()
+{
+	//TODO pass renderer to audience to be able to create the sprite!
+
+	//audience_sprite = renderer->createRawSprite();
+	//audience_sprite->loadTexture("Resources\\Textures\\avatar.png");
+	//audience->dims[0] = 92;
+	//audience->dims[1] = 92;
+}

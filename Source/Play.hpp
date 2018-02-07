@@ -2,6 +2,7 @@
 #include "Audience.hpp"
 
 class Scene;
+class GameData;
 
 //if I've understood this right, the structure should look like this:
 //	States

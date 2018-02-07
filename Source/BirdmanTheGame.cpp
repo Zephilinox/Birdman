@@ -70,6 +70,7 @@ void BirdmanTheGame::update(const ASGE::GameTime& gt)
 void BirdmanTheGame::render(const ASGE::GameTime& gt)
 {
 	game_data->getStateManager()->render();
+	game_data->getSceneManager()->render();
 }
 
 void BirdmanTheGame::keyHandler(const ASGE::SharedEventData data)

@@ -26,7 +26,8 @@ public:
 	void setFadeEndCallback(std::function<void(void)> func);
 
 private:
-	std::unique_ptr<ASGE::Sprite> black_screen;
+	std::unique_ptr<ASGE::Sprite> left_curtain;
+	std::unique_ptr<ASGE::Sprite> right_curtain;
 
 	std::function<void(void)> fade_end_callback;
 };
