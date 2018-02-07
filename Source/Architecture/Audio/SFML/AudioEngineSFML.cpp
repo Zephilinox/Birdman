@@ -5,13 +5,13 @@ AudioEngineSFML::AudioEngineSFML(const std::string& audio_path)
 {
 }
 
-void AudioEngineSFML::play(const std::string & name, bool loop)
+void AudioEngineSFML::play(const std::string& name, bool loop)
 {
-	if (!buffer.loadFromFile(audio_path + name))
+	if (!buffers[name].loadFromFile(audio_path + name))
 	{
-		throw "error loading SFML audio";
+		throw "error loading " + audio_path + name;
 	}
 	
-	sound.setBuffer(buffer);
-	sound.play();
+	sounds.push_back(std::make_unique<sf::Sound>(buffers[name]));
+	sounds.back()->play();
 }
