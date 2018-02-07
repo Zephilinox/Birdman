@@ -1,5 +1,8 @@
 #pragma once
 
+//LIB
+#include <SFML/Audio.hpp>
+
 //SELF
 #include "../AudioEngine.hpp"
 
@@ -12,4 +15,6 @@ public:
 	void play(const std::string& name, bool loop = false) override final;
 	
 private:
+	sf::SoundBuffer buffer;
+	sf::Sound sound;
 };

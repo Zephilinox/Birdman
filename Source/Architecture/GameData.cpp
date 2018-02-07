@@ -1,5 +1,11 @@
 #include "GameData.hpp"
+
+//STD
 #include <assert.h>
+
+//SELF
+#include "Audio/irrKlang/AudioEngineIrrklang.hpp"
+#include "Audio/SFML/AudioEngineSFML.hpp"
 
 //TODO ricardo
 //Ricardo - do we add scene manager to this list?????
@@ -10,7 +16,7 @@ GameData::GameData(ASGE::Renderer* renderer)
 	: renderer(renderer)
 	, state_manager(this)
 	, font_manager(renderer)
-	, audio_manager(new AudioEngineIrrklang("Resources/Sounds/"))
+	, audio_manager(new AudioEngineSFML("Resources/Sounds/"))
 {
 	assert(renderer);
 }

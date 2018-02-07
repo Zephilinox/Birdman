@@ -12,7 +12,6 @@
 
 //todo: make audio manager
 #include "Audio/AudioEngine.hpp"
-#include "Audio/irrKlang/AudioEngineIrrklang.hpp"
 
 class GameData
 {
