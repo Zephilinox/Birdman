@@ -102,4 +102,6 @@ void Menu::selectButton(int button_id)
 	buttons[selected_button_id].setSelected(false);
 	selected_button_id = button_id;
 	buttons[selected_button_id].setSelected(true);
+
+	game_data->getAudioManager()->play("button_select.wav");
 }
