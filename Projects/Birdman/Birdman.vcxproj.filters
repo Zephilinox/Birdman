@@ -76,6 +76,12 @@
     <Filter Include="Source Files\Architecture\Audio\irrKlang">
       <UniqueIdentifier>{504c0865-d1a7-49bd-bb35-58389bc2d53f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Architecture\Audio\SFML">
+      <UniqueIdentifier>{356c5a0f-cf5c-417d-a014-72efe6bc7ffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Architecture\Audio\SFML">
+      <UniqueIdentifier>{bd1aa826-36df-4d06-a870-788d5978d6a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\stdafx.h">
@@ -174,6 +180,9 @@
     <ClInclude Include="..\..\Source\Architecture\Audio\irrKlang\AudioEngineIrrklang.hpp">
       <Filter>Header Files\Architecture\Audio\irKlang</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Audio\SFML\AudioEngineSFML.hpp">
+      <Filter>Header Files\Architecture\Audio\irKlang</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -250,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Architecture\Audio\irrKlang\AudioEngineIrrklang.cpp">
       <Filter>Source Files\Architecture\Audio\irrKlang</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\Audio\SFML\AudioEngineSFML.cpp">
+      <Filter>Source Files\Architecture\Audio\SFML</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
