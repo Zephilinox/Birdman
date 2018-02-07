@@ -208,105 +208,33 @@ void GameState::dialogue_init2()
 {
 	//Add an option to the input menu for the player
 	dialogue_tree.addPlayerOption("start_extra",
-		[&]()
+	[&]()
 	{
-		if(dialogue_tree.getPlayer()->hasFlag("action1"))
+		if (dialogue_tree.getPlayer()->hasFlag("named..."))
 		{
 			return "";
 		}
 
-		return "*Strut across the stage...*";
+		return "*Struts across the stage*";
 	},
-		[&]()
+	[&]()
 	{
-		dialogue_tree.getPlayer()->addFlag("action1");
 		return "done_action1";
 	});
 
-	dialogue_tree.addDialogue("done_action1", "Player", "There are those that call me...", "");
+	dialogue_tree.addDialogue("done_action1", "player", "There are those that call me...", "select_name");
 
-	dialogue_tree.addPlayerOption("start_extra",
-		[&]()
-	{
-		if(!dialogue_tree.getPlayer()->hasFlag("action1"))
-		{
-			return "";
-		}
-
-		return "Tim...";
-	},
-		[&]()
+	dialogue_tree.addPlayerOption("select_name", "Tim...",
+	[&]()
 	{
 		dialogue_tree.getPlayer()->addFlag("named...");
 		return "done_action2";
 	});
 
-	dialogue_tree.addPlayerOption("start_extra",
-		[&]()
-	{
-		if(!dialogue_tree.getPlayer()->hasFlag("action1"))
-		{
-			return "";
-		}
-
-		return "Barnabus...";
-	},
-		[&]()
+	dialogue_tree.addPlayerOption("select_name", "Barnabus...",
+	[&]()
 	{
 		dialogue_tree.getPlayer()->addFlag("named...");
 		return "done_action2";
-	});
-
-
-	dialogue_tree.addDialogue("start", "strange_npc",
-		[&]()
-	{
-		if(dialogue_tree.getPlayer()->hasFlag("npc_killed"))
-		{
-			if(dialogue_tree.getSpeaker()->hasFlag("stole_sword"))
-			{
-				return "*You stand over the dead corpse of the man who stole your sword*";
-			}
-			else
-			{
-				return "*You stand over the dead corpse of the man you randomly slaughtered*";
-			}
-		}
-
-		if(dialogue_tree.getPlayer()->hasFlag("npc_found"))
-		{
-			dialogue_tree.getPlayer()->addFlag("npc_killed");
-			return "No! Please! *ARRRGH*";
-		}
-
-		if(dialogue_tree.getSpeaker()->hasFlag("stole_sword"))
-		{
-			return "*The strange NPC who stole your sword is nowhere to be found...*";
-		}
-
-		if(!dialogue_tree.getSpeaker()->hasFlag("met_player"))
-		{
-			return "What? Who are you? What do you want?";
-		}
-
-		return "What? You're still here? What is it now.";
-	},
-		[&]()
-	{
-		dialogue_tree.getSpeaker()->addFlag("met_player");
-
-		if(dialogue_tree.getPlayer()->hasFlag("npc_killed"))
-		{
-			return "end";
-		}
-
-		if(dialogue_tree.getSpeaker()->hasFlag("stole_sword"))
-		{
-			return "";
-		}
-		else
-		{
-			return "start_options";
-		}
 	});
 };
