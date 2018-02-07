@@ -3,10 +3,6 @@
 //STD
 #include <assert.h>
 
-//SELF
-#include "Audio/irrKlang/AudioEngineIrrklang.hpp"
-#include "Audio/SFML/AudioEngineSFML.hpp"
-
 //TODO ricardo
 //Ricardo - do we add scene manager to this list?????
 	//You only need to add it if you need to pass something to the scene managers constructor
@@ -16,7 +12,7 @@ GameData::GameData(ASGE::Renderer* renderer)
 	: renderer(renderer)
 	, state_manager(this)
 	, font_manager(renderer)
-	, audio_manager(new AudioEngineSFML("Resources/Sounds/"))
+	, audio_manager(AudioManager::Engine::SFML, "Resources/Sounds/")
 {
 	assert(renderer);
 }
@@ -51,7 +47,7 @@ SceneManager* GameData::getSceneManager()
 	return &scene_manager;
 }
 
-AudioEngine* GameData::getAudioManager()
+AudioManager* GameData::getAudioManager()
 {
-	return audio_manager.get();
+	return &audio_manager;
 }

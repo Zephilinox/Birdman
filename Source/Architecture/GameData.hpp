@@ -9,6 +9,7 @@
 #include "Managers/FontManager.hpp"
 #include "Messages/MessageQueue.hpp"
 #include "Managers/SceneManager.h"
+#include "Managers/AudioManager.hpp"
 
 //todo: make audio manager
 #include "Audio/AudioEngine.hpp"
@@ -24,7 +25,7 @@ public:
 	FontManager* getFontManager();
 	MessageQueue* getMessageQueue();
 	SceneManager* getSceneManager();
-	AudioEngine* getAudioManager();
+	AudioManager* getAudioManager();
 
 private:
 	ASGE::Renderer* renderer = nullptr;
@@ -49,6 +50,5 @@ private:
 
 	SceneManager scene_manager;
 
-	//todo: replace with audio manager
-	std::unique_ptr<AudioEngine> audio_manager = nullptr;
+	AudioManager audio_manager;
 };
