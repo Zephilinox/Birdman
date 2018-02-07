@@ -1,5 +1,9 @@
 #include "AudioManager.hpp"
 
+//STD
+#include <functional>
+#include <string>
+
 //SELF
 #include "../Audio/irrKlang/AudioEngineIrrklang.hpp"
 #include "../Audio/SFML/AudioEngineSFML.hpp"
@@ -33,4 +37,9 @@ AudioEngine* AudioManager::getAudioEngine()
 AudioManager::Engine AudioManager::getEngineType()
 {
 	return engine;
+}
+
+void AudioManager::play(const std::string& name, bool loop)
+{
+	audio_engine->play(std::forward<const std::string&>(name), std::forward<bool>(loop));
 }
