@@ -25,7 +25,7 @@ A game based on the movie Birdman
 - game over
 	- ?
 	- score?
-- random number generator
+- random number generator [X] (inside gamedata)
 - audio
 	- library [X]
 		- IrrKlang [X]
