@@ -27,10 +27,13 @@ A game based on the movie Birdman
 	- score?
 - random number generator
 - audio
-	- library
-		- Irrklang like in tutorial?
-		- Or something else?
+	- library [X]
+		- IrrKlang [X]
+		- SFML [X]
+		- None [X]
+		- Need to add more features and pick one primary engine to support (IrrKlang?)
 	- UI
+		- Button Click [X]
 	- background music
 	- other SFX (audience reaction?)
 
