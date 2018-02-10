@@ -10,8 +10,8 @@
 
 //SELF
 #include "../Messages/MessageQueue.hpp"
+#include "../States/BaseState.hpp"
 
-class BaseState;
 class GameData;
 
 /**
@@ -35,9 +35,7 @@ public:
 
 private:
 	GameData* game_data;
-	BaseState* current_state;
-	BaseState* previous_state;
-	std::vector<std::shared_ptr<BaseState>> states;
+	std::vector<std::unique_ptr<BaseState>> states;
 	std::vector<std::function<void()>> delayed_calls;
 };
 
@@ -60,8 +58,7 @@ void StateManager::push()
 			states.back()->onInactive();
 		}
 
-		std::shared_ptr<T> state = std::make_shared<T>(game_data);
-		states.push_back(state);
+		states.push_back(std::make_unique<T>(game_data));
 	});
 }
 
@@ -76,7 +73,6 @@ void StateManager::push(Args... args)
 			states.back()->onInactive();
 		}
 
-		std::shared_ptr<T> state = std::make_shared<T>(game_data, args...);
-		states.push_back(state);
+		states.push_back(std::make_unique<T>(game_data, args...));
 	});
 }
