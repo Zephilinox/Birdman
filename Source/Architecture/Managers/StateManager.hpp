@@ -36,6 +36,7 @@ public:
 private:
 	GameData* game_data;
 	std::vector<std::unique_ptr<BaseState>> states;
+	//todo: implement generic delayed calls
 	std::vector<std::function<void()>> delayed_calls;
 };
 
