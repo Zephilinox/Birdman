@@ -78,6 +78,8 @@ dkms.conf
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+Projects/enc_temp_folder/
+
 # User-specific files
 *.suo
 *.user

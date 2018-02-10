@@ -1,7 +1,7 @@
 #pragma once
 
 //STD
-#include <map>
+#include <array>
 #include <mutex>
 
 //LIB
@@ -36,7 +36,7 @@ public:
 	bool isKeyDown(int key);
 
 private:
-	std::map<int, int> toggle_keys;
-	std::map<int, int> keys;
+	std::array<int, ASGE::KEYS::KEY_LAST> toggle_keys;
+	std::array<int, ASGE::KEYS::KEY_LAST> keys;
 	std::mutex keys_mutex;
 };

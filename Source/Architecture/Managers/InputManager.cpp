@@ -18,15 +18,15 @@ InputManager::InputManager()
 void InputManager::update()
 {
 	std::lock_guard<std::mutex> guard(keys_mutex);
-	for (int i = 0; i < ASGE::KEYS::KEY_LAST; ++i)
+	for (auto& key : keys)
 	{
 		//If the key hasn't been released since the last update
 		//Then set it to repeated so that
 		//KeyDown returns true but 
 		//KeyPressed returns false
-		if (keys[i] == ASGE::KEYS::KEY_PRESSED)
+		if (key == ASGE::KEYS::KEY_PRESSED)
 		{
-			keys[i] = ASGE::KEYS::KEY_REPEATED;
+			key = ASGE::KEYS::KEY_REPEATED;
 		}
 	}
 }
