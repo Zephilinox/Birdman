@@ -12,6 +12,7 @@ GameState::GameState(GameData* game_data)
 	//dialogue_init();
 	//dialogue_init2();
 	dialogue_init3();
+	visual_dialogue.update();
 }
 
 void GameState::update(const ASGE::GameTime&)

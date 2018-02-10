@@ -25,7 +25,7 @@ void StateManager::update(const ASGE::GameTime& gt)
 		return;
 	}
 
-	top()->update(gt);
+	states.back()->update(gt);
 }
 
 void StateManager::render() const
@@ -35,12 +35,20 @@ void StateManager::render() const
 		return;
 	}
 
-	if (top()->shouldRenderPreviousState() && states.size() >= 2)
+	size_t firstRenderState = 0;
+	for (int i = states.size() - 1; i >= 0; --i)
 	{
-		states[states.size() - 2]->render();
+		if (!states[i]->shouldRenderPreviousState())
+		{
+			firstRenderState = i;
+			break;
+		}
 	}
 
-	top()->render();
+	for (size_t i = firstRenderState; i < states.size(); ++i)
+	{
+		states[i]->render();
+	}
 }
 
 /**
@@ -73,8 +81,6 @@ void StateManager::pop()
 		{
 			throw std::runtime_error("StateManager::pop - Stack is empty");
 		}
-
-		std::cout << "popped state\n";
 
 		states.pop_back();
 

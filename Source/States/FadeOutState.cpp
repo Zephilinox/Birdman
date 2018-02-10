@@ -26,9 +26,10 @@ FadeOutState::FadeOutState(GameData* game_data, std::function<void()> callback)
 
 void FadeOutState::update(const ASGE::GameTime& gt)
 {
-	left_curtain->xPos(left_curtain->xPos() + (360 * float((gt.delta_time.count() / 1000.0f))));
-	right_curtain->xPos(right_curtain->xPos() - (360 * float((gt.delta_time.count() / 1000.0f))));
+	left_curtain->xPos(left_curtain->xPos() + (500 * float((gt.delta_time.count() / 1000.0f))));
+	right_curtain->xPos(right_curtain->xPos() - (500 * float((gt.delta_time.count() / 1000.0f))));
 
+	//todo: add small delay (0.1 seconds) for it to remain closed before it opens
 	if (left_curtain->xPos() >= 0 && right_curtain->xPos() <= WINDOW_WIDTH / 2)
 	{
 		game_data->getStateManager()->pop();

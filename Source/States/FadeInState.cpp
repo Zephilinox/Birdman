@@ -23,8 +23,8 @@ FadeInState::FadeInState(GameData* game_data)
   
 void FadeInState::update(const ASGE::GameTime& gt)
 {
-	left_curtain->xPos(left_curtain->xPos() - 360 * float((gt.delta_time.count() / 1000.0f)));
-	right_curtain->xPos(right_curtain->xPos() + 360 * float((gt.delta_time.count() / 1000.0f)));
+	left_curtain->xPos(left_curtain->xPos() - 500 * float((gt.delta_time.count() / 1000.0f)));
+	right_curtain->xPos(right_curtain->xPos() + 500 * float((gt.delta_time.count() / 1000.0f)));
 
 	if (left_curtain->xPos() < -WINDOW_WIDTH/2 && right_curtain->xPos() > WINDOW_WIDTH)
 	{

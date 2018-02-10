@@ -60,8 +60,6 @@ void StateManager::push()
 			states.back()->onInactive();
 		}
 
-		std::cout << "pushed state\n";
-
 		std::shared_ptr<T> state = std::make_shared<T>(game_data);
 		states.push_back(state);
 	});
@@ -77,8 +75,6 @@ void StateManager::push(Args... args)
 		{
 			states.back()->onInactive();
 		}
-
-		std::cout << "pushed state with arg\n";
 
 		std::shared_ptr<T> state = std::make_shared<T>(game_data, args...);
 		states.push_back(state);
