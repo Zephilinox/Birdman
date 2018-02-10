@@ -13,27 +13,34 @@ StateManager::StateManager(GameData* game_data)
 
 void StateManager::update(const ASGE::GameTime& gt)
 {
+	for (auto& f : delayed_calls)
+	{
+		f();
+	}
+
+	delayed_calls.clear();
+
 	if (states.empty())
 	{
-		current_state = nullptr;
 		return;
 	}
 
-	current_state = top();
-	current_state->update(gt);
+	top()->update(gt);
 }
 
 void StateManager::render() const
 {
-	if (current_state)
+	if (states.empty())
 	{
-		if (current_state->shouldRenderPreviousState() && states.size() >= 2)
-		{
-			states[states.size() - 2]->render();
-		}
-
-		current_state->render();
+		return;
 	}
+
+	if (top()->shouldRenderPreviousState() && states.size() >= 2)
+	{
+		states[states.size() - 2]->render();
+	}
+
+	top()->render();
 }
 
 /**
@@ -41,7 +48,7 @@ void StateManager::render() const
 *   @details Returns the top state on the stack. Might not be the active state.
 Will throw an exception if the stack is empty.
 *   @return  pointer to a BaseState */
-BaseState* StateManager::top()
+BaseState* StateManager::top() const
 {
 	if (states.empty())
 	{
@@ -59,7 +66,7 @@ Calls onActive() after popping
 *   @return  void */
 void StateManager::pop()
 {
-	game_data->getMessageQueue()->sendMessage<CommandMessage>(
+	delayed_calls.push_back(
 	[&]()
 	{
 		if (states.empty())

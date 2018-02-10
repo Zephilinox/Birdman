@@ -11,23 +11,6 @@
 //SELF
 #include "../Messages/MessageQueue.hpp"
 
-class CommandMessage : public Message
-{
-public:
-	CommandMessage(std::function<void()> func)
-		: Message("CommandMessage")
-		, func(func)
-	{}
-
-	void execute()
-	{
-		func();
-	}
-
-private:
-	std::function<void()> func;
-};
-
 class BaseState;
 class GameData;
 
@@ -47,7 +30,7 @@ public:
 	template <class T> void push();
 	template <class T, class... Args> void push(Args... args);
 
-	BaseState* top();
+	BaseState* top() const;
 	bool empty() const;
 
 private:
@@ -55,6 +38,7 @@ private:
 	BaseState* current_state;
 	BaseState* previous_state;
 	std::vector<std::shared_ptr<BaseState>> states;
+	std::vector<std::function<void()>> delayed_calls;
 };
 
 /**
@@ -68,7 +52,7 @@ Calls onInactive() before pushing
 template <class T>
 void StateManager::push()
 {
-	game_data->getMessageQueue()->sendMessage<CommandMessage>(
+	delayed_calls.push_back(
 	[&]()
 	{
 		if (!states.empty())
@@ -86,7 +70,7 @@ void StateManager::push()
 template <class T, class... Args>
 void StateManager::push(Args... args)
 {
-	game_data->getMessageQueue()->sendMessage<CommandMessage>(
+	delayed_calls.push_back(
 	[&, args...]()
 	{
 		if (!states.empty())

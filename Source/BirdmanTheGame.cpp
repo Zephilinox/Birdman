@@ -51,11 +51,6 @@ bool BirdmanTheGame::init()
 	game_data->getMessageQueue()->addListener([](Message* msg)
 	{
 		std::cout << "Processed Message: " << msg->message_id << "\n";
-
-		if (msg->message_id == "CommandMessage")
-		{
-			static_cast<CommandMessage*>(msg)->execute();
-		}
 	});
 
 	return true;
