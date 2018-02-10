@@ -19,16 +19,12 @@ MenuState::MenuState(GameData* game_data)
 	//button lives as long as menu, which lives as long as this menu state
 	//so no need to keep track of Connection lifetime
 	//Take at look at Signal.hpp for more info on how that works.
-	menu.getButton(0).on_click.connect([game_data]()
+	menu.getButton(0).on_click.connect([gd=game_data]()
 	{
 		//here we're using the fade out state to transition to another state
-		auto state = game_data->getStateManager()->push<FadeOutState>();
-		//set a lambda for the callback, this is done between the fade out state popping itself and pushing the fade in state
-		//i.e. pop fade off, push game state, push fade in, so it goes fade out -> fade in -> game state
-		state->setFadeEndCallback(
-		[&]()
+		gd->getStateManager()->push<FadeOutState>([gd]()
 		{
-			game_data->getStateManager()->push<GameState>();
+			gd->getStateManager()->push<GameState>();
 		});
 	});
 

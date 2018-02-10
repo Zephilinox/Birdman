@@ -17,8 +17,11 @@ void SplashState::update(const ASGE::GameTime& gt)
 
 	if (duration.count() >= 1.0f)
 	{
+		//game_data->getStateManager()->pop();
+		//game_data->getStateManager()->push<MenuState>();
 		game_data->getStateManager()->pop();
 		game_data->getStateManager()->push<MenuState>();
+		start_time = end_time;
 	}
 }
 

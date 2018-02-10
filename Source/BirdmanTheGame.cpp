@@ -47,20 +47,32 @@ bool BirdmanTheGame::init()
 	// TODO use this to initialise the scene at gameplay state start
 	game_data->getSceneManager()->setCurrentScene(0);
 
+
+	game_data->getMessageQueue()->addListener([](Message* msg)
+	{
+		std::cout << "Processed Message: " << msg->message_id << "\n";
+
+		if (msg->message_id == "CommandMessage")
+		{
+			static_cast<CommandMessage*>(msg)->execute();
+		}
+	});
+
 	return true;
 }
 
 void BirdmanTheGame::update(const ASGE::GameTime& gt)
 {
-	game_data->getInputManager()->update();
 	game_data->getMessageQueue()->processMessages(std::chrono::microseconds(2000));
+
+	game_data->getInputManager()->update();
 	game_data->getStateManager()->update(gt);
 
 	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ESCAPE))
 	{
 		game_data->getStateManager()->pop();
 	}
-
+	
 	if (renderer->exit() || this->exit || game_data->getStateManager()->empty())
 	{
 		signalExit();

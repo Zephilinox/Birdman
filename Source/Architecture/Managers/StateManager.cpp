@@ -5,39 +5,34 @@
 
 //SELF
 #include "../States/BaseState.hpp"
+#include "../GameData.hpp"
 
 StateManager::StateManager(GameData* game_data)
 	: game_data(game_data)
-{
-}
+{}
 
 void StateManager::update(const ASGE::GameTime& gt)
 {
 	if (states.empty())
 	{
-		throw std::runtime_error("StateManager::update - Stack is empty");
+		current_state = nullptr;
+		return;
 	}
 
-	current_state = states.back();
-
-	if (states.size() >= 2 && current_state->shouldRenderPreviousState())
-	{
-		previous_state = states[states.size() - 2];
-	}
-	else
-	{
-		previous_state = nullptr;
-	}
-
+	current_state = top();
 	current_state->update(gt);
 }
 
 void StateManager::render() const
 {
-	current_state->render();
-	if (previous_state)
+	if (current_state)
 	{
-		previous_state->render();
+		if (current_state->shouldRenderPreviousState() && states.size() >= 2)
+		{
+			states[states.size() - 2]->render();
+		}
+
+		current_state->render();
 	}
 }
 
@@ -64,17 +59,23 @@ Calls onActive() after popping
 *   @return  void */
 void StateManager::pop()
 {
-	if (states.empty())
+	game_data->getMessageQueue()->sendMessage<CommandMessage>(
+	[&]()
 	{
-		throw std::runtime_error("StateManager::pop - Stack is empty");
-	}
-	
-	states.pop_back();
+		if (states.empty())
+		{
+			throw std::runtime_error("StateManager::pop - Stack is empty");
+		}
 
-	if (!states.empty())
-	{
-		states.back()->onActive();
-	}
+		std::cout << "popped state\n";
+
+		states.pop_back();
+
+		if (!states.empty())
+		{
+			states.back()->onActive();
+		}
+	});
 }
 
 bool StateManager::empty() const

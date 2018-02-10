@@ -17,17 +17,15 @@ class GameData;
 class FadeOutState : public BaseState
 {
 public:
-	FadeOutState(GameData* game_data);
+	FadeOutState(GameData* game_data, std::function<void()> callback);
 	void update(const ASGE::GameTime& gt) override final;
 	void render() const override final;
 	void onActive() override final;
 	void onInactive() override final;
 
-	void setFadeEndCallback(std::function<void(void)> func);
-
 private:
 	std::unique_ptr<ASGE::Sprite> left_curtain;
 	std::unique_ptr<ASGE::Sprite> right_curtain;
 
-	std::function<void(void)> fade_end_callback;
+	std::function<void()> fade_end_callback;
 };
