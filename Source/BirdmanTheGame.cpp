@@ -47,10 +47,9 @@ bool BirdmanTheGame::init()
 	// TODO use this to initialise the scene at gameplay state start
 	game_data->getSceneManager()->setCurrentScene(0);
 
-
 	game_data->getMessageQueue()->addListener([](Message* msg)
 	{
-		std::cout << "Processed Message: " << msg->message_id << "\n";
+		std::cout << "Processed " << msg->message_id << "\n";
 	});
 
 	return true;
@@ -58,7 +57,7 @@ bool BirdmanTheGame::init()
 
 void BirdmanTheGame::update(const ASGE::GameTime& gt)
 {
-	game_data->getMessageQueue()->processMessages(std::chrono::microseconds(2000));
+	game_data->getMessageQueue()->processMessages(6ms);
 
 	game_data->getInputManager()->update();
 	game_data->getStateManager()->update(gt);

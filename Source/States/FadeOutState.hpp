@@ -8,6 +8,7 @@
 
 //SELF
 #include "../Architecture/States/BaseState.hpp"
+#include "../Architecture/Timer.hpp"
 
 class GameData;
 
@@ -26,6 +27,8 @@ public:
 private:
 	std::unique_ptr<ASGE::Sprite> left_curtain;
 	std::unique_ptr<ASGE::Sprite> right_curtain;
+	bool closed = false;
+	Timer timer;
 
 	std::function<void()> fade_end_callback;
 };

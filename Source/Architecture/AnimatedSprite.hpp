@@ -8,6 +8,7 @@
 //LIB
 #include <Engine/Sprite.h>
 
+//todo: utilise timer class
 typedef std::chrono::high_resolution_clock Clock;
 
 class AnimatedSprite

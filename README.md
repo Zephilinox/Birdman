@@ -22,6 +22,8 @@ A game based on the movie Birdman
 			option menu buttons/boxes
 			fonts
 			audience reaction
+- level select
+	- only appears if player has played before (save some ints)
 - game over
 	- ?
 	- score?

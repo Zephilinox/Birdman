@@ -1,18 +1,27 @@
 #include "MessageQueue.hpp"
 
-void MessageQueue::processMessages(std::chrono::microseconds max_processing_time)
+//STD
+#include <iomanip>
+
+void MessageQueue::processMessages(Timer::nanoseconds_float max_processing_time)
 {
 	//Could optimise this more by having listeners choose which events they care about, thus less listeners being called back.
-	auto start_time = std::chrono::high_resolution_clock().now();
-	auto processing_time = std::chrono::microseconds::duration();
+	timer.restart();
 
-	while (!message_queue.empty() && processing_time < max_processing_time)
+	int processedMessages = 0;
+	while (!message_queue.empty() && timer.getChronoElapsedTime() < max_processing_time)
 	{
+		processedMessages++;
 		messenger.emit(message_queue.front().get());
 		message_queue.pop();
+	}
 
-		auto end_time = std::chrono::high_resolution_clock().now();
-		processing_time = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
+	if (timer.getChronoElapsedTime() > max_processing_time)
+	{
+		std::cout << "WARNING: MessageQueue took " << std::fixed << std::setprecision(1) << std::setfill('0') <<
+			std::setw(3) << timer.getElapsedTime<Timer::milliseconds>() << "ms processing " <<
+			std::setw(4) << processedMessages << " messages. " <<
+			std::setw(4) << message_queue.size() << " remain\n";
 	}
 }
 

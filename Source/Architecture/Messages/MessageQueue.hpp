@@ -7,15 +7,15 @@
 //SELF
 #include "../Signals/Signal.hpp"
 #include "Message.hpp"
+#include "../Timer.hpp"
 
 class MessageQueue
 {
 public:
 	using FunctionType = Signal<Message*>::FunctionType;
 
-	//1000 microseconds = 1 millisecond
 	//Note: This is not a hard limit. Highly dependant on the number of listeners.
-	void processMessages(std::chrono::microseconds max_processing_time);
+	void processMessages(Timer::nanoseconds_float max_processing_time);
 
 	Connection addListener(FunctionType function);
 	bool removeListener(Connection c);
@@ -35,4 +35,5 @@ public:
 private:
 	Signal<Message*> messenger;
 	std::queue<std::unique_ptr<Message>> message_queue;
+	Timer timer;
 };

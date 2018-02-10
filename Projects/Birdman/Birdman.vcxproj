@@ -139,6 +139,7 @@
     <ClInclude Include="..\..\Source\Architecture\Signals\Signal.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Signals\Slot.hpp" />
     <ClInclude Include="..\..\Source\Architecture\States\BaseState.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Timer.hpp" />
     <ClInclude Include="..\..\Source\Architecture\UI\Button.hpp" />
     <ClInclude Include="..\..\Source\Architecture\UI\Menu.hpp" />
     <ClInclude Include="..\..\Source\Audience.hpp" />
@@ -173,6 +174,7 @@
     <ClCompile Include="..\..\Source\Architecture\Managers\StateManager.cpp" />
     <ClCompile Include="..\..\Source\Architecture\Messages\MessageQueue.cpp" />
     <ClCompile Include="..\..\Source\Architecture\Signals\Connection.cpp" />
+    <ClCompile Include="..\..\Source\Architecture\Timer.cpp" />
     <ClCompile Include="..\..\Source\Architecture\UI\Button.cpp" />
     <ClCompile Include="..\..\Source\Architecture\UI\Menu.cpp" />
     <ClCompile Include="..\..\Source\Audience.cpp" />

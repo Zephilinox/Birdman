@@ -51,11 +51,6 @@ void StateManager::render() const
 	}
 }
 
-/**
-*   @brief   Returns the top state on the stack.
-*   @details Returns the top state on the stack. Might not be the active state.
-Will throw an exception if the stack is empty.
-*   @return  pointer to a BaseState */
 BaseState* StateManager::top() const
 {
 	if (states.empty())
@@ -66,12 +61,6 @@ BaseState* StateManager::top() const
 	return states.back().get();
 }
 
-/**
-*   @brief   Destroys the top state on the stack.
-*   @details Destroys the top state on the stack. Might not be the active state.
-Will throw an exception if the stack is empty.
-Calls onActive() after popping
-*   @return  void */
 void StateManager::pop()
 {
 	delayed_calls.push_back(

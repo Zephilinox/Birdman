@@ -14,10 +14,6 @@
 
 class GameData;
 
-/**
-*  State Manager. A manager for the BaseState abstract class and its derivatives.
-*/
-
 class StateManager
 {
 public:
@@ -40,14 +36,6 @@ private:
 	std::vector<std::function<void()>> delayed_calls;
 };
 
-/**
-*   @brief   Creates a new state
-*   @details Creates a shared pointer to a derived class
-of BaseState based on a template parameter
-and then pushes it on to the stack.
-Calls onInactive() before pushing
-*   @tparam  T the state class to push
-*   @return  the state that was pushed */
 template <class T>
 void StateManager::push()
 {
