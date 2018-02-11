@@ -41,6 +41,7 @@ bool BirdmanTheGame::init()
 	key_handler_id = inputs->addCallbackFnc(ASGE::EventType::E_KEY, &BirdmanTheGame::keyHandler, this);
 
 	game_data->getFontManager()->addFont("../../Resources/Fonts/Comic.ttf", "Default");
+	game_data->getFontManager()->loadFont("Default", 40);
 	game_data->getStateManager()->push<SplashState>();
 
 	//Chris - hmmm
