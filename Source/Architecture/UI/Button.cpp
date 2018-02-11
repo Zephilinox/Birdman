@@ -10,18 +10,14 @@ Button::Button()
 
 void Button::render(GameData* game_data) const
 {
-	//TODO: FIX
-	game_data->getFontManager()->loadFont("Default", 43);
-	game_data->getFontManager()->loadFont("Default", 44);
+	game_data->getFontManager()->setFont("Default", 40);
 
 	if (selected)
 	{
-		game_data->getFontManager()->setFont("Default", 43);
 		game_data->getRenderer()->renderText(name.c_str(), pos_x, pos_y, 1.0f, selected_colour);
 	}
 	else
 	{
-		game_data->getFontManager()->setFont("Default", 44);
 		game_data->getRenderer()->renderText(name.c_str(), pos_x, pos_y, 1.0f, colour);
 	}
 }
