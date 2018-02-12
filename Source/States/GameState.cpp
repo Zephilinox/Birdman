@@ -228,6 +228,7 @@ void GameState::dialogue_init()
 
 	dialogue_tree.addPlayerOption("town/menu", "Blacksmith", "town/blacksmith");
 	dialogue_tree.addPlayerOption("town/menu", "Townhall", "town/townhall");
+	dialogue_tree.addPlayerOption("town/menu", "Blabbering NPC", "town/blab");
 	dialogue_tree.addPlayerOption("town/menu",
 	[&]()
 	{
@@ -248,9 +249,11 @@ void GameState::dialogue_init()
 		return s;
 	}, "");
 
-	dialogue_tree.addDialogue("town/blacksmith", "blacksmith_npc", "Yo we're closed, get out.", "town/bye");
+	dialogue_tree.addDialogue("town/blacksmith", "blacksmith_npc", "Yo we're closed.\nGet out.", "town/bye");
 	dialogue_tree.addDialogue("town/townhall", "mayor","We have no quests, go away.", "town/bye");
 	dialogue_tree.addDialogue("town/bye", "player", "Ah okay, bye.", "");
+	dialogue_tree.addDialogue("town/blab", "blab_npc", "We should probably ensure one convo isn't longer than\n3 lines of text. We can break it up with '\\n' but we still\nneed to make sure it doesn't go on for too long", "town/blab2");
+	dialogue_tree.addDialogue("town/blab2", "blab_npc", "If it does we can chain it like so, which is nice.\nIt's not worth the effort trying to automate any of this to be honest.\nWe'll just have to handle it all manually.", "town/start");
 
 
 }
