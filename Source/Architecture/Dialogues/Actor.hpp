@@ -16,26 +16,15 @@ public:
 	void addFlag(std::string flag);
 	void removeFlag(const std::string flag);
 
-	bool hasData(const std::string id)
-	{
-		if (datas.count(id))
-		{
-			std::cout << name + " HAS DATA " + id + "\n";
-			return true;
-		}
-		else
-		{
-			std::cout << name + " DOES NOT HAVE DATA " + id + "\n";
-			return false;
-		}
-	}
+	bool hasData(const std::string id);
+	void removeData(const std::string id);
 
 	template <class T>
 	void addData(std::string id, T data)
 	{
-		if (datas.insert({ id, data }).second)
+		if (datas.insert({id, data}).second)
 		{
-			std::cout << "DATA " + id + " ADDED ON" + name + "\n";
+			std::cout << "DATA " + id + " ADDED ON " + name + "\n";
 		}
 		else
 		{
@@ -43,27 +32,10 @@ public:
 		}
 	}
 
-	void removeData(const std::string id)
-	{
-		if (flags.erase(id))
-		{
-			std::cout << "DATA " + id + " REMOVED ON " + name + "\n";
-		}
-		else
-		{
-			std::cout << "DATA " + id + " FAILED TO REMOVE ON " + name + "\n";
-		}
-	}
-
 	template <class T>
-	T* getData(const std::string id)
+	T& getData(const std::string id)
 	{
-		if (datas.count(id))
-		{
-			return std::any_cast<T>(&datas[id]);
-		}
-
-		return nullptr;
+		return *std::any_cast<T>(&datas[id]);
 	}
 
 	const std::string name;

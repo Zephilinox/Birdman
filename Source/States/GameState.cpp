@@ -236,17 +236,16 @@ void GameState::dialogue_init()
 			dialogue_tree.getPlayer()->addData<int>("town_menu_count", 0);
 		}
 
-		int* data = dialogue_tree.getPlayer()->getData<int>("town_menu_count");
-		if (data)
+		int& data = dialogue_tree.getPlayer()->getData<int>("town_menu_count");
+		std::string s = "You've been here " + std::to_string(data) + " times";
+		data += 1;
+
+		if (data >= 5)
 		{
-			std::string s = "You've been here " + std::to_string(*data) + " times";
-
-			*data = *data + 1;
-
-			return s;
+			dialogue_tree.getPlayer()->removeData("town_menu_count");
 		}
 
-		return std::string();
+		return s;
 	}, "");
 
 	dialogue_tree.addDialogue("town/blacksmith", "blacksmith_npc", "Yo we're closed, get out.", "town/bye");
