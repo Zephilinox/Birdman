@@ -5,6 +5,9 @@
 class Scene;
 class GameData;
 
+//TODO - implement inheritance of class Play_One, Play_Two, Play_Three etc.
+
+
 
 //if I've understood this right, the structure should look like this:
 //	States
