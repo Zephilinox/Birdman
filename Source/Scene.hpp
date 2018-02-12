@@ -1,4 +1,8 @@
 #pragma once
+#include <vector>
+
+class GameData;
+
 class Scene
 {
 	friend class Play;
@@ -10,12 +14,20 @@ class Scene
 	};
 
 public:
+	Scene(GameData* data);
 	std::string getName() const;
 	std::string getDescription() const;
+	void update();
+	void render();
 
 private:
 	std::string name;
-	std::string stage_description;
+	std::string scene_description;
+
+	GameData* game_data;
+
+	//TODO - object pool of props
+	//std::vector<Prop>;
 
 	SceneLink light;
 	SceneLink dark;

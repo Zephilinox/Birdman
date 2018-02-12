@@ -3,6 +3,7 @@
 //STD
 #include <unordered_set>
 #include <string>
+#include <Engine/Sprite.h>
 
 class Actor
 {
@@ -16,5 +17,7 @@ public:
 	const std::string name;
 
 private:
+	ASGE::Sprite* portrait = nullptr;
+	ASGE::Sprite* model;
 	std::unordered_set<std::string> flags;
 };

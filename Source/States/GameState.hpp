@@ -5,6 +5,7 @@
 #include "../Architecture/UI/Menu.hpp"
 #include "../Architecture/Dialogues/DialogueTree.hpp"
 #include "../Dialogue/VisualDialogue.hpp"
+#include "../Play.hpp"
 
 class GameData;
 
@@ -28,4 +29,5 @@ private:
 
 	DialogueTree dialogue_tree;
 	VisualDialogue visual_dialogue;
+	Play play_01;
 };

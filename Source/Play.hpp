@@ -1,8 +1,10 @@
 #pragma once
 #include "Audience.hpp"
+#include <vector>
 
 class Scene;
 class GameData;
+
 
 //if I've understood this right, the structure should look like this:
 //	States
@@ -17,14 +19,18 @@ class GameData;
 class Play
 {
 public:
-	Play() = default;
+	Play(GameData* data);
 	~Play();
 
 	void create();
+	void update();
+	void render();
 	Scene* getScene(int idx);
 
 private:
-	Scene* scenes = nullptr;
+	std::vector<Scene> scenes;
+
+	GameData* game_data;
 
 	Audience audience;
 

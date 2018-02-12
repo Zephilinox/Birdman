@@ -42,11 +42,6 @@ StateManager* GameData::getStateManager()
 	return &state_manager;
 }
 
-SceneManager* GameData::getSceneManager()
-{
-	return &scene_manager;
-}
-
 AudioManager* GameData::getAudioManager()
 {
 	return &audio_manager;

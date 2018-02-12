@@ -12,8 +12,6 @@
 #include "Constants.hpp"
 #include "States/SplashState.hpp"
 
-//Chris - added here too, simply to initialise it. Unsure if needed here.
-#include "Architecture/Managers/SceneManager.h"
 
 BirdmanTheGame::~BirdmanTheGame()
 {
@@ -44,9 +42,6 @@ bool BirdmanTheGame::init()
 	game_data->getFontManager()->loadFont("Default", 40);
 	game_data->getStateManager()->push<SplashState>();
 
-	//Chris - hmmm
-	// TODO use this to initialise the scene at gameplay state start
-	game_data->getSceneManager()->setCurrentScene(0);
 
 	game_data->getMessageQueue()->addListener([](Message* msg)
 	{
@@ -77,7 +72,6 @@ void BirdmanTheGame::update(const ASGE::GameTime& gt)
 void BirdmanTheGame::render(const ASGE::GameTime& gt)
 {
 	game_data->getStateManager()->render();
-	game_data->getSceneManager()->render();
 }
 
 void BirdmanTheGame::keyHandler(const ASGE::SharedEventData data)

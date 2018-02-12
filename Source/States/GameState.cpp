@@ -7,6 +7,7 @@
 GameState::GameState(GameData* game_data)
 	: BaseState(game_data)
 	, visual_dialogue(game_data, &dialogue_tree, "start_extra")
+	, play_01(game_data)
 {
 	//add all the dialogue to the dialogue tree. each level would have its own dialogue tree
 	//dialogue_init();

@@ -8,7 +8,6 @@
 #include "Managers/StateManager.hpp"
 #include "Managers/FontManager.hpp"
 #include "Messages/MessageQueue.hpp"
-#include "Managers/SceneManager.h"
 #include "Managers/AudioManager.hpp"
 #include "Rng.h"
 
@@ -25,7 +24,6 @@ public:
 	InputManager* getInputManager();
 	FontManager* getFontManager();
 	MessageQueue* getMessageQueue();
-	SceneManager* getSceneManager();
 	AudioManager* getAudioManager();
 	Rng* getRandomNumberGenerator();
 
@@ -49,8 +47,6 @@ private:
 	The other class (or classes) can grab these events and handle them via a function.
 	For instance, an achievement system could read events pushed to the message queue by the dialogue system*/
 	MessageQueue message_queue;
-
-	SceneManager scene_manager;
 
 	Rng random_number_gen;
 

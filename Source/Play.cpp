@@ -4,19 +4,25 @@
 #include "Scene.hpp"
 
 
+Play::Play(GameData* data)
+{
+	scenes.reserve(10);
+	game_data = data;
+}
+
 Play::~Play()
 {
-	//it's better to avoid manual memory management, see if you can use std::vector<Scene>> instead.
-	delete[] scenes;
-	scenes = nullptr;
 }
 
 void Play::create()
 {
 	//TODO implement scene linked list creation here
 	//Call functions here based on the play to instanciate
-
-	scenes = new Scene[9];
+	for (int i = 0; i < 10; i++)
+	{
+		Scene s(game_data);
+		scenes.push_back(std::move(s));
+	}
 
 	Scene& scene1 = scenes[0];
 	Scene& scene2 = scenes[1];
@@ -29,9 +35,10 @@ void Play::create()
 	Scene& scene9 = scenes[8];
 	Scene& scene10 = scenes[9];
 
+	//Set values and links of each scene
 	scene1.name = "scene1";
-	scene1.stage_description = "A rundown stage.. poorly made props... Player actor is stood on the left, his head lowered...";
-	scene1.dark.stage_description = "A room north of you";
+	scene1.scene_description = "A rundown stage.. poorly made props... Player actor is stood on the left, his head lowered...";
+	scene1.dark.stage_description = "IntroScene";
 	scene1.dark.scene = &scene2;
 	scene1.light.stage_description = "blah hbalshflagf";
 	scene1.light.scene = &scene3;
@@ -39,7 +46,20 @@ void Play::create()
 
 
 	scene2.name = "scene2";
-	scene2.stage_description = "A lifeless room.. Except for the firey redhead in lingerie... your wife... in bed with another man!";
+	scene2.scene_description = "A lifeless room.. Except for the firey redhead in lingerie... your wife... in bed with another man!";
+}
+
+void Play::update()
+{
+	
+	return;
+}
+
+void Play::render()
+{
+	//Render  scenes[currentScene]
+	//Render  VisualDialogue*
+	return;
 }
 
 Scene* Play::getScene(int idx)
