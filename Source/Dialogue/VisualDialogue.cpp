@@ -1,5 +1,8 @@
 #include "VisualDialogue.hpp"
 
+//STD
+#include <iostream>
+
 //LIB
 #include <Engine/Renderer.h>
 

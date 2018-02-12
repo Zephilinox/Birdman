@@ -2,6 +2,8 @@
 
 //STD
 #include <memory>
+#include <chrono>
+#include <functional>
 
 //LIB
 #include <Engine/Sprite.h>

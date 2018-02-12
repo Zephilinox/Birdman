@@ -2,6 +2,7 @@
 
 //STD
 #include <iomanip>
+#include <iostream>
 
 void MessageQueue::processMessages(Timer::nanoseconds_float max_processing_time)
 {
