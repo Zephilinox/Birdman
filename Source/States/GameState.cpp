@@ -94,7 +94,7 @@ void GameState::dialogue_init()
 	{
 		visual_dialogue.setDefaultDialogue("town/menu");
 
-		return "";
+		return "town/start";
 	});
 
 	dialogue_tree.addDialogue("start", "strange_npc",
@@ -224,6 +224,8 @@ void GameState::dialogue_init()
 	}, "");
 
 	//Town Scene
+	dialogue_tree.addDialogue("town/start", "", "*You spot the town of Bree in the distance.*", "");
+
 	dialogue_tree.addPlayerOption("town/menu", "Blacksmith", "town/blacksmith");
 	dialogue_tree.addPlayerOption("town/menu", "Townhall", "town/townhall");
 
