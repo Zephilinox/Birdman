@@ -300,9 +300,4 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\Source\Dialogue\example.cpp">
-      <Filter>Source Files\Dialogue</Filter>
-    </None>
-  </ItemGroup>
 </Project>

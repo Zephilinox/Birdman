@@ -35,7 +35,7 @@ public:
 	template <class T>
 	T& getData(const std::string id)
 	{
-		return *std::any_cast<T>(&datas[id]);
+		return std::any_cast<T&>(datas[id]);
 	}
 
 	const std::string name;

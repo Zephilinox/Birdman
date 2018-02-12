@@ -13,7 +13,7 @@ GameState::GameState(GameData* game_data)
 	dialogue_init();
 	//dialogue_init2();
 	//dialogue_init3();
-	visual_dialogue.update();
+	visual_dialogue.updateTree();
 }
 
 void GameState::update(const ASGE::GameTime&)
@@ -254,8 +254,6 @@ void GameState::dialogue_init()
 	dialogue_tree.addDialogue("town/bye", "player", "Ah okay, bye.", "");
 	dialogue_tree.addDialogue("town/blab", "blab_npc", "We should probably ensure one convo isn't longer than\n3 lines of text. We can break it up with '\\n' but we still\nneed to make sure it doesn't go on for too long", "town/blab2");
 	dialogue_tree.addDialogue("town/blab2", "blab_npc", "If it does we can chain it like so, which is nice.\nIt's not worth the effort trying to automate any of this to be honest.\nWe'll just have to handle it all manually.", "town/start");
-
-
 }
 
 void GameState::dialogue_init2()

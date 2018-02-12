@@ -12,6 +12,11 @@
 //currently too much being copied around, use pointers for non-POD
 
 /*
+https://github.com/fr00b0/nod
+https://simmesimme.github.io/tutorials/2015/09/20/signal-slot
+*/
+
+/*
 Args determines the arguments that the signal can emit
 which is also the parameters functions must accept
 Automatically invalidates all Connections created by calling connect()

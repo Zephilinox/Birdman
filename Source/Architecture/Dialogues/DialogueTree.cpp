@@ -69,7 +69,7 @@ Actor* DialogueTree::getPlayer()
 
 Actor* DialogueTree::getSpeaker()
 {
-	if (player_option)
+	if (player_option || !current_dialogue)
 	{
 		return nullptr;
 	}
