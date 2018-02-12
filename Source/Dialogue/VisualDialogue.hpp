@@ -11,6 +11,8 @@ class VisualDialogue
 public:
 	VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree, std::string starting_dialogue);
 	
+	void setDefaultDialogue(std::string dialogue);
+
 	void interact();
 
 	void update();
@@ -20,7 +22,7 @@ private:
 	GameData* game_data;
 	DialogueTree* dialogue_tree;
 
-	std::string starting_dialogue;
+	std::string default_dialogue;
 	Menu options;
 	std::string dialogue_text;
 	int selected_option = -1;

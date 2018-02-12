@@ -11,8 +11,13 @@ VisualDialogue::VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree,
 	: game_data(game_data)
 	, dialogue_tree(dialogue_tree)
 	, options(game_data)
-	, starting_dialogue(starting_dialogue)
+	, default_dialogue(starting_dialogue)
 {}
+
+void VisualDialogue::setDefaultDialogue(std::string dialogue)
+{
+	default_dialogue = dialogue;
+}
 
 void VisualDialogue::interact()
 {
@@ -32,7 +37,7 @@ void VisualDialogue::interact()
 
 	if (dialogue_text == "")
 	{
-		dialogue_text = dialogue_tree->play(starting_dialogue);
+		dialogue_text = dialogue_tree->play(default_dialogue);
 	}
 }
 

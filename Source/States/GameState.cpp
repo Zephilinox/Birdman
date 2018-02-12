@@ -10,9 +10,9 @@ GameState::GameState(GameData* game_data)
 	, play_01(game_data)
 {
 	//add all the dialogue to the dialogue tree. each level would have its own dialogue tree
-	//dialogue_init();
+	dialogue_init();
 	//dialogue_init2();
-	dialogue_init3();
+	//dialogue_init3();
 	visual_dialogue.update();
 }
 
@@ -78,6 +78,23 @@ void GameState::dialogue_init()
 		}
 
 		return "start";
+	});
+
+	dialogue_tree.addPlayerOption("start_extra",
+	[&]()
+	{
+		if (dialogue_tree.getPlayer()->hasFlag("npc_killed"))
+		{
+			return "Go to Town";
+		}
+
+		return "";
+	},
+	[&]()
+	{
+		visual_dialogue.setDefaultDialogue("town/menu");
+
+		return "";
 	});
 
 	dialogue_tree.addDialogue("start", "strange_npc",
@@ -205,6 +222,14 @@ void GameState::dialogue_init()
 			return "I don't know why I did that...";
 		}
 	}, "");
+
+	//Town Scene
+	dialogue_tree.addPlayerOption("town/menu", "Blacksmith", "town/blacksmith");
+	dialogue_tree.addPlayerOption("town/menu", "Townhall", "town/townhall");
+
+	dialogue_tree.addDialogue("town/blacksmith", "blacksmith_npc", "Yo we're closed, get out.", "town/bye");
+	dialogue_tree.addDialogue("town/townhall", "mayor","We have no quests, go away.", "town/bye");
+	dialogue_tree.addDialogue("town/bye", "player", "Ah okay, bye.", "");
 }
 
 void GameState::dialogue_init2()
