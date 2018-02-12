@@ -122,7 +122,6 @@ std::string DialogueTree::play(std::string dialogue_name)
 				std::cout << "text = " << text << "\n";
 				if (text != "")
 				{
-					text = d.speaker + ": " + text;
 					return std::move(text);
 				}
 				else

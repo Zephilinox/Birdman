@@ -45,7 +45,7 @@ void VisualDialogue::update()
 {
 	if (!dialogue_tree->playing)
 	{
-		dialogue_text = dialogue_tree->play("start_extra");
+		dialogue_text = dialogue_tree->play(default_dialogue);
 	}
 
 	if (dialogue_tree->player_option && !has_set_player_options)
@@ -76,6 +76,12 @@ void VisualDialogue::update()
 
 void VisualDialogue::render() const
 {
-	game_data->getRenderer()->renderText(dialogue_text.c_str(), WINDOW_WIDTH / 3, 100);
+	std::string prefix = "";
+	if (dialogue_tree->getSpeaker() && dialogue_tree->getSpeaker()->name != "")
+	{
+		prefix = dialogue_tree->getSpeaker()->name + " : ";
+	}
+
+	game_data->getRenderer()->renderText((prefix + dialogue_text).c_str(), WINDOW_WIDTH / 3, 100);
 	options.render();
 }
