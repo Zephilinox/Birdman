@@ -29,6 +29,7 @@ public:
 	Actor* getActor(std::string name);
 	Actor* getPlayer();
 	Actor* getSpeaker();
+	Actor* getPreviousSpeaker();
 
 	std::string play(std::string dialogue_name);
 	std::string next();
@@ -40,6 +41,6 @@ public:
 private:
 	std::vector<Dialogue> dialogues;
 	std::vector<Actor> actors;
-
+	Actor* previous_speaker;
 	Dialogue* current_dialogue = nullptr;
 };

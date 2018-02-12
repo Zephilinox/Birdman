@@ -77,6 +77,11 @@ Actor* DialogueTree::getSpeaker()
 	return getActor(current_dialogue->speaker);
 }
 
+Actor* DialogueTree::getPreviousSpeaker()
+{
+	return previous_speaker;
+}
+
 std::string DialogueTree::play(std::string dialogue_name)
 {
 	//Don't ask how this works. it's a mess.
@@ -102,8 +107,14 @@ std::string DialogueTree::play(std::string dialogue_name)
 		{
 			if (!player_option && !d.player_option)
 			{
+				if (current_dialogue)
+				{
+					previous_speaker = getActor(current_dialogue->speaker);
+				}
+
 				//we haven't found a player option yet and this isn't a player option
 				//so we start this dialogue, run text lambda, and return the result
+
 				current_dialogue = &d;
 				playing = true;
 				std::cout << "RUNNING DIALOGUE TEXT DETERMINATOR FOR '" << d.name << "'\n";
