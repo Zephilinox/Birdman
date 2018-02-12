@@ -228,10 +228,32 @@ void GameState::dialogue_init()
 
 	dialogue_tree.addPlayerOption("town/menu", "Blacksmith", "town/blacksmith");
 	dialogue_tree.addPlayerOption("town/menu", "Townhall", "town/townhall");
+	dialogue_tree.addPlayerOption("town/menu",
+	[&]()
+	{
+		if (!dialogue_tree.getPlayer()->hasData("town_menu_count"))
+		{
+			dialogue_tree.getPlayer()->addData<int>("town_menu_count", 0);
+		}
+
+		int* data = dialogue_tree.getPlayer()->getData<int>("town_menu_count");
+		if (data)
+		{
+			std::string s = "You've been here " + std::to_string(*data) + " times";
+
+			*data = *data + 1;
+
+			return s;
+		}
+
+		return std::string();
+	}, "");
 
 	dialogue_tree.addDialogue("town/blacksmith", "blacksmith_npc", "Yo we're closed, get out.", "town/bye");
 	dialogue_tree.addDialogue("town/townhall", "mayor","We have no quests, go away.", "town/bye");
 	dialogue_tree.addDialogue("town/bye", "player", "Ah okay, bye.", "");
+
+
 }
 
 void GameState::dialogue_init2()
