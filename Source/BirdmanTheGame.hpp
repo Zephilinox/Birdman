@@ -48,6 +48,7 @@ public:
 	virtual bool init() override;
 	
 private:
+	void setup();
 	/**
 	*  The simulation for the game.
 	*  The objects in the game need to updated or simulated

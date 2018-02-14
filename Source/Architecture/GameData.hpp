@@ -10,12 +10,15 @@
 #include "Messages/MessageQueue.hpp"
 #include "Managers/AudioManager.hpp"
 #include "Rng.h"
+#include "../BirdmanTheGame.hpp"
 
 //todo: make audio manager
 #include "Audio/AudioEngine.hpp"
 
 class GameData
 {
+friend BirdmanTheGame;
+
 public:
 	GameData(ASGE::Renderer* renderer);
 
