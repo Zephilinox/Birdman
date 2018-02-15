@@ -28,6 +28,7 @@ public:
 		if (datas.insert({id, data}).second)
 		{
 			std::cout << "DATA " + id + " ADDED ON " + name + "\n";
+			std::cout << "DATA IS " << getData<T>(id) << "\n";
 		}
 		else
 		{
@@ -42,6 +43,7 @@ public:
 	}
 
 	const std::string name;
+	std::string realName;
 
 private:
 	ASGE::Sprite* portrait = nullptr;

@@ -41,6 +41,8 @@ void GameState::onInactive()
 
 void GameState::dialogue_init()
 {
+	dialogue_tree.getActor("strange_npc")->realName = "Stranger";
+
 	dialogue_tree.addPlayerOption("start_extra",
 	[&]()
 	{
@@ -57,7 +59,7 @@ void GameState::dialogue_init()
 		return "sword_got";
 	});
 
-	dialogue_tree.addDialogue("sword_got", "player", "Woo! I found a cool sword!", "");
+	dialogue_tree.addDialogue("sword_got", DialogueTree::player, "Woo! I found a cool sword!", "");
 
 	dialogue_tree.addPlayerOption("start_extra",
 	[&]()
@@ -174,7 +176,7 @@ void GameState::dialogue_init()
 	});
 
 	dialogue_tree.addPlayerOption("start_options", "Bye.", "bye_ply");
-	dialogue_tree.addDialogue("bye_ply", "player", "Sorry, gotta run.", "bye");
+	dialogue_tree.addDialogue("bye_ply", DialogueTree::player, "Sorry, gotta run.", "bye");
 	dialogue_tree.addDialogue("start2", "strange_npc", "Well I'm quite busy right now.", "bye");
 
 	dialogue_tree.addDialogue("bye", "strange_npc",
@@ -207,7 +209,7 @@ void GameState::dialogue_init()
 		return "*Steals Your Sword*";
 	}, "");
 
-	dialogue_tree.addDialogue("end", "player",
+	dialogue_tree.addDialogue("end", DialogueTree::player,
 	[&]()
 	{
 		if (dialogue_tree.getSpeaker()->hasFlag("stole_sword"))
@@ -250,7 +252,7 @@ void GameState::dialogue_init()
 
 	dialogue_tree.addDialogue("town/blacksmith", "blacksmith_npc", "Yo we're closed.\nGet out.", "town/bye");
 	dialogue_tree.addDialogue("town/townhall", "mayor","We have no quests, go away.", "town/bye");
-	dialogue_tree.addDialogue("town/bye", "player", "Ah okay, bye.", "");
+	dialogue_tree.addDialogue("town/bye", DialogueTree::player, "Ah okay, bye.", "");
 	dialogue_tree.addDialogue("town/blab", "blab_npc", "We should probably ensure one convo isn't longer than\n3 lines of text. We can break it up with '\\n' but we still\nneed to make sure it doesn't go on for too long", "town/blab2");
 	dialogue_tree.addDialogue("town/blab2", "blab_npc", "If it does we can chain it like so, which is nice.\nIt's not worth the effort trying to automate any of this to be honest.\nWe'll just have to handle it all manually.", "town/start");
 }
@@ -273,7 +275,7 @@ void GameState::dialogue_init2()
 		return "done_action1";
 	});
 
-	dialogue_tree.addDialogue("done_action1", "player", "There are those that call me...", "select_name");
+	dialogue_tree.addDialogue("done_action1", DialogueTree::player, "There are those that call me...", "select_name");
 
 	dialogue_tree.addPlayerOption("select_name", "Tim...",
 	[&]()
@@ -298,7 +300,7 @@ void GameState::dialogue_init3()
 		dialogue_tree.getPlayer()->addFlag("playing");
 		return "play";
 	});
-	dialogue_tree.addDialogue("play", "Player", "You are playing the game", "");
+	dialogue_tree.addDialogue("play", DialogueTree::player, "You are playing the game", "");
 	dialogue_tree.addPlayerOption("start_extra", "maybeplay", "1");
 	dialogue_tree.addDialogue("1", "Jim", "Ya names Jim", "");
 	dialogue_tree.addPlayerOption("start_extra", 

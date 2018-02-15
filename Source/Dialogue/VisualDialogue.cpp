@@ -97,10 +97,11 @@ void VisualDialogue::render() const
 {
 	game_data->getFontManager()->setFont("Default", 24);
 
-	if (dialogue_tree->getSpeaker() && dialogue_tree->getSpeaker()->name != "")
+	if (dialogue_tree->getSpeaker())
 	{
-		game_data->getRenderer()->renderText(dialogue_tree->getSpeaker()->name.c_str(), 600, WINDOW_HEIGHT - 120);
+		game_data->getRenderer()->renderText(dialogue_tree->getSpeaker()->realName.c_str(), 600, WINDOW_HEIGHT - 120);
 	}
+
 	game_data->getRenderer()->renderText(dialogue_text.c_str(), 100, WINDOW_HEIGHT - 220);
 
 	options.render();
