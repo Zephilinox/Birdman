@@ -126,9 +126,9 @@ std::string DialogueTree::play(std::string dialogue_name)
 				if (current_dialogue)
 				{
 					previous_speaker = getActor(current_dialogue->speaker);
+					previous_dialogue = current_dialogue;
 				}
 
-				previous_dialogue = current_dialogue;
 				current_dialogue = &d;
 				playing = true;
 				std::cout << "RUNNING DIALOGUE TEXT DETERMINATOR FOR '" << d.name << "'\n";
@@ -154,9 +154,9 @@ std::string DialogueTree::play(std::string dialogue_name)
 				if (current_dialogue)
 				{
 					previous_speaker = getActor(current_dialogue->speaker);
+					previous_dialogue = current_dialogue;
 				}
 				
-				previous_dialogue = current_dialogue;
 				current_dialogue = nullptr;
 				playing = true;
 				player_option = true;
