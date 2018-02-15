@@ -31,6 +31,7 @@ public:
 	Actor* getPlayer();
 	Actor* getSpeaker();
 	Actor* getPreviousSpeaker();
+	Dialogue* getCurrentDialogue();
 
 	std::string play(std::string dialogue_name);
 	std::string next();

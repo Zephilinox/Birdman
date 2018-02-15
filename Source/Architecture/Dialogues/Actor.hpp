@@ -6,6 +6,7 @@
 #include <string>
 #include <any>
 #include <iostream>
+#include <memory>
 
 //LIB
 #include <Engine/Sprite.h>
@@ -28,7 +29,6 @@ public:
 		if (datas.insert({id, data}).second)
 		{
 			std::cout << "DATA " + id + " ADDED ON " + name + "\n";
-			std::cout << "DATA IS " << getData<T>(id) << "\n";
 		}
 		else
 		{
@@ -55,10 +55,9 @@ public:
 
 	const std::string name;
 	std::string realName;
+	std::unique_ptr<ASGE::Sprite> portrait = nullptr;
 
 private:
-	ASGE::Sprite* portrait = nullptr;
-	ASGE::Sprite* model;
 	std::unordered_set<std::string> flags;
 	std::unordered_map<std::string, std::any> datas;
 };

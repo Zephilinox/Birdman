@@ -111,13 +111,12 @@ std::string DialogueTree::play(std::string dialogue_name)
 		{
 			if (!player_option && !d.player_option)
 			{
+				//we haven't found a player option yet and this isn't a player option
+				//so we start this dialogue, run text lambda, and return the result
 				if (current_dialogue)
 				{
 					previous_speaker = getActor(current_dialogue->speaker);
 				}
-
-				//we haven't found a player option yet and this isn't a player option
-				//so we start this dialogue, run text lambda, and return the result
 
 				current_dialogue = &d;
 				playing = true;
@@ -140,6 +139,11 @@ std::string DialogueTree::play(std::string dialogue_name)
 			else
 			{
 				//found a player option, push it to the vector and keep looping to find more options with the same name
+				if (current_dialogue)
+				{
+					previous_speaker = getActor(current_dialogue->speaker);
+				}
+				
 				current_dialogue = nullptr;
 				playing = true;
 				player_option = true;
@@ -158,6 +162,7 @@ std::string DialogueTree::play(std::string dialogue_name)
 	else
 	{
 		//if we got to this point it means nothing was found, so reset.
+		previous_speaker = nullptr;
 		current_dialogue = nullptr;
 		playing = false;
 		return "";

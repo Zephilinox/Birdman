@@ -1,5 +1,11 @@
 #include "GameState.hpp"
 
+//STD
+#include <memory>
+
+//LIB
+#include <Engine/Sprite.h>
+
 //SELF
 #include "../Architecture/GameData.hpp"
 #include "../Constants.hpp"
@@ -41,7 +47,15 @@ void GameState::onInactive()
 
 void GameState::dialogue_init()
 {
+	dialogue_tree.getActor("player")->realName = "TeamBirb";
+	auto spr = game_data->getRenderer()->createUniqueSprite();
+	spr->loadTexture("../../Resources/Textures/Portraits/player.png");
+	dialogue_tree.getActor("player")->portrait = std::move(spr);
+
 	dialogue_tree.getActor("strange_npc")->realName = "Stranger";
+	spr = game_data->getRenderer()->createUniqueSprite();
+	spr->loadTexture("../../Resources/Textures/Portraits/strange_npc.png");
+	dialogue_tree.getActor("strange_npc")->portrait = std::move(spr);
 
 	dialogue_tree.addPlayerOption("start_extra",
 	[&]()
@@ -225,6 +239,11 @@ void GameState::dialogue_init()
 	}, "");
 
 	//Town Scene
+	dialogue_tree.getActor("blab_npc")->realName = "Old Man";
+	spr = game_data->getRenderer()->createUniqueSprite();
+	spr->loadTexture("../../Resources/Textures/Portraits/blabbering_npc.png");
+	dialogue_tree.getActor("blab_npc")->portrait = std::move(spr);
+
 	dialogue_tree.addDialogue("town/start", "", "*You spot the town of Bree in the distance.*", "");
 
 	dialogue_tree.addPlayerOption("town/menu", "Blacksmith", "town/blacksmith");
