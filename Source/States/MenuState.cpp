@@ -12,8 +12,8 @@ MenuState::MenuState(GameData* game_data)
 {
 	//menu buttons
 	//this is rough and just for prototyping, might need something nicer for the actual game
-	menu.addButton(WINDOW_WIDTH / 2 - 80, WINDOW_HEIGHT / 2 - 40, "PLAY", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
-	menu.addButton(WINDOW_WIDTH / 2 - 80, WINDOW_HEIGHT / 2 + 40, "EXIT", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 - 40, "PLAY", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 40, "EXIT", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 	
 	//register actions to button clicks
 	//button lives as long as menu, which lives as long as this menu state

@@ -20,22 +20,19 @@ BirdmanTheGame::~BirdmanTheGame()
 
 bool BirdmanTheGame::init()
 {
-	game_width = WINDOW_WIDTH;
-	game_height = WINDOW_HEIGHT;
+	game_width = 1280;
+	game_height = 720;
 
 	if (!initAPI(ASGE::Renderer::WindowMode::WINDOWED))
 	{
 		return false;
 	}
 	game_data = std::make_unique<GameData>(renderer.get());
+	game_data->window_width = game_width;
+	game_data->window_height = game_height;
 
 	setup();
 
-	key_handler_id = inputs->addCallbackFnc(ASGE::EventType::E_KEY, &BirdmanTheGame::keyHandler, this);
-
-	game_data->getFontManager()->addFont("../../Resources/Fonts/DroidSansMono.ttf", "Default");
-	game_data->getFontManager()->loadFont("Default", 40);
-	game_data->getFontManager()->loadFont("Default", 24);
 	game_data->getStateManager()->push<SplashState>();
 	game_data->getMessageQueue()->addListener([](Message* msg)
 	{
@@ -66,8 +63,9 @@ void BirdmanTheGame::setup()
 	renderer->setSpriteMode(ASGE::SpriteSortMode::BACK_TO_FRONT);
 	game_data->renderer = renderer.get();
 	game_data->font_manager = FontManager(renderer.get());
-	game_data->getFontManager()->addFont("../../Resources/Fonts/Comic.ttf", "Default");
+	game_data->getFontManager()->addFont("../../Resources/Fonts/DroidSansMono.ttf", "Default");
 	game_data->getFontManager()->loadFont("Default", 40);
+	game_data->getFontManager()->loadFont("Default", 24);
 	key_handler_id = inputs->addCallbackFnc(ASGE::EventType::E_KEY, &BirdmanTheGame::keyHandler, this);
 }
 
@@ -84,20 +82,20 @@ void BirdmanTheGame::update(const ASGE::GameTime& gt)
 		{
 			game_width = 1920;
 			game_height = 1080;
+			game_data->window_width = game_width;
+			game_data->window_height = game_height;
 
-			if (!renderer->init(game_width, game_height, ASGE::Renderer::WindowMode::FULLSCREEN))
+			if (!initAPI(ASGE::Renderer::WindowMode::FULLSCREEN))
 			{
 				throw "uhoh";
-			}
-			//if (!initAPI(ASGE::Renderer::WindowMode::FULLSCREEN))
-			{
-				//throw "uhoh";
 			}
 		}
 		else
 		{
 			game_width = 1280;
 			game_height = 720;
+			game_data->window_width = game_width;
+			game_data->window_height = game_height;
 
 			if (!initAPI(ASGE::Renderer::WindowMode::WINDOWED))
 			{

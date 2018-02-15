@@ -9,7 +9,8 @@
 	//For instance, the state_manager needs a pointer to game_data, so *this* is passed
 	//Where as the font_manager just needs a pointer to ASGE::Renderer, so *renderer* is passed
 GameData::GameData(ASGE::Renderer* renderer)
-	: renderer(renderer)
+	: game(game)
+	, renderer(renderer)
 	, state_manager(this)
 	, font_manager(renderer)
 	, audio_manager(AudioManager::Engine::SFML, "Resources/Sounds/")
@@ -50,4 +51,14 @@ AudioManager* GameData::getAudioManager()
 Rng * GameData::getRandomNumberGenerator()
 {
 	return &random_number_gen;
+}
+
+int GameData::getWindowWidth()
+{
+	return window_width;
+}
+
+int GameData::getWindowHeight()
+{
+	return window_height;
 }
