@@ -11,7 +11,7 @@
 #include "Architecture/GameData.hpp"
 #include "Constants.hpp"
 #include "States/SplashState.hpp"
-
+#include "Architecture/Messages/FunctionMessage.hpp"
 
 BirdmanTheGame::~BirdmanTheGame()
 {
@@ -45,7 +45,20 @@ bool BirdmanTheGame::init()
 
 	game_data->getMessageQueue()->addListener([](Message* msg)
 	{
-		std::cout << "Processed " << msg->message_id << "\n";
+		if (msg->message_id != "Message")
+		{
+			std::cout << "Processed " << msg->message_id << "\n";
+		}
+	});
+
+	game_data->getMessageQueue()->addListener([](Message* msg)
+	{
+		if (msg->message_id == "Function")
+		{
+			std::cout << "Executed " << msg->message_id << "\n";
+			FunctionMessage* func = static_cast<FunctionMessage*>(msg);
+			func->execute();
+		}
 	});
 
 	return true;

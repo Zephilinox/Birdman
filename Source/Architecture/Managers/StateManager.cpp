@@ -9,17 +9,11 @@
 
 StateManager::StateManager(GameData* game_data)
 	: game_data(game_data)
-{}
+{
+}
 
 void StateManager::update(const ASGE::GameTime& gt)
 {
-	for (auto& f : delayed_calls)
-	{
-		f();
-	}
-
-	delayed_calls.clear();
-
 	if (states.empty())
 	{
 		return;
@@ -63,7 +57,7 @@ BaseState* StateManager::top() const
 
 void StateManager::pop()
 {
-	delayed_calls.push_back(
+	game_data->getMessageQueue()->sendPriorityMessage<FunctionMessage>(
 	[&]()
 	{
 		if (states.empty())

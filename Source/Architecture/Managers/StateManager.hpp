@@ -11,6 +11,7 @@
 //SELF
 #include "../Messages/MessageQueue.hpp"
 #include "../States/BaseState.hpp"
+#include "../Messages/FunctionMessage.hpp"
 
 class GameData;
 
@@ -32,14 +33,12 @@ public:
 private:
 	GameData* game_data;
 	std::vector<std::unique_ptr<BaseState>> states;
-	//todo: implement generic delayed calls
-	std::vector<std::function<void()>> delayed_calls;
 };
 
 template <class T>
 void StateManager::push()
 {
-	delayed_calls.push_back(
+	game_data->getMessageQueue()->sendPriorityMessage<FunctionMessage>(
 	[&]()
 	{
 		if (!states.empty())
@@ -54,7 +53,7 @@ void StateManager::push()
 template <class T, class... Args>
 void StateManager::push(Args... args)
 {
-	delayed_calls.push_back(
+	game_data->getMessageQueue()->sendPriorityMessage<FunctionMessage>(
 	[&, args...]()
 	{
 		if (!states.empty())
