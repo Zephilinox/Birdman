@@ -25,6 +25,8 @@ public:
 	Play(GameData* data);
 	~Play();
 
+
+	// setCurrentScene()
 	void create();
 	void update();
 	void render();
@@ -36,6 +38,8 @@ private:
 	GameData* game_data;
 
 	Audience audience;
+
+	int current_scene = 0;
 
 	//TODO see this
 	//Chris - each night 1 = preview1, 2 = preview 2, 3 = opening night

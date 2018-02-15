@@ -19,6 +19,17 @@ void Scene::update()
 {
 }
 
-void Scene::render()
+void Scene::render(ASGE::Renderer* renderer)
 {
+	//TODO render all props and actors
+
+	//for(int p : props_pool)
+	//{
+
+	//}
+
+	//for(Character x : character_pool)
+	//{
+	//	x.setFacing(Character::CharacterFacing::NORTH);
+	//}
 }
