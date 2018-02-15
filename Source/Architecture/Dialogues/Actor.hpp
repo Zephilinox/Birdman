@@ -6,6 +6,7 @@
 #include <string>
 #include <any>
 #include <iostream>
+#include <memory>
 
 //LIB
 #include <Engine/Sprite.h>
@@ -41,11 +42,22 @@ public:
 		return std::any_cast<T&>(datas[id]);
 	}
 
+	template <class T>
+	T& getData(const std::string id, T data)
+	{
+		if (!hasData(id))
+		{
+			addData<T>(id, data);
+		}
+
+		return std::any_cast<T&>(datas[id]);
+	}
+
 	const std::string name;
+	std::string realName;
+	std::unique_ptr<ASGE::Sprite> portrait = nullptr;
 
 private:
-	ASGE::Sprite* portrait = nullptr;
-	ASGE::Sprite* model;
 	std::unordered_set<std::string> flags;
 	std::unordered_map<std::string, std::any> datas;
 };

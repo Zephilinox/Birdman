@@ -15,6 +15,7 @@
 class DialogueTree
 {
 public:
+	static std::string player;
 
 	void addDialogue(std::string dialogue_name, std::string speaker_name, Dialogue::FunctionType dialogue_text, Dialogue::FunctionType next_dialogue);
 	void addDialogue(std::string dialogue_name, std::string speaker_name, std::string dialogue_text, Dialogue::FunctionType next_dialogue);
@@ -30,6 +31,8 @@ public:
 	Actor* getPlayer();
 	Actor* getSpeaker();
 	Actor* getPreviousSpeaker();
+	Dialogue* getCurrentDialogue();
+	Dialogue* getPreviousDialogue();
 
 	std::string play(std::string dialogue_name);
 	std::string next();
@@ -39,8 +42,11 @@ public:
 	std::vector<Dialogue*> current_player_options;
 
 private:
+	std::string formatActorName(std::string name);
+
 	std::vector<Dialogue> dialogues;
 	std::vector<Actor> actors;
 	Actor* previous_speaker;
 	Dialogue* current_dialogue = nullptr;
+	Dialogue* previous_dialogue = nullptr;
 };

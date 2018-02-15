@@ -11,6 +11,7 @@
 #include "Architecture/GameData.hpp"
 #include "Constants.hpp"
 #include "States/SplashState.hpp"
+#include "Architecture/Messages/FunctionMessage.hpp"
 
 BirdmanTheGame::~BirdmanTheGame()
 {
@@ -30,10 +31,28 @@ bool BirdmanTheGame::init()
 
 	setup();
 
+	key_handler_id = inputs->addCallbackFnc(ASGE::EventType::E_KEY, &BirdmanTheGame::keyHandler, this);
+
+	game_data->getFontManager()->addFont("../../Resources/Fonts/DroidSansMono.ttf", "Default");
+	game_data->getFontManager()->loadFont("Default", 40);
+	game_data->getFontManager()->loadFont("Default", 24);
 	game_data->getStateManager()->push<SplashState>();
 	game_data->getMessageQueue()->addListener([](Message* msg)
 	{
-		std::cout << "Processed " << msg->message_id << "\n";
+		if (msg->message_id != "Message")
+		{
+			std::cout << "Processed " << msg->message_id << "\n";
+		}
+	});
+
+	game_data->getMessageQueue()->addListener([](Message* msg)
+	{
+		if (msg->message_id == "Function")
+		{
+			std::cout << "Executed " << msg->message_id << "\n";
+			FunctionMessage* func = static_cast<FunctionMessage*>(msg);
+			func->execute();
+		}
 	});
 
 	return true;

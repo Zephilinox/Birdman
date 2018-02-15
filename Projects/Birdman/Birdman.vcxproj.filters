@@ -204,6 +204,9 @@
     <ClInclude Include="..\..\Source\Architecture\Timer.hpp">
       <Filter>Header Files\Architecture</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Messages\FunctionMessage.hpp">
+      <Filter>Header Files\Architecture\Messages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">

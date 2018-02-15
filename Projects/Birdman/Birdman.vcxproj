@@ -132,6 +132,7 @@
     <ClInclude Include="..\..\Source\Architecture\Managers\FontManager.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Managers\InputManager.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Managers\StateManager.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Messages\FunctionMessage.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Messages\Message.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Messages\MessageQueue.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Signals\Connection.hpp" />

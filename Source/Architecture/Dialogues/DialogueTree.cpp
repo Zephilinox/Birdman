@@ -2,11 +2,14 @@
 
 //STD
 #include <assert.h>
+#include <locale>
 
 //SELF
 #include "Actor.hpp"
 
 //todo: fix strings througout dialogue system to be performant (minor issue)
+
+std::string DialogueTree::player = "player";
 
 void DialogueTree::addDialogue(std::string dialogue_name, std::string speaker_name, Dialogue::FunctionType dialogue_text, Dialogue::FunctionType next_dialogue)
 {
@@ -30,22 +33,22 @@ void DialogueTree::addDialogue(std::string dialogue_name, std::string speaker_na
 
 void DialogueTree::addPlayerOption(std::string dialogue_name, Dialogue::FunctionType dialogue_text, Dialogue::FunctionType next_dialogue)
 {
-	dialogues.emplace_back(std::move(dialogue_name), "player", dialogue_text, next_dialogue, true);
+	dialogues.emplace_back(std::move(dialogue_name), player, dialogue_text, next_dialogue, true);
 }
 
 void DialogueTree::addPlayerOption(std::string dialogue_name, std::string dialogue_text, Dialogue::FunctionType next_dialogue)
 {
-	dialogues.emplace_back(std::move(dialogue_name), "player", [dialogue_text]() {return dialogue_text; }, next_dialogue, true);
+	dialogues.emplace_back(std::move(dialogue_name), player, [dialogue_text]() {return dialogue_text; }, next_dialogue, true);
 }
 
 void DialogueTree::addPlayerOption(std::string dialogue_name, Dialogue::FunctionType dialogue_text, std::string next_dialogue)
 {
-	dialogues.emplace_back(std::move(dialogue_name), "player", dialogue_text, [next_dialogue]() {return next_dialogue; }, true);
+	dialogues.emplace_back(std::move(dialogue_name), player, dialogue_text, [next_dialogue]() {return next_dialogue; }, true);
 }
 
 void DialogueTree::addPlayerOption(std::string dialogue_name, std::string dialogue_text, std::string next_dialogue)
 {
-	dialogues.emplace_back(std::move(dialogue_name), "player", [dialogue_text]() {return dialogue_text; }, [next_dialogue]() {return next_dialogue; }, true);
+	dialogues.emplace_back(std::move(dialogue_name), player, [dialogue_text]() {return dialogue_text; }, [next_dialogue]() {return next_dialogue; }, true);
 }
 
 Actor* DialogueTree::getActor(std::string name)
@@ -58,13 +61,14 @@ Actor* DialogueTree::getActor(std::string name)
 		}
 	}
 
-	actors.emplace_back(std::move(name));
+	actors.emplace_back(name);
+	actors.back().realName = formatActorName(name);
 	return &actors.back();
 }
 
 Actor* DialogueTree::getPlayer()
 {
-	return getActor("player");
+	return getActor(player);
 }
 
 Actor* DialogueTree::getSpeaker()
@@ -80,6 +84,16 @@ Actor* DialogueTree::getSpeaker()
 Actor* DialogueTree::getPreviousSpeaker()
 {
 	return previous_speaker;
+}
+
+Dialogue* DialogueTree::getCurrentDialogue()
+{
+	return current_dialogue;
+}
+
+Dialogue* DialogueTree::getPreviousDialogue()
+{
+	return previous_dialogue;
 }
 
 std::string DialogueTree::play(std::string dialogue_name)
@@ -107,13 +121,13 @@ std::string DialogueTree::play(std::string dialogue_name)
 		{
 			if (!player_option && !d.player_option)
 			{
+				//we haven't found a player option yet and this isn't a player option
+				//so we start this dialogue, run text lambda, and return the result
 				if (current_dialogue)
 				{
 					previous_speaker = getActor(current_dialogue->speaker);
+					previous_dialogue = current_dialogue;
 				}
-
-				//we haven't found a player option yet and this isn't a player option
-				//so we start this dialogue, run text lambda, and return the result
 
 				current_dialogue = &d;
 				playing = true;
@@ -128,6 +142,7 @@ std::string DialogueTree::play(std::string dialogue_name)
 				{
 					//uhoh, normal dialogue should never return a blank screen, dialogue is malformed
 					std::cout << "ERROR: DIALOGUE TEXT FOR '" << d.name << "' IS EMPTY. STOPPING.\n";
+					previous_dialogue = current_dialogue;
 					current_dialogue = nullptr;
 					playing = false;
 					return "";
@@ -136,6 +151,12 @@ std::string DialogueTree::play(std::string dialogue_name)
 			else
 			{
 				//found a player option, push it to the vector and keep looping to find more options with the same name
+				if (current_dialogue)
+				{
+					previous_speaker = getActor(current_dialogue->speaker);
+					previous_dialogue = current_dialogue;
+				}
+				
 				current_dialogue = nullptr;
 				playing = true;
 				player_option = true;
@@ -154,6 +175,8 @@ std::string DialogueTree::play(std::string dialogue_name)
 	else
 	{
 		//if we got to this point it means nothing was found, so reset.
+		previous_speaker = nullptr;
+		previous_dialogue = current_dialogue;
 		current_dialogue = nullptr;
 		playing = false;
 		return "";
@@ -173,4 +196,24 @@ std::string DialogueTree::next()
 	//something seriously wrong has happened, I have no idea what. You get one poop emoji.
 	playing = false;
 	return "...\n";
+}
+
+std::string DialogueTree::formatActorName(std::string name)
+{	
+	name[0] = std::toupper(name[0], std::locale());
+
+	for (int i = 0; i < name.length(); ++i)
+	{
+		if (name[i] == '_')
+		{
+			name[i] = ' ';
+
+			if (i < name.length() - 1)
+			{
+				name[i + 1] = std::toupper(name[i + 1], std::locale());
+			}
+		}
+	}
+
+	return name;
 }

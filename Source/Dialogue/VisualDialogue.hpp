@@ -28,6 +28,8 @@ private:
 	std::string default_dialogue;
 	Menu options;
 	std::string dialogue_text;
+	std::string speaker_name;
+	ASGE::Sprite* portrait = nullptr;
 	int selected_option = -1;
 
 	bool has_set_player_options = false;
