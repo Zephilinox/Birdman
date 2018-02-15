@@ -20,8 +20,8 @@ FadeOutState::FadeOutState(GameData* game_data, std::function<void()> callback)
 		throw "Failed to load rightcurtain.png";
 	}
 
-	left_curtain->xPos(float(-WINDOW_WIDTH/2));
-	right_curtain->xPos(float(WINDOW_WIDTH));
+	left_curtain->xPos(float(-game_data->getWindowWidth()/2));
+	right_curtain->xPos(float(game_data->getWindowWidth()));
 }
 
 void FadeOutState::update(const ASGE::GameTime& gt)
@@ -31,7 +31,7 @@ void FadeOutState::update(const ASGE::GameTime& gt)
 		left_curtain->xPos(left_curtain->xPos() + (500 * float((gt.delta_time.count() / 1000.0f))));
 		right_curtain->xPos(right_curtain->xPos() - (500 * float((gt.delta_time.count() / 1000.0f))));
 
-		if (left_curtain->xPos() >= 0 && right_curtain->xPos() <= WINDOW_WIDTH / 2)
+		if (left_curtain->xPos() >= 0 && right_curtain->xPos() <= game_data->getWindowWidth() / 2)
 		{
 			timer.restart();
 			closed = true;

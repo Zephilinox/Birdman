@@ -55,7 +55,7 @@ void VisualDialogue::setupPlayerOptions()
 		std::string txt = dialogue_tree->current_player_options[i]->text();
 		if (txt != "")
 		{
-			int id = options.addButton(30, WINDOW_HEIGHT - 120 + (validOptions * 30), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
+			int id = options.addButton(30, game_data->getWindowHeight() - 120 + (validOptions * 30), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 			options.getButton(id).on_click.connect(
 				[&, i]()
 			{
@@ -105,17 +105,17 @@ void VisualDialogue::render() const
 
 	if (speaker)
 	{
-		game_data->getRenderer()->renderText(speaker->realName.c_str(), 600, WINDOW_HEIGHT - 150);
+		game_data->getRenderer()->renderText(speaker->realName.c_str(), 600, game_data->getWindowHeight() - 150);
 
 		if (speaker->portrait)
 		{
 			speaker->portrait->xPos(600);
-			speaker->portrait->yPos(WINDOW_HEIGHT - 135);
+			speaker->portrait->yPos(game_data->getWindowHeight() - 135);
 			game_data->getRenderer()->renderSprite(*speaker->portrait.get());
 		}
 	}
 
-	game_data->getRenderer()->renderText(dialogue_text.c_str(), 30, WINDOW_HEIGHT - 250);
+	game_data->getRenderer()->renderText(dialogue_text.c_str(), 30, game_data->getWindowHeight() - 250);
 
 	options.render();
 }
