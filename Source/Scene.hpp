@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <Engine\Renderer.h>
+#include "Character.h"
 
 class GameData;
 
@@ -18,7 +20,7 @@ public:
 	std::string getName() const;
 	std::string getDescription() const;
 	void update();
-	void render();
+	void render(ASGE::Renderer* renderer);
 
 private:
 	std::string name;
@@ -27,10 +29,11 @@ private:
 	GameData* game_data;
 
 	//TODO - object pool of props
-	//std::vector<Prop>;
+	std::vector<int> props_pool;
+	std::vector<Character> character_pool;
 
 	SceneLink light;
 	SceneLink dark;
-	SceneLink shocking;
-	SceneLink sad;
+	SceneLink serious;
+	SceneLink slapstick;
 };

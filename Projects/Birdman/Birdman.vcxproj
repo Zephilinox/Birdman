@@ -19,7 +19,7 @@
     <ProjectGuid>{503EE74A-5AE3-43A1-B492-438B644DB6EF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Birdman</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -145,6 +145,7 @@
     <ClInclude Include="..\..\Source\Architecture\UI\Menu.hpp" />
     <ClInclude Include="..\..\Source\Audience.hpp" />
     <ClInclude Include="..\..\Source\BirdmanTheGame.hpp" />
+    <ClInclude Include="..\..\Source\Character.h" />
     <ClInclude Include="..\..\Source\Constants.hpp" />
     <ClInclude Include="..\..\Source\Dialogue\VisualDialogue.hpp" />
     <ClInclude Include="..\..\Source\Play.hpp" />
@@ -179,6 +180,7 @@
     <ClCompile Include="..\..\Source\Architecture\UI\Menu.cpp" />
     <ClCompile Include="..\..\Source\Audience.cpp" />
     <ClCompile Include="..\..\Source\BirdmanTheGame.cpp" />
+    <ClCompile Include="..\..\Source\Character.cpp" />
     <ClCompile Include="..\..\Source\Dialogue\VisualDialogue.cpp" />
     <ClCompile Include="..\..\Source\main.cpp" />
     <ClCompile Include="..\..\Source\Play.cpp" />
