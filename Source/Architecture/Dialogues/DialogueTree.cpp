@@ -86,6 +86,16 @@ Actor* DialogueTree::getPreviousSpeaker()
 	return previous_speaker;
 }
 
+Dialogue* DialogueTree::getCurrentDialogue()
+{
+	return current_dialogue;
+}
+
+Dialogue* DialogueTree::getPreviousDialogue()
+{
+	return previous_dialogue;
+}
+
 std::string DialogueTree::play(std::string dialogue_name)
 {
 	//Don't ask how this works. it's a mess.
@@ -118,6 +128,7 @@ std::string DialogueTree::play(std::string dialogue_name)
 					previous_speaker = getActor(current_dialogue->speaker);
 				}
 
+				previous_dialogue = current_dialogue;
 				current_dialogue = &d;
 				playing = true;
 				std::cout << "RUNNING DIALOGUE TEXT DETERMINATOR FOR '" << d.name << "'\n";
@@ -131,6 +142,7 @@ std::string DialogueTree::play(std::string dialogue_name)
 				{
 					//uhoh, normal dialogue should never return a blank screen, dialogue is malformed
 					std::cout << "ERROR: DIALOGUE TEXT FOR '" << d.name << "' IS EMPTY. STOPPING.\n";
+					previous_dialogue = current_dialogue;
 					current_dialogue = nullptr;
 					playing = false;
 					return "";
@@ -144,6 +156,7 @@ std::string DialogueTree::play(std::string dialogue_name)
 					previous_speaker = getActor(current_dialogue->speaker);
 				}
 				
+				previous_dialogue = current_dialogue;
 				current_dialogue = nullptr;
 				playing = true;
 				player_option = true;
@@ -163,6 +176,7 @@ std::string DialogueTree::play(std::string dialogue_name)
 	{
 		//if we got to this point it means nothing was found, so reset.
 		previous_speaker = nullptr;
+		previous_dialogue = current_dialogue;
 		current_dialogue = nullptr;
 		playing = false;
 		return "";

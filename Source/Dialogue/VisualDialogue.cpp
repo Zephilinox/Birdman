@@ -97,14 +97,10 @@ void VisualDialogue::render() const
 {
 	game_data->getFontManager()->setFont("Default", 24);
 
-	Actor* speaker = nullptr;
-	if (dialogue_tree->player_option)
+	Actor* speaker = dialogue_tree->getSpeaker();
+	if (dialogue_tree->player_option && dialogue_tree->getPreviousDialogue() && !dialogue_tree->getPreviousDialogue()->player_option)
 	{
 		speaker = dialogue_tree->getPreviousSpeaker();
-	}
-	else
-	{
-		speaker = dialogue_tree->getSpeaker();
 	}
 
 	if (speaker)
