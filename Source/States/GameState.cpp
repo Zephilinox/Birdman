@@ -16,9 +16,10 @@ GameState::GameState(GameData* game_data)
 	, play_01(game_data)
 {
 	//add all the dialogue to the dialogue tree. each level would have its own dialogue tree
-	dialogue_init();
+	//dialogue_init();
 	//dialogue_init2();
 	//dialogue_init3();
+	dialogue_kitchen();
 	visual_dialogue.updateTree();
 }
 
@@ -333,3 +334,31 @@ void GameState::dialogue_init3()
 	});
 }
 
+void GameState::dialogue_kitchen()
+{
+	dialogue_tree.addDialogue("start_extra", "lesley", "He loved me", "kitchen/start");
+	dialogue_tree.addDialogue("kitchen/start", "ralph", "Yeah. He loved her so much he tried to kill her.", "kitchen/start2");
+	dialogue_tree.addDialogue("kitchen/start2", "laura", "He tried to kill you?", "kitchen/start3");
+	dialogue_tree.addDialogue("kitchen/start3", "lesley", "No.\nOkay, well he did beat me up one night.", "kitchen/start4");
+	dialogue_tree.addDialogue("kitchen/start4", "lesley", "He dragged me around the living room by my ankles, yelling\n\"I Love you, I love you, bitch.\"", "kitchen/start5");
+	dialogue_tree.addDialogue("kitchen/start5", "ralph", "What do you do with a love like that?", "kitchen/start6");
+	dialogue_tree.addDialogue("kitchen/start6", "ralph", "How is that...\nThat is not love and you know it.\nWhy do you insist on calling it...", "kitchen/start7");
+	dialogue_tree.addDialogue("kitchen/start7", "lesley", "You can say what you want, but I know what it was.", "kitchen/start8");
+	dialogue_tree.addDialogue("kitchen/start8", "ralph", "What about you, Nick?\nDoes that sound like love to you?", "kitchen/start9");
+	dialogue_tree.addDialogue("kitchen/start9", "riggan", "Sorry I'm late.\nI'm the wrong person to ask.\nI've only heard his name mentioned in passing.", "kitchen/start10");
+	dialogue_tree.addDialogue("kitchen/start10", "riggan", "You'd have to know the particulars\nBut I think what you're saying is\nthat love is absolute.", "kitchen/start11");
+	dialogue_tree.addDialogue("kitchen/start11", "ralph", "Yeah. The kind of love I'm talking about is...", "kitchen/start12");
+	dialogue_tree.addDialogue("kitchen/start12", "ralph", "The kind of love I'm talking about, you don't try and kill people.", "kitchen/start13");
+	dialogue_tree.addDialogue("kitchen/start13", "lesley", "It was love, Mel.\nTo Eddie, it was.", "kitchen/start14");
+	dialogue_tree.addDialogue("kitchen/start14", "lesley", "I don't care what anybody says.\nHe was ready to die for it.", "kitchen/start15");
+	dialogue_tree.addDialogue("kitchen/start15", "ralph", "Ask her what he did after she left him.", "kitchen/start16");
+	dialogue_tree.addDialogue("kitchen/start16", "lesley", "He shot himself in the mouth.\nBut he screwed that up, too.\nPoor Ed.", "kitchen/start17");
+	dialogue_tree.addDialogue("kitchen/start17", "ralph", "Poor Ed, my ass.\nThe guy was dangerous.", "kitchen/start18");
+	dialogue_tree.addDialogue("kitchen/start18", "laura", "How'd he screw it up if he shot himself in the mouth?", "kitchen/start19");
+	dialogue_tree.addDialogue("kitchen/start19", "ralph", "He used to carry this twenty-two.\nWe lived like fugitives those days.\n", "kitchen/start20");
+	dialogue_tree.addDialogue("kitchen/start20", "ralph", "I never knew if he was going to come\nout of the bushes or from behind\a car and just start shooting.", "kitchen/start21");
+	dialogue_tree.addDialogue("kitchen/start21", "ralph", "The man was crazy.\nHe was capable of anything.", "kitchen/start22");
+	dialogue_tree.addDialogue("kitchen/start22", "laura", "Christ. What a nightmare...", "kitchen/start23");
+	dialogue_tree.addDialogue("kitchen/start23", "ralph", "He used to call me at the hospital and say...", "kitchen/start24");
+	dialogue_tree.addDialogue("kitchen/start24", "ralph", "\"Son of a bitch. Your days are numbered.\"", "");
+}

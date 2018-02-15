@@ -26,6 +26,7 @@ private:
 	void dialogue_init();
 	void dialogue_init2();
 	void dialogue_init3();
+	void dialogue_kitchen();
 
 	DialogueTree dialogue_tree;
 	VisualDialogue visual_dialogue;
