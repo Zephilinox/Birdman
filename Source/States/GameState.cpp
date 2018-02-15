@@ -156,7 +156,6 @@ void GameState::dialogue_init()
 	//Also keep in mind you might want to set the next dialogue to be one where the player is speaking and not an NPC, but I was lazy.
 	dialogue_tree.addPlayerOption("start_options", "Hello.", "start2");
 	dialogue_tree.addPlayerOption("start_options", "Howdy.", "start2");
-	dialogue_tree.addPlayerOption("start_options", "Hey.", "start2");
 
 	dialogue_tree.addPlayerOption("start_options",
 	[&]()

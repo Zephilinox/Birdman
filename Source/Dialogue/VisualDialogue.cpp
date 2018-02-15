@@ -55,7 +55,7 @@ void VisualDialogue::setupPlayerOptions()
 		std::string txt = dialogue_tree->current_player_options[i]->text();
 		if (txt != "")
 		{
-			int id = options.addButton(WINDOW_WIDTH / 4, 200 + (validOptions * 70), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
+			int id = options.addButton(100, WINDOW_HEIGHT - 120 + (validOptions * 30), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 			options.getButton(id).on_click.connect(
 				[&, i]()
 			{
@@ -65,6 +65,11 @@ void VisualDialogue::setupPlayerOptions()
 			});
 			validOptions++;
 		}
+	}
+
+	if (validOptions > 4)
+	{
+		throw "Too many player options!";
 	}
 }
 
@@ -90,12 +95,13 @@ void VisualDialogue::updateTree()
 
 void VisualDialogue::render() const
 {
-	std::string prefix = "";
+	game_data->getFontManager()->setFont("Default", 24);
+
 	if (dialogue_tree->getSpeaker() && dialogue_tree->getSpeaker()->name != "")
 	{
-		prefix = dialogue_tree->getSpeaker()->name + ": ";
+		game_data->getRenderer()->renderText(dialogue_tree->getSpeaker()->name.c_str(), 600, WINDOW_HEIGHT - 120);
 	}
+	game_data->getRenderer()->renderText(dialogue_text.c_str(), 100, WINDOW_HEIGHT - 220);
 
-	game_data->getRenderer()->renderText((prefix + dialogue_text).c_str(), WINDOW_WIDTH / 4, 100);
 	options.render();
 }
