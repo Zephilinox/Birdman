@@ -233,12 +233,7 @@ void GameState::dialogue_init()
 	dialogue_tree.addPlayerOption("town/menu",
 	[&]()
 	{
-		if (!dialogue_tree.getPlayer()->hasData("town_menu_count"))
-		{
-			dialogue_tree.getPlayer()->addData<int>("town_menu_count", 0);
-		}
-
-		int& data = dialogue_tree.getPlayer()->getData<int>("town_menu_count");
+		int& data = dialogue_tree.getPlayer()->getData<int>("town_menu_count", 0);
 		std::string s = "You've been here " + std::to_string(data) + " times";
 		data += 1;
 

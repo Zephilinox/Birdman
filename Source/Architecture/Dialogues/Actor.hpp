@@ -42,6 +42,17 @@ public:
 		return std::any_cast<T&>(datas[id]);
 	}
 
+	template <class T>
+	T& getData(const std::string id, T data)
+	{
+		if (!hasData(id))
+		{
+			addData<T>(id, data);
+		}
+
+		return std::any_cast<T&>(datas[id]);
+	}
+
 	const std::string name;
 	std::string realName;
 
