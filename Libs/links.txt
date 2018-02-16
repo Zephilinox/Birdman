@@ -1,0 +1,4 @@
+https://github.com/Turbine1991/cpp-feather-ini-parser
+https://github.com/SFML/SFML
+https://www.ambiera.com/irrklang/
+https://github.com/jhpy1024/ini_parser

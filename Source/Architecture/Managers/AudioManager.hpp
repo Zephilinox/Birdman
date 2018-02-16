@@ -11,20 +11,24 @@
 class AudioManager
 {
 public:
-	enum class Engine
+	enum Engine
 	{
-		None,
-		IrrKlang,
-		SFML
+		None = 0,
+		IrrKlang = 1,
+		SFML = 2
 	};
 
-	AudioManager(Engine engine, const std::string& audio_path);
+	AudioManager(Engine engine, const std::string audio_path);
+	AudioManager(const std::string audio_path);
 	AudioEngine* getAudioEngine();
 	Engine getEngineType();
+
+	void setEngineType(int engine);
 
 	void play(const std::string& name, bool loop = false);
 
 private:
 	std::unique_ptr<AudioEngine> audio_engine;
 	Engine engine;
+	std::string audio_path;
 };

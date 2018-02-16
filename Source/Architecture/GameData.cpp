@@ -3,19 +3,29 @@
 //STD
 #include <assert.h>
 
-//TODO ricardo
-//Ricardo - do we add scene manager to this list?????
-	//You only need to add it if you need to pass something to the scene managers constructor
-	//For instance, the state_manager needs a pointer to game_data, so *this* is passed
-	//Where as the font_manager just needs a pointer to ASGE::Renderer, so *renderer* is passed
+//LIB
+#include <ini_parser.hpp>
+
 GameData::GameData(ASGE::Renderer* renderer)
 	: game(game)
 	, renderer(renderer)
 	, state_manager(this)
 	, font_manager(renderer)
-	, audio_manager(AudioManager::Engine::SFML, "Resources/Sounds/")
+	, audio_manager("Resources/Sounds/")
 {
 	assert(renderer);
+
+	ini_parser ini("settings.ini");
+
+	try
+	{
+		audio_manager.setEngineType(ini.get_int("AudioEngine"));
+	}
+	catch (std::runtime_error& e)
+	{
+		std::cout << "ERROR: Setting 'AudioEngine' not found in 'settings.ini'.\n";
+		std::cout << "ERROR INFO: " << e.what() << "\n";
+	}
 }
 
 ASGE::Renderer* GameData::getRenderer() const

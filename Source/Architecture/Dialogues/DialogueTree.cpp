@@ -103,6 +103,9 @@ std::string DialogueTree::play(std::string dialogue_name)
 	//passed empty dialog string, stop
 	if (dialogue_name == "")
 	{
+		previous_speaker = nullptr;
+		previous_dialogue = nullptr;
+		current_dialogue = nullptr;
 		playing = false;
 		return "";
 	}

@@ -9,8 +9,30 @@
 #include "../Audio/SFML/AudioEngineSFML.hpp"
 #include "../Audio/None/AudioEngineNone.hpp"
 
-AudioManager::AudioManager(Engine engine, const std::string& audio_path)
+AudioManager::AudioManager(Engine engine, const std::string audio_path)
 	: engine(engine)
+	, audio_path(audio_path)
+{
+	setEngineType(engine);
+}
+
+AudioManager::AudioManager(const std::string audio_path)
+	: audio_path(audio_path)
+{
+	setEngineType(Engine::None);
+}
+
+AudioEngine* AudioManager::getAudioEngine()
+{
+	return audio_engine.get();
+}
+
+AudioManager::Engine AudioManager::getEngineType()
+{
+	return engine;
+}
+
+void AudioManager::setEngineType(int engine)
 {
 	switch (engine)
 	{
@@ -25,18 +47,7 @@ AudioManager::AudioManager(Engine engine, const std::string& audio_path)
 		default:
 			audio_engine.reset(new AudioEngineNone(audio_path));
 			break;
-
 	}
-}
-
-AudioEngine* AudioManager::getAudioEngine()
-{
-	return audio_engine.get();
-}
-
-AudioManager::Engine AudioManager::getEngineType()
-{
-	return engine;
 }
 
 void AudioManager::play(const std::string& name, bool loop)

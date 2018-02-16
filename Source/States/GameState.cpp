@@ -16,7 +16,7 @@ GameState::GameState(GameData* game_data)
 	, play_01(game_data)
 {
 	//add all the dialogue to the dialogue tree. each level would have its own dialogue tree
-	//dialogue_init();
+	dialogue_init();
 	//dialogue_init2();
 	//dialogue_init3();
 	dialogue_kitchen();
@@ -113,6 +113,8 @@ void GameState::dialogue_init()
 
 		return "town/start";
 	});
+
+	dialogue_tree.addPlayerOption("start_extra", "Kitchen Scene", "kitchen/start");
 
 	dialogue_tree.addDialogue("start", "strange_npc",
 	[&]()
@@ -336,8 +338,8 @@ void GameState::dialogue_init3()
 
 void GameState::dialogue_kitchen()
 {
-	dialogue_tree.addDialogue("start_extra", "lesley", "He loved me", "kitchen/start");
-	dialogue_tree.addDialogue("kitchen/start", "ralph", "Yeah. He loved her so much he tried to kill her.", "kitchen/start2");
+	dialogue_tree.addDialogue("kitchen/start", "lesley", "He loved me", "kitchen/start1");
+	dialogue_tree.addDialogue("kitchen/start1", "ralph", "Yeah. He loved her so much he tried to kill her.", "kitchen/start2");
 	dialogue_tree.addDialogue("kitchen/start2", "laura", "He tried to kill you?", "kitchen/start3");
 	dialogue_tree.addDialogue("kitchen/start3", "lesley", "No.\nOkay, well he did beat me up one night.", "kitchen/start4");
 	dialogue_tree.addDialogue("kitchen/start4", "lesley", "He dragged me around the living room by my ankles, yelling\n\"I Love you, I love you, bitch.\"", "kitchen/start5");
@@ -356,7 +358,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/start17", "ralph", "Poor Ed, my ass.\nThe guy was dangerous.", "kitchen/start18");
 	dialogue_tree.addDialogue("kitchen/start18", "laura", "How'd he screw it up if he shot himself in the mouth?", "kitchen/start19");
 	dialogue_tree.addDialogue("kitchen/start19", "ralph", "He used to carry this twenty-two.\nWe lived like fugitives those days.\n", "kitchen/start20");
-	dialogue_tree.addDialogue("kitchen/start20", "ralph", "I never knew if he was going to come\nout of the bushes or from behind\a car and just start shooting.", "kitchen/start21");
+	dialogue_tree.addDialogue("kitchen/start20", "ralph", "I never knew if he was going to come\nout of the bushes or from behind\na car and just start shooting.", "kitchen/start21");
 	dialogue_tree.addDialogue("kitchen/start21", "ralph", "The man was crazy.\nHe was capable of anything.", "kitchen/start22");
 	dialogue_tree.addDialogue("kitchen/start22", "laura", "Christ. What a nightmare...", "kitchen/start23");
 	dialogue_tree.addDialogue("kitchen/start23", "ralph", "He used to call me at the hospital and say...", "kitchen/start24");
