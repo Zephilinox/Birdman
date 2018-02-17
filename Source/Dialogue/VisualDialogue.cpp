@@ -16,6 +16,7 @@ VisualDialogue::VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree,
 	, dialogue_tree(dialogue_tree)
 	, options(game_data)
 	, default_dialogue(default_dialogue)
+	, dialogueFinishedMarker(game_data->getRenderer())
 {
 	ini_parser ini("settings.ini");
 	
@@ -29,6 +30,12 @@ VisualDialogue::VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree,
 		std::cout << "ERROR INFO: " << e.what() << "\n";
 		setDialogueSpeed(DialogueSpeed::Instant);
 	}
+
+	dialogueFinishedMarker.xPos = 500;
+	dialogueFinishedMarker.yPos = game_data->getWindowHeight() - 150;
+	dialogueFinishedMarker.addFrame("UI/DialogueMarker", 1.0f);
+	dialogueFinishedMarker.addFrame("UI/DialogueMarker", 2.0f, 0, -10);
+	dialogueFinishedMarker.pause();
 }
 
 void VisualDialogue::setDefaultDialogue(std::string dialogue)
@@ -131,10 +138,16 @@ void VisualDialogue::update()
 	{
 		dialogue_characters_timer.restart();
 		dialogue_text_characters++;
+
+		if (dialogue_text_characters >= dialogue_text.length())
+		{
+			dialogueFinishedMarker.restart();
+		}
 	}
 
 	updateTree();
 	options.update();
+	dialogueFinishedMarker.update(1.f / 60.f);
 }
 
 //todo: change this to be ran when changing dialogue tree we're managing
@@ -174,6 +187,11 @@ void VisualDialogue::render() const
 	}
 
 	game_data->getRenderer()->renderText(dialogue_text.substr(0, dialogue_text_characters).c_str(), 30, game_data->getWindowHeight() - 250);
+
+	if (dialogue_text != "" && dialogue_text_characters >= dialogue_text.length())
+	{
+		game_data->getRenderer()->renderSprite(*dialogueFinishedMarker.getCurrentFrameSprite());
+	}
 
 	options.render();
 }

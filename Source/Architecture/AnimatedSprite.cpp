@@ -32,7 +32,7 @@ void AnimatedSprite::addFrame(std::string texture, float frame_length_millisecon
 
 	std::unique_ptr<ASGE::Sprite> spr(renderer->createRawSprite());
 	frames.push_back(std::make_pair(std::move(spr), frame_data));
-	if (!frames.back().first->loadTexture(std::string("..\\..\\Resources\\Textures\\" + texture + ".png").c_str()))
+	if (!frames.back().first->loadTexture(std::string("../../Resources/Textures/" + texture + ".png").c_str()))
 	{
 		throw std::exception(std::string("[Animation::addFrame()] Failed to load texture '..\\..\\Resources\\Textures\\'" + texture + ".png").c_str());
 	}
@@ -51,6 +51,12 @@ void AnimatedSprite::play()
 void AnimatedSprite::pause()
 {
 	playing = false;
+}
+
+void AnimatedSprite::restart()
+{
+	current_frame = 0;
+	playing = true;
 }
 
 bool AnimatedSprite::isOver()

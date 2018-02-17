@@ -205,7 +205,7 @@ std::string DialogueTree::formatActorName(std::string name)
 {	
 	name[0] = std::toupper(name[0], std::locale());
 
-	for (int i = 0; i < name.length(); ++i)
+	for (size_t i = 0; i < name.length(); ++i)
 	{
 		if (name[i] == '_')
 		{

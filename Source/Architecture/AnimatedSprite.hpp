@@ -35,6 +35,7 @@ public:
 
 	void play();
 	void pause();
+	void restart();
 	bool isOver();
 
 	float xPos = 0;

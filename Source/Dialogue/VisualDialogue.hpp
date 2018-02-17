@@ -3,6 +3,7 @@
 //SELF
 #include "../Architecture/UI/Menu.hpp"
 #include "../Architecture/Timer.hpp"
+#include "../Architecture/AnimatedSprite.hpp"
 
 class GameData;
 class DialogueTree;
@@ -49,4 +50,6 @@ private:
 	size_t dialogue_text_characters = 0;
 	Timer dialogue_characters_timer;
 	float dialogue_characters_delay = 0.05f;
+
+	AnimatedSprite dialogueFinishedMarker;
 };
