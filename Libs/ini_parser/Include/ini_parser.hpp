@@ -413,7 +413,7 @@ class ini_parser
 
             if (sections.at(section).find(name) == sections.at(section).end())
             {
-                throw std::runtime_error("property \"" + section + "\" does not exist");
+                throw std::runtime_error("property \"" + name + "\" does not exist");
             }
         }
 

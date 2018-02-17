@@ -338,7 +338,7 @@ void GameState::dialogue_init3()
 
 void GameState::dialogue_kitchen()
 {
-	dialogue_tree.addDialogue("kitchen/start", "lesley", "He loved me", "kitchen/start1");
+	dialogue_tree.addDialogue("kitchen/start", "lesley", "He loved me.", "kitchen/start1");
 	dialogue_tree.addDialogue("kitchen/start1", "ralph", "Yeah. He loved her so much he tried to kill her.", "kitchen/start2");
 	dialogue_tree.addDialogue("kitchen/start2", "laura", "He tried to kill you?", "kitchen/start3");
 	dialogue_tree.addDialogue("kitchen/start3", "lesley", "No.\nOkay, well he did beat me up one night.", "kitchen/start4");

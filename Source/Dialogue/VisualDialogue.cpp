@@ -5,6 +5,7 @@
 
 //LIB
 #include <Engine/Renderer.h>
+#include <ini_parser.hpp>
 
 //SELF
 #include "../Architecture/Dialogues/DialogueTree.hpp"
@@ -16,6 +17,18 @@ VisualDialogue::VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree,
 	, options(game_data)
 	, default_dialogue(default_dialogue)
 {
+	ini_parser ini("settings.ini");
+	
+	try
+	{
+		setDialogueSpeed(ini.get_int("DialogueSpeed"));
+	}
+	catch (std::runtime_error& e)
+	{
+		std::cout << "ERROR: Setting 'DialogueSpeed' not found in 'settings.ini'.\n";
+		std::cout << "ERROR INFO: " << e.what() << "\n";
+		setDialogueSpeed(DialogueSpeed::Instant);
+	}
 }
 
 void VisualDialogue::setDefaultDialogue(std::string dialogue)
@@ -25,9 +38,16 @@ void VisualDialogue::setDefaultDialogue(std::string dialogue)
 
 void VisualDialogue::interact()
 {
+	if (dialogue_text_characters < dialogue_text.length())
+	{
+		dialogue_text_characters = dialogue_text.length();
+		return;
+	}
+
 	if (selected_option >= 0)
 	{
-		dialogue_text = dialogue_tree->play(dialogue_tree->current_player_options[selected_option]->next());
+		const auto& txt = dialogue_tree->play(dialogue_tree->current_player_options[selected_option]->next());
+		setDialogueText(txt);
 		selected_option = -1;
 	}
 	else
@@ -35,13 +55,13 @@ void VisualDialogue::interact()
 		const auto& txt = dialogue_tree->next();
 		if (!dialogue_tree->player_option)
 		{
-			dialogue_text = txt;
+			setDialogueText(txt);
 		}
 	}
 
 	if (dialogue_text == "")
 	{
-		dialogue_text = dialogue_tree->play(default_dialogue);
+		setDialogueText(dialogue_tree->play(default_dialogue));
 	}
 }
 
@@ -73,8 +93,47 @@ void VisualDialogue::setupPlayerOptions()
 	}
 }
 
+void VisualDialogue::setDialogueText(std::string text)
+{
+	dialogue_text = text;
+	dialogue_text_characters = 0;
+	dialogue_characters_timer.restart();
+}
+
+void VisualDialogue::setDialogueSpeed(int speed)
+{
+	switch (speed)
+	{
+		case DialogueSpeed::VerySlow:
+			dialogue_characters_delay = 0.2f;
+			break;
+		case DialogueSpeed::Slow:
+			dialogue_characters_delay = 0.1f;
+			break;
+		case DialogueSpeed::Normal:
+			dialogue_characters_delay = 0.05f;
+			break;
+		case DialogueSpeed::Fast:
+			dialogue_characters_delay = 0.025f;
+			break;
+		case DialogueSpeed::VeryFast:
+			dialogue_characters_delay = 0.0125f;
+			break;
+		case DialogueSpeed::Instant:
+		default:
+			dialogue_characters_delay = -1.0f;
+			break;
+	}
+}
+
 void VisualDialogue::update()
 {
+	if (dialogue_text_characters < dialogue_text.length() && dialogue_characters_timer.getElapsedTime() > dialogue_characters_delay)
+	{
+		dialogue_characters_timer.restart();
+		dialogue_text_characters++;
+	}
+
 	updateTree();
 	options.update();
 }
@@ -84,7 +143,7 @@ void VisualDialogue::updateTree()
 {
 	if (!dialogue_tree->playing)
 	{
-		dialogue_text = dialogue_tree->play(default_dialogue);
+		setDialogueText(dialogue_tree->play(default_dialogue));
 	}
 
 	if (dialogue_tree->player_option && !has_set_player_options)
@@ -115,7 +174,7 @@ void VisualDialogue::render() const
 		}
 	}
 
-	game_data->getRenderer()->renderText(dialogue_text.c_str(), 30, game_data->getWindowHeight() - 250);
+	game_data->getRenderer()->renderText(dialogue_text.substr(0, dialogue_text_characters).c_str(), 30, game_data->getWindowHeight() - 250);
 
 	options.render();
 }

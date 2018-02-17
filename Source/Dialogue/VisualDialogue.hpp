@@ -2,9 +2,20 @@
 
 //SELF
 #include "../Architecture/UI/Menu.hpp"
+#include "../Architecture/Timer.hpp"
 
 class GameData;
 class DialogueTree;
+
+enum DialogueSpeed
+{
+	VerySlow = 0,
+	Slow = 1,
+	Normal = 2,
+	Fast = 3,
+	VeryFast = 4,
+	Instant = 5
+};
 
 class VisualDialogue
 {
@@ -21,6 +32,8 @@ public:
 
 private:
 	void setupPlayerOptions();
+	void setDialogueText(std::string text);
+	void setDialogueSpeed(int speed);
 
 	GameData* game_data;
 	DialogueTree* dialogue_tree;
@@ -33,4 +46,7 @@ private:
 	int selected_option = -1;
 
 	bool has_set_player_options = false;
+	int dialogue_text_characters = 0;
+	Timer dialogue_characters_timer;
+	float dialogue_characters_delay = 0.05f;
 };
