@@ -31,6 +31,7 @@ bool BirdmanTheGame::init()
 	game_data->window_width = game_width;
 	game_data->window_height = game_height;
 
+	toggleFPS();
 	setup();
 
 	game_data->getStateManager()->push<SplashState>();
@@ -78,34 +79,26 @@ void BirdmanTheGame::update(const ASGE::GameTime& gt)
 
 	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_F1))
 	{
-		if (game_width != 1920)
+		static bool fullscreen = false;
+		if (!fullscreen)
 		{
-			game_width = 1920;
-			game_height = 1080;
-			game_data->window_width = game_width;
-			game_data->window_height = game_height;
-
-			if (!initAPI(ASGE::Renderer::WindowMode::FULLSCREEN))
+			if (!initAPI(ASGE::Renderer::WindowMode::BORDERLESS))
 			{
 				throw "uhoh";
 			}
+			fullscreen = true;
 		}
 		else
 		{
-			game_width = 1280;
-			game_height = 720;
-			game_data->window_width = game_width;
-			game_data->window_height = game_height;
-
 			if (!initAPI(ASGE::Renderer::WindowMode::WINDOWED))
 			{
 				throw "uhoh";
 			}
+			fullscreen = false;
 		}
 
 		setup();
 	}
-
 
 	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ESCAPE))
 	{
