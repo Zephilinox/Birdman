@@ -10,7 +10,7 @@ Button::Button()
 
 void Button::render(GameData* game_data) const
 {
-	game_data->getFontManager()->setFont("Default", 24);
+	game_data->getFontManager()->setFont("Default");
 
 	if (selected)
 	{

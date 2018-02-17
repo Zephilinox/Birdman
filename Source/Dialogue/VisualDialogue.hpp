@@ -46,7 +46,7 @@ private:
 	int selected_option = -1;
 
 	bool has_set_player_options = false;
-	int dialogue_text_characters = 0;
+	size_t dialogue_text_characters = 0;
 	Timer dialogue_characters_timer;
 	float dialogue_characters_delay = 0.05f;
 };

@@ -48,7 +48,6 @@ public:
 	virtual bool init() override;
 	
 private:
-	void setup();
 	/**
 	*  The simulation for the game.
 	*  The objects in the game need to updated or simulated
@@ -78,8 +77,10 @@ private:
 	*  @param data They key event and its related data.
 	*  @see SharedEventData
 	*/
-	void keyHandler(const ASGE::SharedEventData data);
 
+	void keyHandler(const ASGE::SharedEventData data);
+	void toggleFullscreen();
+	void setup();
 private:
 	int key_handler_id = -1;  /**< Input Callback ID. The callback ID assigned by the game engine. */
 	std::unique_ptr<GameData> game_data;

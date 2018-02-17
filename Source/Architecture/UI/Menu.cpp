@@ -28,7 +28,7 @@ Menu::Menu(GameData* game_data, bool vertical)
 
 void Menu::update()
 {
-	if (buttons.size() == 0) return;
+	if (buttons.empty()) return;
 
 	if (game_data->getInputManager()->isKeyPressed(key_decrement) ||
 		game_data->getInputManager()->isKeyPressed(key_decrement_alt))

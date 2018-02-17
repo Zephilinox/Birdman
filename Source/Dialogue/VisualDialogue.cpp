@@ -68,7 +68,6 @@ void VisualDialogue::interact()
 void VisualDialogue::setupPlayerOptions()
 {
 	has_set_player_options = true;
-	std::cout << "PLAYER OPTIONS\n";
 	int validOptions = 0;
 	for (size_t i = 0; i < dialogue_tree->current_player_options.size(); ++i)
 	{
@@ -154,7 +153,7 @@ void VisualDialogue::updateTree()
 
 void VisualDialogue::render() const
 {
-	game_data->getFontManager()->setFont("Default", 24);
+	game_data->getFontManager()->setFont("Default");
 
 	Actor* speaker = dialogue_tree->getSpeaker();
 	if (dialogue_tree->player_option && dialogue_tree->getPreviousDialogue() && !dialogue_tree->getPreviousDialogue()->player_option)
@@ -169,7 +168,7 @@ void VisualDialogue::render() const
 		if (speaker->portrait)
 		{
 			speaker->portrait->xPos(600);
-			speaker->portrait->yPos(game_data->getWindowHeight() - 135);
+			speaker->portrait->yPos(game_data->getWindowHeight() - 135.0f);
 			game_data->getRenderer()->renderSprite(*speaker->portrait.get());
 		}
 	}
