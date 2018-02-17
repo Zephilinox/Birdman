@@ -32,9 +32,9 @@ VisualDialogue::VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree,
 	}
 
 	dialogueFinishedMarker.xPos = 500;
-	dialogueFinishedMarker.yPos = game_data->getWindowHeight() - 150;
-	dialogueFinishedMarker.addFrame("UI/DialogueMarker", 1.0f);
-	dialogueFinishedMarker.addFrame("UI/DialogueMarker", 2.0f, 0, -10);
+	dialogueFinishedMarker.yPos = game_data->getWindowHeight() - 150.0f;
+	dialogueFinishedMarker.addFrame("UI/DialogueMarker", 0.6f);
+	dialogueFinishedMarker.addFrame("UI/DialogueMarker", 0.3f, 0, -10);
 	dialogueFinishedMarker.pause();
 }
 
@@ -132,7 +132,7 @@ void VisualDialogue::setDialogueSpeed(int speed)
 	}
 }
 
-void VisualDialogue::update()
+void VisualDialogue::update(float dt)
 {
 	if (dialogue_text_characters < dialogue_text.length() && dialogue_characters_timer.getElapsedTime() > dialogue_characters_delay)
 	{
@@ -147,7 +147,7 @@ void VisualDialogue::update()
 
 	updateTree();
 	options.update();
-	dialogueFinishedMarker.update(1.f / 60.f);
+	dialogueFinishedMarker.update(dt);
 }
 
 //todo: change this to be ran when changing dialogue tree we're managing

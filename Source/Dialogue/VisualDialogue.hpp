@@ -27,7 +27,7 @@ public:
 
 	void interact();
 
-	void update();
+	void update(float dt);
 	void updateTree();
 	void render() const;
 

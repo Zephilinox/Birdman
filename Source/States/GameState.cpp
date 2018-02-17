@@ -23,9 +23,9 @@ GameState::GameState(GameData* game_data)
 	visual_dialogue.updateTree();
 }
 
-void GameState::update(const ASGE::GameTime&)
+void GameState::update(const ASGE::GameTime& gt)
 {
-	visual_dialogue.update();
+	visual_dialogue.update(gt.delta_time.count() / 1000.0f);
 
 	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER))
 	{

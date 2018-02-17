@@ -57,6 +57,7 @@ void AnimatedSprite::restart()
 {
 	current_frame = 0;
 	playing = true;
+	frame_time = 0;
 }
 
 bool AnimatedSprite::isOver()
