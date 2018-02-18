@@ -19,6 +19,8 @@ public:
 		function();
 	}
 
+	static constexpr uint32_t ID = hash_str("Function");
+
 private:
 	std::function<void()> function;
 };
