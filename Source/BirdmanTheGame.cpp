@@ -36,16 +36,17 @@ bool BirdmanTheGame::init()
 	setup();
 
 	game_data->getStateManager()->push<SplashState>();
+
 	game_data->getMessageQueue()->addListener([](Message* msg)
 	{
-		std::cout << "Processed " << msg->id.hash << "\n";
+		std::cout << "Processed\t" << msg->id << "\n";
 	});
 
 	game_data->getMessageQueue()->addListener([](Message* msg)
 	{
 		if (msg->id == FunctionMessage::ID)
 		{
-			std::cout << "Executed " << msg->id.hash << "\n";
+			std::cout << "Executed\t" << msg->id <<"\n";
 			FunctionMessage* func = static_cast<FunctionMessage*>(msg);
 			func->execute();
 		}

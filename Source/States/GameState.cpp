@@ -25,7 +25,7 @@ GameState::GameState(GameData* game_data)
 
 void GameState::update(const ASGE::GameTime& gt)
 {
-	visual_dialogue.update(gt.delta_time.count() / 1000.0f);
+	visual_dialogue.update(float(gt.delta_time.count()) / 1000.0f);
 
 	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER))
 	{
