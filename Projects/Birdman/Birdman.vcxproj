@@ -61,7 +61,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\new 4ser\Documents\!git\birb\Libs\ini_parser\Include;$(SolutionDir)..\Libs\irrKlang\include;$(SolutionDir)..\Libs\SFML\include;$(SolutionDir)..\Libs\ASGE\Include;$(SolutionDir)..\Source;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\Libs\ini_parser\Include;$(SolutionDir)..\Libs\irrKlang\include;$(SolutionDir)..\Libs\SFML\include;$(SolutionDir)..\Libs\ASGE\Include;$(SolutionDir)..\Source;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)..\Libs\SFML\Lib;$(SolutionDir)..\Libs\irrKlang\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugFast|Win32'">

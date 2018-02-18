@@ -10,7 +10,7 @@ class FunctionMessage : public Message
 {
 public:
 	FunctionMessage(std::function<void()> func)
-		: Message("Function")
+		: Message(ID)
 		, function(func)
 	{}
 
@@ -18,6 +18,8 @@ public:
 	{
 		function();
 	}
+
+	static constexpr HashedID ID = hash("Function");
 
 private:
 	std::function<void()> function;
