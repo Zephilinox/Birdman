@@ -1,6 +1,16 @@
 #include "Character.h"
 
 
+Character::Character()
+{
+
+}
+
+Character::~Character()
+{
+
+}
+
 void Character::setFacing(CharacterFacing new_facing)
 {
 	char_facing = new_facing;
@@ -9,6 +19,16 @@ void Character::setFacing(CharacterFacing new_facing)
 void Character::setState(CharacterState new_state)
 {
 	char_state = new_state;
+}
+
+void Character::setIsActive(bool new_active)
+{
+	isActive = new_active;
+}
+
+bool Character::getIsActive()
+{
+	return isActive;
 }
 
 void Character::update()
@@ -74,7 +94,7 @@ void Character::update()
 	}
 }
 
-	void Character::render()
+	void Character::render(ASGE::Renderer* renderer)
 {
 		switch(char_state)
 		{

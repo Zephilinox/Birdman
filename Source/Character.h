@@ -5,8 +5,6 @@
 
 class Character
 {
-
-
 public:
 	enum CharacterFacing
 	{
@@ -24,13 +22,21 @@ public:
 		SPEAKING
 	};
 
+	Character();
+	~Character();
+
 	void setFacing(CharacterFacing new_facing);
 	void setState(CharacterState new_state);
 
+	void setIsActive(bool new_active);
+	bool getIsActive();
+
 	void update();
-	void render();
+	void render(ASGE::Renderer* renderer);
 
 private:
+	bool isActive = false;
+
 	AnimatedSprite horizontal_walk_sprite;
 	AnimatedSprite vertical_walk_sprite;
 	AnimatedSprite talking_sprite;

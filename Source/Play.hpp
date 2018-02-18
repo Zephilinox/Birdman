@@ -5,9 +5,9 @@
 class Scene;
 class GameData;
 
+constexpr unsigned int number_of_scenes = 10;
+
 //TODO - implement inheritance of class Play_One, Play_Two, Play_Three etc.
-
-
 
 //if I've understood this right, the structure should look like this:
 //	States
@@ -22,9 +22,33 @@ class GameData;
 class Play
 {
 public:
+
+	//TODO - these all may or may not be used.
+	enum SceneProps
+	{
+		KITCHEN = 0,
+		APARTMENT_BEDROOM,
+		ALLEYWAY,
+		LIVING_ROOM,
+		STREET,
+	};
+
+	enum SceneCharacters
+	{
+		RIGGAN =0,
+		LESLEY,
+		JOHN,
+		HANNAH,
+		FISTO,
+	};
+
+	enum PropName
+	{
+		A = 0, B, C, D, E, F, G, H, I, J
+	};
+
 	Play(GameData* data);
 	~Play();
-
 
 	// setCurrentScene()
 	void create();

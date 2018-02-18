@@ -5,9 +5,10 @@
 #include "Scene.hpp"
 
 
+
 Play::Play(GameData* data)
 {
-	scenes.reserve(10);
+	scenes.reserve(number_of_scenes);
 	game_data = data;
 }
 
@@ -19,7 +20,7 @@ void Play::create()
 {
 	//TODO implement scene linked list creation here
 	//Call functions here based on the play to instanciate
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < number_of_scenes; i++)
 	{
 		Scene s(game_data);
 		scenes.push_back(std::move(s));
@@ -39,6 +40,9 @@ void Play::create()
 	//Set values and links of each scene
 	scene1.name = "scene1";
 	scene1.scene_description = "The Theater is full, Riggan's attempt to ";
+	scene1.initSceneProps(Play::KITCHEN);
+	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
+	scene1.initSceneCharacter(Play::SceneCharacters::JOHN);
 
 	scene1.dark.stage_description = "The play is going down a dark path...";
 	scene1.dark.scene = &scene2;
@@ -48,17 +52,22 @@ void Play::create()
 
 	scene2.name = "scene2";
 	scene2.scene_description = "A dark apartment bedroom, two bodies move under the sheets...";
+
+	//TODO implement next scenes
+	scene2.initSceneProps(Play::APARTMENT_BEDROOM);
+	scene2.initSceneCharacter(Play::SceneCharacters::RIGGAN);
+	scene2.initSceneCharacter(Play::SceneCharacters::JOHN);
 }
 
 void Play::update()
 {
-	
+	scenes[current_scene].update();
 	return;
 }
 
 void Play::render()
 {
-	scenes[current_scene].render(game_data->getRenderer());
+	scenes[current_scene].render();
 	//Render  VisualDialogue*
 	return;
 }
