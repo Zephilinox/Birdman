@@ -64,7 +64,6 @@ private:
 	Audience audience;
 
 	int current_scene = 0;
-
 	//TODO see this
 	//Chris - each night 1 = preview1, 2 = preview 2, 3 = opening night
 	int night = 1;

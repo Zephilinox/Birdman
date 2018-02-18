@@ -7,7 +7,6 @@
 Scene::Scene(GameData * data)
 {
 	game_data = data;
-	rend = game_data->getRenderer();
 	props_pool.reserve(number_of_props);
 	character_pool.reserve(number_of_characters);
 	loadPropTexStrings();
@@ -106,18 +105,17 @@ void Scene::update()
 void Scene::render()
 {
 	//TODO render all ACTIVE props and characters
-
 	for(Prop current_prop : props_pool)
 	{
-		if(current_prop.getIsActive)
+		if(current_prop.getIsActive())
 		{
 			current_prop.render(game_data->getRenderer());
 		}
 	}
 
-	for(Character current_character : character_pool)
+	for(Character &current_character : character_pool)
 	{
-		if(current_character.getIsActive)
+		if(current_character.getIsActive())
 		{
 			current_character.render(game_data->getRenderer());
 		}

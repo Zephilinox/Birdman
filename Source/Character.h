@@ -37,9 +37,9 @@ public:
 private:
 	bool isActive = false;
 
-	AnimatedSprite horizontal_walk_sprite;
-	AnimatedSprite vertical_walk_sprite;
-	AnimatedSprite talking_sprite;
+	//AnimatedSprite horizontal_walk_sprite;
+	//AnimatedSprite vertical_walk_sprite;
+	//AnimatedSprite talking_sprite;
 	ASGE::Sprite* idle_sprite;
 	ASGE::Sprite* point_gun;
 	CharacterFacing char_facing = SOUTH;

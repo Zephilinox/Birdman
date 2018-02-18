@@ -40,7 +40,6 @@ private:
 	std::string textureStrings[number_of_props];
 
 	GameData* game_data;
-	ASGE::Renderer* rend;
 
 	//TODO - object pool of props
 	std::vector<Prop> props_pool;
