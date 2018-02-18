@@ -20,7 +20,7 @@ void MessageQueue::processMessages(Timer::nanoseconds_float max_processing_time)
 
 	if (processedPriorityMessages > 0)
 	{
-		std::cout << "INFO:\tMessageQueue took " << std::fixed << std::setprecision(1) << std::setfill('0') <<
+		std::cout << "INFO:\t MessageQueue took " << std::fixed << std::setprecision(1) << std::setfill('0') <<
 			std::setw(3) << timer.getElapsedTime<Timer::milliseconds>() << "ms processing " <<
 			std::setw(4) << processedPriorityMessages << " priority messages.\n";
 	}
