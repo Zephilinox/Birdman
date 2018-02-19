@@ -98,26 +98,16 @@ void BirdmanTheGame::keyHandler(const ASGE::SharedEventData data)
 
 void BirdmanTheGame::toggleFullscreen()
 {
-	//static bool fullscreen = false;
-
 	inputs->unregisterCallback(key_handler_id);
 
 	if (renderer->getWindowMode() == ASGE::Renderer::WindowMode::WINDOWED)
 	{
-		if (!initAPI(ASGE::Renderer::WindowMode::BORDERLESS))
-		{
-			throw "Init failed";
-		}
+		renderer->setWindowedMode(ASGE::Renderer::WindowMode::BORDERLESS);
 	}
 	else
 	{
-		if (!initAPI(ASGE::Renderer::WindowMode::WINDOWED))
-		{
-			throw "Init failed";
-		}
+		renderer->setWindowedMode(ASGE::Renderer::WindowMode::WINDOWED);
 	}
-
-	//fullscreen = !fullscreen;
 
 	setup();
 }
