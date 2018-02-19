@@ -4,8 +4,6 @@
 //SELF
 #include "Scene.hpp"
 
-
-
 Play::Play(GameData* data)
 {
 	scenes.reserve(number_of_scenes);
@@ -26,16 +24,27 @@ void Play::create()
 		scenes.push_back(std::move(s));
 	}
 
+	//TODO replace with non shit code
 	Scene& scene1 = scenes[0];
+	scene1.setSceneID(0);
 	Scene& scene2 = scenes[1];
+	scene2.setSceneID(1);
 	Scene& scene3 = scenes[2];
+	scene3.setSceneID(2);
 	Scene& scene4 = scenes[3];
+	scene4.setSceneID(3);
 	Scene& scene5 = scenes[4];
+	scene5.setSceneID(4);
 	Scene& scene6 = scenes[5];
+	scene6.setSceneID(5);
 	Scene& scene7 = scenes[6];
+	scene7.setSceneID(6);
 	Scene& scene8 = scenes[7];
+	scene8.setSceneID(7);
 	Scene& scene9 = scenes[8];
+	scene9.setSceneID(8);
 	Scene& scene10 = scenes[9];
+	scene10.setSceneID(9);
 
 	//Set values and links of each scene
 	scene1.name = "scene1";
@@ -62,17 +71,49 @@ void Play::create()
 void Play::update()
 {
 	scenes[current_scene].update();
-	return;
 }
 
 void Play::render()
 {
 	scenes[current_scene].render();
 	//Render  VisualDialogue*
-	return;
 }
 
-Scene* Play::getScene(int idx)
+void Play::moveToNextScene()
 {
-	return &scenes[idx];
+	//TODO - redo this, it's ugly as shitfuck
+	if (scenes[current_scene].light_value > scenes[current_scene].dark_value &&
+		scenes[current_scene].light_value > scenes[current_scene].serious_value &&
+		scenes[current_scene].light_value > scenes[current_scene].slapstick_value)
+	{
+		current_scene = scenes[current_scene].light.scene->scene_id;
+	}
+	else if (scenes[current_scene].dark_value > scenes[current_scene].serious_value&&
+		scenes[current_scene].dark_value > scenes[current_scene].slapstick_value)
+	{
+		current_scene = scenes[current_scene].dark.scene->scene_id;
+	}
+	else if (scenes[current_scene].serious_value > scenes[current_scene].slapstick_value)
+	{
+		current_scene = scenes[current_scene].serious.scene->scene_id;
+	}
+	else
+	{
+		current_scene = scenes[current_scene].slapstick.scene->scene_id;
+		std::cout << "Make this better!";
+	}
+}
+
+void Play::moveToNextNight()
+{
+	if (night < 3)
+	{
+		night++;
+		audience.varyApprovalsBetweenNights();
+	}
+	else
+	{
+		//TODO - play finished, next play pls
+	}
+
 }

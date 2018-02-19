@@ -29,6 +29,7 @@ public:
 	void initSceneCharacter(Play::SceneCharacters chars);
 	void loadPropTexStrings();
 	void populateProps();
+	void setSceneID(int id);
 
 	void update();
 	void render();
@@ -44,6 +45,13 @@ private:
 	//TODO - object pool of props
 	std::vector<Prop> props_pool;
 	std::vector<Character> character_pool;
+
+	int light_value = 0;
+	int dark_value = 0;
+	int serious_value = 0;
+	int slapstick_value = 0;
+
+	int scene_id = 0;
 
 	SceneLink light;
 	SceneLink dark;

@@ -54,7 +54,9 @@ public:
 	void create();
 	void update();
 	void render();
-	Scene* getScene(int idx);
+	//Scene* getScene(int idx);
+	void moveToNextScene();
+	void moveToNextNight();
 
 private:
 	std::vector<Scene> scenes;

@@ -32,6 +32,7 @@ void Scene::initSceneProps(Play::SceneProps layout)
 	{
 		case Play::SceneProps::KITCHEN:
 		{
+			//TODO- search predicates (find if)
 			props_pool.at(0).setIsActive(false);
 			break;
 		}
@@ -70,16 +71,16 @@ void Scene::initSceneCharacter(Play::SceneCharacters chars)
 void Scene::loadPropTexStrings()
 {
 	//TODO find a nice way of doing this if pos?
-	textureStrings[0] = "../Resources/Textures/1.png";
-	textureStrings[1] = "../Resources/Textures/7.png";
-	textureStrings[2] = "c";
-	textureStrings[3] = "d";
-	textureStrings[4] = "e";
-	textureStrings[5] = "f";
-	textureStrings[6] = "g";
-	textureStrings[7] = "h";
-	textureStrings[8] = "i";
-	textureStrings[9] = "j";
+	textureStrings[0] = "../../Resources/Textures/1.png";
+	textureStrings[1] = "../../Resources/Textures/2.png";
+	textureStrings[2] = "../../Resources/Textures/3.png";
+	textureStrings[3] = "../../Resources/Textures/4.png";
+	textureStrings[4] = "../../Resources/Textures/5.png";
+	textureStrings[5] = "../../Resources/Textures/6.png";
+	textureStrings[6] = "../../Resources/Textures/7.png";
+	textureStrings[7] = "../../Resources/Textures/8.png";
+	textureStrings[8] = "../../Resources/Textures/9.png";
+	textureStrings[9] = "../../Resources/Textures/10.png";
 }
 
 void Scene::populateProps()
@@ -93,19 +94,24 @@ void Scene::populateProps()
 	}
 }
 
+void Scene::setSceneID(int id)
+{
+	scene_id = id;
+}
+
 void Scene::update()
 {
 	//TODO - cycle through characters in scene, update them.
-	//for(Character x : character_pool)
-	//{
-	//	x.update();
-	//}
+	for(Character &x : character_pool)
+	{
+		x.update();
+	}
 }
 
 void Scene::render()
 {
 	//TODO render all ACTIVE props and characters
-	for(Prop current_prop : props_pool)
+	for(Prop &current_prop : props_pool)
 	{
 		if(current_prop.getIsActive())
 		{

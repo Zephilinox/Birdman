@@ -98,11 +98,11 @@ void BirdmanTheGame::keyHandler(const ASGE::SharedEventData data)
 
 void BirdmanTheGame::toggleFullscreen()
 {
-	static bool fullscreen = false;
+	//static bool fullscreen = false;
 
 	inputs->unregisterCallback(key_handler_id);
 
-	if (!fullscreen)
+	if (renderer->getWindowMode() == ASGE::Renderer::WindowMode::WINDOWED)
 	{
 		if (!initAPI(ASGE::Renderer::WindowMode::BORDERLESS))
 		{
@@ -117,7 +117,7 @@ void BirdmanTheGame::toggleFullscreen()
 		}
 	}
 
-	fullscreen = !fullscreen;
+	//fullscreen = !fullscreen;
 
 	setup();
 }
