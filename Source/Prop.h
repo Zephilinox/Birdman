@@ -9,7 +9,7 @@ public:
 	~Prop() { delete prop_sprite; }
 
 	void setIsActive(bool new_active);
-	bool getIsActive();
+	bool getIsActive() const;
 
 	ASGE::Sprite* getSprite();
 

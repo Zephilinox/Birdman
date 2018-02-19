@@ -1,19 +1,19 @@
 #include "Audience.hpp"
+#include "Rng.h"
+#include "Architecture\GameData.hpp"
 
 //STD
 #include <random>
 
-Audience::Audience()
+Audience::Audience(GameData* data)
 {
 	//TODO: move this to some kind of RNG class we can use anywhere
-	std::random_device rd;
-	std::mt19937 mt(rd());
+	game_data = data;
 
-	std::uniform_int_distribution<int> random(1, max_approval);
-	approval_sad = random(mt);
-	approval_shocking = random(mt);
-	approval_light = random(mt);
-	approval_dark = random(mt);
+	approval_sad = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
+	approval_shocking = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
+	approval_light = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
+	approval_dark = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
 }
 
 int Audience::getSad()
@@ -61,10 +61,7 @@ void Audience::varyApprovalsBetweenNights()
 
 void Audience::loadAudienceSprite()
 {
-	//TODO pass renderer to audience to be able to create the sprite!
-
-	//audience_sprite = renderer->createRawSprite();
-	//audience_sprite->loadTexture("Resources\\Textures\\avatar.png");
-	//audience->dims[0] = 92;
-	//audience->dims[1] = 92;
+	audience_sprite = game_data->getRenderer()->createRawSprite();
+	audience_sprite->loadTexture("..//..//Resources\\Textures\\avatar.png");
+	//Set dimensions
 }

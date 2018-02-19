@@ -70,39 +70,42 @@ void Scene::initSceneCharacter(Play::SceneCharacters chars)
 void Scene::loadPropTexStrings()
 {
 	//TODO find a nice way of doing this if pos?
-	textureStrings[0] = "../Resources/Textures/1.png";
-	textureStrings[1] = "../Resources/Textures/7.png";
-	textureStrings[2] = "c";
-	textureStrings[3] = "d";
-	textureStrings[4] = "e";
-	textureStrings[5] = "f";
-	textureStrings[6] = "g";
-	textureStrings[7] = "h";
-	textureStrings[8] = "i";
-	textureStrings[9] = "j";
+	textureStrings[0] = "../../Resources/Textures/1.png";
+	textureStrings[1] = "../../Resources/Textures/2.png";
+	textureStrings[2] = "../../Resources/Textures/3.png";
+	textureStrings[3] = "../../Resources/Textures/4.png";
+	textureStrings[4] = "../../Resources/Textures/5.png";
+	textureStrings[5] = "../../Resources/Textures/6.png";
+	textureStrings[6] = "../../Resources/Textures/7.png";
+	textureStrings[7] = "../../Resources/Textures/8.png";
+	textureStrings[8] = "../../Resources/Textures/9.png";
+	textureStrings[9] = "../../Resources/Textures/10.png";
 }
 
 void Scene::populateProps()
 {
 	//TODO Ricardo! this correct?
-	for(int i = 0; i < number_of_props; i++)
+	for(unsigned int i = 0; i < number_of_props; ++i)
 	{
 		Prop* p = new Prop;
 		p->initSprite(game_data->getRenderer(), textureStrings[i]);
-		props_pool.push_back(*p);
+
+		p->getSprite()->xPos((i * 100) + 50);
+		p->getSprite()->yPos((i * 100) + 50);
+
+		props_pool.push_back(std::move(*p));
 	}
 }
 
 void Scene::update()
 {
-	//TODO - cycle through characters in scene, update them.
-	//for(Character x : character_pool)
-	//{
-	//	x.update();
-	//}
+	/*for(Character &current_character : character_pool)
+	{
+		current_character.update();
+	}*/
 }
 
-void Scene::render()
+void Scene::render() const
 {
 	//TODO render all ACTIVE props and characters
 	for(Prop current_prop : props_pool)
@@ -113,11 +116,11 @@ void Scene::render()
 		}
 	}
 
-	for(Character &current_character : character_pool)
+	/*for(Character current_character : character_pool)
 	{
 		if(current_character.getIsActive())
 		{
 			current_character.render(game_data->getRenderer());
 		}
-	}
+	}*/
 }

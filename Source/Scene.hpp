@@ -31,7 +31,7 @@ public:
 	void populateProps();
 
 	void update();
-	void render();
+	void render() const;
 
 private:
 	std::string name;

@@ -53,8 +53,7 @@ public:
 	// setCurrentScene()
 	void create();
 	void update();
-	void render();
-	Scene* getScene(int idx);
+	void render() const;
 
 private:
 	std::vector<Scene> scenes;

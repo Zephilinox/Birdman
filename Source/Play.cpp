@@ -6,7 +6,7 @@
 
 
 
-Play::Play(GameData* data)
+Play::Play(GameData* data): audience(game_data)
 {
 	scenes.reserve(number_of_scenes);
 	game_data = data;
@@ -62,17 +62,10 @@ void Play::create()
 void Play::update()
 {
 	scenes[current_scene].update();
-	return;
 }
 
-void Play::render()
+void Play::render() const
 {
 	scenes[current_scene].render();
 	//Render  VisualDialogue*
-	return;
-}
-
-Scene* Play::getScene(int idx)
-{
-	return &scenes[idx];
 }

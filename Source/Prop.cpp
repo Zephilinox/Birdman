@@ -1,12 +1,12 @@
 #include "Prop.h"
 #include <Engine\Renderer.h>
 
-void Prop::setIsActive(bool new_active)
+void Prop::setIsActive(bool new_active) 
 {
 	isActive = new_active;
 }
 
-bool Prop::getIsActive()
+bool Prop::getIsActive() const
 {
 	return isActive;
 }
