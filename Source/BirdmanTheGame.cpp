@@ -28,13 +28,17 @@ bool BirdmanTheGame::init()
 		return false;
 	}
 
-	game_data = std::make_unique<GameData>(renderer.get());
-	game_data->window_width = game_width;
-	game_data->window_height = game_height;
-
+	renderer->setWindowTitle("Birbie");
+	float cArray[] = { 0.08f, 0.08f, 0.08f };
+	renderer->setClearColour(cArray);
+	renderer->setSpriteMode(ASGE::SpriteSortMode::IMMEDIATE);
 	toggleFPS();
-	setup();
 
+	key_handler_id = inputs->addCallbackFnc(ASGE::EventType::E_KEY, &BirdmanTheGame::keyHandler, this);
+
+	game_data = std::make_unique<GameData>(renderer.get(), game_width, game_height);
+	game_data->getFontManager()->addFont("../../Resources/Fonts/DroidSansMono.ttf", "Default", 24);
+	
 	game_data->getStateManager()->push<SplashState>();
 
 	game_data->getMessageQueue()->addListener([](Message* msg)
@@ -98,28 +102,12 @@ void BirdmanTheGame::keyHandler(const ASGE::SharedEventData data)
 
 void BirdmanTheGame::toggleFullscreen()
 {
-	inputs->unregisterCallback(key_handler_id);
-
 	if (renderer->getWindowMode() == ASGE::Renderer::WindowMode::WINDOWED)
 	{
-		renderer->setWindowedMode(ASGE::Renderer::WindowMode::BORDERLESS);
+		renderer->setWindowedMode(ASGE::Renderer::WindowMode::FULLSCREEN);
 	}
 	else
 	{
 		renderer->setWindowedMode(ASGE::Renderer::WindowMode::WINDOWED);
 	}
-
-	setup();
-}
-
-void BirdmanTheGame::setup()
-{
-	renderer->setWindowTitle("Birbie");
-	float cArray[] = { 0.08f, 0.08f, 0.08f };
-	renderer->setClearColour(cArray);
-	renderer->setSpriteMode(ASGE::SpriteSortMode::BACK_TO_FRONT);
-	game_data->renderer = renderer.get();
-	game_data->font_manager = FontManager(renderer.get());
-	game_data->getFontManager()->addFont("../../Resources/Fonts/DroidSansMono.ttf", "Default", 24);
-	key_handler_id = inputs->addCallbackFnc(ASGE::EventType::E_KEY, &BirdmanTheGame::keyHandler, this);
 }

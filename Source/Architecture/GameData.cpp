@@ -6,12 +6,13 @@
 //LIB
 #include <ini_parser.hpp>
 
-GameData::GameData(ASGE::Renderer* renderer)
-	: game(game)
-	, renderer(renderer)
+GameData::GameData(ASGE::Renderer* renderer, int width, int height)
+	: renderer(renderer)
 	, state_manager(this)
 	, font_manager(renderer)
 	, audio_manager("Resources/Sounds/")
+	, window_width(width)
+	, window_height(height)
 {
 	assert(renderer);
 

@@ -10,17 +10,14 @@
 #include "Messages/MessageQueue.hpp"
 #include "Managers/AudioManager.hpp"
 #include "Rng.h"
-#include "../BirdmanTheGame.hpp"
 
 //todo: make audio manager
 #include "Audio/AudioEngine.hpp"
 
 class GameData
 {
-friend class BirdmanTheGame;
-
 public:
-	GameData(ASGE::Renderer* renderer);
+	GameData(ASGE::Renderer* renderer, int width, int height);
 
 	ASGE::Renderer* getRenderer() const;
 	StateManager* getStateManager();
@@ -34,7 +31,6 @@ public:
 	int getWindowHeight();
 
 private:
-	BirdmanTheGame* game;
 	ASGE::Renderer* renderer = nullptr;
 
 	/** Input Manager. A wrapper around key states from callbacks by ASGE::Input. */
