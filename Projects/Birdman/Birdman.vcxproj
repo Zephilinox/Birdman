@@ -61,16 +61,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)..\Libs\ini_parser\Include;$(SolutionDir)..\Libs\irrKlang\include;$(SolutionDir)..\Libs\SFML\include;$(SolutionDir)..\Libs\ASGE\Include;$(SolutionDir)..\Source;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\Libs\SFML\Lib;$(SolutionDir)..\Libs\irrKlang\Lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)..\Libs\enetpp\include;$(SolutionDir)..\Libs\enet\include;$(SolutionDir)..\Libs\ini_parser\Include;$(SolutionDir)..\Libs\irrKlang\include;$(SolutionDir)..\Libs\SFML\include;$(SolutionDir)..\Libs\ASGE\Include;$(SolutionDir)..\Source;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\Libs\enet;$(SolutionDir)..\Libs\SFML\Lib;$(SolutionDir)..\Libs\irrKlang\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugFast|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)..\Libs\irrKlang\include;$(SolutionDir)..\Libs\SFML\include;$(SolutionDir)..\Libs\ini_parser\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\Libs\irrKlang\lib;$(SolutionDir)..\Libs\SFML\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)..\Libs\enetpp\include;$(SolutionDir)..\Libs\enet\include;$(SolutionDir)..\Libs\irrKlang\include;$(SolutionDir)..\Libs\SFML\include;$(SolutionDir)..\Libs\ini_parser\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\Libs\enet;$(SolutionDir)..\Libs\irrKlang\lib;$(SolutionDir)..\Libs\SFML\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -85,7 +85,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>irrKlang.lib;sfml-audio-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>enet.lib;ws2_32.lib;winmm.lib;irrKlang.lib;sfml-audio-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>LIBCMT; MSVCRT; LIBCMTD</IgnoreSpecificDefaultLibraries>
     </Link>
@@ -121,7 +121,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>irrKlang.lib;sfml-audio.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>enet.lib;ws2_32.lib;winmm.lib;irrKlang.lib;sfml-audio.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
