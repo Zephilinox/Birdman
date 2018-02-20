@@ -8,6 +8,38 @@
 NetworkingState::NetworkingState(GameData* game_data)
 	: BaseState(game_data)
 {
+	Packet p;
+	p.serialize("Hello ");
+	//doesn't get packed to char-sized int
+	//results in 4 bytes packed, 1 valid, 3 null
+	p.serialize(int('4'));
+	p.serialize(int('2'));
+	p.serialize(" World :)");
+	char* data = (char*)p.buffer.data();
+	int size = p.buffer.size();
+	for (int i = 0; i < size; ++i)
+	{
+		std::cout << data[i];
+	}
+
+	std::cout << "\n Now for ints\n";
+	Packet p2;
+	p2.serialize(20180220); //the data, for funs.
+
+	std::cout << "Here is the raw value of the int as ASCII\n";
+	char* data2 = (char*)p2.buffer.data();
+	int size2 = p2.buffer.size();
+	for (int i = 0; i < size2; ++i)
+	{
+		std::cout << data2[i];
+	}
+	std::cout << "\nAnd here is the int value memcpy'd\n";
+
+	int destination;
+	memcpy(&destination, p2.buffer.data(), p2.buffer.size());
+	std::cout << destination << "\n";
+
+	std::cout << "\n";
 	enetpp::global_state::get().initialize();
 	int input;
 	std::cout << "server is 0, client is 1: ";

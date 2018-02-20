@@ -22,6 +22,37 @@ struct ServerClient
 	}
 };
 
+struct Packet
+{
+	Packet()
+	{
+		buffer.reserve(255);
+	}
+
+	void serialize(std::string string)
+	{
+		//grab the old size
+		auto old_size = buffer.size();
+		//resize the vector so we know we have enough space to append more bits
+		buffer.resize(old_size + string.size());
+		//copy the string data to the end of the buffer at the position before it was resized
+		memcpy(buffer.data() + old_size, string.data(), string.size());
+	}
+
+	void serialize(int i)
+	{
+		//grab the old size
+		auto old_size = buffer.size();
+		//resize the vector so we know we have enough space to append more bits
+		buffer.resize(old_size + sizeof(i));
+		//grab the pointer to i, and the size of it, so it will grab the data between those using pointer arithmetic. smiley face.
+		memcpy(buffer.data() + old_size, &i, sizeof(i));
+	}
+
+	HashedID id;
+	std::vector<enet_uint8> buffer;
+};
+
 /**
 *  See BaseState for overriden functions
 */
