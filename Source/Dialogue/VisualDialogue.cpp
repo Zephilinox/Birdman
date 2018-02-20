@@ -53,6 +53,7 @@ void VisualDialogue::interact()
 
 	if (selected_option >= 0)
 	{
+		options = Menu(game_data);
 		const auto& txt = dialogue_tree->play(dialogue_tree->current_player_options[selected_option]->next());
 		setDialogueText(txt);
 		selected_option = -1;
@@ -87,7 +88,6 @@ void VisualDialogue::setupPlayerOptions()
 			{
 				has_set_player_options = false;
 				selected_option = i;
-				options = Menu(game_data);
 			});
 			validOptions++;
 		}
