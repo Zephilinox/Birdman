@@ -1,4 +1,5 @@
 #include "NetworkingState.hpp"
+
 //SELF
 #include "../Architecture/GameData.hpp"
 #include "../States/MenuState.hpp"
@@ -8,25 +9,36 @@ NetworkingState::NetworkingState(GameData* game_data)
 	: BaseState(game_data)
 {
 	enetpp::global_state::get().initialize();
+	int input;
 	std::cout << "server is 0, client is 1: ";
-	std::cin >> type;
+	std::cin >> input;
 	std::cout << "\n";
 
-	if (type == 0)
+	if (input == 0)
 	{
-		auto init_client_func = [&](ServerClient& client, const char* ip)
+		isServer = true;
+	}
+	else
+	{
+		isServer = false;
+	}
+	
+	if (isServer)
+	{
+		auto client_init = [&](ServerClient& client, const char* ip)
 		{
+			std::cout << "Client " << next_uid << " initialized with IP " << ip << "\n";
 			client.id = next_uid;
 			next_uid++;
 		};
 
 		server.start_listening(enetpp::server_listen_params<ServerClient>()
-			.set_max_client_count(20)
+			.set_max_client_count(2)
 			.set_channel_count(1)
 			.set_listen_port(11111)
-			.set_initialize_client_function(init_client_func));
+			.set_initialize_client_function(client_init));
 	}
-	else if (type == 1)
+	else
 	{
 		client.connect(enetpp::client_connect_params()
 			.set_channel_count(1)
@@ -34,13 +46,20 @@ NetworkingState::NetworkingState(GameData* game_data)
 	}
 }
 
+NetworkingState::~NetworkingState()
+{
+	enetpp::global_state::get().deinitialize();
+	server.stop_listening();
+	client.disconnect();
+}
+
 void NetworkingState::update(const ASGE::GameTime& gt)
 {
-	if (type == 0)
+	if (isServer)
 	{
 		updateServer();
 	}
-	else if (type == 1)
+	else if (!isServer)
 	{
 		updateClient();
 	}
@@ -61,17 +80,25 @@ void NetworkingState::onInactive()
 
 void NetworkingState::updateServer()
 {
-	std::string data;
-	std::cout << "server: ";
-	std::getline(std::cin, data);
-	std::cout << "\n";
+	std::string data = "Hi";
+	
+	if (t.getElapsedTime() > 1)
+	{
+		t.restart();
+		for (const auto& client : server.get_connected_clients())
+		{
+			server.send_packet_to(client->id, 0, (enet_uint8*)(data.c_str()), data.size(), ENET_PACKET_FLAG_RELIABLE);
+		}
+	}
 
-	server.send_packet_to_all_if(0, (enet_uint8*)(data.c_str()), data.size(), ENET_PACKET_FLAG_RELIABLE, [](const ServerClient&) {return true; });
-
-	auto on_client_connected = [&](ServerClient& client) {};
+	auto on_client_connected = [&](ServerClient& client)
+	{
+		std::cout << "client " << client.id << " connected \n";
+	};
 	auto on_client_disconnected = [&](unsigned int client_uid) {};
 	auto on_client_data_received = [&](ServerClient& client, const enet_uint8* data, size_t data_size)
 	{
+		std::cout << "client " << client.id << ": ";
 		for (int i = 0; i < data_size; ++i)
 		{
 			std::cout << data[i];
@@ -85,7 +112,12 @@ void NetworkingState::updateServer()
 
 void NetworkingState::updateClient()
 {
-	std::string data;
+	if (t.getElapsedTime() > 1)
+	{
+		t.restart();
+		std::string data = std::to_string(t2.getElapsedTime());
+		client.send_packet(0, (enet_uint8*)(data.c_str()), data.size(), ENET_PACKET_FLAG_RELIABLE);
+	}
 
 	auto on_connected = [&]() {};
 	auto on_disconnected = [&]() {};

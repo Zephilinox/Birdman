@@ -9,7 +9,8 @@
 
 //SELF
 #include "../Architecture/States/BaseState.hpp"
-
+#include "../Architecture/Timer.hpp"
+#include "../Architecture/Messages/Message.hpp"
 class GameData;
 
 struct ServerClient
@@ -28,6 +29,7 @@ class NetworkingState : public BaseState
 {
 public:
 	NetworkingState(GameData* game_data);
+	~NetworkingState();
 
 	void update(const ASGE::GameTime&) override final;
 	void render() const override final;
@@ -37,8 +39,14 @@ public:
 	void updateClient();
 
 private:
-	int type = 0;
+	bool isServer = true;
+
+	//Server
 	enetpp::server<ServerClient> server;
-	enetpp::client client;
 	unsigned int next_uid = 0;
+	Timer t;
+
+	//Client
+	enetpp::client client;
+	Timer t2;
 };
