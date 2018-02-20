@@ -10,7 +10,7 @@
 //SELF
 #include "Architecture/GameData.hpp"
 #include "Constants.hpp"
-#include "States/SplashState.hpp"
+#include "States/NetworkingState.hpp"
 #include "Architecture/Messages/FunctionMessage.hpp"
 
 BirdmanTheGame::~BirdmanTheGame()
@@ -39,7 +39,7 @@ bool BirdmanTheGame::init()
 	game_data = std::make_unique<GameData>(renderer.get(), game_width, game_height);
 	game_data->getFontManager()->addFont("../../Resources/Fonts/DroidSansMono.ttf", "Default", 24);
 	
-	game_data->getStateManager()->push<SplashState>();
+	game_data->getStateManager()->push<NetworkingState>();
 
 	game_data->getMessageQueue()->addListener([](Message* msg)
 	{
