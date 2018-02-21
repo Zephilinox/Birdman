@@ -80,8 +80,6 @@ void NetworkingState::onInactive()
 
 void NetworkingState::updateServer()
 {
-	std::string data = "Hi";
-	
 	Entity ent;
 	ent.id = game_data->getRandomNumberGenerator()->getRandomInt(0, 10000);
 	ent.name = "Big Baddy Dude " + std::to_string(game_data->getRandomNumberGenerator()->getRandomInt(0, 99));
@@ -93,6 +91,7 @@ void NetworkingState::updateServer()
 	ent.serialize(updateEntity);
 	updateEntity.setID(hash("UpdateEntity"));
 
+	std::string data = "Hi";
 	Packet msg;
 	msg.serialize(data);
 
@@ -138,8 +137,7 @@ void NetworkingState::updateClient()
 	auto on_disconnected = [&]() {};
 	auto on_data_received = [&](const enet_uint8* data, size_t data_size)
 	{
-		Packet p;
-		p.serialize(data, data_size);
+		Packet p(data, data_size);
 
 		if (p.getID() == hash("UpdateEntity"))
 		{

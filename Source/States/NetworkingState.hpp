@@ -37,6 +37,13 @@ struct Packet
 		buffer.reserve(255);
 	}
 
+	Packet(const enet_uint8* data, size_t size)
+	{
+		deserializePosition = sizeof(HashedID);
+		buffer.resize(size);
+		memcpy(buffer.data(), data, size);
+	}
+
 	void setID(HashedID id)
 	{
 		memcpy(buffer.data(), &id, sizeof(id));
@@ -78,13 +85,6 @@ struct Packet
 	void serialize(bool src)
 	{
 		serialize(&src, sizeof(src));
-	}
-
-	void serialize(const enet_uint8* data, size_t size)
-	{
-		auto old_size = buffer.size();
-		buffer.resize(old_size + size);
-		memcpy(buffer.data(), data, size);
 	}
 
 	void deserialize(void* destination, size_t size)
