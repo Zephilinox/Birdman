@@ -137,6 +137,7 @@
     <ClInclude Include="..\..\Source\Architecture\Managers\AudioManager.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Managers\FontManager.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Managers\InputManager.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Managers\NetworkManager.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Managers\StateManager.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Messages\FunctionMessage.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Messages\Message.hpp" />
@@ -181,6 +182,7 @@
     <ClCompile Include="..\..\Source\Architecture\Managers\AudioManager.cpp" />
     <ClCompile Include="..\..\Source\Architecture\Managers\FontManager.cpp" />
     <ClCompile Include="..\..\Source\Architecture\Managers\InputManager.cpp" />
+    <ClCompile Include="..\..\Source\Architecture\Managers\NetworkManager.cpp" />
     <ClCompile Include="..\..\Source\Architecture\Managers\StateManager.cpp" />
     <ClCompile Include="..\..\Source\Architecture\Messages\MessageQueue.cpp" />
     <ClCompile Include="..\..\Source\Architecture\Networking\Packet.cpp" />

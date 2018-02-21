@@ -11,7 +11,7 @@
 #include "../Architecture/States/BaseState.hpp"
 #include "../Architecture/Timer.hpp"
 #include "../Architecture/Messages/Message.hpp"
-#include "../Architecture/Networking/Packet.hpp"
+#include "../Architecture/Managers/NetworkManager.hpp"
 
 class GameData;
 
@@ -81,15 +81,22 @@ public:
 	void updateServer();
 	void updateClient();
 
+	//Server
+	void onClientConnected(ClientInfo* ci);
+	void onClientDisconnected(uint32_t client_id);
+	void onClientSentPacket(ClientInfo* ci, Packet p);
+
+	//Client
+	void onConnected();
+	void onDisconnected();
+	void onServerSentPacket(Packet p);
+
 private:
-	bool isServer = true;
+	NetworkManager* netman;
 
 	//Server
-	enetpp::server<ServerClient> server;
-	unsigned int next_uid = 0;
 	Timer t;
 
 	//Client
-	enetpp::client client;
 	Timer t2;
 };

@@ -11,6 +11,7 @@ GameData::GameData(ASGE::Renderer* renderer, int width, int height)
 	, state_manager(this)
 	, font_manager(renderer)
 	, audio_manager("Resources/Sounds/")
+	, network_manager(this) //todo: evaluate if needed
 	, window_width(width)
 	, window_height(height)
 {
@@ -62,6 +63,11 @@ AudioManager* GameData::getAudioManager()
 Rng * GameData::getRandomNumberGenerator()
 {
 	return &random_number_gen;
+}
+
+NetworkManager* GameData::getNetworkManager()
+{
+	return &network_manager;
 }
 
 int GameData::getWindowWidth()

@@ -9,10 +9,8 @@
 #include "Managers/FontManager.hpp"
 #include "Messages/MessageQueue.hpp"
 #include "Managers/AudioManager.hpp"
+#include "Managers/NetworkManager.hpp"
 #include "Rng.h"
-
-//todo: make audio manager
-#include "Audio/AudioEngine.hpp"
 
 class GameData
 {
@@ -25,6 +23,7 @@ public:
 	FontManager* getFontManager();
 	MessageQueue* getMessageQueue();
 	AudioManager* getAudioManager();
+	NetworkManager* getNetworkManager();
 	Rng* getRandomNumberGenerator();
 	
 	int getWindowWidth();
@@ -54,6 +53,8 @@ private:
 	Rng random_number_gen;
 
 	AudioManager audio_manager;
+
+	NetworkManager network_manager;
 
 	int window_width;
 	int window_height;

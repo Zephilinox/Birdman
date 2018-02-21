@@ -222,6 +222,9 @@
     <ClInclude Include="..\..\Source\Architecture\Networking\Packet.hpp">
       <Filter>Header Files\Architecture\Networking</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Architecture\Managers\NetworkManager.hpp">
+      <Filter>Header Files\Architecture\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -327,6 +330,9 @@
       <Filter>Source Files\States</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Architecture\Networking\Packet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Architecture\Managers\NetworkManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
