@@ -38,6 +38,7 @@ public:
 
 	bool isServer();
 	bool isConnected();
+	bool isInitialized();
 
 	//Server
 	Signal<ClientInfo*> client_connected;

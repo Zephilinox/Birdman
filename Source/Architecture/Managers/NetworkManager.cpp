@@ -104,6 +104,11 @@ bool NetworkManager::isConnected()
 	return client.is_connecting_or_connected();
 }
 
+bool NetworkManager::isInitialized()
+{
+	return initialized;
+}
+
 void NetworkManager::updateServer()
 {
 	auto on_client_connected = [&](ClientInfo& client)

@@ -13,6 +13,7 @@
 #include "../Architecture/Messages/Message.hpp"
 #include "../Architecture/Managers/NetworkManager.hpp"
 #include "../Architecture/AnimatedSprite.hpp"
+#include "../Architecture/UI/Menu.hpp"
 
 class GameData;
 
@@ -85,12 +86,11 @@ public:
 
 private:
 	NetworkManager* netman;
+	Menu menu;
 
 	//Server
-	Timer t;
-	AnimatedSprite serverPaddleMaster;
+	AnimatedSprite serverPaddle;
 
 	//Client
-	Timer t2;
-	AnimatedSprite serverPaddleSlave;
+	AnimatedSprite clientPaddle;
 };
