@@ -1,10 +1,8 @@
 #pragma once
 
-//STD
-#include <chrono>
-
 //SELF
 #include "../Architecture/States/BaseState.hpp"
+#include "../Architecture/Timer.hpp"
 
 class GameData;
 
