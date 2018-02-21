@@ -8,29 +8,6 @@
 NetworkingState::NetworkingState(GameData* game_data)
 	: BaseState(game_data)
 {
-	Entity ent;
-	ent.id = 10;
-	ent.name = "Big Baddy Dude 27";
-	ent.x = 2.57f;
-	ent.y = 28374.47f;
-	ent.alive = true;
-
-	Packet updateEntity;
-	ent.serialize(updateEntity);
-	updateEntity.setID(hash("UpdateEntity"));
-
-	if (updateEntity.getID() == hash("UpdateEntity"))
-	{
-		Entity entReceived;
-		entReceived.deserialize(updateEntity);
-		std::cout << "Received PositionUpdate packet for entity "
-			<< entReceived.id
-			<< " (" << entReceived.name << ") "
-			<< " at position "
-			<< entReceived.x << ", " << entReceived.y
-			<< " life status = " << entReceived.alive << "\n";
-	}
-	
 	enetpp::global_state::get().initialize();
 	int input;
 	std::cout << "server is 0, client is 1: ";
@@ -105,12 +82,27 @@ void NetworkingState::updateServer()
 {
 	std::string data = "Hi";
 	
+	Entity ent;
+	ent.id = game_data->getRandomNumberGenerator()->getRandomInt(0, 10000);
+	ent.name = "Big Baddy Dude " + std::to_string(game_data->getRandomNumberGenerator()->getRandomInt(0, 99));
+	ent.x = game_data->getRandomNumberGenerator()->getRandomFloat(-100, 1000);
+	ent.y = game_data->getRandomNumberGenerator()->getRandomFloat(-1000, 100);
+	ent.alive = game_data->getRandomNumberGenerator()->getRandomInt(0, 1);
+
+	Packet updateEntity;
+	ent.serialize(updateEntity);
+	updateEntity.setID(hash("UpdateEntity"));
+
+	Packet msg;
+	msg.serialize(data);
+
 	if (t.getElapsedTime() > 1)
 	{
 		t.restart();
 		for (const auto& client : server.get_connected_clients())
 		{
-			server.send_packet_to(client->id, 0, (enet_uint8*)(data.c_str()), data.size(), ENET_PACKET_FLAG_RELIABLE);
+			server.send_packet_to(client->id, 0, msg.buffer.data(), msg.buffer.size(), ENET_PACKET_FLAG_RELIABLE);
+			server.send_packet_to(client->id, 0, updateEntity.buffer.data(), updateEntity.buffer.size(), ENET_PACKET_FLAG_RELIABLE);
 		}
 	}
 
@@ -146,12 +138,26 @@ void NetworkingState::updateClient()
 	auto on_disconnected = [&]() {};
 	auto on_data_received = [&](const enet_uint8* data, size_t data_size)
 	{
-		for (int i = 0; i < data_size; ++i)
-		{
-			std::cout << data[i];
-		}
+		Packet p;
+		p.serialize(data, data_size);
 
-		std::cout << "\n";
+		if (p.getID() == hash("UpdateEntity"))
+		{
+			Entity entReceived;
+			entReceived.deserialize(p);
+			std::cout << "Received PositionUpdate packet for entity "
+				<< entReceived.id
+				<< " (" << entReceived.name << ") "
+				<< " at position "
+				<< entReceived.x << ", " << entReceived.y
+				<< " life status = " << entReceived.alive << "\n";
+		}
+		else
+		{
+			std::string msg;
+			p.deserialize(msg);
+			std::cout << "Message Received: " << msg << "\n";
+		}
 	};
 
 	client.consume_events(on_connected, on_disconnected, on_data_received);

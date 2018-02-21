@@ -80,6 +80,13 @@ struct Packet
 		serialize(&src, sizeof(src));
 	}
 
+	void serialize(const enet_uint8* data, size_t size)
+	{
+		auto old_size = buffer.size();
+		buffer.resize(old_size + size);
+		memcpy(buffer.data(), data, size);
+	}
+
 	void deserialize(void* destination, size_t size)
 	{
 		memcpy(destination, buffer.data() + deserializePosition, size);
