@@ -8,28 +8,27 @@
 NetworkingState::NetworkingState(GameData* game_data)
 	: BaseState(game_data)
 {
-	int entityID = 10;
-	float entityPosX = 2.57f;
-	float entityPosY = 28374.47f;
+	Entity ent;
+	ent.id = 10;
+	ent.name = "Big Baddy Dude 27";
+	ent.x = 2.57f;
+	ent.y = 28374.47f;
+	ent.alive = true;
 
-	Packet positionUpdate;
-	positionUpdate.serialize(entityID);
-	positionUpdate.serialize(entityPosX);
-	positionUpdate.serialize(entityPosY);
-	positionUpdate.setID(hash("PositionUpdate"));
+	Packet updateEntity;
+	ent.serialize(updateEntity);
+	updateEntity.setID(hash("UpdateEntity"));
 
-	int entityIDReceived;
-	float entityPosXReceived;
-	float entityPosYReceived;
-
-	if (positionUpdate.getID() == hash("PositionUpdate"))
+	if (updateEntity.getID() == hash("UpdateEntity"))
 	{
-		positionUpdate.deserialize(entityIDReceived);
-		positionUpdate.deserialize(entityPosXReceived);
-		positionUpdate.deserialize(entityPosYReceived);
+		Entity entReceived;
+		entReceived.deserialize(updateEntity);
 		std::cout << "Received PositionUpdate packet for entity "
-			<< entityIDReceived << " to move to "
-			<< entityPosXReceived << ", " << entityPosYReceived << "\n";
+			<< entReceived.id
+			<< " (" << entReceived.name << ") "
+			<< " at position "
+			<< entReceived.x << ", " << entReceived.y
+			<< " life status = " << entReceived.alive << "\n";
 	}
 	
 	enetpp::global_state::get().initialize();

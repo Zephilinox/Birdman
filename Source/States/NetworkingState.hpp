@@ -75,6 +75,11 @@ struct Packet
 		serialize(&src, sizeof(src));
 	}
 
+	void serialize(bool src)
+	{
+		serialize(&src, sizeof(src));
+	}
+
 	void deserialize(void* destination, size_t size)
 	{
 		memcpy(destination, buffer.data() + deserializePosition, size);
@@ -99,8 +104,40 @@ struct Packet
 		deserialize(&destination, sizeof(destination));
 	}
 
+	void deserialize(bool& destination)
+	{
+		deserialize(&destination, sizeof(destination));
+	}
+
 	std::vector<enet_uint8> buffer;
 	size_t deserializePosition = 0;
+};
+
+struct Entity
+{
+	int32_t id;
+	std::string name;
+	float x;
+	float y;
+	bool alive;
+
+	void serialize(Packet& p)
+	{
+		p.serialize(id);
+		p.serialize(name);
+		p.serialize(x);
+		p.serialize(y);
+		p.serialize(alive);
+	}
+
+	void deserialize(Packet& p)
+	{
+		p.deserialize(id);
+		p.deserialize(name);
+		p.deserialize(x);
+		p.deserialize(y);
+		p.deserialize(alive);
+	}
 };
 
 /**
