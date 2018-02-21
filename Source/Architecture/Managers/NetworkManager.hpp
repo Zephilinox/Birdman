@@ -37,6 +37,7 @@ public:
 	void sendPacket(enet_uint8 channel_id, Packet* p, enet_uint32 flags, std::function<bool(const ClientInfo& client)> predicate);
 
 	bool isServer();
+	bool isConnected();
 
 	//Server
 	Signal<ClientInfo*> client_connected;

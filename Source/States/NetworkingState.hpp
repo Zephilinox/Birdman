@@ -12,17 +12,9 @@
 #include "../Architecture/Timer.hpp"
 #include "../Architecture/Messages/Message.hpp"
 #include "../Architecture/Managers/NetworkManager.hpp"
+#include "../Architecture/AnimatedSprite.hpp"
 
 class GameData;
-
-struct ServerClient
-{
-	unsigned int id;
-	unsigned int get_id() const
-	{
-		return id;
-	}
-};
 
 struct Entity
 {
@@ -78,8 +70,8 @@ public:
 	void render() const override final;
 	void onActive() override final;
 	void onInactive() override final;
-	void updateServer();
-	void updateClient();
+	void updateServer(float dt);
+	void updateClient(float dt);
 
 	//Server
 	void onClientConnected(ClientInfo* ci);
@@ -96,7 +88,9 @@ private:
 
 	//Server
 	Timer t;
+	AnimatedSprite serverPaddleMaster;
 
 	//Client
 	Timer t2;
+	AnimatedSprite serverPaddleSlave;
 };

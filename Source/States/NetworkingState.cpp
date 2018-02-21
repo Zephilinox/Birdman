@@ -8,6 +8,8 @@
 NetworkingState::NetworkingState(GameData* game_data)
 	: BaseState(game_data)
 	, netman(game_data->getNetworkManager())
+	, serverPaddleMaster(game_data->getRenderer())
+	, serverPaddleSlave(game_data->getRenderer())
 {
 	int input;
 	std::cout << "server is 0, client is 1: ";
@@ -29,6 +31,14 @@ NetworkingState::NetworkingState(GameData* game_data)
 		netman->disconnected.connect(this, &NetworkingState::onDisconnected);
 		netman->server_sent_packet.connect(this, &NetworkingState::onServerSentPacket);
 	}
+
+	serverPaddleMaster.addFrame("Portraits/blabbering_npc", 1);
+	serverPaddleMaster.xPos = 60;
+	serverPaddleMaster.yPos = 720 / 2;
+
+	serverPaddleSlave.addFrame("Portraits/blabbering_npc", 1);
+	serverPaddleSlave.xPos = 60;
+	serverPaddleSlave.yPos = 720 / 2;
 }
 
 NetworkingState::~NetworkingState()
@@ -40,17 +50,24 @@ void NetworkingState::update(const ASGE::GameTime& gt)
 {
 	if (netman->isServer())
 	{
-		updateServer();
+		updateServer(gt.delta_time.count() / 1000.0f);
 	}
-	else
+	else if (netman->isConnected())
 	{
-		updateClient();
+		updateClient(gt.delta_time.count() / 1000.0f);
 	}
 }
 
 void NetworkingState::render() const
 {
-
+	if (netman->isServer())
+	{
+		game_data->getRenderer()->renderSprite(*serverPaddleMaster.getCurrentFrameSprite());
+	}
+	else
+	{
+		game_data->getRenderer()->renderSprite(*serverPaddleSlave.getCurrentFrameSprite());
+	}
 }
 
 void NetworkingState::onActive()
@@ -61,8 +78,10 @@ void NetworkingState::onInactive()
 {
 }
 
-void NetworkingState::updateServer()
+void NetworkingState::updateServer(float dt)
 {
+	serverPaddleMaster.update(dt);
+
 	Entity ent;
 	ent.id = game_data->getRandomNumberGenerator()->getRandomInt(0, 10000);
 	ent.name = "Big Baddy Dude " + std::to_string(game_data->getRandomNumberGenerator()->getRandomInt(0, 99));
@@ -84,10 +103,26 @@ void NetworkingState::updateServer()
 		netman->sendPacket(0, &msg);
 		netman->sendPacket(0, &updateEntity);
 	}
+
+	if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_W))
+	{
+		serverPaddleMaster.yPos -= 1000 * dt;
+	}
+	else if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_S))
+	{
+		serverPaddleMaster.yPos += 1000 * dt;
+	}
+
+	Packet p;
+	p.setID(hash("UpdatePosition"));
+	p << serverPaddleMaster.xPos << serverPaddleMaster.yPos;
+	netman->sendPacket(0, &p);
 }
 
-void NetworkingState::updateClient()
+void NetworkingState::updateClient(float dt)
 {
+	serverPaddleSlave.update(dt);
+
 	if (t.getElapsedTime() > 1)
 	{
 		t.restart();
@@ -128,12 +163,16 @@ void NetworkingState::onServerSentPacket(Packet p)
 	{
 		Entity entReceived;
 		p >> entReceived;
-		std::cout << "Received PositionUpdate packet for entity "
+		std::cout << "Received UpdateEntity packet for entity "
 			<< entReceived.id
 			<< " (" << entReceived.name << ") "
 			<< " at position "
 			<< entReceived.x << ", " << entReceived.y
 			<< " life status = " << entReceived.alive << "\n";
+	}
+	else if (p.getID() == hash("UpdatePosition"))
+	{
+		p >> serverPaddleSlave.xPos >> serverPaddleSlave.yPos;
 	}
 	else
 	{
