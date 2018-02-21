@@ -52,7 +52,6 @@ struct Packet
 	void serialize(void* data, size_t size)
 	{
 		//grab the old size
-		//todo: 32bit int
 		auto old_size = buffer.size();
 		//resize the vector so we know we have enough space to append more bits
 		buffer.resize(old_size + size);
@@ -62,11 +61,16 @@ struct Packet
 
 	void serialize(std::string src)
 	{
-		serialize(src.size());
+		serialize(static_cast<int32_t>(src.size()));
 		serialize(src.data(), src.size());
 	}
 
 	void serialize(int32_t src)
+	{
+		serialize(&src, sizeof(src));
+	}
+
+	void serialize(float src)
 	{
 		serialize(&src, sizeof(src));
 	}
@@ -84,11 +88,15 @@ struct Packet
 
 	void deserialize(std::string& destination)
 	{
-		//todo: 32bit int
-		int size;
+		int32_t size;
 		deserialize(size);
 		destination.resize(size);
 		deserialize(destination.data(), size);
+	}
+
+	void deserialize(float& destination)
+	{
+		deserialize(&destination, sizeof(destination));
 	}
 
 	std::vector<enet_uint8> buffer;
