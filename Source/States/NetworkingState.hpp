@@ -32,12 +32,27 @@ struct Packet
 {
 	Packet()
 	{
+		deserializePosition = sizeof(HashedID);
+		buffer.resize(sizeof(HashedID));
 		buffer.reserve(255);
+	}
+
+	void setID(HashedID id)
+	{
+		memcpy(buffer.data(), &id, sizeof(id));
+	}
+
+	HashedID getID()
+	{
+		HashedID id;
+		memcpy(&id, buffer.data(), sizeof(id));
+		return id;
 	}
 
 	void serialize(void* data, size_t size)
 	{
 		//grab the old size
+		//todo: 32bit int
 		auto old_size = buffer.size();
 		//resize the vector so we know we have enough space to append more bits
 		buffer.resize(old_size + size);
@@ -47,8 +62,8 @@ struct Packet
 
 	void serialize(std::string src)
 	{
-		serialize(src.data(), src.size());
 		serialize(src.size());
+		serialize(src.data(), src.size());
 	}
 
 	void serialize(int32_t src)
@@ -58,8 +73,8 @@ struct Packet
 
 	void deserialize(void* destination, size_t size)
 	{
-		memcpy(destination, buffer.data() + buffer.size() - size, size);
-		buffer.resize(buffer.size() - size);
+		memcpy(destination, buffer.data() + deserializePosition, size);
+		deserializePosition += size;
 	}
 
 	void deserialize(int32_t& destination)
@@ -69,14 +84,15 @@ struct Packet
 
 	void deserialize(std::string& destination)
 	{
+		//todo: 32bit int
 		int size;
 		deserialize(size);
 		destination.resize(size);
 		deserialize(destination.data(), size);
 	}
 
-	HashedID id;
 	std::vector<enet_uint8> buffer;
+	size_t deserializePosition = 0;
 };
 
 /**

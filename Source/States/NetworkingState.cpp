@@ -10,10 +10,11 @@ NetworkingState::NetworkingState(GameData* game_data)
 {
 	Packet p;
 	p.serialize("Hello ");
+	p.setID(hash("Connection"));
 	//doesn't get packed to char-sized int
 	//results in 4 bytes packed, 1 valid, 3 null
-	p.serialize(4);
-	p.serialize(2);
+	p.serialize('4');
+	p.serialize('2');
 	p.serialize(" World :)");
 	/*char* data = (char*)p.buffer.data();
 	int size = p.buffer.size();
@@ -24,7 +25,7 @@ NetworkingState::NetworkingState(GameData* game_data)
 
 
 	//todo: figure out ordering, should be fifo, not filo
-	std::string str;
+	/*std::string str;
 	p.deserialize(str);
 	std::cout << str;
 	int stuff;
@@ -33,9 +34,23 @@ NetworkingState::NetworkingState(GameData* game_data)
 	p.deserialize(stuff);
 	std::cout << stuff;
 	p.deserialize(str);
-	std::cout << str << "\n";
+	std::cout << str << "\n";*/
 
-	std::cout << "\n Now for ints\n";
+	std::string msg;
+	std::string str;
+	int integer;
+	p.deserialize(str);
+	msg += str;
+	p.deserialize(integer);
+	msg += integer;
+	p.deserialize(integer);
+	msg += integer;
+	p.deserialize(str);
+	msg += str;
+
+	std::cout << "Packet ID " << p.getID() << ": " << msg << "\n";
+
+	std::cout << "\nNow for ints\n";
 	Packet p2;
 	int wow = ('.' << 24) | ('y' << 16) | ('e' << 8) | 'h';
 	p2.serialize(wow); //the data, for funs.
