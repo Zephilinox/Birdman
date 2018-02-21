@@ -16,7 +16,6 @@ namespace
 
 using HashedID = uint32_t;
 
-//todo: figure out why I can't make this a protected member function
 constexpr HashedID hash(const char* input)
 {
 	return helper(offset, input);

@@ -33,7 +33,7 @@ NetworkingState::NetworkingState(GameData* game_data)
 		netman->server_sent_packet.connect(this, &NetworkingState::onServerSentPacket);
 	});
 
-	menu.getButton(2).on_click.connect([&]()
+	menu.getButton(2).on_click.connect([game_data]()
 	{
 		game_data->getStateManager()->pop();
 	});

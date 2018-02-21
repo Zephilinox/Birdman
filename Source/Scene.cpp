@@ -86,6 +86,13 @@ void Scene::loadPropTexStrings()
 void Scene::populateProps()
 {
 	//TODO Ricardo! this correct?
+	//ah.. I don't think so but I'm not sure, ask james?
+	//I have no idea what happens when you push a dereferenced pointer to a vector of values, does it copy it?
+	//if so, then that will cause a memory leak (x2, one for the prop you new'd, and one for the ASGE sprite the prop owns that never gets deleted)
+	//If that is the case, then better off doing something like this:
+	//Prop p;
+	//p->initSprite(...)
+	//props_pool.push_back(std::move(p))
 	for(int i = 0; i < number_of_props; i++)
 	{
 		Prop* p = new Prop;

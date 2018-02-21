@@ -7,21 +7,14 @@
 SplashState::SplashState(GameData* game_data)
 	: BaseState(game_data)
 {
-	start_time = std::chrono::system_clock().now();
 }
 
 void SplashState::update(const ASGE::GameTime& gt)
 {
-	auto end_time = std::chrono::system_clock().now();
-	std::chrono::duration<float> duration = end_time - start_time;
-
-	if (duration.count() >= 1.0f)
+	if (timer.getElapsedTime() > 1)
 	{
-		//game_data->getStateManager()->pop();
-		//game_data->getStateManager()->push<MenuState>();
 		game_data->getStateManager()->pop();
 		game_data->getStateManager()->push<MenuState>();
-		start_time = end_time;
 	}
 }
 

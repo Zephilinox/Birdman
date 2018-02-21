@@ -22,6 +22,5 @@ public:
 	void onInactive() override final;
 
 private:
-	//todo: timer class;
-	std::chrono::system_clock::time_point start_time;
+	Timer timer;
 };
