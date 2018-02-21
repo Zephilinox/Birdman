@@ -13,6 +13,12 @@
 #include "../Architecture/Messages/Message.hpp"
 class GameData;
 
+//https://stackoverflow.com/questions/17471717/c-static-cast-from-int-to-void-to-char-can-you-help-me-to-understand-this
+//http://www.cplusplus.com/forum/general/109866/
+//https://stackoverflow.com/questions/2437283/c-c-packing-signed-char-into-int
+//https://stackoverflow.com/questions/1874354/a-dynamic-buffer-type-in-c
+//https://stackoverflow.com/questions/16543519/serialization-of-struct
+
 struct ServerClient
 {
 	unsigned int id;
@@ -29,24 +35,44 @@ struct Packet
 		buffer.reserve(255);
 	}
 
-	void serialize(std::string string)
+	void serialize(void* data, size_t size)
 	{
 		//grab the old size
 		auto old_size = buffer.size();
 		//resize the vector so we know we have enough space to append more bits
-		buffer.resize(old_size + string.size());
-		//copy the string data to the end of the buffer at the position before it was resized
-		memcpy(buffer.data() + old_size, string.data(), string.size());
+		buffer.resize(old_size + size);
+		//append the data, at the position before in the vector before it was resized
+		memcpy(buffer.data() + old_size, data, size);
 	}
 
-	void serialize(int i)
+	void serialize(std::string src)
 	{
-		//grab the old size
-		auto old_size = buffer.size();
-		//resize the vector so we know we have enough space to append more bits
-		buffer.resize(old_size + sizeof(i));
-		//grab the pointer to i, and the size of it, so it will grab the data between those using pointer arithmetic. smiley face.
-		memcpy(buffer.data() + old_size, &i, sizeof(i));
+		serialize(src.data(), src.size());
+		serialize(src.size());
+	}
+
+	void serialize(int32_t src)
+	{
+		serialize(&src, sizeof(src));
+	}
+
+	void deserialize(void* destination, size_t size)
+	{
+		memcpy(destination, buffer.data() + buffer.size() - size, size);
+		buffer.resize(buffer.size() - size);
+	}
+
+	void deserialize(int32_t& destination)
+	{
+		deserialize(&destination, sizeof(destination));
+	}
+
+	void deserialize(std::string& destination)
+	{
+		int size;
+		deserialize(size);
+		destination.resize(size);
+		deserialize(destination.data(), size);
 	}
 
 	HashedID id;

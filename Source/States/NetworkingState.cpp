@@ -12,19 +12,33 @@ NetworkingState::NetworkingState(GameData* game_data)
 	p.serialize("Hello ");
 	//doesn't get packed to char-sized int
 	//results in 4 bytes packed, 1 valid, 3 null
-	p.serialize(int('4'));
-	p.serialize(int('2'));
+	p.serialize(4);
+	p.serialize(2);
 	p.serialize(" World :)");
-	char* data = (char*)p.buffer.data();
+	/*char* data = (char*)p.buffer.data();
 	int size = p.buffer.size();
 	for (int i = 0; i < size; ++i)
 	{
 		std::cout << data[i];
-	}
+	}*/
+
+
+	//todo: figure out ordering, should be fifo, not filo
+	std::string str;
+	p.deserialize(str);
+	std::cout << str;
+	int stuff;
+	p.deserialize(stuff);
+	std::cout << stuff;
+	p.deserialize(stuff);
+	std::cout << stuff;
+	p.deserialize(str);
+	std::cout << str << "\n";
 
 	std::cout << "\n Now for ints\n";
 	Packet p2;
-	p2.serialize(20180220); //the data, for funs.
+	int wow = ('.' << 24) | ('y' << 16) | ('e' << 8) | 'h';
+	p2.serialize(wow); //the data, for funs.
 
 	std::cout << "Here is the raw value of the int as ASCII\n";
 	char* data2 = (char*)p2.buffer.data();
@@ -36,10 +50,12 @@ NetworkingState::NetworkingState(GameData* game_data)
 	std::cout << "\nAnd here is the int value memcpy'd\n";
 
 	int destination;
-	memcpy(&destination, p2.buffer.data(), p2.buffer.size());
+	//memcpy(&destination, p2.buffer.data(), p2.buffer.size());
+	p2.deserialize(destination);
 	std::cout << destination << "\n";
 
 	std::cout << "\n";
+
 	enetpp::global_state::get().initialize();
 	int input;
 	std::cout << "server is 0, client is 1: ";
