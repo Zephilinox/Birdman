@@ -102,6 +102,7 @@ void NetworkingState::updateServer()
 		{
 			server.send_packet_to(client->id, 0, msg.buffer.data(), msg.buffer.size(), ENET_PACKET_FLAG_RELIABLE);
 			server.send_packet_to(client->id, 0, updateEntity.buffer.data(), updateEntity.buffer.size(), ENET_PACKET_FLAG_RELIABLE);
+			std::cout << "main thread: " << std::this_thread::get_id() << "\n";
 		}
 	}
 
@@ -118,7 +119,7 @@ void NetworkingState::updateServer()
 			std::cout << data[i];
 		}
 
-		std::cout << "\n";
+		std::cout << "data thread: " << std::this_thread::get_id() << "\n";
 	};
 
 	server.consume_events(on_client_connected, on_client_disconnected, on_client_data_received);
@@ -131,6 +132,7 @@ void NetworkingState::updateClient()
 		t.restart();
 		std::string data = std::to_string(t2.getElapsedTime());
 		client.send_packet(0, (enet_uint8*)(data.c_str()), data.size(), ENET_PACKET_FLAG_RELIABLE);
+		std::cout << "main thread: " << std::this_thread::get_id() << "\n";
 	}
 
 	auto on_connected = [&]() {};
@@ -148,7 +150,8 @@ void NetworkingState::updateClient()
 				<< " (" << entReceived.name << ") "
 				<< " at position "
 				<< entReceived.x << ", " << entReceived.y
-				<< " life status = " << entReceived.alive << "\n";
+				<< " life status = " << entReceived.alive
+				<< " thread: " << std::this_thread::get_id() << "\n";
 		}
 		else
 		{

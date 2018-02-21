@@ -141,6 +141,7 @@
     <ClInclude Include="..\..\Source\Architecture\Messages\FunctionMessage.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Messages\Message.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Messages\MessageQueue.hpp" />
+    <ClInclude Include="..\..\Source\Architecture\Networking\Packet.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Signals\Connection.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Signals\Disconnector.hpp" />
     <ClInclude Include="..\..\Source\Architecture\Signals\Signal.hpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="..\..\Source\Architecture\Managers\InputManager.cpp" />
     <ClCompile Include="..\..\Source\Architecture\Managers\StateManager.cpp" />
     <ClCompile Include="..\..\Source\Architecture\Messages\MessageQueue.cpp" />
+    <ClCompile Include="..\..\Source\Architecture\Networking\Packet.cpp" />
     <ClCompile Include="..\..\Source\Architecture\Signals\Connection.cpp" />
     <ClCompile Include="..\..\Source\Architecture\Timer.cpp" />
     <ClCompile Include="..\..\Source\Architecture\UI\Button.cpp" />
