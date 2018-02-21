@@ -88,12 +88,12 @@ void NetworkingState::updateServer()
 	ent.alive = game_data->getRandomNumberGenerator()->getRandomInt(0, 1);
 
 	Packet updateEntity;
-	ent.serialize(updateEntity);
+	updateEntity << ent;
 	updateEntity.setID(hash("UpdateEntity"));
 
 	std::string data = "Hi";
 	Packet msg;
-	msg.serialize(data);
+	msg << data;
 
 	if (t.getElapsedTime() > 1)
 	{
@@ -142,7 +142,7 @@ void NetworkingState::updateClient()
 		if (p.getID() == hash("UpdateEntity"))
 		{
 			Entity entReceived;
-			entReceived.deserialize(p);
+			p >> entReceived;
 			std::cout << "Received PositionUpdate packet for entity "
 				<< entReceived.id
 				<< " (" << entReceived.name << ") "
@@ -153,7 +153,7 @@ void NetworkingState::updateClient()
 		else
 		{
 			std::string msg;
-			p.deserialize(msg);
+			p >> msg;
 			std::cout << "Message Received: " << msg << "\n";
 		}
 	};

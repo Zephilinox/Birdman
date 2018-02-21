@@ -11,6 +11,7 @@
 #include "../Architecture/States/BaseState.hpp"
 #include "../Architecture/Timer.hpp"
 #include "../Architecture/Messages/Message.hpp"
+
 class GameData;
 
 //https://stackoverflow.com/questions/17471717/c-static-cast-from-int-to-void-to-char-can-you-help-me-to-understand-this
@@ -66,25 +67,29 @@ struct Packet
 		memcpy(buffer.data() + old_size, data, size);
 	}
 
-	void serialize(std::string src)
+	Packet& operator<<(std::string src)
 	{
-		serialize(static_cast<int32_t>(src.size()));
+		*this << static_cast<int32_t>(src.size());
 		serialize(src.data(), src.size());
+		return *this;
 	}
 
-	void serialize(int32_t src)
+	Packet& operator<<(int32_t src)
 	{
 		serialize(&src, sizeof(src));
+		return *this;
 	}
 
-	void serialize(float src)
+	Packet& operator<<(float src)
 	{
 		serialize(&src, sizeof(src));
+		return *this;
 	}
 
-	void serialize(bool src)
+	Packet& operator<<(bool src)
 	{
 		serialize(&src, sizeof(src));
+		return *this;
 	}
 
 	void deserialize(void* destination, size_t size)
@@ -93,27 +98,31 @@ struct Packet
 		deserializePosition += size;
 	}
 
-	void deserialize(int32_t& destination)
+	Packet& operator>>(int32_t& destination)
 	{
 		deserialize(&destination, sizeof(destination));
+		return *this;
 	}
 
-	void deserialize(std::string& destination)
+	Packet& operator>>(std::string& destination)
 	{
 		int32_t size;
-		deserialize(size);
+		*this >> size;
 		destination.resize(size);
 		deserialize(destination.data(), size);
+		return *this;
 	}
 
-	void deserialize(float& destination)
+	Packet& operator>>(float& destination)
 	{
 		deserialize(&destination, sizeof(destination));
+		return *this;
 	}
 
-	void deserialize(bool& destination)
+	Packet& operator>>(bool& destination)
 	{
 		deserialize(&destination, sizeof(destination));
+		return *this;
 	}
 
 	std::vector<enet_uint8> buffer;
@@ -128,24 +137,38 @@ struct Entity
 	float y;
 	bool alive;
 
-	void serialize(Packet& p)
-	{
-		p.serialize(id);
-		p.serialize(name);
-		p.serialize(x);
-		p.serialize(y);
-		p.serialize(alive);
-	}
+	//Needed because we have private data
+	friend Packet& operator<<(Packet& p, const Entity& entity);
+	friend Packet& operator>>(Packet& p, Entity& entity);
 
-	void deserialize(Packet& p)
-	{
-		p.deserialize(id);
-		p.deserialize(name);
-		p.deserialize(x);
-		p.deserialize(y);
-		p.deserialize(alive);
-	}
+private:
+	int stuffThatNeedsSerialized;
 };
+
+//https://stackoverflow.com/questions/32232448/already-defined-error-with-operator-overloading
+inline
+Packet& operator <<(Packet& packet, const Entity& entity)
+{
+	return packet
+		<< entity.id
+		<< entity.name
+		<< entity.x
+		<< entity.y
+		<< entity.alive
+		<< entity.stuffThatNeedsSerialized;
+}
+
+inline
+Packet& operator >>(Packet& packet, Entity& entity)
+{
+	return packet
+		>> entity.id
+		>> entity.name
+		>> entity.x
+		>> entity.y
+		>> entity.alive
+		>> entity.stuffThatNeedsSerialized;
+}
 
 /**
 *  See BaseState for overriden functions
