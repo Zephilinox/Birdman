@@ -17,50 +17,6 @@
 
 class GameData;
 
-struct Entity
-{
-	int32_t id;
-	std::string name;
-	float x;
-	float y;
-	bool alive;
-
-	//Needed because we have private data
-	friend Packet& operator<<(Packet& p, const Entity& entity);
-	friend Packet& operator>>(Packet& p, Entity& entity);
-
-private:
-	int stuffThatNeedsSerialized;
-};
-
-//https://stackoverflow.com/questions/32232448/already-defined-error-with-operator-overloading
-inline
-Packet& operator <<(Packet& packet, const Entity& entity)
-{
-	return packet
-		<< entity.id
-		<< entity.name
-		<< entity.x
-		<< entity.y
-		<< entity.alive
-		<< entity.stuffThatNeedsSerialized;
-}
-
-inline
-Packet& operator >>(Packet& packet, Entity& entity)
-{
-	return packet
-		>> entity.id
-		>> entity.name
-		>> entity.x
-		>> entity.y
-		>> entity.alive
-		>> entity.stuffThatNeedsSerialized;
-}
-
-/**
-*  See BaseState for overriden functions
-*/
 class NetworkingState : public BaseState
 {
 public:
@@ -90,6 +46,9 @@ private:
 
 	//Server
 	AnimatedSprite serverPaddle;
+	AnimatedSprite serverBall;
+	Timer ballTimer;
+	bool ballMovingLeft = true;
 
 	//Client
 	AnimatedSprite clientPaddle;

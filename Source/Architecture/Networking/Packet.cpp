@@ -17,8 +17,10 @@ Packet::Packet(const enet_uint8* data, size_t size)
 
 void Packet::reset()
 {
-	deserializePosition = sizeof(HashedID);
 	buffer.clear();
+
+	deserializePosition = sizeof(HashedID);
+	buffer.resize(sizeof(HashedID));
 }
 
 void Packet::setID(HashedID id)

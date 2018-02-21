@@ -10,6 +10,7 @@ NetworkingState::NetworkingState(GameData* game_data)
 	, netman(game_data->getNetworkManager())
 	, serverPaddle(game_data->getRenderer())
 	, clientPaddle(game_data->getRenderer())
+	, serverBall(game_data->getRenderer())
 	, menu(game_data)
 {		
 	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 - 40, "SERVER", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
@@ -44,6 +45,10 @@ NetworkingState::NetworkingState(GameData* game_data)
 	clientPaddle.addFrame("Portraits/blabbering_npc", 1);
 	clientPaddle.xPos = 1100;
 	clientPaddle.yPos = 720 / 2;
+
+	serverBall.addFrame("UI/DialogueMarker", 1);
+	serverBall.xPos = 1280 / 2;
+	serverBall.yPos = 720 / 2;
 }
 
 NetworkingState::~NetworkingState()
@@ -55,16 +60,18 @@ void NetworkingState::update(const ASGE::GameTime& gt)
 {
 	if (netman->isInitialized())
 	{
-		serverPaddle.update(gt.delta_time.count() / 1000.0f);
-		clientPaddle.update(gt.delta_time.count() / 1000.0f);
+		float dt = gt.delta_time.count() / 1000.0f;
+		serverPaddle.update(dt);
+		clientPaddle.update(dt);
+		serverBall.update(dt);
 
 		if (netman->isServer())
 		{
-			updateServer(gt.delta_time.count() / 1000.0f);
+			updateServer(dt);
 		}
 		else if (netman->isConnected())
 		{
-			updateClient(gt.delta_time.count() / 1000.0f);
+			updateClient(dt);
 		}
 	}
 	else
@@ -79,6 +86,7 @@ void NetworkingState::render() const
 	{
 		game_data->getRenderer()->renderSprite(*serverPaddle.getCurrentFrameSprite());
 		game_data->getRenderer()->renderSprite(*clientPaddle.getCurrentFrameSprite());
+		game_data->getRenderer()->renderSprite(*serverBall.getCurrentFrameSprite());
 	}
 	else
 	{
@@ -105,9 +113,22 @@ void NetworkingState::updateServer(float dt)
 		serverPaddle.yPos += 1000 * dt;
 	}
 
+	if (ballTimer.getElapsedTime() > 1)
+	{
+		ballTimer.restart();
+		ballMovingLeft = !ballMovingLeft;
+	}
+
+	serverBall.xPos -= 200 * dt * (ballMovingLeft ? 1 : -1);
+
 	Packet p;
 	p.setID(hash("UpdatePosition"));
-	p << serverPaddle.xPos << serverPaddle.yPos;
+	p << 0 << serverPaddle.xPos << serverPaddle.yPos;
+	netman->sendPacket(0, &p);
+
+	p.reset();
+	p.setID(hash("UpdatePosition"));
+	p << 2 << serverBall.xPos << serverBall.yPos;
 	netman->sendPacket(0, &p);
 }
 
@@ -124,7 +145,7 @@ void NetworkingState::updateClient(float dt)
 
 	Packet p;
 	p.setID(hash("UpdatePosition"));
-	p << clientPaddle.xPos << clientPaddle.yPos;
+	p << 1 << clientPaddle.xPos << clientPaddle.yPos;
 	netman->sendPacket(0, &p);
 }
 
@@ -141,7 +162,22 @@ void NetworkingState::onClientSentPacket(ClientInfo* ci, Packet p)
 {
 	if (p.getID() == hash("UpdatePosition"))
 	{
-		p >> clientPaddle.xPos >> clientPaddle.yPos;
+		int objectID;
+		p >> objectID;
+
+		switch (objectID)
+		{
+			//serverPaddle
+			case 0:
+				break;
+			//clientPaddle
+			case 1:
+				p >> clientPaddle.xPos >> clientPaddle.yPos;
+				break;
+			//serverBall
+			case 2:
+				break;
+		}
 	}
 }
 
@@ -157,6 +193,22 @@ void NetworkingState::onServerSentPacket(Packet p)
 {
 	if (p.getID() == hash("UpdatePosition"))
 	{
-		p >> serverPaddle.xPos >> serverPaddle.yPos;
+		int objectID;
+		p >> objectID;
+
+		switch (objectID)
+		{
+			//serverPaddle
+			case 0:
+				p >> serverPaddle.xPos >> serverPaddle.yPos;
+				break;
+			//clientPaddle
+			case 1:
+				break;
+			//serverBall
+			case 2:
+				p >> serverBall.xPos >> serverBall.yPos;
+				break;
+		}
 	}
 }
