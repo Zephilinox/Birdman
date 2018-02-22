@@ -34,15 +34,15 @@ public:
 
 	//Connect to a non-member function/lambda/etc.
 	//Connecting to an invalid function, such as a nullptr, will throw an exception.
-	Connection connect(FunctionType function)
+	Connection connect(FunctionType&& function)
 	{
 		if (!function)
 		{
-			throw std::runtime_error("Signal::connect - Invalid function");
+			throw std::runtime_error("Invalid function");
 		}
 
 		slot_id_counter++;
-		slots.emplace_back(Connection(dc, slot_id_counter), function);
+		slots.emplace_back(Connection(dc, slot_id_counter), std::forward<FunctionType>(function));
 		return slots.back().connection;
 	}
 
@@ -52,12 +52,12 @@ public:
 	template <typename T>
 	Connection connect(T* instance, void (T::*function)(Args...))
 	{
-		auto wrapper = [=](Args... args)
+		auto wrapper = [=](Args&&... args)
 		{
-			(instance->*function)(args...);
+			(instance->*function)(std::forward<Args>(args)...);
 		};
 
-		return connect(wrapper);
+		return connect(std::forward<decltype(wrapper)>(wrapper));
 	}
 
 	//Connect to a const member function.
@@ -66,16 +66,16 @@ public:
 	template <typename T>
 	Connection connect(T* instance, void (T::*function)(Args...) const)
 	{
-		auto wrapper = [=](Args... args)
+		auto wrapper = [=](Args&&... args)
 		{
-			(instance->*function)(args...);
+			(instance->*function)(std::forward<Args>(args)...);
 		};
 
-		return connect(wrapper);
+		return connect(std::forward<decltype(wrapper)>(wrapper));
 	}
 
 	//True if disconnect was successful.
-	//False if the Connection is invalid or if no disconnection occured.
+	//False if the Connection is invalid or if no disconnection occurred.
 	//Resets the Connection passed in, so that it's no longer valid.
 	bool disconnect(Connection& connection)
 	{
@@ -86,7 +86,7 @@ public:
 
 		bool valid_disconnect = false;
 
-		//Can be replaced with the C++11 equivelant if required
+		//Can be replaced with the C++11 equivalent if required
 		//This is the only C++17 code used for Signals & Slots
 		//auto in lambda's is a C++14 feature
 		std::experimental::erase_if(slots, [&](const auto& slot)
@@ -117,10 +117,14 @@ public:
 private:
 	/*
 	Part 2 of type erasure :D
-	SignalDisconnector stores a raw pointer to signal, and signal stores a shared_ptr to the disconnector
-	This means that the raw pointer should always point to signal correctly, since signal only shares weak_ptrs of the
-	disconnector, not ref-counted shared_ptr's.
-	If the signal is destroyed, so is the SignalDisconnector, invalidating all weak_ptr's held in any Connections for the signal
+	SignalDisconnector stores a raw pointer to signal
+	signal stores a shared_ptr to the disconnector
+
+	This means that the raw pointer should always point to signal correctly
+	since signal only shares weak_ptrs of the disconnector, not ref-counted shared_ptr's.
+
+	If the signal is destroyed so is the SignalDisconnector
+	thus invalidating all weak_ptr's held in any Connections for the signal
 	*/
 	template <typename... Args>
 	class SignalDisconnector : public Disconnector
@@ -146,7 +150,8 @@ private:
 	//0 is invalid(like a nullptr), anything higher is fine.
 	unsigned slot_id_counter;
 	
-	//We own this, only share weak_ptrs so that connections know when this signal is destroyed
+	//We own this, only share weak_ptrs so that connections
+	//know when this signal is destroyed
 	std::shared_ptr<SignalDisconnector<Args...>> dc;
 	
 	//Store all the functions and connections

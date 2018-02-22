@@ -64,7 +64,9 @@ void BirdmanTheGame::update(const ASGE::GameTime& gt)
 	//Sleep if our FPS is too high so we avoid too much wasted CPU usage (2k+ fps)
 	if (5 - gt.delta_time.count() > 0)
 	{
-		std::this_thread::sleep_for(std::chrono::duration<double, std::milli>(5 - gt.delta_time.count()));
+		std::this_thread::sleep_for(
+			std::chrono::duration<double, std::milli>(5 - gt.delta_time.count())
+		);
 	}
 
 	game_data->getNetworkManager()->update();

@@ -2,10 +2,10 @@
 #include "Packet.hpp"
 
 Packet::Packet()
+	: buffer(100) //bytes reserved, most packets will be under this amount
 {
 	deserializePosition = sizeof(HashedID);
 	buffer.resize(sizeof(HashedID));
-	buffer.reserve(255);
 }
 
 Packet::Packet(const enet_uint8* data, size_t size)

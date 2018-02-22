@@ -24,10 +24,10 @@ constexpr HashedID hash(const char* input)
 class Message
 {
 public:
-	Message() = delete;
+	Message() = default;
 	virtual ~Message() noexcept = default;
 	
-	const HashedID id;
+	const HashedID id = ID;
 	static constexpr HashedID ID = hash("Message");
 
 protected:

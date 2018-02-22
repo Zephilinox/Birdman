@@ -6,7 +6,8 @@
 
 void MessageQueue::processMessages(Timer::nanoseconds_float max_processing_time)
 {
-	//Could optimise this more by having listeners choose which events they care about, thus less listeners being called back.
+	//todo: Optimise this more by having listeners choose which events they care about
+	//thus less listeners being called back.
 	timer.restart();
 
 	//Process all of the priority messages, no matter how long it takes.
@@ -20,7 +21,8 @@ void MessageQueue::processMessages(Timer::nanoseconds_float max_processing_time)
 
 	if (processedPriorityMessages > 0)
 	{
-		std::cout << "INFO:\t MessageQueue took " << std::fixed << std::setprecision(1) << std::setfill('0') <<
+		std::cout << "INFO:\t MessageQueue took " <<
+			std::fixed << std::setprecision(1) << std::setfill('0') <<
 			std::setw(3) << timer.getElapsedTime<Timer::milliseconds>() << "ms processing " <<
 			std::setw(4) << processedPriorityMessages << " priority messages.\n";
 	}
@@ -36,16 +38,17 @@ void MessageQueue::processMessages(Timer::nanoseconds_float max_processing_time)
 
 	if (timer.getChronoElapsedTime() > max_processing_time)
 	{
-		std::cout << "WARNING: MessageQueue took " << std::fixed << std::setprecision(1) << std::setfill('0') <<
+		std::cout << "WARNING: MessageQueue took " <<
+			std::fixed << std::setprecision(1) << std::setfill('0') <<
 			std::setw(3) << timer.getElapsedTime<Timer::milliseconds>() << "ms processing " <<
 			std::setw(4) << processedMessages + processedPriorityMessages << " messages. " <<
 			std::setw(4) << message_queue.size() << " remain\n";
 	}
 }
 
-Connection MessageQueue::addListener(FunctionType function)
+Connection MessageQueue::addListener(FunctionType&& function)
 {
-	return messenger.connect(function);
+	return messenger.connect(std::forward<FunctionType>(function));
 }
 
 bool MessageQueue::removeListener(Connection c)
