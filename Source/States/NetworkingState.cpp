@@ -104,6 +104,31 @@ void NetworkingState::onInactive()
 
 void NetworkingState::updateServer(float dt)
 {
+	//Simple AABB collision check
+	if (serverPaddle.xPos < serverBall.xPos + serverBall.getCurrentFrameSprite()->width() &&
+		serverPaddle.xPos + serverPaddle.getCurrentFrameSprite()->width() > serverBall.xPos &&
+		serverPaddle.yPos < serverBall.yPos + serverBall.getCurrentFrameSprite()->height() &&
+		serverPaddle.yPos + serverPaddle.getCurrentFrameSprite()->height() > serverBall.yPos)
+	{
+		ballMovingLeft = false;
+		ballDirY = game_data->getRandomNumberGenerator()->getRandomFloat(-0.8, 0.8);
+	}
+
+	if (clientPaddle.xPos < serverBall.xPos + serverBall.getCurrentFrameSprite()->width() &&
+		clientPaddle.xPos + clientPaddle.getCurrentFrameSprite()->width() > serverBall.xPos &&
+		clientPaddle.yPos < serverBall.yPos + serverBall.getCurrentFrameSprite()->height() &&
+		clientPaddle.yPos + clientPaddle.getCurrentFrameSprite()->height() > serverBall.yPos)
+	{
+		ballMovingLeft = true;
+		ballDirY = game_data->getRandomNumberGenerator()->getRandomFloat(-0.8, 0.8);
+	}
+
+	if (serverBall.yPos < 0 ||
+		serverBall.yPos + serverBall.getCurrentFrameSprite()->width() > game_data->getWindowHeight())
+	{
+		ballDirY = -ballDirY;
+	}
+
 	if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_W))
 	{
 		serverPaddle.yPos -= 1000 * dt;
@@ -113,13 +138,14 @@ void NetworkingState::updateServer(float dt)
 		serverPaddle.yPos += 1000 * dt;
 	}
 
-	if (ballTimer.getElapsedTime() > 1)
+	if (serverBall.yPos + serverBall.getCurrentFrameSprite()->width() < 0 ||
+		serverBall.yPos > game_data->getWindowWidth())
 	{
-		ballTimer.restart();
-		ballMovingLeft = !ballMovingLeft;
+		serverBall.xPos = 1280 / 2;
 	}
 
-	serverBall.xPos -= 200 * dt * (ballMovingLeft ? 1 : -1);
+	serverBall.xPos += 200 * dt * (ballMovingLeft ? -1 : 1);
+	serverBall.yPos += 200 * dt * ballDirY;
 
 	Packet p;
 	p.setID(hash("UpdatePosition"));

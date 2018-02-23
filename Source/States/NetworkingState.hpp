@@ -47,8 +47,8 @@ private:
 	//Server
 	AnimatedSprite serverPaddle;
 	AnimatedSprite serverBall;
-	Timer ballTimer;
 	bool ballMovingLeft = true;
+	float ballDirY;
 
 	//Client
 	AnimatedSprite clientPaddle;
