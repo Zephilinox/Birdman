@@ -31,16 +31,18 @@ struct Packet
 	HashedID getID();
 
 	void serialize(void* data, size_t size);
-	Packet& operator<<(std::string src);
-	Packet& operator<<(int32_t src);
-	Packet& operator<<(float src);
-	Packet& operator<<(bool src);
+	Packet& operator <<(std::string src);
+	Packet& operator <<(int32_t src);
+	Packet& operator <<(uint32_t src);
+	Packet& operator <<(float src);
+	Packet& operator <<(bool src);
 
 	void deserialize(void* destination, size_t size);
-	Packet& operator>>(int32_t& destination);
-	Packet& operator>>(std::string& destination);
-	Packet& operator>>(float& destination);
-	Packet& operator>>(bool& destination);
+	Packet& operator >>(int32_t& destination);
+	Packet& operator >>(uint32_t& destination);
+	Packet& operator >>(std::string& destination);
+	Packet& operator >>(float& destination);
+	Packet& operator >>(bool& destination);
 
 	std::vector<enet_uint8> buffer;
 	size_t deserializePosition = 0;

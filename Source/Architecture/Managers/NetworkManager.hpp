@@ -37,24 +37,22 @@ public:
 	void sendPacket(enet_uint8 channel_id, Packet* p, enet_uint32 flags, std::function<bool(const ClientInfo& client)> predicate);
 
 	bool isServer();
-	bool isConnected();
 	bool isInitialized();
 
 	//Server
 	Signal<ClientInfo*> client_connected;
 	Signal<uint32_t> client_disconnected;
-	Signal<ClientInfo*, Packet> client_sent_packet;
+	Signal<const enet_uint8, ClientInfo*, Packet> client_sent_packet;
+	enetpp::server<ClientInfo> server;
+	uint32_t next_uid = 1;
 
 	//Client
 	Signal<> connected;
 	Signal<> disconnected;
-	Signal<Packet> server_sent_packet;
+	Signal<const enet_uint8, Packet> server_sent_packet;
 
-	//Server - todo: create abstraction for this shit
-	enetpp::server<ClientInfo> server;
-	uint32_t next_uid = 0;
-
-	//Client
+	bool isConnected();
+	uint32_t clientID = 0;
 	enetpp::client client;
 
 private:
@@ -64,4 +62,5 @@ private:
 	GameData* game_data;
 	bool initialized = false;
 	bool hostingServer;
+	bool clientConnectedToServer = false;
 };

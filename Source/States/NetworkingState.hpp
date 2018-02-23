@@ -17,6 +17,53 @@
 
 class GameData;
 
+class Entity
+{
+public:
+	virtual void update(float dt) = 0;
+	virtual void render(ASGE::Renderer* renderer) const = 0;
+
+	uint32_t networkID;
+	uint32_t ownerID;
+	HashedID type;
+};
+
+class Paddle : public Entity
+{
+public:
+	Paddle(GameData* game_data)
+		: sprite(game_data->getRenderer())
+		, game_data(game_data)
+	{
+		type = hash("Paddle");
+	}
+
+	void update(float dt) override final
+	{
+		sprite.update(dt);
+
+		if (ownerID == game_data->getNetworkManager()->clientID)
+		{
+			if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_W))
+			{
+				sprite.yPos -= 1000 * dt;
+			}
+			else if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_S))
+			{
+				sprite.yPos += 1000 * dt;
+			}
+		}
+	}
+
+	void render(ASGE::Renderer* renderer) const override final
+	{
+		renderer->renderSprite(*sprite.getCurrentFrameSprite());
+	}
+
+	AnimatedSprite sprite;
+	GameData* game_data;
+};
+
 class NetworkingState : public BaseState
 {
 public:
@@ -33,23 +80,27 @@ public:
 	//Server
 	void onClientConnected(ClientInfo* ci);
 	void onClientDisconnected(uint32_t client_id);
-	void onClientSentPacket(ClientInfo* ci, Packet p);
+	void onClientSentPacket(const enet_uint8 channel_id, ClientInfo* ci, Packet p);
 
 	//Client
 	void onConnected();
 	void onDisconnected();
-	void onServerSentPacket(Packet p);
+	void onServerSentPacket(const enet_uint8 channel_id, Packet p);
 
 private:
 	NetworkManager* netman;
 	Menu menu;
 
 	//Server
-	AnimatedSprite serverPaddle;
+	Paddle* serverPaddle;
 	AnimatedSprite serverBall;
+
+	//Client
+	Paddle* clientPaddle;
+
+	//both
 	bool ballMovingLeft = true;
 	float ballDirY;
 
-	//Client
-	AnimatedSprite clientPaddle;
+	std::vector<std::unique_ptr<Entity>> entities;
 };

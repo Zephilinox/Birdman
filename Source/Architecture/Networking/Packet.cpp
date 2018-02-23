@@ -46,26 +46,32 @@ void Packet::serialize(void* data, size_t size)
 	memcpy(buffer.data() + old_size, data, size);
 }
 
-Packet& Packet::operator<<(std::string src)
+Packet& Packet::operator <<(std::string src)
 {
 	*this << static_cast<int32_t>(src.size());
 	serialize(src.data(), src.size());
 	return *this;
 }
 
-Packet& Packet::operator<<(int32_t src)
+Packet& Packet::operator <<(int32_t src)
 {
 	serialize(&src, sizeof(src));
 	return *this;
 }
 
-Packet& Packet::operator<<(float src)
+Packet& Packet::operator <<(uint32_t src)
 {
 	serialize(&src, sizeof(src));
 	return *this;
 }
 
-Packet& Packet::operator<<(bool src)
+Packet& Packet::operator <<(float src)
+{
+	serialize(&src, sizeof(src));
+	return *this;
+}
+
+Packet& Packet::operator <<(bool src)
 {
 	serialize(&src, sizeof(src));
 	return *this;
@@ -77,13 +83,19 @@ void Packet::deserialize(void* destination, size_t size)
 	deserializePosition += size;
 }
 
-Packet& Packet::operator>>(int32_t& destination)
+Packet& Packet::operator >>(int32_t& destination)
 {
 	deserialize(&destination, sizeof(destination));
 	return *this;
 }
 
-Packet& Packet::operator>>(std::string& destination)
+Packet& Packet::operator >>(uint32_t& destination)
+{
+	deserialize(&destination, sizeof(destination));
+	return *this;
+}
+
+Packet& Packet::operator >>(std::string& destination)
 {
 	int32_t size;
 	*this >> size;
@@ -92,13 +104,13 @@ Packet& Packet::operator>>(std::string& destination)
 	return *this;
 }
 
-Packet& Packet::operator>>(float& destination)
+Packet& Packet::operator >>(float& destination)
 {
 	deserialize(&destination, sizeof(destination));
 	return *this;
 }
 
-Packet& Packet::operator>>(bool& destination)
+Packet& Packet::operator >>(bool& destination)
 {
 	deserialize(&destination, sizeof(destination));
 	return *this;

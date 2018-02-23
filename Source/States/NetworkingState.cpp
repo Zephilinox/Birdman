@@ -8,11 +8,9 @@
 NetworkingState::NetworkingState(GameData* game_data)
 	: BaseState(game_data)
 	, netman(game_data->getNetworkManager())
-	, serverPaddle(game_data->getRenderer())
-	, clientPaddle(game_data->getRenderer())
 	, serverBall(game_data->getRenderer())
 	, menu(game_data)
-{		
+{	
 	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 - 40, "SERVER", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 40, "CLIENT", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 120, "BACK", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
@@ -38,13 +36,22 @@ NetworkingState::NetworkingState(GameData* game_data)
 		game_data->getStateManager()->pop();
 	});
 
-	serverPaddle.addFrame("Portraits/blabbering_npc", 1);
-	serverPaddle.xPos = 60;
-	serverPaddle.yPos = 720 / 2;
+	entities.emplace_back(std::make_unique<Paddle>(game_data));
+	entities.emplace_back(std::make_unique<Paddle>(game_data));
+	serverPaddle = static_cast<Paddle*>(entities[0].get());
+	clientPaddle = static_cast<Paddle*>(entities[1].get());
 
-	clientPaddle.addFrame("Portraits/blabbering_npc", 1);
-	clientPaddle.xPos = 1100;
-	clientPaddle.yPos = 720 / 2;
+	serverPaddle->networkID = 0;
+	serverPaddle->ownerID = 0;
+	serverPaddle->sprite.addFrame("Portraits/blabbering_npc", 1);
+	serverPaddle->sprite.xPos = 60;
+	serverPaddle->sprite.yPos = 720 / 2;
+
+	clientPaddle->networkID = 1;
+	clientPaddle->ownerID = 1;
+	clientPaddle->sprite.addFrame("Portraits/blabbering_npc", 1);
+	clientPaddle->sprite.xPos = 1100;
+	clientPaddle->sprite.yPos = 720 / 2;
 
 	serverBall.addFrame("UI/DialogueMarker", 1);
 	serverBall.xPos = 1280 / 2;
@@ -61,8 +68,12 @@ void NetworkingState::update(const ASGE::GameTime& gt)
 	if (netman->isInitialized())
 	{
 		float dt = gt.delta_time.count() / 1000.0f;
-		serverPaddle.update(dt);
-		clientPaddle.update(dt);
+
+		for (auto& ent : entities)
+		{
+			ent->update(dt);
+		}
+
 		serverBall.update(dt);
 
 		if (netman->isServer())
@@ -84,8 +95,23 @@ void NetworkingState::render() const
 {
 	if (netman->isInitialized())
 	{
-		game_data->getRenderer()->renderSprite(*serverPaddle.getCurrentFrameSprite());
-		game_data->getRenderer()->renderSprite(*clientPaddle.getCurrentFrameSprite());
+		if (netman->isServer())
+		{
+			serverPaddle->render(game_data->getRenderer());
+			if (!netman->server.get_connected_clients().empty())
+			{
+				clientPaddle->render(game_data->getRenderer());
+			}
+		}
+		else
+		{
+			clientPaddle->render(game_data->getRenderer());
+			if (netman->isConnected())
+			{
+				serverPaddle->render(game_data->getRenderer());
+			}
+		}
+
 		game_data->getRenderer()->renderSprite(*serverBall.getCurrentFrameSprite());
 	}
 	else
@@ -105,19 +131,19 @@ void NetworkingState::onInactive()
 void NetworkingState::updateServer(float dt)
 {
 	//Simple AABB collision check
-	if (serverPaddle.xPos < serverBall.xPos + serverBall.getCurrentFrameSprite()->width() &&
-		serverPaddle.xPos + serverPaddle.getCurrentFrameSprite()->width() > serverBall.xPos &&
-		serverPaddle.yPos < serverBall.yPos + serverBall.getCurrentFrameSprite()->height() &&
-		serverPaddle.yPos + serverPaddle.getCurrentFrameSprite()->height() > serverBall.yPos)
+	if (serverPaddle->sprite.xPos < serverBall.xPos + serverBall.getCurrentFrameSprite()->width() &&
+		serverPaddle->sprite.xPos + serverPaddle->sprite.getCurrentFrameSprite()->width() > serverBall.xPos &&
+		serverPaddle->sprite.yPos < serverBall.yPos + serverBall.getCurrentFrameSprite()->height() &&
+		serverPaddle->sprite.yPos + serverPaddle->sprite.getCurrentFrameSprite()->height() > serverBall.yPos)
 	{
 		ballMovingLeft = false;
 		ballDirY = game_data->getRandomNumberGenerator()->getRandomFloat(-0.8, 0.8);
 	}
 
-	if (clientPaddle.xPos < serverBall.xPos + serverBall.getCurrentFrameSprite()->width() &&
-		clientPaddle.xPos + clientPaddle.getCurrentFrameSprite()->width() > serverBall.xPos &&
-		clientPaddle.yPos < serverBall.yPos + serverBall.getCurrentFrameSprite()->height() &&
-		clientPaddle.yPos + clientPaddle.getCurrentFrameSprite()->height() > serverBall.yPos)
+	if (clientPaddle->sprite.xPos < serverBall.xPos + serverBall.getCurrentFrameSprite()->width() &&
+		clientPaddle->sprite.xPos + clientPaddle->sprite.getCurrentFrameSprite()->width() > serverBall.xPos &&
+		clientPaddle->sprite.yPos < serverBall.yPos + serverBall.getCurrentFrameSprite()->height() &&
+		clientPaddle->sprite.yPos + clientPaddle->sprite.getCurrentFrameSprite()->height() > serverBall.yPos)
 	{
 		ballMovingLeft = true;
 		ballDirY = game_data->getRandomNumberGenerator()->getRandomFloat(-0.8, 0.8);
@@ -127,15 +153,6 @@ void NetworkingState::updateServer(float dt)
 		serverBall.yPos + serverBall.getCurrentFrameSprite()->width() > game_data->getWindowHeight())
 	{
 		ballDirY = -ballDirY;
-	}
-
-	if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_W))
-	{
-		serverPaddle.yPos -= 1000 * dt;
-	}
-	else if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_S))
-	{
-		serverPaddle.yPos += 1000 * dt;
 	}
 
 	if (serverBall.yPos + serverBall.getCurrentFrameSprite()->width() < 0 ||
@@ -148,31 +165,32 @@ void NetworkingState::updateServer(float dt)
 	serverBall.yPos += 200 * dt * ballDirY;
 
 	Packet p;
-	p.setID(hash("UpdatePosition"));
-	p << 0 << serverPaddle.xPos << serverPaddle.yPos;
+	p.setID(hash("Entity"));
+	p << serverPaddle->networkID
+		<< serverPaddle->ownerID
+		<< serverPaddle->type
+		<< serverPaddle->sprite.xPos
+		<< serverPaddle->sprite.yPos;
 	netman->sendPacket(0, &p);
 
 	p.reset();
-	p.setID(hash("UpdatePosition"));
-	p << 2 << serverBall.xPos << serverBall.yPos;
+	p.setID(hash("UpdateBall"));
+	p << serverBall.xPos << serverBall.yPos;
 	netman->sendPacket(0, &p);
+	netman->sendPacket(1, &p);
 }
 
 void NetworkingState::updateClient(float dt)
 {
-	if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_W))
-	{
-		clientPaddle.yPos -= 1000 * dt;
-	}
-	else if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_S))
-	{
-		clientPaddle.yPos += 1000 * dt;
-	}
-
 	Packet p;
-	p.setID(hash("UpdatePosition"));
-	p << 1 << clientPaddle.xPos << clientPaddle.yPos;
+	p.setID(hash("Entity"));
+	p << clientPaddle->networkID
+		<< clientPaddle->ownerID
+		<< clientPaddle->type
+		<< clientPaddle->sprite.xPos
+		<< clientPaddle->sprite.yPos;
 	netman->sendPacket(0, &p);
+	netman->sendPacket(1, &p);
 }
 
 void NetworkingState::onClientConnected(ClientInfo* ci)
@@ -184,25 +202,27 @@ void NetworkingState::onClientDisconnected(uint32_t client_id)
 {
 }
 
-void NetworkingState::onClientSentPacket(ClientInfo* ci, Packet p)
+void NetworkingState::onClientSentPacket(const enet_uint8 channel_id, ClientInfo* ci, Packet p)
 {
-	if (p.getID() == hash("UpdatePosition"))
+	if (p.getID() == hash("Entity"))
 	{
-		int objectID;
-		p >> objectID;
+		uint32_t networkID;
+		uint32_t ownerID;
+		HashedID type;
+		p >> networkID >> ownerID >> type;
 
-		switch (objectID)
+		if (entities[networkID]->ownerID == ownerID &&
+			ownerID == ci->id)
 		{
-			//serverPaddle
-			case 0:
-				break;
-			//clientPaddle
-			case 1:
-				p >> clientPaddle.xPos >> clientPaddle.yPos;
-				break;
-			//serverBall
-			case 2:
-				break;
+			if (type == hash("Paddle"))
+			{
+				Paddle* paddle = static_cast<Paddle*>(entities[networkID].get());
+				p >> paddle->sprite.xPos >> paddle->sprite.yPos;
+			}
+		}
+		else
+		{
+			assert(true);
 		}
 	}
 }
@@ -215,26 +235,27 @@ void NetworkingState::onDisconnected()
 {
 }
 
-void NetworkingState::onServerSentPacket(Packet p)
+void NetworkingState::onServerSentPacket(const enet_uint8 channel_id, Packet p)
 {
-	if (p.getID() == hash("UpdatePosition"))
+	if (p.getID() == hash("Entity"))
 	{
-		int objectID;
-		p >> objectID;
+		uint32_t networkID;
+		uint32_t ownerID;
+		HashedID type;
+		p >> networkID >> ownerID >> type;
 
-		switch (objectID)
+		//todo client doesn't care who owns what?
+		if (entities[networkID]->ownerID == ownerID)
 		{
-			//serverPaddle
-			case 0:
-				p >> serverPaddle.xPos >> serverPaddle.yPos;
-				break;
-			//clientPaddle
-			case 1:
-				break;
-			//serverBall
-			case 2:
-				p >> serverBall.xPos >> serverBall.yPos;
-				break;
+			if (type == hash("Paddle"))
+			{
+				Paddle* paddle = static_cast<Paddle*>(entities[networkID].get());
+				p >> paddle->sprite.xPos >> paddle->sprite.yPos;
+			}
 		}
+	}
+	else if (p.getID() == hash("UpdateBall"))
+	{
+		p >> serverBall.xPos >> serverBall.yPos;
 	}
 }

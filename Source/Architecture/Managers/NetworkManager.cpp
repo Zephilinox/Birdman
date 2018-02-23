@@ -25,18 +25,24 @@ void NetworkManager::initialize(bool hostServer)
 			std::cout << "Client " << next_uid << " initialized with IP " << ip << "\n";
 			client.id = next_uid;
 			next_uid++;
+			
+			//Tell the client what its ID is
+			Packet p;
+			p.setID(hash("ClientID"));
+			p << client.id;
+			sendPacket(client.id, 0, &p);
 		};
 
 		server.start_listening(enetpp::server_listen_params<ClientInfo>()
 			.set_max_client_count(2)
-			.set_channel_count(1)
+			.set_channel_count(2)
 			.set_listen_port(11111)
 			.set_initialize_client_function(client_init));
 	}
 	else
 	{
 		client.connect(enetpp::client_connect_params()
-			.set_channel_count(1)
+			.set_channel_count(2)
 			.set_server_host_name_and_port("localhost", 11111));
 	}
 }
@@ -101,7 +107,7 @@ bool NetworkManager::isServer()
 
 bool NetworkManager::isConnected()
 {
-	return client.is_connecting_or_connected();
+	return client.is_connecting_or_connected() && clientConnectedToServer;
 }
 
 bool NetworkManager::isInitialized()
@@ -122,9 +128,9 @@ void NetworkManager::updateServer()
 		client_disconnected.emit(client_uid);
 	};
 
-	auto on_client_data_received = [&](ClientInfo& client, const enet_uint8* data, size_t data_size)
+	auto on_client_data_received = [&](const enet_uint8 channel_id, ClientInfo& client, const enet_uint8* data, size_t data_size)
 	{
-		client_sent_packet.emit(&client, { data, data_size });
+		client_sent_packet.emit(std::move(channel_id), &client, {data, data_size});
 	};
 
 	server.consume_events(on_client_connected, on_client_disconnected, on_client_data_received);
@@ -134,17 +140,28 @@ void NetworkManager::updateClient()
 {
 	auto on_connected = [&]()
 	{
+		clientConnectedToServer = true;
 		connected.emit();
 	};
 
 	auto on_disconnected = [&]()
 	{
+		clientConnectedToServer = false;
 		disconnected.emit();
 	};
 
-	auto on_data_received = [&](const enet_uint8* data, size_t data_size)
+	auto on_data_received = [&](const enet_uint8 channel_id, const enet_uint8* data, size_t data_size)
 	{
-		server_sent_packet.emit({data, data_size});
+		Packet p(data, data_size);
+		if (p.getID() != hash("ClientID"))
+		{
+			server_sent_packet.emit(std::move(channel_id), std::move(p));
+		}
+		else
+		{
+			p >> clientID;
+			std::cout << "ClientID " << clientID << " received\n";
+		}
 	};
 
 	client.consume_events(on_connected, on_disconnected, on_data_received);
