@@ -61,6 +61,6 @@ private:
 
 	GameData* game_data;
 	bool initialized = false;
-	bool hostingServer;
-	bool clientConnectedToServer = false;
+	bool hosting_server;
+	bool client_connected_to_server = false;
 };

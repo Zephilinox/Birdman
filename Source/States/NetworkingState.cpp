@@ -5,6 +5,166 @@
 #include "../States/MenuState.hpp"
 #include "../States/FadeOutState.hpp"
 
+struct EntityInfo
+{
+	uint32_t networkID;
+	uint32_t ownerID;
+	HashedID type;
+};
+
+Packet& operator <<(Packet& p, EntityInfo* e)
+{
+	p << e->networkID
+		<< e->ownerID
+		<< e->type;
+	return p;
+}
+
+Packet& operator >>(Packet& p, EntityInfo* e)
+{
+	p >> e->networkID
+		>> e->ownerID
+		>> e->type;
+	return p;
+}
+
+class Entity
+{
+public:
+	virtual void update(float dt) = 0;
+	virtual void render(ASGE::Renderer* renderer) const = 0;
+	virtual void receivedPacket(uint32_t channelID, Packet* p) = 0;
+
+	EntityInfo entity_info;
+};
+
+Packet& operator <<(Packet& p, Entity* e)
+{
+	p << &e->entity_info;
+	return p;
+}
+
+Packet& operator >>(Packet& p, Entity* e)
+{
+	p >> &e->entity_info;
+	return p;
+}
+
+class Paddle : public Entity
+{
+public:
+	Paddle(GameData* game_data)
+		: sprite(game_data->getRenderer())
+		, game_data(game_data)
+	{
+		entity_info.type = hash("Paddle");
+	}
+
+	void update(float dt) override final
+	{
+		sprite.update(dt);
+
+		if (entity_info.ownerID == game_data->getNetworkManager()->clientID)
+		{
+			if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_W))
+			{
+				sprite.yPos -= 1000 * dt;
+			}
+			else if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_S))
+			{
+				sprite.yPos += 1000 * dt;
+			}
+
+			Packet p;
+			p.setID(hash("Entity"));
+			p << &entity_info
+				<< sprite.xPos
+				<< sprite.yPos;
+			game_data->getNetworkManager()->sendPacket(0, &p);
+		}
+	}
+
+	void render(ASGE::Renderer* renderer) const override final
+	{
+		renderer->renderSprite(*sprite.getCurrentFrameSprite());
+	}
+
+	void receivedPacket(uint32_t channel_id, Packet* p) override final
+	{
+		*p >> sprite.xPos >> sprite.yPos;
+	}
+
+	AnimatedSprite sprite;
+	GameData* game_data;
+};
+
+class Ball : public Entity
+{
+public:
+	Ball(GameData* game_data)
+		: sprite(game_data->getRenderer())
+		, game_data(game_data)
+	{
+		entity_info.type = hash("Ball");
+	}
+
+	void update(float dt) override final
+	{
+		sprite.update(dt);
+
+		if (game_data->getNetworkManager()->isServer())
+		{
+			if (sprite.yPos < 0)
+			{
+				dirY = -dirY;
+				sprite.yPos = 0;
+			}
+
+			if (sprite.yPos + sprite.getCurrentFrameSprite()->height() > game_data->getWindowHeight())
+			{
+				dirY = -dirY;
+				sprite.yPos = game_data->getWindowHeight() - sprite.getCurrentFrameSprite()->height();
+			}
+
+			if (sprite.xPos + sprite.getCurrentFrameSprite()->width() < 0 ||
+				sprite.xPos > game_data->getWindowWidth())
+			{
+				sprite.xPos = 1280 / 2;
+				dirY = 0;
+				movingLeft = game_data->getRandomNumberGenerator()->getRandomInt(0, 1);
+			}
+
+			sprite.xPos += 200 * dt * (movingLeft ? -1 : 1);
+			sprite.yPos += 200 * dt * dirY;
+		}
+
+		if (entity_info.ownerID == game_data->getNetworkManager()->clientID)
+		{
+			Packet p;
+			p.setID(hash("Entity"));
+			p << &entity_info
+				<< sprite.xPos
+				<< sprite.yPos;
+			game_data->getNetworkManager()->sendPacket(0, &p);
+		}
+	}
+
+	void render(ASGE::Renderer* renderer) const override final
+	{
+		renderer->renderSprite(*sprite.getCurrentFrameSprite());
+	}
+
+	void receivedPacket(uint32_t channelID, Packet* p) override final
+	{
+		*p >> sprite.xPos >> sprite.yPos;
+	}
+
+	AnimatedSprite sprite;
+	GameData* game_data;
+	bool movingLeft = false;
+	float dirY;
+};
+
 NetworkingState::NetworkingState(GameData* game_data)
 	: BaseState(game_data)
 	, netman(game_data->getNetworkManager())
@@ -135,35 +295,14 @@ void NetworkingState::updateServer(float dt)
 		serverBall->movingLeft = true;
 		serverBall->dirY = game_data->getRandomNumberGenerator()->getRandomFloat(-0.8, 0.8);
 	}
-	
-	Packet p;
-	p.setID(hash("Entity"));
-	p << &serverPaddle->entity_info
-		<< serverPaddle->sprite.xPos
-		<< serverPaddle->sprite.yPos;
-	netman->sendPacket(0, &p);
-
-	p.reset();
-	p.setID(hash("Entity"));
-	p << &serverBall->entity_info
-		<< serverBall->sprite.xPos
-		<< serverBall->sprite.yPos;
-	netman->sendPacket(0, &p);
 }
 
 void NetworkingState::updateClient(float dt)
 {
-	Packet p;
-	p.setID(hash("Entity"));
-	p << &clientPaddle->entity_info
-		<< clientPaddle->sprite.xPos
-		<< clientPaddle->sprite.yPos;
-	netman->sendPacket(0, &p);
 }
 
 void NetworkingState::onClientConnected(ClientInfo* ci)
 {
-	std::cout << "client " << ci->id << " connected \n";
 	clientPaddle->entity_info.ownerID = ci->id;
 }
 
@@ -173,34 +312,7 @@ void NetworkingState::onClientDisconnected(uint32_t client_id)
 
 void NetworkingState::onClientSentPacket(const enet_uint8 channel_id, ClientInfo* ci, Packet p)
 {
-	switch (p.getID())
-	{
-		case hash("Entity"):
-		{
-			EntityInfo info;
-			p >> &info;
-			Entity* ent = getEntity(info.networkID);
-			if (ent && //exists
-				ent->entity_info.ownerID == info.ownerID && //owners match
-				info.ownerID == ci->id && //client isn't lying about what it owns
-				ent->entity_info.type == info.type) //types match
-			{
-				switch (info.type)
-				{
-					case hash("Paddle"):
-					{
-						Paddle* paddle = static_cast<Paddle*>(ent);
-						p >> paddle->sprite.xPos >> paddle->sprite.yPos;
-					} break;
-					case hash("Ball"):
-					{
-						Ball* ball = static_cast<Ball*>(ent);
-						p >> ball->sprite.xPos >> ball->sprite.yPos;
-					} break;
-				}
-			}
-		} break;
-	}
+	onPacketReceived(channel_id, ci, std::move(p));
 }
 
 void NetworkingState::onConnected()
@@ -213,6 +325,11 @@ void NetworkingState::onDisconnected()
 
 void NetworkingState::onServerSentPacket(const enet_uint8 channel_id, Packet p)
 {
+	onPacketReceived(channel_id, nullptr, std::move(p));
+}
+
+void NetworkingState::onPacketReceived(const enet_uint8 channel_id, ClientInfo* ci, Packet p)
+{
 	switch (p.getID())
 	{
 		case hash("Entity"):
@@ -224,18 +341,10 @@ void NetworkingState::onServerSentPacket(const enet_uint8 channel_id, Packet p)
 				ent->entity_info.ownerID == info.ownerID && //owners match
 				ent->entity_info.type == info.type) //types match
 			{
-				switch (info.type)
+				if (!ci || //client received packet, we trust the server
+					(ci && info.ownerID == ci->id)) //received packet from client, make sure they aren't lying about what they own
 				{
-					case hash("Paddle"):
-					{
-						Paddle* paddle = static_cast<Paddle*>(ent);
-						p >> paddle->sprite.xPos >> paddle->sprite.yPos;
-					} break;
-					case hash("Ball"):
-					{
-						Ball* ball = static_cast<Ball*>(ent);
-						p >> ball->sprite.xPos >> ball->sprite.yPos;
-					} break;
+					ent->receivedPacket(channel_id, &p);
 				}
 			}
 		} break;

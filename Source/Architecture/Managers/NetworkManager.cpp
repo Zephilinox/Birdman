@@ -16,9 +16,9 @@ NetworkManager::~NetworkManager()
 void NetworkManager::initialize(bool hostServer)
 {
 	initialized = true;
-	hostingServer = hostServer;
+	hosting_server = hostServer;
 
-	if (hostingServer)
+	if (hosting_server)
 	{
 		auto client_init = [&](ClientInfo& client, const char* ip)
 		{
@@ -49,7 +49,7 @@ void NetworkManager::initialize(bool hostServer)
 
 void NetworkManager::reset()
 {
-	if (hostingServer)
+	if (hosting_server)
 	{
 		server.stop_listening();
 	}
@@ -65,7 +65,7 @@ void NetworkManager::update()
 {
 	if (initialized)
 	{
-		if (hostingServer)
+		if (hosting_server)
 		{
 			updateServer();
 		}
@@ -78,9 +78,12 @@ void NetworkManager::update()
 
 void NetworkManager::sendPacket(enet_uint8 channel_id, Packet* p, enet_uint32 flags)
 {
-	if (!hostingServer)
+	if (!hosting_server)
 	{
-		client.send_packet(channel_id, p->buffer.data(), p->buffer.size(), flags);
+		if (isConnected())
+		{
+			client.send_packet(channel_id, p->buffer.data(), p->buffer.size(), flags);
+		}
 	}
 	else
 	{
@@ -90,24 +93,24 @@ void NetworkManager::sendPacket(enet_uint8 channel_id, Packet* p, enet_uint32 fl
 
 void NetworkManager::sendPacket(uint32_t client_id, enet_uint8 channel_id, Packet* p, enet_uint32 flags)
 {
-	assert(hostingServer);
+	assert(hosting_server);
 	server.send_packet_to(client_id, channel_id, p->buffer.data(), p->buffer.size(), flags);
 }
 
 void NetworkManager::sendPacket(enet_uint8 channel_id, Packet* p, enet_uint32 flags, std::function<bool(const ClientInfo& client)> predicate)
 {
-	assert(hostingServer);
+	assert(hosting_server);
 	server.send_packet_to_all_if(channel_id, p->buffer.data(), p->buffer.size(), flags, predicate);
 }
 
 bool NetworkManager::isServer()
 {
-	return hostingServer;
+	return hosting_server;
 }
 
 bool NetworkManager::isConnected()
 {
-	return client.is_connecting_or_connected() && clientConnectedToServer;
+	return client.is_connecting_or_connected() && client_connected_to_server;
 }
 
 bool NetworkManager::isInitialized()
@@ -140,13 +143,13 @@ void NetworkManager::updateClient()
 {
 	auto on_connected = [&]()
 	{
-		clientConnectedToServer = true;
+		client_connected_to_server = true;
 		connected.emit();
 	};
 
 	auto on_disconnected = [&]()
 	{
-		clientConnectedToServer = false;
+		client_connected_to_server = false;
 		disconnected.emit();
 	};
 
