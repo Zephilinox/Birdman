@@ -10,6 +10,12 @@ Play::Play(GameData* data): audience(game_data)
 {
 	scenes.reserve(number_of_scenes);
 	game_data = data;
+	stage = data->getRenderer()->createUniqueSprite();
+	stage->loadTexture("../../Resources/Textures/stage.png");
+	stage->width((float)data->getWindowWidth());
+	stage->height((float)data->getWindowHeight() * 0.65f);
+	stage->xPos(0.0f);
+	stage->yPos(0.0f);
 }
 
 Play::~Play()
@@ -42,7 +48,8 @@ void Play::create()
 	scene1.scene_description = "The Theater is full, Riggan's attempt to ";
 	scene1.initSceneProps(Play::KITCHEN);
 	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
-	scene1.initSceneCharacter(Play::SceneCharacters::JOHN);
+	//TODO - Remove this
+	scene1.character_pool.at(0).setPosition(100.0f, 100.0f);
 
 	scene1.dark.stage_description = "The play is going down a dark path...";
 	scene1.dark.scene = &scene2;
@@ -59,13 +66,16 @@ void Play::create()
 	scene2.initSceneCharacter(Play::SceneCharacters::JOHN);
 }
 
-void Play::update()
+void Play::update(float dt)
 {
-	scenes[current_scene].update();
+	scenes[current_scene].update(dt);
 }
 
 void Play::render() const
 {
+	//Render stage background
+	game_data->getRenderer()->renderSprite(*stage);
+
 	scenes[current_scene].render();
 	//Render  VisualDialogue*
 }

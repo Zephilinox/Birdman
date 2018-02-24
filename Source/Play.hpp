@@ -52,7 +52,7 @@ public:
 
 	// setCurrentScene()
 	void create();
-	void update();
+	void update(float dt);
 	void render() const;
 
 private:
@@ -61,6 +61,8 @@ private:
 	GameData* game_data;
 
 	Audience audience;
+
+	std::unique_ptr<ASGE::Sprite> stage;
 
 	int current_scene = 0;
 	//TODO see this

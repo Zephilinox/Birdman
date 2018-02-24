@@ -5,11 +5,12 @@ class Prop
 {
 public:
 	Prop() = default;
-	//TODO Ricardo, this needed?
-	~Prop() { delete prop_sprite; }
+	//TODO sprite memory leak - FIX IT
+	~Prop() = default;
 
 	void setIsActive(bool new_active);
 	bool getIsActive() const;
+	void setPosition(float x, float y);
 
 	ASGE::Sprite* getSprite();
 

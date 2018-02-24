@@ -17,6 +17,7 @@ GameState::GameState(GameData* game_data)
 {
 	//add all the dialogue to the dialogue tree. each level would have its own dialogue tree
 	dialogue_init();
+	play_01.create();
 	//dialogue_init2();
 	//dialogue_init3();
 	dialogue_kitchen();
@@ -26,7 +27,7 @@ GameState::GameState(GameData* game_data)
 void GameState::update(const ASGE::GameTime& gt)
 {
 	visual_dialogue.update(float(gt.delta_time.count()) / 1000.0f);
-	play_01.update();
+	play_01.update(float(gt.delta_time.count()) / 1000.0f);
 
 	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER))
 	{

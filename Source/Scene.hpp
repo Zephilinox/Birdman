@@ -6,7 +6,6 @@
 #include "Prop.h"
 
 constexpr unsigned int number_of_props = 10;
-constexpr unsigned int number_of_characters = 5;
 
 class GameData;
 
@@ -27,17 +26,18 @@ public:
 
 	void initSceneProps(Play::SceneProps layout);
 	void initSceneCharacter(Play::SceneCharacters chars);
-	void loadPropTexStrings();
+	void loadPropTextureStrings();
 	void populateProps();
 
-	void update();
+	void update(float dt);
 	void render() const;
 
 private:
 	std::string name;
 	std::string scene_description;
 
-	std::string textureStrings[number_of_props];
+	std::string propTextureStrings[number_of_props];
+
 
 	GameData* game_data;
 
