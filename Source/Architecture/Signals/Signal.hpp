@@ -27,8 +27,8 @@ class Signal
 public:
 	using FunctionType = std::function<void(Args...)>;
 
-	Signal()
-		: dc(new SignalDisconnector<Args...>(this))
+	Signal() noexcept
+		: dc(std::make_shared<SignalDisconnector<Args...>>(this))
 		, slot_id_counter(0)
 	{}
 
@@ -130,7 +130,7 @@ private:
 	class SignalDisconnector : public Disconnector
 	{
 	public:
-		SignalDisconnector(Signal<Args...>* signal)
+		SignalDisconnector(Signal<Args...>* signal) noexcept
 			: signal(signal)
 		{}
 

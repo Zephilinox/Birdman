@@ -7,7 +7,7 @@
 #include "../States/BaseState.hpp"
 #include "../GameData.hpp"
 
-StateManager::StateManager(GameData* game_data)
+StateManager::StateManager(GameData* game_data) noexcept
 	: game_data(game_data)
 {
 }
@@ -74,7 +74,7 @@ void StateManager::pop()
 	});
 }
 
-bool StateManager::empty() const
+bool StateManager::empty() const noexcept
 {
 	return states.empty();
 }

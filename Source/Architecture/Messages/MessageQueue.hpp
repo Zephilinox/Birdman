@@ -24,13 +24,13 @@ public:
 	template <typename T, typename... Args>
 	void sendMessage(Args... args)
 	{
-		message_queue.emplace(new T(args...));
+		message_queue.emplace(std::make_unique<T>(args...));
 	}
 
 	template <typename T, typename... Args>
 	void sendPriorityMessage(Args... args)
 	{
-		priority_message_queue.emplace(new T(args...));
+		priority_message_queue.emplace(std::make_unique<T>(args...));
 	}
 
 private:

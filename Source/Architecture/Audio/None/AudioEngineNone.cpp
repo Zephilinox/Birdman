@@ -6,6 +6,6 @@ AudioEngineNone::AudioEngineNone(const std::string& audio_path)
 {
 }
 
-void AudioEngineNone::play(const std::string& name, bool loop)
+void AudioEngineNone::play(const std::string& name, bool loop) noexcept
 {
 }

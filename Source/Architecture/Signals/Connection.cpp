@@ -3,7 +3,7 @@
 //SELF
 #include "Disconnector.hpp"
 
-Connection::operator bool() const
+Connection::operator bool() const noexcept
 {
 	return slot_id != 0 && !dc.expired();
 }

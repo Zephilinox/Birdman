@@ -21,7 +21,7 @@ public:
 		float frame_length_milliseconds;
 	};
 
-	AnimatedSprite(ASGE::Renderer* renderer, bool loop = true);
+	AnimatedSprite(ASGE::Renderer* renderer, bool loop = true) noexcept;
 
 	AnimatedSprite(const AnimatedSprite& other) = delete;
 	AnimatedSprite(AnimatedSprite&& other) = delete;
@@ -33,10 +33,10 @@ public:
 	void addFrame(std::string texture, float frame_length_milliseconds, float relative_x = 0, float relative_y = 0);
 	ASGE::Sprite* getCurrentFrameSprite() const;
 
-	void play();
-	void pause();
-	void restart();
-	bool isOver();
+	void play() noexcept;
+	void pause() noexcept;
+	void restart() noexcept;
+	bool isOver() noexcept;
 
 	float xPos = 0;
 	float yPos = 0;

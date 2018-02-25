@@ -18,7 +18,7 @@ class GameData;
 class StateManager
 {
 public:
-	StateManager(GameData* game_data);
+	StateManager(GameData* game_data) noexcept;
 
 	void update(const ASGE::GameTime& gt);
 	void render() const;
@@ -28,7 +28,7 @@ public:
 	template <class T, class... Args> void push(Args... args);
 
 	BaseState* top() const;
-	bool empty() const;
+	bool empty() const noexcept;
 
 private:
 	GameData* game_data;

@@ -30,52 +30,52 @@ GameData::GameData(ASGE::Renderer* renderer, int width, int height)
 	}
 }
 
-ASGE::Renderer* GameData::getRenderer() const
+ASGE::Renderer* GameData::getRenderer() const noexcept
 {
 	return renderer;
 }
 
-InputManager* GameData::getInputManager()
+InputManager* GameData::getInputManager() noexcept
 {
 	return &input_manager;
 }
 
-FontManager* GameData::getFontManager()
+FontManager* GameData::getFontManager() noexcept
 {
 	return &font_manager;
 }
 
-MessageQueue* GameData::getMessageQueue()
+MessageQueue* GameData::getMessageQueue() noexcept
 {
 	return &message_queue;
 }
 
-StateManager* GameData::getStateManager()
+StateManager* GameData::getStateManager() noexcept
 {
 	return &state_manager;
 }
 
-AudioManager* GameData::getAudioManager()
+AudioManager* GameData::getAudioManager() noexcept
 {
 	return &audio_manager;
 }
 
-Rng * GameData::getRandomNumberGenerator()
+Rng* GameData::getRandomNumberGenerator() noexcept
 {
 	return &random_number_gen;
 }
 
-NetworkManager* GameData::getNetworkManager()
+NetworkManager* GameData::getNetworkManager() noexcept
 {
 	return &network_manager;
 }
 
-int GameData::getWindowWidth()
+int GameData::getWindowWidth() noexcept
 {
 	return window_width;
 }
 
-int GameData::getWindowHeight()
+int GameData::getWindowHeight() noexcept
 {
 	return window_height;
 }

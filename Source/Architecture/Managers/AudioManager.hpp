@@ -20,8 +20,8 @@ public:
 
 	AudioManager(Engine engine, const std::string audio_path);
 	AudioManager(const std::string audio_path);
-	AudioEngine* getAudioEngine();
-	Engine getEngineType();
+	AudioEngine* getAudioEngine() const noexcept;
+	Engine getEngineType() const noexcept;
 
 	void setEngineType(int engine);
 

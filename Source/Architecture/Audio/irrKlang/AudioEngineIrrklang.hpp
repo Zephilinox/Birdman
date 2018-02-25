@@ -15,7 +15,7 @@ class AudioEngineIrrklang : public AudioEngine
 {
 public:
 	AudioEngineIrrklang(const std::string& audio_path);
-	~AudioEngineIrrklang() = default;
+	~AudioEngineIrrklang() noexcept = default;
 
 	void play(const std::string& name, bool loop = false) override final;
 

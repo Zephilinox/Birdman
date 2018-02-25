@@ -37,7 +37,7 @@ void NetworkManager::initialize(bool hostServer)
 			.set_max_client_count(2)
 			.set_channel_count(2)
 			.set_listen_port(11111)
-			.set_initialize_client_function(client_init));
+			.set_initialize_client_function(std::move(client_init)));
 	}
 	else
 	{
@@ -103,17 +103,17 @@ void NetworkManager::sendPacket(enet_uint8 channel_id, Packet* p, enet_uint32 fl
 	server.send_packet_to_all_if(channel_id, p->buffer.data(), p->buffer.size(), flags, predicate);
 }
 
-bool NetworkManager::isServer()
+bool NetworkManager::isServer() const noexcept
 {
 	return hosting_server;
 }
 
-bool NetworkManager::isConnected()
+bool NetworkManager::isConnected() const noexcept
 {
 	return client.is_connecting_or_connected() && client_connected_to_server;
 }
 
-bool NetworkManager::isInitialized()
+bool NetworkManager::isInitialized() const noexcept
 {
 	return initialized;
 }
@@ -136,7 +136,9 @@ void NetworkManager::updateServer()
 		client_sent_packet.emit(std::move(channel_id), &client, {data, data_size});
 	};
 
-	server.consume_events(on_client_connected, on_client_disconnected, on_client_data_received);
+	server.consume_events(std::move(on_client_connected),
+		std::move(on_client_disconnected),
+		std::move(on_client_data_received));
 }
 
 void NetworkManager::updateClient()
@@ -167,5 +169,7 @@ void NetworkManager::updateClient()
 		}
 	};
 
-	client.consume_events(on_connected, on_disconnected, on_data_received);
+	client.consume_events(std::move(on_connected),
+		std::move(on_disconnected),
+		std::move(on_data_received));
 }

@@ -9,7 +9,7 @@
 
 //todo: fix strings througout dialogue system to be performant (minor issue)
 
-std::string DialogueTree::player = "player";
+const std::string DialogueTree::player = "player";
 
 void DialogueTree::addDialogue(std::string dialogue_name, std::string speaker_name, Dialogue::FunctionType dialogue_text, Dialogue::FunctionType next_dialogue)
 {
@@ -81,17 +81,17 @@ Actor* DialogueTree::getSpeaker()
 	return getActor(current_dialogue->speaker);
 }
 
-Actor* DialogueTree::getPreviousSpeaker()
+Actor* DialogueTree::getPreviousSpeaker() noexcept
 {
 	return previous_speaker;
 }
 
-Dialogue* DialogueTree::getCurrentDialogue()
+Dialogue* DialogueTree::getCurrentDialogue() noexcept
 {
 	return current_dialogue;
 }
 
-Dialogue* DialogueTree::getPreviousDialogue()
+Dialogue* DialogueTree::getPreviousDialogue() noexcept
 {
 	return previous_dialogue;
 }

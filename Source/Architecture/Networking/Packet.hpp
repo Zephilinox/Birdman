@@ -22,13 +22,13 @@
 
 struct Packet
 {
-	Packet();
-	Packet(const enet_uint8* data, size_t size);
+	Packet() noexcept;
+	Packet(const enet_uint8* data, size_t size) noexcept;
 	
 	void reset();
 
-	void setID(HashedID id);
-	HashedID getID();
+	void setID(HashedID id) noexcept;
+	HashedID getID() const noexcept;
 
 	void serialize(void* data, size_t size);
 	Packet& operator <<(std::string src);
@@ -37,7 +37,7 @@ struct Packet
 	Packet& operator <<(float src);
 	Packet& operator <<(bool src);
 
-	void deserialize(void* destination, size_t size);
+	void deserialize(void* destination, size_t size) noexcept;
 	Packet& operator >>(int32_t& destination);
 	Packet& operator >>(uint32_t& destination);
 	Packet& operator >>(std::string& destination);

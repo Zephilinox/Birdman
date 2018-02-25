@@ -14,17 +14,17 @@
 class Button
 {
 public:
-	Button();
+	Button() noexcept;
 
 	void render(GameData* game_data) const;
 
-	bool isSelected() const;
-	void setSelected(bool selected);
+	bool isSelected() const noexcept;
+	void setSelected(bool selected) noexcept;
 
-	void setPos(int x, int y);
+	void setPos(int x, int y) noexcept;
 	void setName(std::string name);
-	void setColour(ASGE::Colour colour);
-	void setSelectedColour(ASGE::Colour colour);
+	void setColour(ASGE::Colour colour) noexcept;
+	void setSelectedColour(ASGE::Colour colour) noexcept;
 
 	Signal<> on_click;
 

@@ -31,6 +31,7 @@ Packet& operator >>(Packet& p, EntityInfo* e)
 class Entity
 {
 public:
+	virtual ~Entity() = default;
 	virtual void update(float dt) = 0;
 	virtual void render(ASGE::Renderer* renderer) const = 0;
 	virtual void receivedPacket(uint32_t channelID, Packet* p) = 0;
@@ -162,7 +163,7 @@ public:
 	AnimatedSprite sprite;
 	GameData* game_data;
 	bool movingLeft = false;
-	float dirY;
+	float dirY = 0;
 };
 
 NetworkingState::NetworkingState(GameData* game_data)
@@ -230,7 +231,7 @@ void NetworkingState::update(const ASGE::GameTime& gt)
 {
 	if (netman->isInitialized())
 	{
-		float dt = gt.delta_time.count() / 1000.0f;
+		const float dt = gt.delta_time.count() / 1000.0f;
 
 		for (auto& ent : entities)
 		{
@@ -301,12 +302,12 @@ void NetworkingState::updateClient(float dt)
 {
 }
 
-void NetworkingState::onClientConnected(ClientInfo* ci)
+void NetworkingState::onClientConnected(ClientInfo* ci) noexcept
 {
 	clientPaddle->entity_info.ownerID = ci->id;
 }
 
-void NetworkingState::onClientDisconnected(uint32_t client_id)
+void NetworkingState::onClientDisconnected(uint32_t client_id) noexcept
 {
 }
 
@@ -315,11 +316,11 @@ void NetworkingState::onClientSentPacket(const enet_uint8 channel_id, ClientInfo
 	onPacketReceived(channel_id, ci, std::move(p));
 }
 
-void NetworkingState::onConnected()
+void NetworkingState::onConnected() noexcept
 {
 }
 
-void NetworkingState::onDisconnected()
+void NetworkingState::onDisconnected() noexcept
 {
 }
 

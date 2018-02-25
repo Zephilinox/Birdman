@@ -8,8 +8,11 @@ namespace
 	static constexpr uint32_t offset = 2166136261u;
 	static constexpr uint32_t prime = 16777619u;
 
+
+	//not_null?
 	constexpr uint32_t helper(uint32_t partial, const char* str)
 	{
+		//Correct cast?
 		return str[0] == 0 ? partial : helper(static_cast<unsigned long long>((partial^str[0])) * prime, str + 1);
 	}
 }
@@ -31,7 +34,7 @@ public:
 	static constexpr HashedID ID = hash("Message");
 
 protected:
-	Message(HashedID id)
+	Message(HashedID id) noexcept
 		: id(id)
 	{}
 };

@@ -63,6 +63,9 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)..\Libs\enetpp\include;$(SolutionDir)..\Libs\enet\include;$(SolutionDir)..\Libs\ini_parser\Include;$(SolutionDir)..\Libs\irrKlang\include;$(SolutionDir)..\Libs\SFML\include;$(SolutionDir)..\Libs\ASGE\Include;$(SolutionDir)..\Source;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)..\Libs\enet;$(SolutionDir)..\Libs\SFML\Lib;$(SolutionDir)..\Libs\irrKlang\Lib;$(LibraryPath)</LibraryPath>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <EnableCppCoreCheck>false</EnableCppCoreCheck>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugFast|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -82,6 +85,7 @@
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <ShowIncludes>false</ShowIncludes>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

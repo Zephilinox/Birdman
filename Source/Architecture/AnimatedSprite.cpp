@@ -3,7 +3,7 @@
 //LIB
 #include <Engine/Renderer.h>
 
-AnimatedSprite::AnimatedSprite(ASGE::Renderer* renderer, bool loop)
+AnimatedSprite::AnimatedSprite(ASGE::Renderer* renderer, bool loop) noexcept
 	: renderer(renderer)
 	, loop(loop)
 {}
@@ -43,24 +43,24 @@ ASGE::Sprite* AnimatedSprite::getCurrentFrameSprite() const
 	return frames[current_frame].first.get();
 }
 
-void AnimatedSprite::play()
+void AnimatedSprite::play() noexcept
 {
 	playing = true;
 }
 
-void AnimatedSprite::pause()
+void AnimatedSprite::pause() noexcept
 {
 	playing = false;
 }
 
-void AnimatedSprite::restart()
+void AnimatedSprite::restart() noexcept
 {
 	current_frame = 0;
 	playing = true;
 	frame_time = 0;
 }
 
-bool AnimatedSprite::isOver()
+bool AnimatedSprite::isOver() noexcept
 {
 	return current_frame == frames.size() - 1 && !loop;
 }

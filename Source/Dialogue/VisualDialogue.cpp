@@ -83,8 +83,8 @@ void VisualDialogue::setupPlayerOptions()
 		if (txt != "")
 		{
 			int id = options.addButton(30, game_data->getWindowHeight() - 120 + (validOptions * 30), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
-			options.getButton(id).on_click.connect(
-				[&, i]()
+			options.getButton(std::move(id)).on_click.connect(
+			[&, i]()
 			{
 				has_set_player_options = false;
 				selected_option = i;
@@ -106,7 +106,7 @@ void VisualDialogue::setDialogueText(std::string text)
 	dialogue_characters_timer.restart();
 }
 
-void VisualDialogue::setDialogueSpeed(int speed)
+void VisualDialogue::setDialogueSpeed(int speed) noexcept
 {
 	switch (speed)
 	{

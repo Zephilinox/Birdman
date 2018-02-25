@@ -1,14 +1,14 @@
 #include "stdafx.h"
 #include "Packet.hpp"
 
-Packet::Packet()
+Packet::Packet() noexcept
 	: buffer(100) //bytes reserved, most packets will be under this amount
 {
 	deserializePosition = sizeof(HashedID);
 	buffer.resize(sizeof(HashedID));
 }
 
-Packet::Packet(const enet_uint8* data, size_t size)
+Packet::Packet(const enet_uint8* data, size_t size) noexcept
 {
 	deserializePosition = sizeof(HashedID);
 	buffer.resize(size);
@@ -23,12 +23,12 @@ void Packet::reset()
 	buffer.resize(sizeof(HashedID));
 }
 
-void Packet::setID(HashedID id)
+void Packet::setID(HashedID id) noexcept
 {
 	memcpy(buffer.data(), &id, sizeof(id));
 }
 
-HashedID Packet::getID()
+HashedID Packet::getID() const noexcept
 {
 	HashedID id;
 	memcpy(&id, buffer.data(), sizeof(id));
@@ -48,6 +48,7 @@ void Packet::serialize(void* data, size_t size)
 
 Packet& Packet::operator <<(std::string src)
 {
+	//correct cast?
 	*this << static_cast<int32_t>(src.size());
 	serialize(src.data(), src.size());
 	return *this;
@@ -77,7 +78,7 @@ Packet& Packet::operator <<(bool src)
 	return *this;
 }
 
-void Packet::deserialize(void* destination, size_t size)
+void Packet::deserialize(void* destination, size_t size) noexcept
 {
 	memcpy(destination, buffer.data() + deserializePosition, size);
 	deserializePosition += size;

@@ -16,7 +16,7 @@ class GameData;
 struct ClientInfo
 {
 	uint32_t id;
-	uint32_t get_id() const
+	uint32_t get_id() const noexcept
 	{
 		return id;
 	}
@@ -36,8 +36,8 @@ public:
 	void sendPacket(uint32_t client_id, enet_uint8 channel_id, Packet* p, enet_uint32 flags = ENET_PACKET_FLAG_RELIABLE);
 	void sendPacket(enet_uint8 channel_id, Packet* p, enet_uint32 flags, std::function<bool(const ClientInfo& client)> predicate);
 
-	bool isServer();
-	bool isInitialized();
+	bool isServer() const noexcept;
+	bool isInitialized() const noexcept;
 
 	//Server
 	Signal<ClientInfo*> client_connected;
@@ -51,7 +51,7 @@ public:
 	Signal<> disconnected;
 	Signal<const enet_uint8, Packet> server_sent_packet;
 
-	bool isConnected();
+	bool isConnected() const noexcept;
 	uint32_t clientID = 0;
 	enetpp::client client;
 
@@ -61,6 +61,6 @@ private:
 
 	GameData* game_data;
 	bool initialized = false;
-	bool hosting_server;
+	bool hosting_server = true;
 	bool client_connected_to_server = false;
 };

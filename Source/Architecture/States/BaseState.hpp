@@ -43,7 +43,7 @@ public:
 	*/
 	virtual void onInactive() = 0;
 
-	bool shouldRenderPreviousState()
+	bool shouldRenderPreviousState() noexcept
 	{
 		return render_previous_state;
 	}
@@ -56,6 +56,5 @@ protected:
 
 	GameData* game_data;
 
-private:
 	bool render_previous_state = false;
 };

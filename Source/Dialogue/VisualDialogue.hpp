@@ -34,7 +34,7 @@ public:
 private:
 	void setupPlayerOptions();
 	void setDialogueText(std::string text);
-	void setDialogueSpeed(int speed);
+	void setDialogueSpeed(int speed) noexcept;
 
 	GameData* game_data;
 	DialogueTree* dialogue_tree;

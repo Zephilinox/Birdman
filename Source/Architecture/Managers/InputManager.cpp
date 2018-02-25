@@ -4,14 +4,10 @@
 *   @brief   Constructor.
 *   @details Initializes the recorded state of all keys
 */
-InputManager::InputManager()
+InputManager::InputManager() noexcept
 {
-	for (int i = 0; i < ASGE::KEYS::KEY_LAST; ++i)
-	{
-		//Create & reserve the map with all valid keys
-		toggle_keys[i] = ASGE::KEYS::KEY_RELEASED;
-		keys[i] = ASGE::KEYS::KEY_RELEASED;
-	}
+	toggle_keys.fill(ASGE::KEYS::KEY_RELEASED);
+	keys.fill(ASGE::KEYS::KEY_RELEASED);
 }
 
 
@@ -68,9 +64,10 @@ bool InputManager::isKeyPressed(int key)
 *   @brief   Determines if the key is being held down
 *   @param   key is the key whose state is being checked
 *   @return  true if the key is being held down. */
-bool InputManager::isKeyDown(int key)
+bool InputManager::isKeyDown(int key) noexcept
 {
 	//Returns true until the key is released
+	[[gsl::suppress(bounds.2)]]
 	return (toggle_keys[key] != ASGE::KEYS::KEY_RELEASED ||
 		keys[key] != ASGE::KEYS::KEY_RELEASED);
 }

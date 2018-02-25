@@ -4,7 +4,7 @@
 #include "../GameData.hpp"
 #include "../Managers/FontManager.hpp"
 
-Button::Button()
+Button::Button() noexcept
 {
 }
 
@@ -22,17 +22,17 @@ void Button::render(GameData* game_data) const
 	}
 }
 
-bool Button::isSelected() const
+bool Button::isSelected() const noexcept
 {
 	return selected;
 }
 
-void Button::setSelected(bool s)
+void Button::setSelected(bool s) noexcept
 {
 	selected = s;
 }
 
-void Button::setPos(int x, int y)
+void Button::setPos(int x, int y) noexcept
 {
 	pos_x = x;
 	pos_y = y;
@@ -43,12 +43,12 @@ void Button::setName(std::string n)
 	name = n;
 }
 
-void Button::setColour(ASGE::Colour c)
+void Button::setColour(ASGE::Colour c) noexcept
 {
 	colour = c;
 }
 
-void Button::setSelectedColour(ASGE::Colour c)
+void Button::setSelectedColour(ASGE::Colour c) noexcept
 {
 	selected_colour = c;
 }

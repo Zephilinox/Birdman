@@ -28,12 +28,12 @@ Use isKeyDown over isKeyPressed if at all possible.
 class InputManager
 {
 public:
-	InputManager();
+	InputManager() noexcept;
 
 	void update();
 	void handleInput(int key, int state);
 	bool isKeyPressed(int key);
-	bool isKeyDown(int key);
+	bool isKeyDown(int key) noexcept;
 
 private:
 	std::array<int, ASGE::KEYS::KEY_LAST> toggle_keys;

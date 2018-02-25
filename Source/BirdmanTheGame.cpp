@@ -30,7 +30,7 @@ bool BirdmanTheGame::init()
 
 	renderer->setWindowTitle("Birbie");
 	float cArray[] = { 0.08f, 0.08f, 0.08f };
-	renderer->setClearColour(cArray);
+	renderer->setClearColour(std::move(cArray));
 	renderer->setSpriteMode(ASGE::SpriteSortMode::IMMEDIATE);
 	toggleFPS();
 

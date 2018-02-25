@@ -19,15 +19,15 @@ public:
 	using milliseconds_float = std::chrono::duration<float, milliseconds::period>;
 	using seconds_float = std::chrono::duration<float, seconds::period>;
 	
-	Timer();
+	Timer() noexcept;
 
-	float getElapsedTime();
-	nanoseconds getChronoElapsedTime();
+	float getElapsedTime() const noexcept;
+	nanoseconds getChronoElapsedTime() const noexcept;
 
 	template <class T>
-	float getElapsedTime();
+	float getElapsedTime() const;
 
-	void restart();
+	void restart() noexcept;
 
 private:
 	bool isPaused = false;
@@ -36,7 +36,7 @@ private:
 };
 
 template <class T>
-float Timer::getElapsedTime()
+float Timer::getElapsedTime() const
 {
 	return std::chrono::duration<float, T::period>(clock::now() - start_time).count();
 }

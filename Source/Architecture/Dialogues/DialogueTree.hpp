@@ -15,7 +15,7 @@
 class DialogueTree
 {
 public:
-	static std::string player;
+	static const std::string player;
 
 	void addDialogue(std::string dialogue_name, std::string speaker_name, Dialogue::FunctionType dialogue_text, Dialogue::FunctionType next_dialogue);
 	void addDialogue(std::string dialogue_name, std::string speaker_name, std::string dialogue_text, Dialogue::FunctionType next_dialogue);
@@ -30,9 +30,9 @@ public:
 	Actor* getActor(std::string name);
 	Actor* getPlayer();
 	Actor* getSpeaker();
-	Actor* getPreviousSpeaker();
-	Dialogue* getCurrentDialogue();
-	Dialogue* getPreviousDialogue();
+	Actor* getPreviousSpeaker() noexcept;
+	Dialogue* getCurrentDialogue() noexcept;
+	Dialogue* getPreviousDialogue() noexcept;
 
 	std::string play(std::string dialogue_name);
 	std::string next();

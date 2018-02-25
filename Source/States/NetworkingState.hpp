@@ -31,14 +31,14 @@ public:
 private:
 	//Server
 	void updateServer(float dt);
-	void onClientConnected(ClientInfo* ci);
-	void onClientDisconnected(uint32_t client_id);
+	void onClientConnected(ClientInfo* ci) noexcept;
+	void onClientDisconnected(uint32_t client_id) noexcept;
 	void onClientSentPacket(const enet_uint8 channel_id, ClientInfo* ci, Packet p);
 
 	//Client
 	void updateClient(float dt);
-	void onConnected();
-	void onDisconnected();
+	void onConnected() noexcept;
+	void onDisconnected() noexcept;
 	void onServerSentPacket(const enet_uint8 channel_id, Packet p);
 
 	//Both

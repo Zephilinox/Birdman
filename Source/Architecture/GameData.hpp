@@ -17,17 +17,17 @@ class GameData
 public:
 	GameData(ASGE::Renderer* renderer, int width, int height);
 
-	ASGE::Renderer* getRenderer() const;
-	StateManager* getStateManager();
-	InputManager* getInputManager();
-	FontManager* getFontManager();
-	MessageQueue* getMessageQueue();
-	AudioManager* getAudioManager();
-	NetworkManager* getNetworkManager();
-	Rng* getRandomNumberGenerator();
+	ASGE::Renderer* getRenderer() const noexcept;
+	StateManager* getStateManager() noexcept;
+	InputManager* getInputManager() noexcept;
+	FontManager* getFontManager() noexcept;
+	MessageQueue* getMessageQueue() noexcept;
+	AudioManager* getAudioManager() noexcept;
+	NetworkManager* getNetworkManager() noexcept;
+	Rng* getRandomNumberGenerator() noexcept;
 	
-	int getWindowWidth();
-	int getWindowHeight();
+	int getWindowWidth() noexcept;
+	int getWindowHeight() noexcept;
 
 private:
 	ASGE::Renderer* renderer = nullptr;

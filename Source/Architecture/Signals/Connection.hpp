@@ -16,7 +16,7 @@ you use it to control disconnecting your function from the signal
 class Connection
 {
 public:
-	Connection() = default;
+	Connection() noexcept = default;
 	Connection(const Connection& c) = default;
 
 	//Not Required?
@@ -31,11 +31,11 @@ public:
 	Connection& operator=(Connection&& c) noexcept = default;
 
 	//Check to see if the Connection is still valid
-	operator bool() const;
+	operator bool() const noexcept;
 
 	//Ensures both Connections are connected to the same Signal and referring to the same function
 	//Might return false if both connections are invalid, depending on what made them invalid.
-	friend bool operator ==(const Connection& lhs, const Connection& rhs)
+	friend bool operator ==(const Connection& lhs, const Connection& rhs) noexcept
 	{
 		return lhs.slot_id == rhs.slot_id && lhs.dc.lock().get() == rhs.dc.lock().get();
 	}
@@ -67,7 +67,7 @@ RAII
 class ManagedConnection : public Connection
 {
 public:
-	ManagedConnection() = default;
+	ManagedConnection() noexcept = default;
 	ManagedConnection(Connection c);
 
 	//Possibly useful
@@ -81,6 +81,6 @@ public:
 	//Not Required?
 	//ManagedConnection& operator=(const ManagedConnection& c) = default;
 
-	//Required
+	//Required, hides connection operator=? important?
 	ManagedConnection& operator=(ManagedConnection&& c) noexcept;
 };
