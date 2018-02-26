@@ -20,6 +20,7 @@ void NetworkManager::initialize(bool hostServer)
 
 	if (hosting_server)
 	{
+		clientID = 1;
 		auto client_init = [&](ClientInfo& client, const char* ip)
 		{
 			std::cout << "Client " << next_uid << " initialized with IP " << ip << "\n";
@@ -165,7 +166,10 @@ void NetworkManager::updateClient()
 		else
 		{
 			p >> clientID;
+			//eww
+			p.deserializePosition = sizeof(HashedID);
 			std::cout << "ClientID " << clientID << " received\n";
+			server_sent_packet.emit(std::move(channel_id), std::move(p));
 		}
 	};
 
