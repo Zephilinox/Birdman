@@ -59,6 +59,18 @@ public:
 		, game_data(game_data)
 	{
 		entity_info.type = hash("Paddle");
+		sprite.addFrame("Portraits/blabbering_npc", 1);
+
+		if (game_data->getNetworkManager()->isServer())
+		{
+			sprite.xPos = 60;
+			sprite.yPos = 720 / 2;
+		}
+		else
+		{
+			sprite.xPos = 1100;
+			sprite.yPos = 720 / 2;
+		}
 	}
 
 	void update(float dt) override final
@@ -107,6 +119,9 @@ public:
 		, game_data(game_data)
 	{
 		entity_info.type = hash("Ball");
+		sprite.addFrame("UI/DialogueMarker", 1);
+		sprite.xPos = 1280 / 2;
+		sprite.yPos = 720 / 2;
 	}
 
 	void update(float dt) override final
@@ -178,48 +193,28 @@ NetworkingState::NetworkingState(GameData* game_data)
 	menu.getButton(0).on_click.connect([&]()
 	{
 		netman->initialize(true);
-		netman->client_connected.connect(this, &NetworkingState::onClientConnected);
-		netman->client_disconnected.connect(this, &NetworkingState::onClientDisconnected);
-		netman->client_sent_packet.connect(this, &NetworkingState::onClientSentPacket);
+		managedOnConnect = netman->client_connected.connect(this, &NetworkingState::onClientConnected);
+		managedOnDisconnect = netman->client_disconnected.connect(this, &NetworkingState::onClientDisconnected);
+		managedOnSentPacket = netman->client_sent_packet.connect(this, &NetworkingState::onClientSentPacket);
+
+		createEntity<Paddle>(this->game_data);
+		createEntity<Ball>(this->game_data);
+		serverPaddle = static_cast<Paddle*>(getEntity(1));
+		serverBall = static_cast<Ball*>(getEntity(2));
 	});
 
 	menu.getButton(1).on_click.connect([&]()
 	{
 		netman->initialize(false);
-		netman->connected.connect(this, &NetworkingState::onConnected);
-		netman->disconnected.connect(this, &NetworkingState::onDisconnected);
-		netman->server_sent_packet.connect(this, &NetworkingState::onServerSentPacket);
+		managedOnConnect = netman->connected.connect(this, &NetworkingState::onConnected);
+		managedOnDisconnect = netman->disconnected.connect(this, &NetworkingState::onDisconnected);
+		managedOnSentPacket = netman->server_sent_packet.connect(this, &NetworkingState::onServerSentPacket);
 	});
 
-	menu.getButton(2).on_click.connect([game_data]()
+	menu.getButton(2).on_click.connect([this]()
 	{
-		game_data->getStateManager()->pop();
+		this->game_data->getStateManager()->pop();
 	});
-
-	entities.emplace_back(std::make_unique<Paddle>(game_data));
-	entities.emplace_back(std::make_unique<Paddle>(game_data));
-	entities.emplace_back(std::make_unique<Ball>(game_data));
-	serverPaddle = static_cast<Paddle*>(entities[0].get());
-	clientPaddle = static_cast<Paddle*>(entities[1].get());
-	serverBall = static_cast<Ball*>(entities[2].get());
-
-	serverPaddle->entity_info.networkID = 0;
-	serverPaddle->entity_info.ownerID = 0;
-	serverPaddle->sprite.addFrame("Portraits/blabbering_npc", 1);
-	serverPaddle->sprite.xPos = 60;
-	serverPaddle->sprite.yPos = 720 / 2;
-
-	clientPaddle->entity_info.networkID = 1;
-	clientPaddle->entity_info.ownerID = 1;
-	clientPaddle->sprite.addFrame("Portraits/blabbering_npc", 1);
-	clientPaddle->sprite.xPos = 1100;
-	clientPaddle->sprite.yPos = 720 / 2;
-
-	serverBall->entity_info.networkID = 2;
-	serverBall->entity_info.ownerID = 0;
-	serverBall->sprite.addFrame("UI/DialogueMarker", 1);
-	serverBall->sprite.xPos = 1280 / 2;
-	serverBall->sprite.yPos = 720 / 2;
 }
 
 NetworkingState::~NetworkingState()
@@ -288,13 +283,27 @@ void NetworkingState::updateServer(float dt)
 		serverBall->dirY = game_data->getRandomNumberGenerator()->getRandomFloat(-0.8, 0.8);
 	}
 
-	if (clientPaddle->sprite.xPos < serverBall->sprite.xPos + serverBall->sprite.getCurrentFrameSprite()->width() &&
-		clientPaddle->sprite.xPos + clientPaddle->sprite.getCurrentFrameSprite()->width() > serverBall->sprite.xPos &&
-		clientPaddle->sprite.yPos < serverBall->sprite.yPos + serverBall->sprite.getCurrentFrameSprite()->height() &&
-		clientPaddle->sprite.yPos + clientPaddle->sprite.getCurrentFrameSprite()->height() > serverBall->sprite.yPos)
+	uint32_t clientPaddleID = 0;
+	for (const auto& ent : entities)
 	{
-		serverBall->movingLeft = true;
-		serverBall->dirY = game_data->getRandomNumberGenerator()->getRandomFloat(-0.8, 0.8);
+		if (ent->entity_info.ownerID != 1 &&
+			ent->entity_info.type == hash("Paddle")) //1 is server id
+		{
+			clientPaddleID = ent->entity_info.networkID;
+			break;
+		}
+	}
+	clientPaddle = static_cast<Paddle*>(getEntity(clientPaddleID));
+	if (clientPaddle)
+	{
+		if (clientPaddle->sprite.xPos < serverBall->sprite.xPos + serverBall->sprite.getCurrentFrameSprite()->width() &&
+			clientPaddle->sprite.xPos + clientPaddle->sprite.getCurrentFrameSprite()->width() > serverBall->sprite.xPos &&
+			clientPaddle->sprite.yPos < serverBall->sprite.yPos + serverBall->sprite.getCurrentFrameSprite()->height() &&
+			clientPaddle->sprite.yPos + clientPaddle->sprite.getCurrentFrameSprite()->height() > serverBall->sprite.yPos)
+		{
+			serverBall->movingLeft = true;
+			serverBall->dirY = game_data->getRandomNumberGenerator()->getRandomFloat(-0.8, 0.8);
+		}
 	}
 }
 
@@ -304,11 +313,24 @@ void NetworkingState::updateClient(float dt)
 
 void NetworkingState::onClientConnected(ClientInfo* ci) noexcept
 {
-	clientPaddle->entity_info.ownerID = ci->id;
+	//Send all existing entity information to the client
+
+	Packet p;
+	for (const auto& ent : entities)
+	{
+		p.reset();
+		p.setID(hash("CreateEntity"));
+		p << &ent->entity_info;
+		netman->sendPacket(ci->id, 0, &p);
+	}
 }
 
 void NetworkingState::onClientDisconnected(uint32_t client_id) noexcept
 {
+	std::experimental::erase_if(entities, [client_id](const auto& entity)
+	{
+		return entity->entity_info.ownerID == client_id;
+	});
 }
 
 void NetworkingState::onClientSentPacket(const enet_uint8 channel_id, ClientInfo* ci, Packet p)
@@ -349,26 +371,47 @@ void NetworkingState::onPacketReceived(const enet_uint8 channel_id, ClientInfo* 
 				}
 			}
 		} break;
-		/*case hash("SpawnEntity"):
+		case hash("CreateEntity"):
 		{
 			//so if client sends a spawn ent, just trust it. create the ent with the owner id and entity id it gave us. but then the network ID might not be right, so.. we send back the network id?
 			EntityInfo info;
 			p >> &info;
-			if (!ent) //make sure it doesn't exist
+			if (netman->isServer()) //server
 			{
-				//uint32_t netId = spawnEntity(info);
-				if (netman->isServer()) //send this info to all clients now
+				switch (info.type)
 				{
-					Packet p;
-					p.setID(hash("SpawnEntity"));
-					p << &info;
-					netman->sendPacket(0, p, ENET_PACKET_FLAG_RELIABLE, [ci](const ClientInfo& client)
+					case hash("Paddle"):
 					{
-						return client.id != ci->id; //don't send to client that told us to spawn entity;
-					})
+						createEntity<Paddle>(ci->id, game_data);
+					} break;
+					case hash("Ball"):
+					{
+						createEntity<Ball>(ci->id, game_data);
+					} break;
 				}
 			}
-		}*/
+			else
+			{
+				switch (info.type)
+				{
+					//issue with constructor data, oh no
+					case hash("Paddle"):
+					{
+						entities.emplace_back(std::make_unique<Paddle>(game_data));
+					} break;
+					case hash("Ball"):
+					{
+						entities.emplace_back(std::make_unique<Ball>(game_data));
+					} break;
+				}
+
+				entities.back()->entity_info = info;
+			}
+		} break;
+		case hash("ClientID"):
+		{
+			createEntity<Paddle>(game_data);
+		}
 	}
 }
 

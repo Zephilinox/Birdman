@@ -35,7 +35,7 @@ public:
 	void sendPacket(enet_uint8 channel_id, Packet* p, enet_uint32 flags = ENET_PACKET_FLAG_RELIABLE);
 	void sendPacket(uint32_t client_id, enet_uint8 channel_id, Packet* p, enet_uint32 flags = ENET_PACKET_FLAG_RELIABLE);
 	void sendPacket(enet_uint8 channel_id, Packet* p, enet_uint32 flags, std::function<bool(const ClientInfo& client)> predicate);
-
+	
 	bool isServer() const noexcept;
 	bool isInitialized() const noexcept;
 
@@ -44,7 +44,7 @@ public:
 	Signal<uint32_t> client_disconnected;
 	Signal<const enet_uint8, ClientInfo*, Packet> client_sent_packet;
 	enetpp::server<ClientInfo> server;
-	uint32_t next_uid = 1;
+	uint32_t next_uid = 2; //0 is invalid, 1 is server
 
 	//Client
 	Signal<> connected;
