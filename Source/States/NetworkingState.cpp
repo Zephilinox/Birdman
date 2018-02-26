@@ -190,15 +190,15 @@ NetworkingState::NetworkingState(GameData* game_data)
 	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 40, "CLIENT", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 120, "BACK", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 
-	menu.getButton(0).on_click.connect([&]()
+	menu.getButton(0).on_click.connect([this]()
 	{
-		netman->initialize(true);
-		netman->client_connected.connect(this, &NetworkingState::onClientConnected);
-		netman->client_disconnected.connect(this, &NetworkingState::onClientDisconnected);
-		netman->client_sent_packet.connect(this, &NetworkingState::onClientSentPacket);
+		this->netman->initialize(true);
+		this->netman->client_connected.connect(this, &NetworkingState::onClientConnected);
+		this->netman->client_disconnected.connect(this, &NetworkingState::onClientDisconnected);
+		this->netman->client_sent_packet.connect(this, &NetworkingState::onClientSentPacket);
 
-		createEntity<Paddle>(game_data);
-		createEntity<Ball>(game_data);
+		createEntity<Paddle>(this->game_data);
+		createEntity<Ball>(this->game_data);
 	});
 
 	menu.getButton(1).on_click.connect([&]()
@@ -272,7 +272,7 @@ void NetworkingState::onInactive()
 void NetworkingState::updateServer(float dt)
 {
 	//Simple AABB collision check
-	if (serverPaddle->sprite.xPos < serverBall->sprite.xPos + serverBall->sprite.getCurrentFrameSprite()->width() &&
+	/*if (serverPaddle->sprite.xPos < serverBall->sprite.xPos + serverBall->sprite.getCurrentFrameSprite()->width() &&
 		serverPaddle->sprite.xPos + serverPaddle->sprite.getCurrentFrameSprite()->width() > serverBall->sprite.xPos &&
 		serverPaddle->sprite.yPos < serverBall->sprite.yPos + serverBall->sprite.getCurrentFrameSprite()->height() &&
 		serverPaddle->sprite.yPos + serverPaddle->sprite.getCurrentFrameSprite()->height() > serverBall->sprite.yPos)
@@ -288,7 +288,7 @@ void NetworkingState::updateServer(float dt)
 	{
 		serverBall->movingLeft = true;
 		serverBall->dirY = game_data->getRandomNumberGenerator()->getRandomFloat(-0.8, 0.8);
-	}
+	}*/
 }
 
 void NetworkingState::updateClient(float dt)
@@ -297,7 +297,16 @@ void NetworkingState::updateClient(float dt)
 
 void NetworkingState::onClientConnected(ClientInfo* ci) noexcept
 {
-	clientPaddle->entity_info.ownerID = ci->id;
+	//Send all existing entity information to the client
+
+	Packet p;
+	for (const auto& ent : entities)
+	{
+		p.reset();
+		p.setID(hash("CreateEntity"));
+		p << &ent->entity_info;
+		netman->sendPacket(ci->id, 0, &p);
+	}
 }
 
 void NetworkingState::onClientDisconnected(uint32_t client_id) noexcept
@@ -382,6 +391,10 @@ void NetworkingState::onPacketReceived(const enet_uint8 channel_id, ClientInfo* 
 
 				entities.back()->entity_info = info;
 			}
+		} break;
+		case hash("ClientID"):
+		{
+			createEntity<Paddle>(game_data);
 		}
 	}
 }

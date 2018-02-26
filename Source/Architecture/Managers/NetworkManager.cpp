@@ -50,6 +50,8 @@ void NetworkManager::initialize(bool hostServer)
 
 void NetworkManager::reset()
 {
+	update();
+
 	if (hosting_server)
 	{
 		server.stop_listening();
@@ -59,7 +61,10 @@ void NetworkManager::reset()
 		client.disconnect();
 	}
 
+	update();
+
 	initialized = false;
+	client_connected_to_server = false;
 }
 
 void NetworkManager::update()
