@@ -32,7 +32,7 @@ public:
 	void setState(CharacterState new_state);
 
 	void setIsActive(bool new_active);
-	bool getIsActive();
+	bool getIsActive() const;
 	void initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend);
 	void setPosition(float x, float y);
 
@@ -42,7 +42,7 @@ public:
 	void loadCharacterTextureStrings();
 
 	void update(float dt);
-	void render(ASGE::Renderer* renderer);
+	void render(ASGE::Renderer* renderer) const;
 
 private:
 

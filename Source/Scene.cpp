@@ -113,9 +113,9 @@ void Scene::populateProps()
 	//props_pool.push_back(std::move(p))
 	for(unsigned int i = 0; i < number_of_props; i++)
 	{
-		Prop p;
-		p.initSprite(game_data->getRenderer(), propTextureStrings[i]);
-		props_pool.push_back(std::move(p));
+		Prop* p = new Prop;
+		p->initSprite(game_data->getRenderer(), propTextureStrings[i]);
+		props_pool.push_back(std::move(*p));
 	}
 }
 
@@ -138,7 +138,7 @@ void Scene::update(float dt)
 void Scene::render() const
 {
 	//TODO render all ACTIVE props and characters
-	for(Prop &current_prop : props_pool)
+	for (const Prop& current_prop : props_pool)
 	{
 		if(current_prop.getIsActive())
 		{
@@ -146,7 +146,7 @@ void Scene::render() const
 		}
 	}
 
-	for(Character current_character : character_pool)
+	for (const Character& current_character : character_pool)
 	{
 		if(current_character.getIsActive())
 		{

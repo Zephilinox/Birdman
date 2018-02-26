@@ -30,7 +30,7 @@ void Character::setIsActive(bool new_active)
 	isActive = new_active;
 }
 
-bool Character::getIsActive()
+bool Character::getIsActive() const
 {
 	return isActive;
 }
@@ -204,7 +204,7 @@ void Character::update(float dt)
 	}
 }
 
-void Character::render(ASGE::Renderer* renderer)
+void Character::render(ASGE::Renderer* renderer) const
 {
 		switch(char_state)
 		{

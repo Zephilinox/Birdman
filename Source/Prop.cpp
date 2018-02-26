@@ -29,7 +29,7 @@ void Prop::initSprite(ASGE::Renderer * rend, std::string texture_name)
 	//TODO - little bit of math to determine dimensions based on screen width / height?
 }
 
-void Prop::render(ASGE::Renderer * renderer)
+void Prop::render(ASGE::Renderer* renderer) const
 {
 	renderer->renderSprite(*prop_sprite);
 }

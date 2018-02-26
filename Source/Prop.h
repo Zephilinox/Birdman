@@ -15,7 +15,7 @@ public:
 	ASGE::Sprite* getSprite();
 
 	void initSprite(ASGE::Renderer* rend, std::string texture_name);
-	void render(ASGE::Renderer* renderer);
+	void render(ASGE::Renderer* renderer) const;
 
 private:
 	bool isActive = false;
