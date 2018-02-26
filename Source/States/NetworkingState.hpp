@@ -28,6 +28,52 @@ public:
 	void onActive() override final;
 	void onInactive() override final;
 
+	template <class T, class... Args>
+	void createEntity(Args... args)
+	{
+		//assert(netman->isInitialized());
+
+		if (netman->isServer())
+		{
+			entities.emplace_back(std::make_unique<T>(std::forward<Args>(args)...));
+			entities.back()->entity_info.networkID = next_network_id;
+			next_network_id++;
+			entities.back()->entity_info.ownerID = netman->clientID;
+
+			//Send packets to all clients (except us, of course)
+			Packet p;
+			p.setID(hash("CreateEntity"));
+			p << &entities.back()->entity_info;
+			netman->sendPacket(0, &p);
+		}
+		else
+		{
+			//Send packet to server with what we want to create
+			T ent(game_data);
+			Packet p;
+			p.setID(hash("CreateEntity"));
+			p << &ent.entity_info;
+			netman->sendPacket(0, &p);
+		}
+	}
+
+	template <class T, class... Args>
+	void createEntity(uint32_t ownerID, Args... args)
+	{
+		assert(netman->isInitialized() && netman->isServer());
+
+		entities.emplace_back(std::make_unique<T>(std::forward<Args>(args)...));
+		entities.back()->entity_info.networkID = next_network_id;
+		next_network_id++;
+		entities.back()->entity_info.ownerID = ownerID;
+
+		//Send packet to all clients
+		Packet p;
+		p.setID(hash("CreateEntity"));
+		p << &entities.back()->entity_info;
+		netman->sendPacket(0, &p);
+	}
+
 private:
 	//Server
 	void updateServer(float dt);
@@ -42,6 +88,10 @@ private:
 	void onServerSentPacket(const enet_uint8 channel_id, Packet p);
 
 	//Both
+	ManagedConnection managedOnConnect;
+	ManagedConnection managedOnDisconnect;
+	ManagedConnection managedOnSentPacket;
+
 	void onPacketReceived(const enet_uint8 channel_id, ClientInfo* ci, Packet p);
 	Entity* getEntity(uint32_t networkID);
 
@@ -52,6 +102,7 @@ private:
 	//Server
 	Paddle* serverPaddle;
 	Ball* serverBall;
+	unsigned int next_network_id = 1; //0 is invalid
 
 	//Client
 	Paddle* clientPaddle;
