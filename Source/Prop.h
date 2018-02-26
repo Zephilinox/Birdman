@@ -6,11 +6,11 @@ class Prop
 public:
 	Prop() = default;
 	//TODO Ricardo, this needed?
-	//yes, use getRenderer()->createUniqueSprite() to avoid deleting
 	~Prop() { delete prop_sprite; }
 
 	void setIsActive(bool new_active);
-	bool getIsActive();
+	bool getIsActive() const;
+	void setPosition(float x, float y);
 
 	ASGE::Sprite* getSprite();
 

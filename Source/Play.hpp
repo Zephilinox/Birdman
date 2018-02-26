@@ -52,9 +52,8 @@ public:
 
 	// setCurrentScene()
 	void create();
-	void update();
-	void render();
-	//Scene* getScene(int idx);
+	void update(float dt);
+	void render() const;
 	void moveToNextScene();
 	void moveToNextNight();
 
@@ -64,6 +63,8 @@ private:
 	GameData* game_data;
 
 	Audience audience;
+
+	std::unique_ptr<ASGE::Sprite> stage;
 
 	int current_scene = 0;
 	//TODO see this

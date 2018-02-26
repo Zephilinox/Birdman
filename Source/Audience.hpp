@@ -7,12 +7,16 @@ namespace ASGE
 	class Sprite;
 }
 
+class GameData;
+
+constexpr unsigned int max_approval = 100;
+
 class Audience
 {
 public:
 	//not really necessary to make them default since we don't define anything, can exclude them
 	//https://en.wikipedia.org/wiki/Rule_of_three_(C%2B%2B_programming) (/rule of five)
-	Audience();
+	Audience(GameData* data);
 	~Audience() = default;
 
 	int getSad();
@@ -35,7 +39,7 @@ private:
 	int approval_dark = 0;
 	int approval_shocking = 0;
 
-	const int max_approval = 100;
+	GameData* game_data;
 
 	ASGE::Sprite* audience_sprite = nullptr;
 };
