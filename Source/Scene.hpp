@@ -6,6 +6,7 @@
 #include "Prop.h"
 
 constexpr unsigned int number_of_props = 10;
+constexpr unsigned int number_of_characters = 5;
 
 class GameData;
 

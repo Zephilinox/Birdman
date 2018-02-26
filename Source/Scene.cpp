@@ -77,7 +77,7 @@ void Scene::initSceneProps(Play::SceneProps layout)
 
 void Scene::initSceneCharacter(Play::SceneCharacters chars)
 {
-	Character* R = new Character;
+	Character* R = new Character(game_data->getRenderer());
 	R->initCharacter(chars, game_data->getRenderer());
 	R->setIsActive(true);
 	R->setFacing(Character::CharacterFacing::EAST);

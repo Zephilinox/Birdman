@@ -50,12 +50,13 @@ public:
 	Play(GameData* data);
 	~Play();
 
-	// setCurrentScene()
 	void create();
 	void update(float dt);
 	void render() const;
 	void moveToNextScene();
 	void moveToNextNight();
+
+	Scene* getScene();
 
 private:
 	std::vector<Scene> scenes;

@@ -48,6 +48,10 @@ void Play::create()
 	scene1.scene_description = "The Theater is full, Riggan's attempt to ";
 	scene1.initSceneProps(Play::KITCHEN);
 	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
+	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
+	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
+	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
+	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
 	//TODO - Remove this
 	scene1.character_pool.at(0).setPosition(100.0f, 100.0f);
 
@@ -117,4 +121,9 @@ void Play::moveToNextNight()
 		//TODO - play finished, next play pls
 	}
 
+}
+
+Scene* Play::getScene()
+{
+	return &scenes[current_scene];
 }

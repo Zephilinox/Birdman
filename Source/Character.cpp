@@ -1,11 +1,13 @@
 #include "Character.h"
 #include "Play.hpp"
 #include <Engine\Renderer.h>
-#include <algorithm>
-#include <cmath>
 
 
-Character::Character()
+
+Character::Character(ASGE::Renderer* rend) : 
+	horizontal_walk_sprite(rend, true),
+	forward_walk_sprite(rend, true),
+	backward_walk_sprite(rend, true)
 {
 	loadCharacterTextureStrings();
 }
@@ -53,6 +55,21 @@ void Character::initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend)
 
 		idle_sprite_right = rend->createUniqueSprite();
 		idle_sprite_right->loadTexture(charTextureStrings[3]);
+
+		//left to right
+		horizontal_walk_sprite.addFrame(charTextureStrings[4], 250.0f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[5], 250.0f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[6], 250.0f, 0.0f, 0.0f);
+
+		//forward
+		forward_walk_sprite.addFrame(charTextureStrings[7], 250.0f, 0.0f, 0.0f);
+		forward_walk_sprite.addFrame(charTextureStrings[8], 250.0f, 0.0f, 0.0f);
+		forward_walk_sprite.addFrame(charTextureStrings[9], 250.0f, 0.0f, 0.0f);
+
+		//backward
+		backward_walk_sprite.addFrame(charTextureStrings[10], 250.0f, 0.0f, 0.0f);
+		backward_walk_sprite.addFrame(charTextureStrings[11], 250.0f, 0.0f, 0.0f);
+		backward_walk_sprite.addFrame(charTextureStrings[12], 250.0f, 0.0f, 0.0f);
 		break;
 	}
 	case Play::SceneCharacters::HANNAH:
@@ -102,26 +119,34 @@ void Character::loadCharacterTextureStrings()
 {
 	//TODO - maybe break this down so it's not such a fat function?
 	//TODO rename folders to follow actor names?
-	//RIGGAN
+	//RIGGAN IDLE
 	charTextureStrings[0] = "../../Resources/Textures/Clint/Forwards/ClintF1.png";
 	charTextureStrings[1] = "../../Resources/Textures/Clint/Backwards/ClingB1.png";
 	charTextureStrings[2] = "../../Resources/Textures/Clint/LeftTurn/ClintL1.png";
 	charTextureStrings[3] = "../../Resources/Textures/Clint/RightTurn/ClintR1.png";
-	charTextureStrings[4] = "../../Resources/Textures/5.png";
+
+	//RIGGAN WALKING - RIGHT
+	charTextureStrings[4] = "../../Resources/Textures/Clint/RightTurn/ClintR2.png";
+	charTextureStrings[5] = "../../Resources/Textures/Clint/RightTurn/ClintR3.png";
+	charTextureStrings[6] = "../../Resources/Textures/Clint/RightTurn/ClintR4.png";
+
+	//RIGGAN WALKING - FORWARD
+	charTextureStrings[7] = "../../Resources/Textures/Clint/Forwards/ClintF2.png";
+	charTextureStrings[8] = "../../Resources/Textures/Clint/Forwards/ClintF3.png";
+	charTextureStrings[9] = "../../Resources/Textures/Clint/Forwards/ClintF4.png";
+
+	//RIGGAN WALKING = BACKWARDS
+	charTextureStrings[10] = "../../Resources/Textures/Clint/Backwards/ClintB2.png";
+	charTextureStrings[11] = "../../Resources/Textures/Clint/Backwards/ClintB3.png";
+	charTextureStrings[12] = "../../Resources/Textures/Clint/Backwards/ClintB4.png";
 
 	//LESLEY
-	charTextureStrings[5] = "../../Resources/Textures/6.png";
-	charTextureStrings[6] = "../../Resources/Textures/7.png";
-	charTextureStrings[7] = "../../Resources/Textures/8.png";
-	charTextureStrings[8] = "../../Resources/Textures/9.png";
-	charTextureStrings[9] = "../../Resources/Textures/10.png";
-
 	//JOHN etc...
 }
 
+
 void Character::update(float dt)
 {
-
 	//TODO - move this into function?
 	//update all sprites positions to the same values
 	idle_sprite_forward->xPos(x_position);
@@ -133,19 +158,30 @@ void Character::update(float dt)
 	idle_sprite_left->xPos(x_position);
 	idle_sprite_left->yPos(y_position);
 
+	forward_walk_sprite.update(dt);
+	backward_walk_sprite.update(dt);
+	horizontal_walk_sprite.update(dt);
 
 	switch(char_state)
 	{
 	case IDLE:
 		{
-			//character_sprite.update();
-			break;
+		//TODO - refactor to not be setting these all the time?
+		horizontal_walk_sprite.restart();
+		horizontal_walk_sprite.pause();
+		backward_walk_sprite.restart();
+		backward_walk_sprite.pause();
+		forward_walk_sprite.restart();
+		forward_walk_sprite.pause();
+
+		break;
 		}
 
 	case WALKING:
 		{
 		bool xPosMatched = false;
 		bool yPosMatched = false;
+
 			if(x_position < target_x_position)
 			{
 				x_position += move_speed * dt;
@@ -177,24 +213,9 @@ void Character::update(float dt)
 				char_state = CharacterState::IDLE;
 			}
 
-			if(char_facing == WEST || char_facing == EAST)
-			{
-				//TODO pass game_data delta time through to here?
-				//horizontal_walk_sprite.update(double dt_milli);
-			}
-			else
-			{
-				//vertical_walk_sprite.update(double dt_milli);
-			}
-			break;
-		}
-	case POINTGUN:
-		{
-			break;
-		}
-	case SPEAKING:
-		{
-			//talking_sprite.update();
+			horizontal_walk_sprite.play();
+			backward_walk_sprite.play();
+			forward_walk_sprite.play();
 			break;
 		}
 	default:
@@ -235,51 +256,37 @@ void Character::render(ASGE::Renderer* renderer) const
 						break;
 					}
 				}
-				//renderer->renderSprite(*current_idle.lock());
 				break;
 			}
 
 			case WALKING:
 			{
-				//render current frame of walking sprite
-
-				//TODO REMOVE- USED ONLY IN TESTING MOVEMENT
 				switch(char_facing)
 				{
-				case NORTH:
-				{
-					renderer->renderSprite(*idle_sprite_back);
-					break;
-				}
-				case EAST:
-				{
-					renderer->renderSprite(*idle_sprite_right);
-					break;
-				}
-				case SOUTH:
-				{
-					renderer->renderSprite(*idle_sprite_forward);
-					break;
-				}
-				case WEST:
-				{
-					renderer->renderSprite(*idle_sprite_left);
-					break;
-				}
+					case NORTH:
+					{
+						renderer->renderSprite(*backward_walk_sprite.getCurrentFrameSprite());
+						break;
+					}
+					case EAST:
+					{
+						renderer->renderSprite(*horizontal_walk_sprite.getCurrentFrameSprite());
+						break;
+					}
+					case SOUTH:
+					{
+						renderer->renderSprite(*forward_walk_sprite.getCurrentFrameSprite());
+						break;
+					}
+					case WEST:
+					{
+						renderer->renderSprite(*horizontal_walk_sprite.getCurrentFrameSprite());
+						break;
+					}
 				}
 				break;
 			}
-			case POINTGUN:
-			{
-				//render pointing gun frame
-				break;
-			}
-			case SPEAKING:
-			{
-				//This may be handled in portrait?
-				//render current frame of talking sprite
-				break;
-			}
+
 			default:
 			{
 				break;

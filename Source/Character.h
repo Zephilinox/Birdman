@@ -3,7 +3,6 @@
 #include "Architecture\AnimatedSprite.hpp"
 #include "Play.hpp"
 
-constexpr unsigned int number_of_characters = 5;
 
 class Character
 {
@@ -21,11 +20,10 @@ public:
 	{
 		IDLE = 0,
 		WALKING,
-		POINTGUN,
-		SPEAKING
 	};
 
-	Character();
+	Character(ASGE::Renderer* rend);
+
 	~Character();
 
 	void setFacing(CharacterFacing new_facing);
@@ -39,8 +37,6 @@ public:
 	void slowMoveToPosition(float x, float y);
 	void fastMoveToPosition(float x, float y);
 
-	void loadCharacterTextureStrings();
-
 	void update(float dt);
 	void render(ASGE::Renderer* renderer) const;
 
@@ -50,23 +46,23 @@ private:
 
 	bool isActive = false;
 
-	std::string charTextureStrings[(number_of_characters * 4)];
+	std::string charTextureStrings[70];
 
-	//std::weak_ptr<ASGE::Sprite> current_idle;
 
 	float x_position = 0.0f;
 	float y_position = 0.0f;
 	float target_x_position = 300.0f;
 	float target_y_position = 300.0f;
 
-	//AnimatedSprite horizontal_walk_sprite;
-	//AnimatedSprite vertical_walk_sprite;
-	//AnimatedSprite talking_sprite;
-	std::shared_ptr<ASGE::Sprite> idle_sprite_forward;
-	std::shared_ptr<ASGE::Sprite> idle_sprite_right;
-	std::shared_ptr<ASGE::Sprite> idle_sprite_back;
-	std::shared_ptr<ASGE::Sprite> idle_sprite_left;
-	ASGE::Sprite* point_gun;
+	AnimatedSprite horizontal_walk_sprite;
+	AnimatedSprite forward_walk_sprite;
+	AnimatedSprite backward_walk_sprite;
+	std::unique_ptr<ASGE::Sprite> idle_sprite_forward;
+	std::unique_ptr<ASGE::Sprite> idle_sprite_right;
+	std::unique_ptr<ASGE::Sprite> idle_sprite_back;
+	std::unique_ptr<ASGE::Sprite> idle_sprite_left;
+
+	void loadCharacterTextureStrings();
 
 	CharacterFacing char_facing = SOUTH;
 	CharacterState char_state = IDLE;
