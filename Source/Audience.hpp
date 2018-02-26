@@ -19,27 +19,43 @@ public:
 	Audience(GameData* data);
 	~Audience() = default;
 
-	int getSad();
-	//humour?
-	int getLight();
-	//horror?
-	int getDark();
-	int getShocking();
-	//could base it off emotion wheels? maybe too much effort though
-	//https://en.wikipedia.org/wiki/Emotion#/media/File:Plutchik-wheel.svg
-	//gotta work out how the audience is going to work first
+	int getSadApproval();
+	int getLightApproval();
+	int getDarkApproval();
+	int getComedyApproval();
+
 
 	//todo: consider doing this in the constructor instead of having an init function
 	void varyApprovalsBetweenNights();
-	void loadAudienceSprite();
+	void loadAudienceSprites();
+
+	void setStartingApprovals(int starting_val);
+
+	float getOverallApproval();
+
+	//Use these to add values (positive or negative) to the approval
+	void addToSad(int);
+	void addToLight(int);
+	void addToDark(int);
+	void addToComedy(int);
 
 private:
-	int approval_sad = 0;
-	int approval_light = 0;
-	int approval_dark = 0;
-	int approval_shocking = 0;
+	int sad_multiplier = 0;
+	int light_multiplier = 0;
+	int dark_multiplier = 0;
+	int comedy_multiplier = 0;
+
+	float overallApproval = 0.0f;
+
+	float sad_approval = 0.0f;
+	float light_approval = 0.0f;
+	float dark_approval = 0.0f;
+	float comedy_approval = 0.0f;
 
 	GameData* game_data;
 
-	ASGE::Sprite* audience_sprite = nullptr;
+	std::unique_ptr<ASGE::Sprite> comedy_sprite;
+	std::unique_ptr<ASGE::Sprite> sad_sprite;
+	std::unique_ptr<ASGE::Sprite> light_sprite;
+	std::unique_ptr<ASGE::Sprite> dark_sprite;
 };
