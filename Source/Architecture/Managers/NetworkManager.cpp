@@ -161,20 +161,20 @@ void NetworkManager::updateClient()
 		disconnected.emit();
 	};
 
-	auto on_data_received = [&](const enet_uint8 channel_id, const enet_uint8* data, size_t data_size)
+	auto on_data_received = [this](const enet_uint8 channel_id, const enet_uint8* data, size_t data_size)
 	{
 		Packet p(data, data_size);
 		if (p.getID() != hash("ClientID"))
 		{
-			server_sent_packet.emit(std::move(channel_id), std::move(p));
+			this->server_sent_packet.emit(std::move(channel_id), std::move(p));
 		}
 		else
 		{
 			p >> clientID;
 			//eww
 			p.deserializePosition = sizeof(HashedID);
-			std::cout << "ClientID " << clientID << " received\n";
-			server_sent_packet.emit(std::move(channel_id), std::move(p));
+			std::cout << "ClientID " << this->clientID << " received\n";
+			this->server_sent_packet.emit(std::move(channel_id), std::move(p));
 		}
 	};
 

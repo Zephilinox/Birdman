@@ -190,28 +190,30 @@ NetworkingState::NetworkingState(GameData* game_data)
 	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 40, "CLIENT", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 120, "BACK", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 
-	menu.getButton(0).on_click.connect([this]()
+	menu.getButton(0).on_click.connect([&]()
 	{
-		this->netman->initialize(true);
-		this->netman->client_connected.connect(this, &NetworkingState::onClientConnected);
-		this->netman->client_disconnected.connect(this, &NetworkingState::onClientDisconnected);
-		this->netman->client_sent_packet.connect(this, &NetworkingState::onClientSentPacket);
+		netman->initialize(true);
+		managedOnConnect = netman->client_connected.connect(this, &NetworkingState::onClientConnected);
+		managedOnDisconnect = netman->client_disconnected.connect(this, &NetworkingState::onClientDisconnected);
+		managedOnSentPacket = netman->client_sent_packet.connect(this, &NetworkingState::onClientSentPacket);
 
 		createEntity<Paddle>(this->game_data);
 		createEntity<Ball>(this->game_data);
+		serverPaddle = static_cast<Paddle*>(getEntity(1));
+		serverBall = static_cast<Ball*>(getEntity(2));
 	});
 
 	menu.getButton(1).on_click.connect([&]()
 	{
 		netman->initialize(false);
-		netman->connected.connect(this, &NetworkingState::onConnected);
-		netman->disconnected.connect(this, &NetworkingState::onDisconnected);
-		netman->server_sent_packet.connect(this, &NetworkingState::onServerSentPacket);
+		managedOnConnect = netman->connected.connect(this, &NetworkingState::onConnected);
+		managedOnDisconnect = netman->disconnected.connect(this, &NetworkingState::onDisconnected);
+		managedOnSentPacket = netman->server_sent_packet.connect(this, &NetworkingState::onServerSentPacket);
 	});
 
-	menu.getButton(2).on_click.connect([game_data]()
+	menu.getButton(2).on_click.connect([this]()
 	{
-		game_data->getStateManager()->pop();
+		this->game_data->getStateManager()->pop();
 	});
 }
 
@@ -272,7 +274,7 @@ void NetworkingState::onInactive()
 void NetworkingState::updateServer(float dt)
 {
 	//Simple AABB collision check
-	/*if (serverPaddle->sprite.xPos < serverBall->sprite.xPos + serverBall->sprite.getCurrentFrameSprite()->width() &&
+	if (serverPaddle->sprite.xPos < serverBall->sprite.xPos + serverBall->sprite.getCurrentFrameSprite()->width() &&
 		serverPaddle->sprite.xPos + serverPaddle->sprite.getCurrentFrameSprite()->width() > serverBall->sprite.xPos &&
 		serverPaddle->sprite.yPos < serverBall->sprite.yPos + serverBall->sprite.getCurrentFrameSprite()->height() &&
 		serverPaddle->sprite.yPos + serverPaddle->sprite.getCurrentFrameSprite()->height() > serverBall->sprite.yPos)
@@ -281,14 +283,28 @@ void NetworkingState::updateServer(float dt)
 		serverBall->dirY = game_data->getRandomNumberGenerator()->getRandomFloat(-0.8, 0.8);
 	}
 
-	if (clientPaddle->sprite.xPos < serverBall->sprite.xPos + serverBall->sprite.getCurrentFrameSprite()->width() &&
-		clientPaddle->sprite.xPos + clientPaddle->sprite.getCurrentFrameSprite()->width() > serverBall->sprite.xPos &&
-		clientPaddle->sprite.yPos < serverBall->sprite.yPos + serverBall->sprite.getCurrentFrameSprite()->height() &&
-		clientPaddle->sprite.yPos + clientPaddle->sprite.getCurrentFrameSprite()->height() > serverBall->sprite.yPos)
+	uint32_t clientPaddleID = 0;
+	for (const auto& ent : entities)
 	{
-		serverBall->movingLeft = true;
-		serverBall->dirY = game_data->getRandomNumberGenerator()->getRandomFloat(-0.8, 0.8);
-	}*/
+		if (ent->entity_info.ownerID != 1 &&
+			ent->entity_info.type == hash("Paddle")) //1 is server id
+		{
+			clientPaddleID = ent->entity_info.networkID;
+			break;
+		}
+	}
+	clientPaddle = static_cast<Paddle*>(getEntity(clientPaddleID));
+	if (clientPaddle)
+	{
+		if (clientPaddle->sprite.xPos < serverBall->sprite.xPos + serverBall->sprite.getCurrentFrameSprite()->width() &&
+			clientPaddle->sprite.xPos + clientPaddle->sprite.getCurrentFrameSprite()->width() > serverBall->sprite.xPos &&
+			clientPaddle->sprite.yPos < serverBall->sprite.yPos + serverBall->sprite.getCurrentFrameSprite()->height() &&
+			clientPaddle->sprite.yPos + clientPaddle->sprite.getCurrentFrameSprite()->height() > serverBall->sprite.yPos)
+		{
+			serverBall->movingLeft = true;
+			serverBall->dirY = game_data->getRandomNumberGenerator()->getRandomFloat(-0.8, 0.8);
+		}
+	}
 }
 
 void NetworkingState::updateClient(float dt)

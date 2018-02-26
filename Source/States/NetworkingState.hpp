@@ -31,7 +31,7 @@ public:
 	template <class T, class... Args>
 	void createEntity(Args... args)
 	{
-		assert(netman->isInitialized());
+		//assert(netman->isInitialized());
 
 		if (netman->isServer())
 		{
@@ -88,6 +88,10 @@ private:
 	void onServerSentPacket(const enet_uint8 channel_id, Packet p);
 
 	//Both
+	ManagedConnection managedOnConnect;
+	ManagedConnection managedOnDisconnect;
+	ManagedConnection managedOnSentPacket;
+
 	void onPacketReceived(const enet_uint8 channel_id, ClientInfo* ci, Packet p);
 	Entity* getEntity(uint32_t networkID);
 
@@ -98,7 +102,7 @@ private:
 	//Server
 	Paddle* serverPaddle;
 	Ball* serverBall;
-	unsigned int next_network_id = 0;
+	unsigned int next_network_id = 1; //0 is invalid
 
 	//Client
 	Paddle* clientPaddle;
