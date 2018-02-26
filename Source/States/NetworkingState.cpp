@@ -349,6 +349,26 @@ void NetworkingState::onPacketReceived(const enet_uint8 channel_id, ClientInfo* 
 				}
 			}
 		} break;
+		/*case hash("SpawnEntity"):
+		{
+			//so if client sends a spawn ent, just trust it. create the ent with the owner id and entity id it gave us. but then the network ID might not be right, so.. we send back the network id?
+			EntityInfo info;
+			p >> &info;
+			if (!ent) //make sure it doesn't exist
+			{
+				//uint32_t netId = spawnEntity(info);
+				if (netman->isServer()) //send this info to all clients now
+				{
+					Packet p;
+					p.setID(hash("SpawnEntity"));
+					p << &info;
+					netman->sendPacket(0, p, ENET_PACKET_FLAG_RELIABLE, [ci](const ClientInfo& client)
+					{
+						return client.id != ci->id; //don't send to client that told us to spawn entity;
+					})
+				}
+			}
+		}*/
 	}
 }
 
