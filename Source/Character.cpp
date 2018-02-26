@@ -4,7 +4,7 @@
 
 
 
-Character::Character(ASGE::Renderer* rend) : 
+Character::Character(ASGE::Renderer* rend) :
 	horizontal_walk_sprite(rend, true),
 	forward_walk_sprite(rend, true),
 	backward_walk_sprite(rend, true)
@@ -57,9 +57,12 @@ void Character::initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend)
 		idle_sprite_right->loadTexture(charTextureStrings[3]);
 
 		//left to right
-		horizontal_walk_sprite.addFrame(charTextureStrings[4], 250.0f, 0.0f, 0.0f);
-		horizontal_walk_sprite.addFrame(charTextureStrings[5], 250.0f, 0.0f, 0.0f);
-		horizontal_walk_sprite.addFrame(charTextureStrings[6], 250.0f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[4], 0.250f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[5], 0.250f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[6], 0.25f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[5], 0.250f, 0.0f, 0.0f);
+		horizontal_walk_sprite.xPos = 300.0f;
+		horizontal_walk_sprite.yPos = 300.0f;
 
 		//forward
 		forward_walk_sprite.addFrame(charTextureStrings[7], 250.0f, 0.0f, 0.0f);
@@ -84,10 +87,6 @@ void Character::initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend)
 	{
 		break;
 	}	
-	case Play::SceneCharacters::FISTO:
-	{
-		break;
-	}
 	default:
 		break;
 	}
@@ -126,19 +125,19 @@ void Character::loadCharacterTextureStrings()
 	charTextureStrings[3] = "../../Resources/Textures/Clint/RightTurn/ClintR1.png";
 
 	//RIGGAN WALKING - RIGHT
-	charTextureStrings[4] = "../../Resources/Textures/Clint/RightTurn/ClintR2.png";
-	charTextureStrings[5] = "../../Resources/Textures/Clint/RightTurn/ClintR3.png";
-	charTextureStrings[6] = "../../Resources/Textures/Clint/RightTurn/ClintR4.png";
+	charTextureStrings[4] = "Clint/RightTurn/ClintR2";
+	charTextureStrings[5] = "Clint/RightTurn/ClintR3";
+	charTextureStrings[6] = "Clint/RightTurn/ClintR4";
 
 	//RIGGAN WALKING - FORWARD
-	charTextureStrings[7] = "../../Resources/Textures/Clint/Forwards/ClintF2.png";
-	charTextureStrings[8] = "../../Resources/Textures/Clint/Forwards/ClintF3.png";
-	charTextureStrings[9] = "../../Resources/Textures/Clint/Forwards/ClintF4.png";
+	charTextureStrings[7] = "Clint/Forwards/ClintF2";
+	charTextureStrings[8] = "Clint/Forwards/ClintF3";
+	charTextureStrings[9] = "Clint/Forwards/ClintF4";
 
 	//RIGGAN WALKING = BACKWARDS
-	charTextureStrings[10] = "../../Resources/Textures/Clint/Backwards/ClintB2.png";
-	charTextureStrings[11] = "../../Resources/Textures/Clint/Backwards/ClintB3.png";
-	charTextureStrings[12] = "../../Resources/Textures/Clint/Backwards/ClintB4.png";
+	charTextureStrings[10] = "Clint/Backwards/ClintB2";
+	charTextureStrings[11] = "Clint/Backwards/ClintB3";
+	charTextureStrings[12] = "Clint/Backwards/ClintB4";
 
 	//LESLEY
 	//JOHN etc...

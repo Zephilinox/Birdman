@@ -6,7 +6,7 @@
 
 
 
-Play::Play(GameData* data): audience(game_data)
+Play::Play(GameData* data): audience(data)
 {
 	scenes.reserve(number_of_scenes);
 	game_data = data;
@@ -53,7 +53,7 @@ void Play::create()
 	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
 	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
 	//TODO - Remove this
-	scene1.character_pool.at(0).setPosition(100.0f, 100.0f);
+	scene1.character_pool.at(0)->setPosition(100.0f, 100.0f);
 
 	scene1.dark.stage_description = "The play is going down a dark path...";
 	scene1.dark.scene = &scene2;

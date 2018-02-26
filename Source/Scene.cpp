@@ -77,11 +77,12 @@ void Scene::initSceneProps(Play::SceneProps layout)
 
 void Scene::initSceneCharacter(Play::SceneCharacters chars)
 {
-	Character* R = new Character(game_data->getRenderer());
+	std::unique_ptr<Character> R(new Character(game_data->getRenderer()));
 	R->initCharacter(chars, game_data->getRenderer());
 	R->setIsActive(true);
 	R->setFacing(Character::CharacterFacing::EAST);
-	character_pool.push_back(std::move(*R));
+	character_pool.push_back(std::move(R));
+
 }
 
 void Scene::loadPropTextureStrings()
@@ -126,11 +127,11 @@ void Scene::setSceneID(int id)
 
 void Scene::update(float dt)
 {
-	for(Character &current_character : character_pool)
+	for(auto& current_character : character_pool)
 	{
-		if(current_character.getIsActive())
+		if(current_character->getIsActive())
 		{
-			current_character.update(dt);
+			current_character->update(dt);
 		}
 	}
 }
@@ -146,11 +147,11 @@ void Scene::render() const
 		}
 	}
 
-	for (const Character& current_character : character_pool)
+	for (auto& current_character : character_pool)
 	{
-		if(current_character.getIsActive())
+		if(current_character->getIsActive())
 		{
-			current_character.render(game_data->getRenderer());
+			current_character->render(game_data->getRenderer());
 		}
 	}
 }

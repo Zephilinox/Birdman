@@ -23,7 +23,6 @@ public:
 	};
 
 	Character(ASGE::Renderer* rend);
-
 	~Character();
 
 	void setFacing(CharacterFacing new_facing);
@@ -65,5 +64,5 @@ private:
 	void loadCharacterTextureStrings();
 
 	CharacterFacing char_facing = SOUTH;
-	CharacterState char_state = IDLE;
+	CharacterState char_state = WALKING;
 };

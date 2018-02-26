@@ -27,7 +27,6 @@ public:
 	AnimatedSprite(AnimatedSprite&& other) = delete;
 	AnimatedSprite& operator= (const AnimatedSprite& other) = delete;
 	AnimatedSprite& operator= (AnimatedSprite&& other) = delete;
-	
 	void update(double dt);
 
 	void addFrame(std::string texture, float frame_length_milliseconds, float relative_x = 0, float relative_y = 0);

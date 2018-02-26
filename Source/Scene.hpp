@@ -45,7 +45,7 @@ private:
 
 	//TODO - object pool of props
 	std::vector<Prop> props_pool;
-	std::vector<Character> character_pool;
+	std::vector<std::unique_ptr<Character>> character_pool;
 
 	int light_value = 0;
 	int dark_value = 0;
