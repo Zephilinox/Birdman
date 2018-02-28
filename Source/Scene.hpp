@@ -8,8 +8,6 @@
 constexpr unsigned int number_of_props = 10;
 constexpr unsigned int number_of_characters = 5;
 
-class GameData;
-
 class Scene
 {
 	friend class Play;
@@ -21,7 +19,7 @@ class Scene
 	};
 
 public:
-	Scene(GameData* data);
+	Scene();
 	std::string getName() const;
 	std::string getDescription() const;
 
@@ -39,10 +37,7 @@ private:
 	std::string scene_description;
 
 	std::string propTextureStrings[number_of_props];
-
-
-	GameData* game_data;
-
+	
 	//TODO - object pool of props
 	std::vector<Prop> props_pool;
 	std::vector<std::unique_ptr<Character>> character_pool;

@@ -8,17 +8,17 @@ Button::Button() noexcept
 {
 }
 
-void Button::render(GameData* game_data) const
+void Button::render() const
 {
-	game_data->getFontManager()->setFont("Default");
+	GameData::getFonts()->setFont("Default");
 
 	if (selected)
 	{
-		game_data->getRenderer()->renderText(name.c_str(), pos_x, pos_y, 1.0f, selected_colour);
+		GameData::getRenderer()->renderText(name.c_str(), pos_x, pos_y, 1.0f, selected_colour);
 	}
 	else
 	{
-		game_data->getRenderer()->renderText(name.c_str(), pos_x, pos_y, 1.0f, colour);
+		GameData::getRenderer()->renderText(name.c_str(), pos_x, pos_y, 1.0f, colour);
 	}
 }
 

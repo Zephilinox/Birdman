@@ -11,7 +11,7 @@ class GameData;
 class PlaySelectState : public BaseState
 {
 public:
-	PlaySelectState(GameData* game_data);
+	PlaySelectState();
 
 	void update(const ASGE::GameTime&) override final;
 	void render() const override final;

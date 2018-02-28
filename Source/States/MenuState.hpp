@@ -13,7 +13,7 @@ class GameData;
 class MenuState : public BaseState
 {
 public:
-	MenuState(GameData* game_data);
+	MenuState();
 
 	void update(const ASGE::GameTime&) override final;
 	void render() const override final;

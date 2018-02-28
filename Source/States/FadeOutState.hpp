@@ -20,7 +20,7 @@ class GameData;
 class FadeOutState : public BaseState
 {
 public:
-	FadeOutState(GameData* game_data, std::function<void()> callback);
+	FadeOutState(std::function<void()> callback);
 	void update(const ASGE::GameTime& gt) override final;
 	void render() const override final;
 	void onActive() override final;

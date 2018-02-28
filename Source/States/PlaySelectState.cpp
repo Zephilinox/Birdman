@@ -1,7 +1,7 @@
 #include "PlaySelectState.hpp"
 
-PlaySelectState::PlaySelectState(GameData* game_data)
-	: BaseState(game_data)
+PlaySelectState::PlaySelectState()
+	: BaseState(false)
 {
 }
 

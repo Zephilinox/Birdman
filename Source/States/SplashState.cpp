@@ -4,8 +4,8 @@
 #include "../States/MenuState.hpp"
 #include "../States/FadeOutState.hpp"
 
-SplashState::SplashState(GameData* game_data)
-	: BaseState(game_data)
+SplashState::SplashState()
+	: BaseState(false)
 {
 }
 
@@ -13,14 +13,14 @@ void SplashState::update(const ASGE::GameTime& gt)
 {
 	if (timer.getElapsedTime() > 1)
 	{
-		game_data->getStateManager()->pop();
-		game_data->getStateManager()->push<MenuState>();
+		GameData::getStates()->pop();
+		GameData::getStates()->push<MenuState>();
 	}
 }
 
 void SplashState::render() const
 {
-	game_data->getRenderer()->renderText("SPLASH SCREEN", 560, 320);
+	GameData::getRenderer()->renderText("SPLASH SCREEN", 560, 320);
 }
 
 void SplashState::onActive()

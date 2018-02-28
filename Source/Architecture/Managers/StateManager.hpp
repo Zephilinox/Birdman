@@ -18,7 +18,7 @@ class GameData;
 class StateManager
 {
 public:
-	StateManager(GameData* game_data) noexcept;
+	StateManager() noexcept = default;
 
 	void update(const ASGE::GameTime& gt);
 	void render() const;
@@ -31,14 +31,13 @@ public:
 	bool empty() const noexcept;
 
 private:
-	GameData* game_data;
 	std::vector<std::unique_ptr<BaseState>> states;
 };
 
 template <class T>
 void StateManager::push()
 {
-	game_data->getMessageQueue()->sendPriorityMessage<FunctionMessage>(
+	GameData::getMessageQueue()->sendPriorityMessage<FunctionMessage>(
 	[&]()
 	{
 		if (!states.empty())
@@ -46,14 +45,14 @@ void StateManager::push()
 			states.back()->onInactive();
 		}
 
-		states.push_back(std::make_unique<T>(game_data));
+		states.push_back(std::make_unique<T>());
 	});
 }
 
 template <class T, class... Args>
 void StateManager::push(Args... args)
 {
-	game_data->getMessageQueue()->sendPriorityMessage<FunctionMessage>(
+	GameData::getMessageQueue()->sendPriorityMessage<FunctionMessage>(
 	[&, args...]()
 	{
 		if (!states.empty())
@@ -61,6 +60,6 @@ void StateManager::push(Args... args)
 			states.back()->onInactive();
 		}
 
-		states.push_back(std::make_unique<T>(game_data, args...));
+		states.push_back(std::make_unique<T>(args...));
 	});
 }

@@ -12,7 +12,7 @@ class GameData;
 class SplashState : public BaseState
 {
 public:
-	SplashState(GameData* game_data);
+	SplashState();
 
 	void update(const ASGE::GameTime&) override final;
 	void render() const override final;

@@ -15,7 +15,7 @@
 class FadeInState : public BaseState
 {
 public:
-	FadeInState(GameData* game_data);
+	FadeInState();
 	void update(const ASGE::GameTime& gt) override final;
 	void render() const override final;
 	void onActive() override final;

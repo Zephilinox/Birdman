@@ -5,10 +5,10 @@
 #include "../Constants.hpp"
 #include "../Architecture/GameData.hpp"
 
-FadeOutState::FadeOutState(GameData* game_data, std::function<void()> callback)
-	: BaseState(game_data, true)
-	, left_curtain(game_data->getRenderer()->createRawSprite())
-	, right_curtain(game_data->getRenderer()->createRawSprite())
+FadeOutState::FadeOutState(std::function<void()> callback)
+	: BaseState(true)
+	, left_curtain(GameData::getRenderer()->createRawSprite())
+	, right_curtain(GameData::getRenderer()->createRawSprite())
 	, fade_end_callback(callback)
 {
 	if (!left_curtain->loadTexture("../../Resources/Textures/leftcurtain.png"))
@@ -20,8 +20,8 @@ FadeOutState::FadeOutState(GameData* game_data, std::function<void()> callback)
 		throw "Failed to load rightcurtain.png";
 	}
 
-	left_curtain->xPos(float(-game_data->getWindowWidth()/2));
-	right_curtain->xPos(float(game_data->getWindowWidth()));
+	left_curtain->xPos(float(-GameData::getWindowWidth()/2));
+	right_curtain->xPos(float(GameData::getWindowWidth()));
 }
 
 void FadeOutState::update(const ASGE::GameTime& gt)
@@ -31,7 +31,7 @@ void FadeOutState::update(const ASGE::GameTime& gt)
 		left_curtain->xPos(left_curtain->xPos() + (500 * float((gt.delta_time.count() / 1000.0f))));
 		right_curtain->xPos(right_curtain->xPos() - (500 * float((gt.delta_time.count() / 1000.0f))));
 
-		if (left_curtain->xPos() >= 0 && right_curtain->xPos() <= game_data->getWindowWidth() / 2)
+		if (left_curtain->xPos() >= 0 && right_curtain->xPos() <= GameData::getWindowWidth() / 2)
 		{
 			timer.restart();
 			closed = true;
@@ -40,16 +40,16 @@ void FadeOutState::update(const ASGE::GameTime& gt)
 	
 	if (closed && timer.getElapsedTime() >= 0.1f)
 	{
-		game_data->getStateManager()->pop();
+		GameData::getStates()->pop();
 		fade_end_callback();
-		game_data->getStateManager()->push<FadeInState>();
+		GameData::getStates()->push<FadeInState>();
 	}
 }
 
 void FadeOutState::render() const
 {
-	game_data->getRenderer()->renderSprite(*left_curtain);
-	game_data->getRenderer()->renderSprite(*right_curtain);
+	GameData::getRenderer()->renderSprite(*left_curtain);
+	GameData::getRenderer()->renderSprite(*right_curtain);
 }
 
 void FadeOutState::onActive()

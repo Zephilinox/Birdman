@@ -80,9 +80,7 @@ private:
 
 	void keyHandler(const ASGE::SharedEventData data);
 	void toggleFullscreen();
-	void setup();
 private:
 	int key_handler_id = -1;  /**< Input Callback ID. The callback ID assigned by the game engine. */
-	std::unique_ptr<GameData> game_data;
 };
 

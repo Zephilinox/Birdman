@@ -10,13 +10,11 @@
 //SELF
 #include "../Architecture/Dialogues/DialogueTree.hpp"
 #include "../Constants.hpp"
+#include "../Architecture/Managers/FontManager.hpp"
 
-VisualDialogue::VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree, std::string default_dialogue)
-	: game_data(game_data)
-	, dialogue_tree(dialogue_tree)
-	, options(game_data)
+VisualDialogue::VisualDialogue(DialogueTree* dialogue_tree, std::string default_dialogue)
+	: dialogue_tree(dialogue_tree)
 	, default_dialogue(default_dialogue)
-	, dialogueFinishedMarker(game_data->getRenderer())
 {
 	ini_parser ini("settings.ini");
 	
@@ -32,7 +30,7 @@ VisualDialogue::VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree,
 	}
 
 	dialogueFinishedMarker.xPos = 500;
-	dialogueFinishedMarker.yPos = game_data->getWindowHeight() - 150.0f;
+	dialogueFinishedMarker.yPos = GameData::getWindowHeight() - 150.0f;
 	dialogueFinishedMarker.addFrame("UI/DialogueMarker", 0.6f);
 	dialogueFinishedMarker.addFrame("UI/DialogueMarker", 0.3f, 0, -10);
 	dialogueFinishedMarker.pause();
@@ -53,7 +51,7 @@ void VisualDialogue::interact()
 
 	if (selected_option >= 0)
 	{
-		options = Menu(game_data);
+		options = Menu();
 		const auto& txt = dialogue_tree->play(dialogue_tree->current_player_options[selected_option]->next());
 		setDialogueText(txt);
 		selected_option = -1;
@@ -82,7 +80,7 @@ void VisualDialogue::setupPlayerOptions()
 		std::string txt = dialogue_tree->current_player_options[i]->text();
 		if (txt != "")
 		{
-			int id = options.addButton(30, game_data->getWindowHeight() - 120 + (validOptions * 30), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
+			int id = options.addButton(30, GameData::getWindowHeight() - 120 + (validOptions * 30), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 			options.getButton(std::move(id)).on_click.connect(
 			[&, i]()
 			{
@@ -166,7 +164,7 @@ void VisualDialogue::updateTree()
 
 void VisualDialogue::render() const
 {
-	game_data->getFontManager()->setFont("Default");
+	GameData::getFonts()->setFont("Default");
 
 	Actor* speaker = dialogue_tree->getSpeaker();
 	if (dialogue_tree->player_option && dialogue_tree->getPreviousDialogue() && !dialogue_tree->getPreviousDialogue()->player_option)
@@ -176,21 +174,21 @@ void VisualDialogue::render() const
 
 	if (speaker)
 	{
-		game_data->getRenderer()->renderText(speaker->realName.c_str(), 600, game_data->getWindowHeight() - 150);
+		GameData::getRenderer()->renderText(speaker->realName.c_str(), 600, GameData::getWindowHeight() - 150);
 
 		if (speaker->portrait)
 		{
 			speaker->portrait->xPos(600);
-			speaker->portrait->yPos(game_data->getWindowHeight() - 135.0f);
-			game_data->getRenderer()->renderSprite(*speaker->portrait.get());
+			speaker->portrait->yPos(GameData::getWindowHeight() - 135.0f);
+			GameData::getRenderer()->renderSprite(*speaker->portrait.get());
 		}
 	}
 
-	game_data->getRenderer()->renderText(dialogue_text.substr(0, dialogue_text_characters).c_str(), 30, game_data->getWindowHeight() - 250);
+	GameData::getRenderer()->renderText(dialogue_text.substr(0, dialogue_text_characters).c_str(), 30, GameData::getWindowHeight() - 250);
 
 	if (dialogue_text != "" && dialogue_text_characters >= dialogue_text.length())
 	{
-		game_data->getRenderer()->renderSprite(*dialogueFinishedMarker.getCurrentFrameSprite());
+		GameData::getRenderer()->renderSprite(*dialogueFinishedMarker.getCurrentFrameSprite());
 	}
 
 	options.render();

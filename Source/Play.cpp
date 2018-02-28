@@ -6,14 +6,13 @@
 
 
 
-Play::Play(GameData* data): audience(data)
+Play::Play()
 {
 	scenes.reserve(number_of_scenes);
-	game_data = data;
-	stage = data->getRenderer()->createUniqueSprite();
+	stage = GameData::getRenderer()->createUniqueSprite();
 	stage->loadTexture("../../Resources/Textures/stage.png");
-	stage->width((float)data->getWindowWidth());
-	stage->height((float)data->getWindowHeight() * 0.65f);
+	stage->width((float)GameData::getWindowWidth());
+	stage->height((float)GameData::getWindowHeight() * 0.65f);
 	stage->xPos(0.0f);
 	stage->yPos(0.0f);
 }
@@ -28,7 +27,7 @@ void Play::create()
 	//Call functions here based on the play to instanciate
 	for (int i = 0; i < number_of_scenes; i++)
 	{
-		Scene s(game_data);
+		Scene s;
 		scenes.push_back(std::move(s));
 	}
 
@@ -78,7 +77,7 @@ void Play::update(float dt)
 void Play::render() const
 {
 	//Render stage background
-	game_data->getRenderer()->renderSprite(*stage);
+	GameData::getRenderer()->renderSprite(*stage);
 
 	scenes[current_scene].render();
 	//Render  VisualDialogue*

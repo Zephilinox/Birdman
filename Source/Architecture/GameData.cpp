@@ -6,22 +6,47 @@
 //LIB
 #include <ini_parser.hpp>
 
-GameData::GameData(ASGE::Renderer* renderer, int width, int height)
-	: renderer(renderer)
-	, state_manager(this)
-	, font_manager(renderer)
-	, audio_manager("Resources/Sounds/")
-	, network_manager(this) //todo: evaluate if needed
-	, window_width(width)
-	, window_height(height)
+//SELF
+#include "Managers/FontManager.hpp"
+#include "Managers/AudioManager.hpp"
+#include "Managers/NetworkManager.hpp"
+
+ASGE::Renderer*					GameData::renderer;
+std::unique_ptr<InputManager>	GameData::input;
+std::unique_ptr<StateManager>	GameData::states;
+std::unique_ptr<FontManager>	GameData::fonts;
+std::unique_ptr<MessageQueue>	GameData::message_queue;
+std::unique_ptr<AudioManager>	GameData::audio;
+std::unique_ptr<NetworkManager>	GameData::network;
+std::unique_ptr<Rng>			GameData::RNG;
+
+int GameData::window_width = 0;
+int GameData::window_height = 0;
+
+bool GameData::initialized = false;
+
+void GameData::initialize(ASGE::Renderer* render, int width, int height)
 {
-	assert(renderer);
+	assert(!initialized);
+	assert(render);
+	initialized = true;
+
+	renderer = render;
+	input = std::move(std::make_unique<InputManager>());
+	states = std::move(std::make_unique<StateManager>());
+	fonts = std::move(std::make_unique<FontManager>());
+	message_queue = std::move(std::make_unique<MessageQueue>());
+	audio = std::move(std::make_unique<AudioManager>("Resources/Sounds/"));
+	network = std::move(std::make_unique<NetworkManager>());
+	RNG = std::move(std::make_unique<Rng>());
+	
+	window_width = width;
+	window_height = height;
 
 	ini_parser ini("settings.ini");
-
 	try
 	{
-		audio_manager.setEngineType(ini.get_int("AudioEngine"));
+		audio->setEngineType(ini.get_int("AudioEngine"));
 	}
 	catch (std::runtime_error& e)
 	{
@@ -30,44 +55,44 @@ GameData::GameData(ASGE::Renderer* renderer, int width, int height)
 	}
 }
 
-ASGE::Renderer* GameData::getRenderer() const noexcept
+ASGE::Renderer* GameData::getRenderer() noexcept
 {
 	return renderer;
 }
 
-InputManager* GameData::getInputManager() noexcept
+InputManager* GameData::getInput() noexcept
 {
-	return &input_manager;
+	return input.get();
 }
 
-FontManager* GameData::getFontManager() noexcept
+FontManager* GameData::getFonts() noexcept
 {
-	return &font_manager;
+	return fonts.get();
 }
 
 MessageQueue* GameData::getMessageQueue() noexcept
 {
-	return &message_queue;
+	return message_queue.get();
 }
 
-StateManager* GameData::getStateManager() noexcept
+StateManager* GameData::getStates() noexcept
 {
-	return &state_manager;
+	return states.get();
 }
 
-AudioManager* GameData::getAudioManager() noexcept
+AudioManager* GameData::getAudio() noexcept
 {
-	return &audio_manager;
+	return audio.get();
 }
 
-Rng* GameData::getRandomNumberGenerator() noexcept
+Rng* GameData::getRNG() noexcept
 {
-	return &random_number_gen;
+	return RNG.get();
 }
 
-NetworkManager* GameData::getNetworkManager() noexcept
+NetworkManager* GameData::getNetwork() noexcept
 {
-	return &network_manager;
+	return network.get();
 }
 
 int GameData::getWindowWidth() noexcept

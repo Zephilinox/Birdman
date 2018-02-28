@@ -25,7 +25,7 @@ struct ClientInfo
 class NetworkManager
 {
 public:
-	NetworkManager(GameData* game_data);
+	NetworkManager();
 	~NetworkManager();
 
 	void initialize(bool hostServer);
@@ -59,7 +59,6 @@ private:
 	void updateServer();
 	void updateClient();
 
-	GameData* game_data;
 	bool initialized = false;
 	bool hosting_server = true;
 	bool client_connected_to_server = false;

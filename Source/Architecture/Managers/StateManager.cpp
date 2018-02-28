@@ -7,11 +7,6 @@
 #include "../States/BaseState.hpp"
 #include "../GameData.hpp"
 
-StateManager::StateManager(GameData* game_data) noexcept
-	: game_data(game_data)
-{
-}
-
 void StateManager::update(const ASGE::GameTime& gt)
 {
 	if (states.empty())
@@ -57,7 +52,7 @@ BaseState* StateManager::top() const
 
 void StateManager::pop()
 {
-	game_data->getMessageQueue()->sendPriorityMessage<FunctionMessage>(
+	GameData::getMessageQueue()->sendPriorityMessage<FunctionMessage>(
 	[&]()
 	{
 		if (states.empty())

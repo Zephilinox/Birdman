@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "NetworkManager.hpp"
 
-NetworkManager::NetworkManager(GameData* game_data)
-	: game_data(game_data)
+NetworkManager::NetworkManager()
 {
 	enetpp::global_state::get().initialize();
 }

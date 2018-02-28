@@ -2,12 +2,10 @@
 #include "Play.hpp"
 #include <Engine\Renderer.h>
 
+//SELF
+#include "Architecture/GameData.hpp"
 
-
-Character::Character(ASGE::Renderer* rend) :
-	horizontal_walk_sprite(rend, true),
-	forward_walk_sprite(rend, true),
-	backward_walk_sprite(rend, true)
+Character::Character()
 {
 	loadCharacterTextureStrings();
 }
@@ -37,9 +35,11 @@ bool Character::getIsActive() const
 	return isActive;
 }
 
-void Character::initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend)
+void Character::initCharacter(Play::SceneCharacters actor)
 {
 	//TODO load textures appropriate to the character
+	auto* rend = GameData::getRenderer();
+
 	switch(actor)
 	{
 	case Play::SceneCharacters::RIGGAN:
@@ -224,71 +224,73 @@ void Character::update(float dt)
 	}
 }
 
-void Character::render(ASGE::Renderer* renderer) const
+void Character::render() const
 {
-		switch(char_state)
+	auto* renderer = GameData::getRenderer();
+
+	switch(char_state)
+	{
+		case IDLE:
 		{
-			case IDLE:
+			//TODO - render current idle sprite
+			//render idle sprite in current facing
+			switch(char_facing)
 			{
-				//TODO - render current idle sprite
-				//render idle sprite in current facing
-				switch(char_facing)
+				case NORTH:
 				{
-					case NORTH:
-					{
-						renderer->renderSprite(*idle_sprite_back);
-						break;
-					}
-					case EAST:
-					{
-						renderer->renderSprite(*idle_sprite_right);
-						break;
-					}
-					case SOUTH:
-					{
-						renderer->renderSprite(*idle_sprite_forward);
-						break;
-					}
-					case WEST:
-					{
-						renderer->renderSprite(*idle_sprite_left);
-						break;
-					}
+					renderer->renderSprite(*idle_sprite_back);
+					break;
 				}
-				break;
-			}
-
-			case WALKING:
-			{
-				switch(char_facing)
+				case EAST:
 				{
-					case NORTH:
-					{
-						renderer->renderSprite(*backward_walk_sprite.getCurrentFrameSprite());
-						break;
-					}
-					case EAST:
-					{
-						renderer->renderSprite(*horizontal_walk_sprite.getCurrentFrameSprite());
-						break;
-					}
-					case SOUTH:
-					{
-						renderer->renderSprite(*forward_walk_sprite.getCurrentFrameSprite());
-						break;
-					}
-					case WEST:
-					{
-						renderer->renderSprite(*horizontal_walk_sprite.getCurrentFrameSprite());
-						break;
-					}
+					renderer->renderSprite(*idle_sprite_right);
+					break;
 				}
-				break;
+				case SOUTH:
+				{
+					renderer->renderSprite(*idle_sprite_forward);
+					break;
+				}
+				case WEST:
+				{
+					renderer->renderSprite(*idle_sprite_left);
+					break;
+				}
 			}
-
-			default:
-			{
-				break;
-			}
+			break;
 		}
+
+		case WALKING:
+		{
+			switch(char_facing)
+			{
+				case NORTH:
+				{
+					renderer->renderSprite(*backward_walk_sprite.getCurrentFrameSprite());
+					break;
+				}
+				case EAST:
+				{
+					renderer->renderSprite(*horizontal_walk_sprite.getCurrentFrameSprite());
+					break;
+				}
+				case SOUTH:
+				{
+					renderer->renderSprite(*forward_walk_sprite.getCurrentFrameSprite());
+					break;
+				}
+				case WEST:
+				{
+					renderer->renderSprite(*horizontal_walk_sprite.getCurrentFrameSprite());
+					break;
+				}
+			}
+			break;
+		}
+
+		default:
+		{
+			break;
+		}
+	}
 }

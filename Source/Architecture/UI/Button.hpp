@@ -16,7 +16,7 @@ class Button
 public:
 	Button() noexcept;
 
-	void render(GameData* game_data) const;
+	void render() const;
 
 	bool isSelected() const noexcept;
 	void setSelected(bool selected) noexcept;

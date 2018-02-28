@@ -3,9 +3,11 @@
 //LIB
 #include <Engine/Renderer.h>
 
-AnimatedSprite::AnimatedSprite(ASGE::Renderer* renderer, bool loop) noexcept
-	: renderer(renderer)
-	, loop(loop)
+//SELF
+#include "GameData.hpp"
+
+AnimatedSprite::AnimatedSprite(bool loop) noexcept
+	: loop(loop)
 {}
 
 void AnimatedSprite::update(double dt_milli)
@@ -30,7 +32,7 @@ void AnimatedSprite::addFrame(std::string texture, float frame_length_millisecon
 	frame_data.relative_x = relative_x;
 	frame_data.relative_y = relative_y;
 
-	std::unique_ptr<ASGE::Sprite> spr(renderer->createRawSprite());
+	std::unique_ptr<ASGE::Sprite> spr(GameData::getRenderer()->createRawSprite());
 	frames.push_back(std::make_pair(std::move(spr), frame_data));
 	if (!frames.back().first->loadTexture(std::string("../../Resources/Textures/" + texture + ".png").c_str()))
 	{

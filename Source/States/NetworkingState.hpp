@@ -20,7 +20,7 @@ class Ball;
 class NetworkingState : public BaseState
 {
 public:
-	NetworkingState(GameData* game_data);
+	NetworkingState();
 	~NetworkingState();
 
 	void update(const ASGE::GameTime&) override final;
@@ -31,7 +31,7 @@ public:
 	template <class T, class... Args>
 	void createEntity(Args... args)
 	{
-		//assert(netman->isInitialized());
+		assert(netman->isInitialized());
 
 		if (netman->isServer())
 		{
@@ -49,7 +49,7 @@ public:
 		else
 		{
 			//Send packet to server with what we want to create
-			T ent(game_data);
+			T ent;
 			Packet p;
 			p.setID(hash("CreateEntity"));
 			p << &ent.entity_info;

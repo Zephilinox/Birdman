@@ -14,7 +14,7 @@ public:
 	using FontID = int;
 	using FontSize = int;
 	
-	FontManager(ASGE::Renderer* renderer, std::string font_path = "");
+	FontManager(std::string font_path = "");
 	
 	//Call these to add a new font from a font file
 	void addFont(const std::string& path, const std::string& name, FontSize size);
@@ -23,7 +23,6 @@ public:
 	void setFont(const std::string& name);
 
 private:
-	ASGE::Renderer* renderer;
 	std::unordered_map<std::string, FontID> fonts;
 	std::string font_path;
 };

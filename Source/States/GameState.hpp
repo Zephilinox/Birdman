@@ -15,7 +15,7 @@ class GameData;
 class GameState : public BaseState
 {
 public:
-	GameState(GameData* game_data);
+	GameState();
 
 	void update(const ASGE::GameTime&) override final;
 	void render() const override final;

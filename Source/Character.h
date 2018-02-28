@@ -22,7 +22,7 @@ public:
 		WALKING,
 	};
 
-	Character(ASGE::Renderer* rend);
+	Character();
 	~Character();
 
 	void setFacing(CharacterFacing new_facing);
@@ -30,14 +30,14 @@ public:
 
 	void setIsActive(bool new_active);
 	bool getIsActive() const;
-	void initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend);
+	void initCharacter(Play::SceneCharacters actor);
 	void setPosition(float x, float y);
 
 	void slowMoveToPosition(float x, float y);
 	void fastMoveToPosition(float x, float y);
 
 	void update(float dt);
-	void render(ASGE::Renderer* renderer) const;
+	void render() const;
 
 private:
 

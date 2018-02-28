@@ -11,7 +11,7 @@ class GameData;
 class Menu
 {
 public:
-	Menu(GameData* game_data, bool vertical = true);
+	Menu(bool vertical = true);
 
 	void update();
 	void render() const;
@@ -22,7 +22,6 @@ public:
 private:
 	void selectButton(int button_id);
 
-	GameData* game_data;
 	std::vector<Button> buttons;
 
 	unsigned selected_button_id;

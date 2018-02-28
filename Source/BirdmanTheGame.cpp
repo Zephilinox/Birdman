@@ -12,6 +12,8 @@
 #include "Constants.hpp"
 #include "States/SplashState.hpp"
 #include "Architecture/Messages/FunctionMessage.hpp"
+#include "Architecture/Managers/NetworkManager.hpp"
+#include "Architecture/Managers/FontManager.hpp"
 
 BirdmanTheGame::~BirdmanTheGame()
 {
@@ -35,18 +37,17 @@ bool BirdmanTheGame::init()
 	toggleFPS();
 
 	key_handler_id = inputs->addCallbackFnc(ASGE::EventType::E_KEY, &BirdmanTheGame::keyHandler, this);
-
-	game_data = std::make_unique<GameData>(renderer.get(), game_width, game_height);
-	game_data->getFontManager()->addFont("../../Resources/Fonts/DroidSansMono.ttf", "Default", 24);
 	
-	game_data->getStateManager()->push<SplashState>();
+	GameData::initialize(renderer.get(), game_width, game_height);
+	GameData::getFonts()->addFont("../../Resources/Fonts/DroidSansMono.ttf", "Default", 24);	
+	GameData::getStates()->push<SplashState>();
 
-	game_data->getMessageQueue()->addListener([](Message* msg)
+	GameData::getMessageQueue()->addListener([](Message* msg)
 	{
-		std::cout << "Processed\t" << msg->id << "\n";
+		//std::cout << "Processed\t" << msg->id << "\n";
 	});
 
-	game_data->getMessageQueue()->addListener([](Message* msg)
+	GameData::getMessageQueue()->addListener([](Message* msg)
 	{
 		if (msg->id == FunctionMessage::ID)
 		{
@@ -69,23 +70,23 @@ void BirdmanTheGame::update(const ASGE::GameTime& gt)
 		);
 	}
 
-	game_data->getNetworkManager()->update();
-	game_data->getMessageQueue()->processMessages(3ms);
+	GameData::getNetwork()->update();
+	GameData::getMessageQueue()->processMessages(3ms);
 
-	game_data->getInputManager()->update();
-	game_data->getStateManager()->update(gt);
+	GameData::getInput()->update();
+	GameData::getStates()->update(gt);
 
-	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_F1))
+	if (GameData::getInput()->isKeyPressed(ASGE::KEYS::KEY_F1))
 	{
 		toggleFullscreen();
 	}
 
-	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ESCAPE))
+	if (GameData::getInput()->isKeyPressed(ASGE::KEYS::KEY_ESCAPE))
 	{
-		game_data->getStateManager()->pop();
+		GameData::getStates()->pop();
 	}
 	
-	if (renderer->exit() || this->exit || game_data->getStateManager()->empty())
+	if (renderer->exit() || this->exit || GameData::getStates()->empty())
 	{
 		signalExit();
 	}
@@ -93,14 +94,14 @@ void BirdmanTheGame::update(const ASGE::GameTime& gt)
 
 void BirdmanTheGame::render(const ASGE::GameTime& gt)
 {
-	game_data->getStateManager()->render();
+	GameData::getStates()->render();
 }
 
 void BirdmanTheGame::keyHandler(const ASGE::SharedEventData data)
 {
 	const auto key_event = static_cast<const ASGE::KeyEvent*>(data.get());
 
-	game_data->getInputManager()->handleInput(key_event->key, key_event->action);
+	GameData::getInput()->handleInput(key_event->key, key_event->action);
 }
 
 void BirdmanTheGame::toggleFullscreen()

@@ -54,14 +54,13 @@ Packet& operator >>(Packet& p, Entity* e)
 class Paddle : public Entity
 {
 public:
-	Paddle(GameData* game_data)
-		: sprite(game_data->getRenderer())
-		, game_data(game_data)
+	Paddle()
+		: sprite(GameData::getRenderer())
 	{
 		entity_info.type = hash("Paddle");
 		sprite.addFrame("Portraits/blabbering_npc", 1);
 
-		if (game_data->getNetworkManager()->isServer())
+		if (GameData::getNetwork()->isServer())
 		{
 			sprite.xPos = 60;
 			sprite.yPos = 720 / 2;
@@ -77,13 +76,13 @@ public:
 	{
 		sprite.update(dt);
 
-		if (entity_info.ownerID == game_data->getNetworkManager()->clientID)
+		if (entity_info.ownerID == GameData::getNetwork()->clientID)
 		{
-			if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_W))
+			if (GameData::getInput()->isKeyDown(ASGE::KEYS::KEY_W))
 			{
 				sprite.yPos -= 1000 * dt;
 			}
-			else if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_S))
+			else if (GameData::getInput()->isKeyDown(ASGE::KEYS::KEY_S))
 			{
 				sprite.yPos += 1000 * dt;
 			}
@@ -93,7 +92,7 @@ public:
 			p << &entity_info
 				<< sprite.xPos
 				<< sprite.yPos;
-			game_data->getNetworkManager()->sendPacket(0, &p);
+			GameData::getNetwork()->sendPacket(0, &p);
 		}
 	}
 
@@ -108,15 +107,13 @@ public:
 	}
 
 	AnimatedSprite sprite;
-	GameData* game_data;
 };
 
 class Ball : public Entity
 {
 public:
-	Ball(GameData* game_data)
-		: sprite(game_data->getRenderer())
-		, game_data(game_data)
+	Ball()
+		: sprite(GameData::getRenderer())
 	{
 		entity_info.type = hash("Ball");
 		sprite.addFrame("UI/DialogueMarker", 1);
@@ -128,7 +125,7 @@ public:
 	{
 		sprite.update(dt);
 
-		if (game_data->getNetworkManager()->isServer())
+		if (GameData::getNetwork()->isServer())
 		{
 			if (sprite.yPos < 0)
 			{
@@ -136,32 +133,32 @@ public:
 				sprite.yPos = 0;
 			}
 
-			if (sprite.yPos + sprite.getCurrentFrameSprite()->height() > game_data->getWindowHeight())
+			if (sprite.yPos + sprite.getCurrentFrameSprite()->height() > GameData::getWindowHeight())
 			{
 				dirY = -dirY;
-				sprite.yPos = game_data->getWindowHeight() - sprite.getCurrentFrameSprite()->height();
+				sprite.yPos = GameData::getWindowHeight() - sprite.getCurrentFrameSprite()->height();
 			}
 
 			if (sprite.xPos + sprite.getCurrentFrameSprite()->width() < 0 ||
-				sprite.xPos > game_data->getWindowWidth())
+				sprite.xPos > GameData::getWindowWidth())
 			{
 				sprite.xPos = 1280 / 2;
 				dirY = 0;
-				movingLeft = game_data->getRandomNumberGenerator()->getRandomInt(0, 1);
+				movingLeft = GameData::getRNG()->getRandomInt(0, 1);
 			}
 
 			sprite.xPos += 200 * dt * (movingLeft ? -1 : 1);
 			sprite.yPos += 200 * dt * dirY;
 		}
 
-		if (entity_info.ownerID == game_data->getNetworkManager()->clientID)
+		if (entity_info.ownerID == GameData::getNetwork()->clientID)
 		{
 			Packet p;
 			p.setID(hash("Entity"));
 			p << &entity_info
 				<< sprite.xPos
 				<< sprite.yPos;
-			game_data->getNetworkManager()->sendPacket(0, &p);
+			GameData::getNetwork()->sendPacket(0, &p);
 		}
 	}
 
@@ -176,44 +173,42 @@ public:
 	}
 
 	AnimatedSprite sprite;
-	GameData* game_data;
 	bool movingLeft = false;
 	float dirY = 0;
 };
 
-NetworkingState::NetworkingState(GameData* game_data)
-	: BaseState(game_data)
-	, netman(game_data->getNetworkManager())
-	, menu(game_data)
+NetworkingState::NetworkingState()
+	: BaseState(false)
+	, netman(GameData::getNetwork())
 {	
-	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 - 40, "SERVER", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
-	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 40, "CLIENT", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
-	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 120, "BACK", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(GameData::getWindowWidth() / 2 - 80, GameData::getWindowHeight() / 2 - 40, "SERVER", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(GameData::getWindowWidth() / 2 - 80, GameData::getWindowHeight() / 2 + 40, "CLIENT", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(GameData::getWindowWidth() / 2 - 80, GameData::getWindowHeight() / 2 + 120, "BACK", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 
-	menu.getButton(0).on_click.connect([&]()
+	menu.getButton(0).on_click.connect([this]()
 	{
-		netman->initialize(true);
-		managedOnConnect = netman->client_connected.connect(this, &NetworkingState::onClientConnected);
-		managedOnDisconnect = netman->client_disconnected.connect(this, &NetworkingState::onClientDisconnected);
-		managedOnSentPacket = netman->client_sent_packet.connect(this, &NetworkingState::onClientSentPacket);
+		GameData::getNetwork()->initialize(true);
+		managedOnConnect = GameData::getNetwork()->client_connected.connect(this, &NetworkingState::onClientConnected);
+		managedOnDisconnect = GameData::getNetwork()->client_disconnected.connect(this, &NetworkingState::onClientDisconnected);
+		managedOnSentPacket = GameData::getNetwork()->client_sent_packet.connect(this, &NetworkingState::onClientSentPacket);
 
-		createEntity<Paddle>(this->game_data);
-		createEntity<Ball>(this->game_data);
+		createEntity<Paddle>();
+		createEntity<Ball>();
 		serverPaddle = static_cast<Paddle*>(getEntity(1));
 		serverBall = static_cast<Ball*>(getEntity(2));
 	});
 
-	menu.getButton(1).on_click.connect([&]()
+	menu.getButton(1).on_click.connect([this]()
 	{
-		netman->initialize(false);
-		managedOnConnect = netman->connected.connect(this, &NetworkingState::onConnected);
-		managedOnDisconnect = netman->disconnected.connect(this, &NetworkingState::onDisconnected);
-		managedOnSentPacket = netman->server_sent_packet.connect(this, &NetworkingState::onServerSentPacket);
+		GameData::getNetwork()->initialize(false);
+		managedOnConnect = GameData::getNetwork()->connected.connect(this, &NetworkingState::onConnected);
+		managedOnDisconnect = GameData::getNetwork()->disconnected.connect(this, &NetworkingState::onDisconnected);
+		managedOnSentPacket = GameData::getNetwork()->server_sent_packet.connect(this, &NetworkingState::onServerSentPacket);
 	});
 
-	menu.getButton(2).on_click.connect([this]()
+	menu.getButton(2).on_click.connect([]()
 	{
-		this->game_data->getStateManager()->pop();
+		GameData::getStates()->pop();
 	});
 }
 
@@ -254,7 +249,7 @@ void NetworkingState::render() const
 	{
 		for (const auto& ent : entities)
 		{
-			ent->render(game_data->getRenderer());
+			ent->render(GameData::getRenderer());
 		}
 	}
 	else
@@ -280,7 +275,7 @@ void NetworkingState::updateServer(float dt)
 		serverPaddle->sprite.yPos + serverPaddle->sprite.getCurrentFrameSprite()->height() > serverBall->sprite.yPos)
 	{
 		serverBall->movingLeft = false;
-		serverBall->dirY = game_data->getRandomNumberGenerator()->getRandomFloat(-0.8, 0.8);
+		serverBall->dirY = GameData::getRNG()->getRandomFloat(-0.8, 0.8);
 	}
 
 	uint32_t clientPaddleID = 0;
@@ -302,7 +297,7 @@ void NetworkingState::updateServer(float dt)
 			clientPaddle->sprite.yPos + clientPaddle->sprite.getCurrentFrameSprite()->height() > serverBall->sprite.yPos)
 		{
 			serverBall->movingLeft = true;
-			serverBall->dirY = game_data->getRandomNumberGenerator()->getRandomFloat(-0.8, 0.8);
+			serverBall->dirY = GameData::getRNG()->getRandomFloat(-0.8, 0.8);
 		}
 	}
 }
@@ -382,11 +377,11 @@ void NetworkingState::onPacketReceived(const enet_uint8 channel_id, ClientInfo* 
 				{
 					case hash("Paddle"):
 					{
-						createEntity<Paddle>(ci->id, game_data);
+						createEntity<Paddle>(ci->id);
 					} break;
 					case hash("Ball"):
 					{
-						createEntity<Ball>(ci->id, game_data);
+						createEntity<Ball>(ci->id);
 					} break;
 				}
 			}
@@ -397,11 +392,11 @@ void NetworkingState::onPacketReceived(const enet_uint8 channel_id, ClientInfo* 
 					//issue with constructor data, oh no
 					case hash("Paddle"):
 					{
-						entities.emplace_back(std::make_unique<Paddle>(game_data));
+						entities.emplace_back(std::make_unique<Paddle>());
 					} break;
 					case hash("Ball"):
 					{
-						entities.emplace_back(std::make_unique<Ball>(game_data));
+						entities.emplace_back(std::make_unique<Ball>());
 					} break;
 				}
 
@@ -410,7 +405,7 @@ void NetworkingState::onPacketReceived(const enet_uint8 channel_id, ClientInfo* 
 		} break;
 		case hash("ClientID"):
 		{
-			createEntity<Paddle>(game_data);
+			createEntity<Paddle>();
 		}
 	}
 }

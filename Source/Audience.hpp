@@ -14,9 +14,7 @@ constexpr unsigned int max_approval = 100;
 class Audience
 {
 public:
-	//not really necessary to make them default since we don't define anything, can exclude them
-	//https://en.wikipedia.org/wiki/Rule_of_three_(C%2B%2B_programming) (/rule of five)
-	Audience(GameData* data);
+	Audience();
 	~Audience() = default;
 
 	int getSadApproval();
@@ -51,8 +49,6 @@ private:
 	float light_approval = 0.0f;
 	float dark_approval = 0.0f;
 	float comedy_approval = 0.0f;
-
-	GameData* game_data;
 
 	std::unique_ptr<ASGE::Sprite> comedy_sprite;
 	std::unique_ptr<ASGE::Sprite> sad_sprite;

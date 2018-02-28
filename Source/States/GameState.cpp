@@ -10,10 +10,9 @@
 #include "../Architecture/GameData.hpp"
 #include "../Constants.hpp"
 
-GameState::GameState(GameData* game_data)
-	: BaseState(game_data)
-	, visual_dialogue(game_data, &dialogue_tree, "start_extra")
-	, play_01(game_data)
+GameState::GameState()
+	: BaseState(false)
+	, visual_dialogue(&dialogue_tree, "start_extra")
 {
 	//add all the dialogue to the dialogue tree. each level would have its own dialogue tree
 	dialogue_init();
@@ -29,7 +28,7 @@ void GameState::update(const ASGE::GameTime& gt)
 	visual_dialogue.update(float(gt.delta_time.count()) / 1000.0f);
 	play_01.update(float(gt.delta_time.count()) / 1000.0f);
 
-	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER))
+	if (GameData::getInput()->isKeyPressed(ASGE::KEYS::KEY_ENTER))
 	{
 		visual_dialogue.interact();
 	}
@@ -52,12 +51,12 @@ void GameState::onInactive()
 void GameState::dialogue_init()
 {
 	dialogue_tree.getActor("player")->realName = "TeamBirb";
-	auto spr = game_data->getRenderer()->createUniqueSprite();
+	auto spr = GameData::getRenderer()->createUniqueSprite();
 	spr->loadTexture("../../Resources/Textures/Portraits/player.png");
 	dialogue_tree.getActor("player")->portrait = std::move(spr);
 
 	dialogue_tree.getActor("strange_npc")->realName = "Stranger";
-	spr = game_data->getRenderer()->createUniqueSprite();
+	spr = GameData::getRenderer()->createUniqueSprite();
 	spr->loadTexture("../../Resources/Textures/Portraits/strange_npc.png");
 	dialogue_tree.getActor("strange_npc")->portrait = std::move(spr);
 
@@ -246,7 +245,7 @@ void GameState::dialogue_init()
 
 	//Town Scene
 	dialogue_tree.getActor("blab_npc")->realName = "Old Man";
-	spr = game_data->getRenderer()->createUniqueSprite();
+	spr = GameData::getRenderer()->createUniqueSprite();
 	spr->loadTexture("../../Resources/Textures/Portraits/blabbering_npc.png");
 	dialogue_tree.getActor("blab_npc")->portrait = std::move(spr);
 

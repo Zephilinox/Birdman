@@ -49,12 +49,9 @@ public:
 	}
 
 protected:
-	BaseState(GameData* game_data, bool render_previous_state = false)
-		: game_data(game_data)
-		, render_previous_state(render_previous_state)
+	BaseState(bool render_previous_state = false)
+		: render_previous_state(render_previous_state)
 	{}
-
-	GameData* game_data;
 
 	bool render_previous_state = false;
 };

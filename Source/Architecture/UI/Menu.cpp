@@ -3,9 +3,9 @@
 //SELF
 #include "../GameData.hpp"
 #include "../Managers/InputManager.hpp"
+#include "../Managers/AudioManager.hpp"
 
-Menu::Menu(GameData* game_data, bool vertical)
-	: game_data(game_data)
+Menu::Menu(bool vertical)
 {
 	buttons.reserve(4);
 	selected_button_id = 0;
@@ -30,8 +30,8 @@ void Menu::update()
 {
 	if (buttons.empty()) return;
 
-	if (game_data->getInputManager()->isKeyPressed(key_decrement) ||
-		game_data->getInputManager()->isKeyPressed(key_decrement_alt))
+	if (GameData::getInput()->isKeyPressed(key_decrement) ||
+		GameData::getInput()->isKeyPressed(key_decrement_alt))
 	{
 		if (selected_button_id == buttons.size() - 1)
 		{
@@ -43,8 +43,8 @@ void Menu::update()
 		}
 	}
 	
-	if (game_data->getInputManager()->isKeyPressed(key_increment) ||
-		game_data->getInputManager()->isKeyPressed(key_increment_alt))
+	if (GameData::getInput()->isKeyPressed(key_increment) ||
+		GameData::getInput()->isKeyPressed(key_increment_alt))
 	{
 		if (selected_button_id == 0)
 		{
@@ -56,9 +56,9 @@ void Menu::update()
 		}
 	}
 
-	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER))
+	if (GameData::getInput()->isKeyPressed(ASGE::KEYS::KEY_ENTER))
 	{
-		game_data->getAudioManager()->play("button_click.wav");
+		GameData::getAudio()->play("button_click.wav");
 
 		if (buttons.size())
 		{
@@ -71,7 +71,7 @@ void Menu::render() const
 {
 	for (const Button& b : buttons)
 	{
-		b.render(game_data);
+		b.render();
 	}
 }
 
@@ -103,5 +103,5 @@ void Menu::selectButton(int button_id)
 	selected_button_id = button_id;
 	buttons[selected_button_id].setSelected(true);
 
-	game_data->getAudioManager()->play("button_select.wav");
+	GameData::getAudio()->play("button_select.wav");
 }

@@ -21,7 +21,7 @@ public:
 		float frame_length_milliseconds;
 	};
 
-	AnimatedSprite(ASGE::Renderer* renderer, bool loop = true) noexcept;
+	AnimatedSprite(bool loop = true) noexcept;
 
 	AnimatedSprite(const AnimatedSprite& other) = delete;
 	AnimatedSprite(AnimatedSprite&& other) = delete;
@@ -42,8 +42,6 @@ public:
 
 private:
 	void nextFrame();
-
-	ASGE::Renderer* renderer;
 
 	bool playing = true;
 	bool loop;

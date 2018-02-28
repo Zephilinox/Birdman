@@ -5,15 +5,13 @@
 //STD
 #include <random>
 
-Audience::Audience(GameData* data)
+Audience::Audience()
 {
 	//TODO: move this to some kind of RNG class we can use anywhere
-	game_data = data;
-
-	sad_multiplier = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
-	comedy_multiplier = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
-	light_multiplier = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
-	dark_multiplier = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
+	sad_multiplier = GameData::getRNG()->getRandomInt(1, max_approval);
+	comedy_multiplier = GameData::getRNG()->getRandomInt(1, max_approval);
+	light_multiplier = GameData::getRNG()->getRandomInt(1, max_approval);
+	dark_multiplier = GameData::getRNG()->getRandomInt(1, max_approval);
 
 	loadAudienceSprites();
 
@@ -64,10 +62,10 @@ void Audience::varyApprovalsBetweenNights()
 
 void Audience::loadAudienceSprites()
 {
-	comedy_sprite = game_data->getRenderer()->createUniqueSprite();
-	sad_sprite = game_data->getRenderer()->createUniqueSprite();
-	light_sprite = game_data->getRenderer()->createUniqueSprite();
-	dark_sprite = game_data->getRenderer()->createUniqueSprite();
+	comedy_sprite = GameData::getRenderer()->createUniqueSprite();
+	sad_sprite = GameData::getRenderer()->createUniqueSprite();
+	light_sprite = GameData::getRenderer()->createUniqueSprite();
+	dark_sprite = GameData::getRenderer()->createUniqueSprite();
 	
 	//TODO - Brendon - This is where we'll load the sprites for the audience reactions.
 	//Add them in when you have them

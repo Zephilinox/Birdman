@@ -4,9 +4,8 @@
 #include "Character.h"
 #include "Architecture\GameData.hpp"
 
-Scene::Scene(GameData * data)
+Scene::Scene()
 {
-	game_data = data;
 	props_pool.reserve(number_of_props);
 	character_pool.reserve(number_of_characters);
 	loadPropTextureStrings();
@@ -31,17 +30,17 @@ void Scene::initSceneProps(Play::SceneProps layout)
 		case Play::SceneProps::KITCHEN:
 		{
 			props_pool.at(0).setIsActive(true);
-			props_pool.at(0).setPosition((game_data->getWindowWidth() * 0.5f) - (props_pool.at(0).getSprite()->width() * 0.5f), game_data->getWindowHeight() * 0.1f);
+			props_pool.at(0).setPosition((GameData::getWindowWidth() * 0.5f) - (props_pool.at(0).getSprite()->width() * 0.5f), GameData::getWindowHeight() * 0.1f);
 			props_pool.at(1).setIsActive(true);
-			props_pool.at(1).setPosition((game_data->getWindowWidth() * 0.5f) - (props_pool.at(1).getSprite()->width() * 0.5f), game_data->getWindowHeight() * 0.35f);
+			props_pool.at(1).setPosition((GameData::getWindowWidth() * 0.5f) - (props_pool.at(1).getSprite()->width() * 0.5f), GameData::getWindowHeight() * 0.35f);
 			break;
 		}
 		case Play::SceneProps::APARTMENT_BEDROOM:
 		{
 			props_pool.at(2).setIsActive(true);
-			props_pool.at(2).setPosition((game_data->getWindowWidth() * 0.5f) - (props_pool.at(2).getSprite()->width() * 0.5f), game_data->getWindowHeight() * 0.15f);
+			props_pool.at(2).setPosition((GameData::getWindowWidth() * 0.5f) - (props_pool.at(2).getSprite()->width() * 0.5f), GameData::getWindowHeight() * 0.15f);
 			props_pool.at(3).setIsActive(true);
-			props_pool.at(3).setPosition((game_data->getWindowWidth() * 0.5f) - (props_pool.at(3).getSprite()->width() * 0.5f), game_data->getWindowHeight() * 0.25f);
+			props_pool.at(3).setPosition((GameData::getWindowWidth() * 0.5f) - (props_pool.at(3).getSprite()->width() * 0.5f), GameData::getWindowHeight() * 0.25f);
 			break;
 		}
 		case Play::SceneProps::ALLEYWAY:
@@ -77,8 +76,8 @@ void Scene::initSceneProps(Play::SceneProps layout)
 
 void Scene::initSceneCharacter(Play::SceneCharacters chars)
 {
-	std::unique_ptr<Character> R(new Character(game_data->getRenderer()));
-	R->initCharacter(chars, game_data->getRenderer());
+	std::unique_ptr<Character> R(new Character());
+	R->initCharacter(chars);
 	R->setIsActive(true);
 	R->setFacing(Character::CharacterFacing::EAST);
 	character_pool.push_back(std::move(R));
@@ -115,7 +114,7 @@ void Scene::populateProps()
 	for(unsigned int i = 0; i < number_of_props; i++)
 	{
 		Prop* p = new Prop;
-		p->initSprite(game_data->getRenderer(), propTextureStrings[i]);
+		p->initSprite(GameData::getRenderer(), propTextureStrings[i]);
 		props_pool.push_back(std::move(*p));
 	}
 }
@@ -143,7 +142,7 @@ void Scene::render() const
 	{
 		if(current_prop.getIsActive())
 		{
-			current_prop.render(game_data->getRenderer());
+			current_prop.render(GameData::getRenderer());
 		}
 	}
 
@@ -151,7 +150,7 @@ void Scene::render() const
 	{
 		if(current_character->getIsActive())
 		{
-			current_character->render(game_data->getRenderer());
+			current_character->render();
 		}
 	}
 }

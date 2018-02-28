@@ -21,7 +21,7 @@ enum DialogueSpeed
 class VisualDialogue
 {
 public:
-	VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree, std::string default_dialogue);
+	VisualDialogue(DialogueTree* dialogue_tree, std::string default_dialogue);
 	
 	void setDefaultDialogue(std::string dialogue);
 
@@ -36,7 +36,6 @@ private:
 	void setDialogueText(std::string text);
 	void setDialogueSpeed(int speed) noexcept;
 
-	GameData* game_data;
 	DialogueTree* dialogue_tree;
 
 	std::string default_dialogue;

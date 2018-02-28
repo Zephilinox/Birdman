@@ -1,61 +1,53 @@
 #pragma once
 
-//LIB
 #include <Engine/Renderer.h>
-
-//SELF
-#include "Managers/InputManager.hpp"
 #include "Managers/StateManager.hpp"
-#include "Managers/FontManager.hpp"
-#include "Messages/MessageQueue.hpp"
-#include "Managers/AudioManager.hpp"
-#include "Managers/NetworkManager.hpp"
 #include "Rng.h"
+#include "Messages/MessageQueue.hpp"
+#include "Managers/InputManager.hpp"
+
+namespace ASGE
+{
+	class Renderer;
+}
+
+class StateManager;
+class InputManager;
+class FontManager;
+class MessageQueue;
+class AudioManager;
+class NetworkManager;
+class Rng;
 
 class GameData
 {
-public:
-	GameData(ASGE::Renderer* renderer, int width, int height);
+public:	
+	static void				initialize(ASGE::Renderer* render, int width, int height);
 
-	ASGE::Renderer* getRenderer() const noexcept;
-	StateManager* getStateManager() noexcept;
-	InputManager* getInputManager() noexcept;
-	FontManager* getFontManager() noexcept;
-	MessageQueue* getMessageQueue() noexcept;
-	AudioManager* getAudioManager() noexcept;
-	NetworkManager* getNetworkManager() noexcept;
-	Rng* getRandomNumberGenerator() noexcept;
+	static ASGE::Renderer*	getRenderer()		noexcept;
+	static StateManager*	getStates()			noexcept;
+	static InputManager*	getInput()			noexcept;
+	static FontManager*		getFonts()			noexcept;
+	static MessageQueue*	getMessageQueue()	noexcept;
+	static AudioManager*	getAudio()			noexcept;
+	static NetworkManager*	getNetwork()		noexcept;
+	static Rng*				getRNG()			noexcept;
 	
-	int getWindowWidth() noexcept;
-	int getWindowHeight() noexcept;
+	static int				getWindowWidth()	noexcept;
+	static int				getWindowHeight()	noexcept;
 
 private:
-	ASGE::Renderer* renderer = nullptr;
+	static ASGE::Renderer*					renderer;
+	static std::unique_ptr<InputManager>	input;
+	static std::unique_ptr<StateManager>	states;
+	static std::unique_ptr<FontManager>		fonts;
+	static std::unique_ptr<MessageQueue>	message_queue;
+	static std::unique_ptr<AudioManager>	audio;
+	static std::unique_ptr<NetworkManager>	network;
+	static std::unique_ptr<Rng>				RNG;
 
-	/** Input Manager. A wrapper around key states from callbacks by ASGE::Input. */
-	//This can be removed, just make sure that input is not multithreaded and add new functions to states to handle events.
-	//Alternatively convert ASGE events and push them to our queue by using a wrapper, but that shouldn't be necessary.
-	InputManager input_manager;
+	static int window_width;
+	static int window_height;
 
-	/** State Manager. A wrapper around storing states in a stack. */
-	StateManager state_manager;
-
-	/* Works a little differently to how ASGE works
-	Make sure you add a font and that you load any font sizes you need before you set the font as active*/
-	FontManager font_manager;
-
-	/*This is pretty neat but we likely won't need to use it.
-	Essentially this would let us heavily decouple on class from another by sending events to the queue
-	The other class (or classes) can grab these events and handle them via a function.
-	For instance, an achievement system could read events pushed to the message queue by the dialogue system*/
-	MessageQueue message_queue;
-
-	Rng random_number_gen;
-
-	AudioManager audio_manager;
-
-	NetworkManager network_manager;
-
-	int window_width;
-	int window_height;
+	static bool initialized;
 };

@@ -46,7 +46,7 @@ public:
 		A = 0, B, C, D, E, F, G, H, I, J
 	};
 
-	Play(GameData* data);
+	Play();
 	~Play();
 
 	void create();
@@ -59,8 +59,6 @@ public:
 
 private:
 	std::vector<Scene> scenes;
-
-	GameData* game_data;
 
 	Audience audience;
 
