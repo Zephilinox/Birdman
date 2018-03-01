@@ -23,12 +23,12 @@ public:
 	void onInactive() override final;
 
 private:
-	void dialogue_init();
-	void dialogue_init2();
-	void dialogue_init3();
 	void dialogue_kitchen();
+	void dialogue_init();
 
 	DialogueTree dialogue_tree;
 	VisualDialogue visual_dialogue;
 	Play play_01;
+
+	std::unique_ptr<ASGE::Sprite> bottom_panel;
 };

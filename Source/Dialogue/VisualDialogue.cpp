@@ -31,10 +31,10 @@ VisualDialogue::VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree,
 		setDialogueSpeed(DialogueSpeed::Instant);
 	}
 
-	dialogueFinishedMarker.xPos = 500;
-	dialogueFinishedMarker.yPos = game_data->getWindowHeight() - 120.0f;
+	dialogueFinishedMarker.xPos = 666;
+	dialogueFinishedMarker.yPos = game_data->getWindowHeight() - 186.0f;
 	dialogueFinishedMarker.addFrame("UI/DialogueMarker", 0.6f);
-	dialogueFinishedMarker.addFrame("UI/DialogueMarker", 0.3f, 0, -10);
+	dialogueFinishedMarker.addFrame("UI/DialogueMarker", 0.3f, 0, 10);
 	dialogueFinishedMarker.pause();
 }
 
@@ -82,7 +82,7 @@ void VisualDialogue::setupPlayerOptions()
 		std::string txt = dialogue_tree->current_player_options[i]->text();
 		if (txt != "")
 		{
-			int id = options.addButton(30, game_data->getWindowHeight() - 90 + (validOptions * 20), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
+			int id = options.addButton(20, game_data->getWindowHeight() - 113 + (validOptions * 30), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
 			options.getButton(std::move(id)).on_click.connect(
 			[&, i]()
 			{
@@ -166,7 +166,8 @@ void VisualDialogue::updateTree()
 
 void VisualDialogue::render() const
 {
-	game_data->getFontManager()->setFont("Default");
+	game_data->getFontManager()->setFont("Dialogue");
+	game_data->getRenderer()->setDefaultTextColour(ASGE::COLOURS::BLACK);
 
 	Actor* speaker = dialogue_tree->getSpeaker();
 	if (dialogue_tree->player_option && dialogue_tree->getPreviousDialogue() && !dialogue_tree->getPreviousDialogue()->player_option)
@@ -176,17 +177,17 @@ void VisualDialogue::render() const
 
 	if (speaker)
 	{
-		game_data->getRenderer()->renderText(speaker->realName.c_str(), 600, game_data->getWindowHeight() - 120);
+		game_data->getRenderer()->renderText(speaker->realName.c_str(), 740, game_data->getWindowHeight() - 180);
 
 		if (speaker->portrait)
 		{
-			speaker->portrait->xPos(600);
-			speaker->portrait->yPos(game_data->getWindowHeight() - 115.0f);
+			speaker->portrait->xPos(740);
+			speaker->portrait->yPos(game_data->getWindowHeight() - 175.0f);
 			game_data->getRenderer()->renderSprite(*speaker->portrait.get());
 		}
 	}
 
-	game_data->getRenderer()->renderText(dialogue_text.substr(0, dialogue_text_characters).c_str(), 30, game_data->getWindowHeight() - 220);
+	game_data->getRenderer()->renderText(dialogue_text.substr(0, dialogue_text_characters).c_str(), 20, game_data->getWindowHeight() - 220);
 
 	if (dialogue_text != "" && dialogue_text_characters >= dialogue_text.length())
 	{

@@ -38,6 +38,7 @@ bool BirdmanTheGame::init()
 
 	game_data = std::make_unique<GameData>(renderer.get(), game_width, game_height);
 	game_data->getFontManager()->addFont("../../Resources/Fonts/DroidSansMono.ttf", "Default", 24);
+	game_data->getFontManager()->addFont("../../Resources/Fonts/DroidSansMono.ttf", "Dialogue", 18);
 	
 	game_data->getStateManager()->push<SplashState>();
 

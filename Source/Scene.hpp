@@ -39,9 +39,7 @@ public:
 private:
 	std::string name;
 	std::string scene_description;
-
 	std::string propTextureStrings[number_of_props];
-
 
 	GameData* game_data;
 

@@ -18,10 +18,6 @@ Play::Play(GameData* data): audience(data)
 	stage->yPos(0.0f);
 }
 
-Play::~Play()
-{
-}
-
 void Play::create()
 {
 	//TODO implement scene linked list creation here
@@ -85,6 +81,9 @@ void Play::create()
 	scene2.initSceneProps(Play::APARTMENT_BEDROOM);
 	//scene2.initSceneCharacter(Play::SceneCharacters::RIGGAN);
 	//scene2.initSceneCharacter(Play::SceneCharacters::MIKE);
+
+	//So AnimatedSprites get drawn while the curtain is closed
+	update(1.0f / 60.0f);
 }
 
 void Play::update(float dt)
