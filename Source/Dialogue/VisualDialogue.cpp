@@ -18,6 +18,9 @@ VisualDialogue::VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree,
 	, default_dialogue(default_dialogue)
 	, dialogueFinishedMarker(game_data->getRenderer())
 {
+	options.selection_image.reset(game_data->getRenderer()->createRawSprite());
+	options.selection_image->loadTexture("../../Resources/Textures/UI/ButtonSelection.png");
+	
 	ini_parser ini("settings.ini");
 	
 	try
@@ -53,7 +56,7 @@ void VisualDialogue::interact()
 
 	if (selected_option >= 0)
 	{
-		options = Menu(game_data);
+		options.reset();
 		const auto& txt = dialogue_tree->play(dialogue_tree->current_player_options[selected_option]->next());
 		setDialogueText(txt);
 		selected_option = -1;
@@ -76,8 +79,6 @@ void VisualDialogue::interact()
 void VisualDialogue::setupPlayerOptions()
 {
 	const float dark[3] = { 0.4, 0.349, 0.317 };
-	const float light[3] = { 0.6, 0.50, 0.4 };
-	//const float light[3] = { 0.5, 0.40, 0.337 };
 
 	has_set_player_options = true;
 	int validOptions = 0;
@@ -86,7 +87,7 @@ void VisualDialogue::setupPlayerOptions()
 		std::string txt = dialogue_tree->current_player_options[i]->text();
 		if (txt != "")
 		{
-			int id = options.addButton(20, game_data->getWindowHeight() - 113 + (validOptions * 30), txt, light, dark);
+			int id = options.addButton(20, game_data->getWindowHeight() - 113 + (validOptions * 30), txt, dark, dark);
 			options.getButton(id).on_click.connect(
 			[&, i]()
 			{
@@ -171,7 +172,6 @@ void VisualDialogue::updateTree()
 void VisualDialogue::render() const
 {
 	const float dark[3] = { 0.4, 0.349, 0.317 };
-	const float light[3] = { 0.5, 0.40, 0.337 };
 
 	game_data->getFontManager()->setFont("Dialogue");
 	game_data->getRenderer()->setDefaultTextColour(dark);

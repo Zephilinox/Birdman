@@ -72,7 +72,20 @@ void Menu::render() const
 	for (const Button& b : buttons)
 	{
 		b.render(game_data);
+
+		if (b.isSelected() && selection_image)
+		{
+			selection_image->xPos(b.getPosX() - 8 - selection_image->width());
+			selection_image->yPos(b.getPosY() + 2 - selection_image->height());
+			game_data->getRenderer()->renderSprite(*selection_image);
+		}
 	}
+}
+
+void Menu::reset()
+{
+	buttons.clear();
+	selected_button_id = 0;
 }
 
 int Menu::addButton(int x, int y, std::string name, ASGE::Colour colour, ASGE::Colour selected_colour)

@@ -21,6 +21,9 @@ public:
 	bool isSelected() const noexcept;
 	void setSelected(bool selected) noexcept;
 
+	int getPosX() const noexcept;
+	int getPosY() const noexcept;
+
 	void setPos(int x, int y) noexcept;
 	void setName(std::string name);
 	void setColour(ASGE::Colour colour) noexcept;

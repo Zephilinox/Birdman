@@ -32,6 +32,16 @@ void Button::setSelected(bool s) noexcept
 	selected = s;
 }
 
+int Button::getPosX() const noexcept
+{
+	return pos_x;
+}
+
+int Button::getPosY() const noexcept
+{
+	return pos_y;
+}
+
 void Button::setPos(int x, int y) noexcept
 {
 	pos_x = x;

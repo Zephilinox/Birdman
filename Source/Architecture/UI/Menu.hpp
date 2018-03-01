@@ -3,6 +3,9 @@
 //STD
 #include <vector>
 
+//LIB
+#include <Engine/Sprite.h>
+
 //SELF
 #include "Button.hpp"
 
@@ -15,10 +18,12 @@ public:
 
 	void update();
 	void render() const;
+	void reset();
 
 	int addButton(int x, int y, std::string name, ASGE::Colour colour, ASGE::Colour selected_colour);
 	Button& getButton(int button_id);
 
+	std::unique_ptr<ASGE::Sprite> selection_image = nullptr;
 private:
 	void selectButton(int button_id);
 
