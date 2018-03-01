@@ -45,7 +45,7 @@ void Play::create()
 
 	//Set values and links of each scene
 	scene1.name = "scene1";
-	scene1.scene_description = "The Theater is full, Riggan's attempt to ";
+	scene1.scene_description = "*The Theater is full, Riggan's attempt to \n blah blah blah etc*";
 
 	//Set props to scene type
 	scene1.initSceneProps(Play::KITCHEN);

@@ -12,30 +12,40 @@ FadeInState::FadeInState(GameData* game_data)
 {
 	if (!left_curtain->loadTexture("../../Resources/Textures/leftcurtain.png"))
 	{
-		throw std::exception("[FadeOutState::FadeOutState()] Failed to load '../../Resources/Textures/leftcurtain.png'\n");
+		throw std::exception("Failed to load leftcurtain.png");
 	}
+
 	if (!right_curtain->loadTexture("../../Resources/Textures/rightcurtain.png"))
 	{
-		throw std::exception("[FadeOutState::FadeOutState()] Failed to load '../../Resources/Textures/rightcurtain.png'\n");
+		throw std::exception("Failed to load rightcurtain.png");
 	}
+
 	right_curtain->xPos(game_data->getWindowWidth() / 2.0f);
+	timer.restart();
 }
   
 void FadeInState::update(const ASGE::GameTime& gt)
 {
-	left_curtain->xPos(left_curtain->xPos() - 500 * float((gt.delta_time.count() / 1000.0f)));
-	right_curtain->xPos(right_curtain->xPos() + 500 * float((gt.delta_time.count() / 1000.0f)));
-
-	if (left_curtain->xPos() < -game_data->getWindowWidth() /2 && right_curtain->xPos() > game_data->getWindowWidth())
+	if (closed && timer.getElapsedTime() > 0.1f)
 	{
-		game_data->getStateManager()->pop();
+		closed = false;
+	}
+
+	if (!closed)
+	{
+		left_curtain->xPos(left_curtain->xPos() - 500 * float((gt.delta_time.count() / 1000.0f)));
+		right_curtain->xPos(right_curtain->xPos() + 500 * float((gt.delta_time.count() / 1000.0f)));
+	
+		if (left_curtain->xPos() < -game_data->getWindowWidth() / 2 && right_curtain->xPos() > game_data->getWindowWidth())
+		{
+			game_data->getStateManager()->pop();
+		}
 	}
 }
 
 void FadeInState::render() const
 {
 	game_data->getRenderer()->renderSprite(*left_curtain);
-
 	game_data->getRenderer()->renderSprite(*right_curtain);
 }
 

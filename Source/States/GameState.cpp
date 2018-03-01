@@ -15,11 +15,9 @@
 
 GameState::GameState(GameData* game_data)
 	: BaseState(game_data)
-	, visual_dialogue(game_data, &dialogue_tree, "start_extra")
+	, visual_dialogue(game_data, &dialogue_tree, "start")
 	, play_01(game_data)
 {
-	//add all the dialogue to the dialogue tree. each level would have its own dialogue tree
-	dialogue_init();
 	play_01.create();
 	dialogue_kitchen();
 	visual_dialogue.updateTree();
@@ -50,6 +48,8 @@ void GameState::onInactive()
 {
 }
 
+//This is here as a point of reference, consider it documentation.
+/*
 void GameState::dialogue_init()
 {
 	dialogue_tree.getActor("player")->realName = "TeamBirb";
@@ -277,10 +277,20 @@ void GameState::dialogue_init()
 	dialogue_tree.addDialogue("town/blab", "blab_npc", "We should probably ensure one convo isn't longer than\n3 lines of text. We can break it up with '\\n' but we still\nneed to make sure it doesn't go on for too long", "town/blab2");
 	dialogue_tree.addDialogue("town/blab2", "blab_npc", "If it does we can chain it like so, which is nice.\nIt's not worth the effort trying to automate any of this to be honest.\nWe'll just have to handle it all manually.", "town/start");
 }
-
+*/
 
 void GameState::dialogue_kitchen()
 {
+	dialogue_tree.addDialogue("start", "",
+	[&]()
+	{
+		return play_01.getScene()->getDescription();
+	},
+	[&]()
+	{
+		return "kitchen/start";
+	});
+
 	dialogue_tree.addDialogue("kitchen/start", "lesley",
 	[&]()
 	{
