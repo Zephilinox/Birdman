@@ -51,5 +51,6 @@ private:
 	Timer dialogue_characters_timer;
 	float dialogue_characters_delay = 0.05f;
 
-	AnimatedSprite dialogueFinishedMarker;
+	AnimatedSprite dialogue_finished_marker;
+	std::unique_ptr<ASGE::Sprite> speaker_underline;
 };

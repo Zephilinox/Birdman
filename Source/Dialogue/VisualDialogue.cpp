@@ -16,10 +16,15 @@ VisualDialogue::VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree,
 	, dialogue_tree(dialogue_tree)
 	, options(game_data)
 	, default_dialogue(default_dialogue)
-	, dialogueFinishedMarker(game_data->getRenderer())
+	, dialogue_finished_marker(game_data->getRenderer())
+	, speaker_underline(game_data->getRenderer()->createRawSprite())
 {
 	options.selection_image.reset(game_data->getRenderer()->createRawSprite());
 	options.selection_image->loadTexture("../../Resources/Textures/UI/ButtonSelection.png");
+
+	speaker_underline->loadTexture("../../Resources/Textures/UI/SpeakerUnderline.png");
+	speaker_underline->xPos(735);
+	speaker_underline->yPos(520);
 	
 	ini_parser ini("settings.ini");
 	
@@ -34,11 +39,11 @@ VisualDialogue::VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree,
 		setDialogueSpeed(DialogueSpeed::Instant);
 	}
 
-	dialogueFinishedMarker.xPos = 666;
-	dialogueFinishedMarker.yPos = game_data->getWindowHeight() - 186.0f;
-	dialogueFinishedMarker.addFrame("UI/DialogueMarker", 0.6f);
-	dialogueFinishedMarker.addFrame("UI/DialogueMarker", 0.3f, 0, 10);
-	dialogueFinishedMarker.pause();
+	dialogue_finished_marker.xPos = 666;
+	dialogue_finished_marker.yPos = game_data->getWindowHeight() - 186.0f;
+	dialogue_finished_marker.addFrame("UI/DialogueMarker", 0.6f);
+	dialogue_finished_marker.addFrame("UI/DialogueMarker", 0.3f, 0, 10);
+	dialogue_finished_marker.pause();
 }
 
 void VisualDialogue::setDefaultDialogue(std::string dialogue)
@@ -146,13 +151,13 @@ void VisualDialogue::update(float dt)
 
 		if (dialogue_text_characters >= dialogue_text.length())
 		{
-			dialogueFinishedMarker.restart();
+			dialogue_finished_marker.restart();
 		}
 	}
 
 	updateTree();
 	options.update();
-	dialogueFinishedMarker.update(dt);
+	dialogue_finished_marker.update(dt);
 }
 
 //todo: change this to be ran when changing dialogue tree we're managing
@@ -184,12 +189,14 @@ void VisualDialogue::render() const
 
 	if (speaker)
 	{
-		game_data->getRenderer()->renderText(speaker->realName.c_str(), 740, game_data->getWindowHeight() - 180);
+		int txtSize = speaker->realName.size() * 4;
+		game_data->getRenderer()->renderText(speaker->realName.c_str(), 740 + txtSize, game_data->getWindowHeight() - 210);
+		game_data->getRenderer()->renderSprite(*speaker_underline);
 
 		if (speaker->portrait)
 		{
 			speaker->portrait->xPos(740);
-			speaker->portrait->yPos(game_data->getWindowHeight() - 175.0f);
+			speaker->portrait->yPos(game_data->getWindowHeight() - 185.0f);
 			game_data->getRenderer()->renderSprite(*speaker->portrait.get());
 		}
 	}
@@ -198,7 +205,7 @@ void VisualDialogue::render() const
 
 	if (dialogue_text != "" && dialogue_text_characters >= dialogue_text.length())
 	{
-		game_data->getRenderer()->renderSprite(*dialogueFinishedMarker.getCurrentFrameSprite());
+		game_data->getRenderer()->renderSprite(*dialogue_finished_marker.getCurrentFrameSprite());
 	}
 
 	options.render();
