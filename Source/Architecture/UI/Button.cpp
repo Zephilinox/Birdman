@@ -10,7 +10,7 @@ Button::Button() noexcept
 
 void Button::render(GameData* game_data) const
 {
-	game_data->getFontManager()->setFont("Default");
+	game_data->getFontManager()->setFont("Dialogue");
 
 	if (selected)
 	{

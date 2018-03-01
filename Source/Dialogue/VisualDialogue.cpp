@@ -75,6 +75,10 @@ void VisualDialogue::interact()
 
 void VisualDialogue::setupPlayerOptions()
 {
+	const float dark[3] = { 0.4, 0.349, 0.317 };
+	const float light[3] = { 0.6, 0.50, 0.4 };
+	//const float light[3] = { 0.5, 0.40, 0.337 };
+
 	has_set_player_options = true;
 	int validOptions = 0;
 	for (size_t i = 0; i < dialogue_tree->current_player_options.size(); ++i)
@@ -82,8 +86,8 @@ void VisualDialogue::setupPlayerOptions()
 		std::string txt = dialogue_tree->current_player_options[i]->text();
 		if (txt != "")
 		{
-			int id = options.addButton(20, game_data->getWindowHeight() - 113 + (validOptions * 30), txt, ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
-			options.getButton(std::move(id)).on_click.connect(
+			int id = options.addButton(20, game_data->getWindowHeight() - 113 + (validOptions * 30), txt, light, dark);
+			options.getButton(id).on_click.connect(
 			[&, i]()
 			{
 				has_set_player_options = false;
@@ -166,8 +170,11 @@ void VisualDialogue::updateTree()
 
 void VisualDialogue::render() const
 {
+	const float dark[3] = { 0.4, 0.349, 0.317 };
+	const float light[3] = { 0.5, 0.40, 0.337 };
+
 	game_data->getFontManager()->setFont("Dialogue");
-	game_data->getRenderer()->setDefaultTextColour(ASGE::COLOURS::BLACK);
+	game_data->getRenderer()->setDefaultTextColour(dark);
 
 	Actor* speaker = dialogue_tree->getSpeaker();
 	if (dialogue_tree->player_option && dialogue_tree->getPreviousDialogue() && !dialogue_tree->getPreviousDialogue()->player_option)

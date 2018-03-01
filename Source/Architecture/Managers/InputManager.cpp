@@ -36,9 +36,13 @@ Or as a direct callback itself.
 *   @return void*/
 void InputManager::handleInput(int key, int state)
 {
-	std::lock_guard<std::mutex> guard(keys_mutex);
-	toggle_keys[key] = state;
-	keys[key] = state;
+	//Fixes Alt+PrintScreen
+	if (key >= 0)
+	{
+		std::lock_guard<std::mutex> guard(keys_mutex);
+		toggle_keys[key] = state;
+		keys[key] = state;
+	}
 }
 
 
