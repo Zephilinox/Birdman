@@ -12,6 +12,7 @@
 #include "../Play.hpp"
 #include "../Scene.hpp"
 #include "../Character.h"
+#include "PauseState.hpp"
 
 GameState::GameState(GameData* game_data)
 	: BaseState(game_data)
@@ -36,6 +37,11 @@ void GameState::update(const ASGE::GameTime& gt)
 	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER))
 	{
 		visual_dialogue.interact();
+	}
+
+	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ESCAPE))
+	{
+		game_data->getStateManager()->push<PauseState>();
 	}
 }
 

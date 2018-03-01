@@ -16,17 +16,17 @@ void AnimatedSprite::update(double dt_milli)
 	if (playing && frames.size())
 	{
 		frame_time += dt_milli;
-		if (frame_time >= frames[current_frame].second.frame_length_milliseconds)
+		if (frame_time >= frames[current_frame].second.frame_length_seconds)
 		{
 			nextFrame();
 		}
 	}
 }
 
-void AnimatedSprite::addFrame(std::string texture, float frame_length_milliseconds,  float relative_x, float relative_y)
+void AnimatedSprite::addFrame(std::string texture, float frame_length_seconds,  float relative_x, float relative_y)
 {
 	FrameData frame_data;
-	frame_data.frame_length_milliseconds = frame_length_milliseconds;
+	frame_data.frame_length_seconds = frame_length_seconds;
 	frame_data.relative_x = relative_x;
 	frame_data.relative_y = relative_y;
 

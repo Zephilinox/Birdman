@@ -18,7 +18,7 @@ public:
 	{
 		float relative_x;
 		float relative_y;
-		float frame_length_milliseconds;
+		float frame_length_seconds;
 	};
 
 	AnimatedSprite(ASGE::Renderer* renderer, bool loop = true) noexcept;
@@ -29,7 +29,7 @@ public:
 	AnimatedSprite& operator= (AnimatedSprite&& other) = delete;
 	void update(double dt);
 
-	void addFrame(std::string texture, float frame_length_milliseconds, float relative_x = 0, float relative_y = 0);
+	void addFrame(std::string texture, float frame_length_seconds, float relative_x = 0, float relative_y = 0);
 	ASGE::Sprite* getCurrentFrameSprite() const;
 
 	void play() noexcept;

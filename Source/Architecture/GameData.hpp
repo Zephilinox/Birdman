@@ -29,6 +29,8 @@ public:
 	int getWindowWidth() noexcept;
 	int getWindowHeight() noexcept;
 
+	bool exit = false;
+
 private:
 	ASGE::Renderer* renderer = nullptr;
 

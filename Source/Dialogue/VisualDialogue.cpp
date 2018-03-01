@@ -41,8 +41,8 @@ VisualDialogue::VisualDialogue(GameData* game_data, DialogueTree* dialogue_tree,
 
 	dialogue_finished_marker.xPos = 666;
 	dialogue_finished_marker.yPos = game_data->getWindowHeight() - 186.0f;
-	dialogue_finished_marker.addFrame("UI/DialogueMarker", 0.6f);
-	dialogue_finished_marker.addFrame("UI/DialogueMarker", 0.3f, 0, 10);
+	dialogue_finished_marker.addFrame("UI/DialogueMarker", 0.4f);
+	dialogue_finished_marker.addFrame("UI/DialogueMarker", 0.4f, 0, 8);
 	dialogue_finished_marker.pause();
 }
 
@@ -189,8 +189,8 @@ void VisualDialogue::render() const
 
 	if (speaker)
 	{
-		int txtSize = speaker->realName.size() * 4;
-		game_data->getRenderer()->renderText(speaker->realName.c_str(), 740 + txtSize, game_data->getWindowHeight() - 210);
+		//There is no way to know the length of a name in pixels, so we can't center this
+		game_data->getRenderer()->renderText(speaker->realName.c_str(), 740, game_data->getWindowHeight() - 210);
 		game_data->getRenderer()->renderSprite(*speaker_underline);
 
 		if (speaker->portrait)

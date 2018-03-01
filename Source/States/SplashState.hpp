@@ -1,5 +1,8 @@
 #pragma once
 
+//LIB
+#include <Engine/Sprite.h>
+
 //SELF
 #include "../Architecture/States/BaseState.hpp"
 #include "../Architecture/Timer.hpp"
@@ -20,5 +23,6 @@ public:
 	void onInactive() override final;
 
 private:
-	Timer timer;
+	std::unique_ptr<ASGE::Sprite> left_curtain;
+	std::unique_ptr<ASGE::Sprite> right_curtain;
 };

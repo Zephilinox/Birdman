@@ -2,16 +2,17 @@
 
 //SELF
 #include "../Architecture/States/BaseState.hpp"
+#include "../Architecture/UI/Menu.hpp"
 
 class GameData;
 
 /**
 *  See BaseState for overriden functions
 */
-class PlaySelectState : public BaseState
+class PauseState : public BaseState
 {
 public:
-	PlaySelectState(GameData* game_data);
+	PauseState(GameData* game_data);
 
 	void update(const ASGE::GameTime&) override final;
 	void render() const override final;
@@ -19,4 +20,6 @@ public:
 	void onInactive() override final;
 
 private:
+	Menu menu;
+	std::unique_ptr<ASGE::Sprite> dim_background;
 };

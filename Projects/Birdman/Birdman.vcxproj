@@ -171,7 +171,7 @@
     <ClInclude Include="..\..\Source\States\GameState.hpp" />
     <ClInclude Include="..\..\Source\States\MenuState.hpp" />
     <ClInclude Include="..\..\Source\States\NetworkingState.hpp" />
-    <ClInclude Include="..\..\Source\States\PlaySelectState.hpp" />
+    <ClInclude Include="..\..\Source\States\PauseState.hpp" />
     <ClInclude Include="..\..\Source\States\SplashState.hpp" />
     <ClInclude Include="..\..\Source\stdafx.h" />
     <ClInclude Include="..\..\Source\targetver.h" />
@@ -210,7 +210,7 @@
     <ClCompile Include="..\..\Source\States\GameState.cpp" />
     <ClCompile Include="..\..\Source\States\MenuState.cpp" />
     <ClCompile Include="..\..\Source\States\NetworkingState.cpp" />
-    <ClCompile Include="..\..\Source\States\PlaySelectState.cpp" />
+    <ClCompile Include="..\..\Source\States\PauseState.cpp" />
     <ClCompile Include="..\..\Source\States\SplashState.cpp" />
     <ClCompile Include="..\..\Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

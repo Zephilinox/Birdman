@@ -195,9 +195,6 @@
     <ClInclude Include="..\..\Source\Rng.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\States\PlaySelectState.hpp">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\States\GameState.hpp">
       <Filter>Header Files\States</Filter>
     </ClInclude>
@@ -227,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Architecture\Managers\NetworkManager.hpp">
       <Filter>Header Files\Architecture\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\States\PauseState.hpp">
+      <Filter>Header Files\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -314,9 +314,6 @@
     <ClCompile Include="..\..\Source\Rng.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\States\PlaySelectState.cpp">
-      <Filter>Source Files\States</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\States\SplashState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
@@ -337,6 +334,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Architecture\Networking\Packet.cpp">
       <Filter>Source Files\Architecture\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\States\PauseState.cpp">
+      <Filter>Source Files\States</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -3,24 +3,38 @@
 #include "../Architecture/GameData.hpp"
 #include "../States/MenuState.hpp"
 #include "../States/FadeOutState.hpp"
+#include "../States/FadeInState.hpp"
+#include "../States/GameState.hpp"
 
 SplashState::SplashState(GameData* game_data)
 	: BaseState(game_data)
+	, left_curtain(game_data->getRenderer()->createRawSprite())
+	, right_curtain(game_data->getRenderer()->createRawSprite())
 {
+	if (!left_curtain->loadTexture("../../Resources/Textures/leftcurtain.png"))
+	{
+		throw "Failed to load leftcurtain.png";
+	}
+
+	if (!right_curtain->loadTexture("../../Resources/Textures/rightcurtain.png"))
+	{
+		throw "Failed to load rightcurtain.png";
+	}
+
+	left_curtain->xPos(float(-game_data->getWindowWidth() / 2));
+	right_curtain->xPos(float(game_data->getWindowWidth()));
 }
 
 void SplashState::update(const ASGE::GameTime& gt)
 {
-	if (timer.getElapsedTime() > 1)
-	{
-		game_data->getStateManager()->pop();
-		game_data->getStateManager()->push<MenuState>();
-	}
+	game_data->getStateManager()->push<GameState>();
+	game_data->getStateManager()->push<FadeInState>();
 }
 
 void SplashState::render() const
 {
-	game_data->getRenderer()->renderText("SPLASH SCREEN", 560, 320);
+	game_data->getRenderer()->renderSprite(*left_curtain);
+	game_data->getRenderer()->renderSprite(*right_curtain);
 }
 
 void SplashState::onActive()

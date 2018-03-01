@@ -11,6 +11,8 @@
 #include "Architecture/GameData.hpp"
 #include "Constants.hpp"
 #include "States/SplashState.hpp"
+#include "States/FadeInState.hpp"
+#include "States/GameState.hpp"
 #include "Architecture/Messages/FunctionMessage.hpp"
 
 BirdmanTheGame::~BirdmanTheGame()
@@ -32,7 +34,7 @@ bool BirdmanTheGame::init()
 	float cArray[] = { 0.08f, 0.08f, 0.08f };
 	renderer->setClearColour(std::move(cArray));
 	renderer->setSpriteMode(ASGE::SpriteSortMode::IMMEDIATE);
-	toggleFPS();
+	//toggleFPS();
 
 	key_handler_id = inputs->addCallbackFnc(ASGE::EventType::E_KEY, &BirdmanTheGame::keyHandler, this);
 
@@ -80,13 +82,8 @@ void BirdmanTheGame::update(const ASGE::GameTime& gt)
 	{
 		toggleFullscreen();
 	}
-
-	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ESCAPE))
-	{
-		game_data->getStateManager()->pop();
-	}
 	
-	if (renderer->exit() || this->exit || game_data->getStateManager()->empty())
+	if (renderer->exit() || this->exit || game_data->exit || game_data->getStateManager()->empty())
 	{
 		signalExit();
 	}
