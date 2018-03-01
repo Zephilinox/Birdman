@@ -9,6 +9,9 @@
 //SELF
 #include "../Architecture/GameData.hpp"
 #include "../Constants.hpp"
+#include "../Play.hpp"
+#include "../Scene.hpp"
+#include "../Character.h"
 
 GameState::GameState(GameData* game_data)
 	: BaseState(game_data)
@@ -18,8 +21,6 @@ GameState::GameState(GameData* game_data)
 	//add all the dialogue to the dialogue tree. each level would have its own dialogue tree
 	dialogue_init();
 	play_01.create();
-	//dialogue_init2();
-	//dialogue_init3();
 	dialogue_kitchen();
 	visual_dialogue.updateTree();
 }
@@ -277,71 +278,18 @@ void GameState::dialogue_init()
 	dialogue_tree.addDialogue("town/blab2", "blab_npc", "If it does we can chain it like so, which is nice.\nIt's not worth the effort trying to automate any of this to be honest.\nWe'll just have to handle it all manually.", "town/start");
 }
 
-void GameState::dialogue_init2()
-{
-	//Add an option to the input menu for the player
-	dialogue_tree.addPlayerOption("start_extra",
-	[&]()
-	{
-		if (dialogue_tree.getPlayer()->hasFlag("named..."))
-		{
-			return "";
-		}
-
-		return "*Struts across the stage*";
-	},
-	[&]()
-	{
-		return "done_action1";
-	});
-
-	dialogue_tree.addDialogue("done_action1", DialogueTree::player, "There are those that call me...", "select_name");
-
-	dialogue_tree.addPlayerOption("select_name", "Tim...",
-	[&]()
-	{
-		dialogue_tree.getPlayer()->addFlag("named...");
-		return "done_action2";
-	});
-
-	dialogue_tree.addPlayerOption("select_name", "Barnabus...",
-	[&]()
-	{
-		dialogue_tree.getPlayer()->addFlag("named...");
-		return "done_action2";
-	});
-}
-
-void GameState::dialogue_init3()
-{
-	dialogue_tree.addPlayerOption("start_extra", "playgame", 
-		[&]() 
-	{
-		dialogue_tree.getPlayer()->addFlag("playing");
-		return "play";
-	});
-	dialogue_tree.addDialogue("play", DialogueTree::player, "You are playing the game", "");
-	dialogue_tree.addPlayerOption("start_extra", "maybeplay", "1");
-	dialogue_tree.addDialogue("1", "Jim", "Ya names Jim", "");
-	dialogue_tree.addPlayerOption("start_extra", 
-		[&]()
-	{
-		if (dialogue_tree.getPlayer()->hasFlag("playing"))
-		{
-			
-			return "continue";
-		}
-		return "";
-	}, [&]()
-	{
-		dialogue_tree.getPlayer()->removeFlag("playing");
-		return "con";
-	});
-}
 
 void GameState::dialogue_kitchen()
 {
-	dialogue_tree.addDialogue("kitchen/start", "lesley", "He loved me.", "kitchen/start1");
+	dialogue_tree.addDialogue("kitchen/start", "lesley",
+	[&]()
+	{
+		auto leslie = play_01.getScene()->getCharacter(Play::LESLIE);
+		leslie->setFacing(Character::CharacterFacing::SOUTH);
+		leslie->setPosition(400, 300);
+		return "He loved me.";
+	}, "kitchen/start1");
+
 	dialogue_tree.addDialogue("kitchen/start1", "ralph", "Yeah. He loved her so much he tried to kill her.", "kitchen/start2");
 	dialogue_tree.addDialogue("kitchen/start2", "laura", "He tried to kill you?", "kitchen/start3");
 	dialogue_tree.addDialogue("kitchen/start3", "lesley", "No.\nOkay, well he did beat me up one night.", "kitchen/start4");

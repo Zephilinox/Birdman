@@ -116,6 +116,11 @@ void Scene::setSceneID(int id)
 	scene_id = id;
 }
 
+Character* Scene::getCharacter(Play::SceneCharacters character)
+{
+	return character_pool[character].get();
+}
+
 void Scene::update(float dt)
 {
 	for(auto& current_character : character_pool)

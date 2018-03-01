@@ -31,6 +31,8 @@ public:
 	void populateProps();
 	void setSceneID(int id);
 
+	Character* getCharacter(Play::SceneCharacters character);
+
 	void update(float dt);
 	void render() const;
 
