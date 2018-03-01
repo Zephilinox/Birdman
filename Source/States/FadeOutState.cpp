@@ -27,10 +27,10 @@ FadeOutState::FadeOutState(GameData* game_data, std::function<void()> callback)
 
 void FadeOutState::update(const ASGE::GameTime& gt)
 {	
-	if (left_curtain->xPos() >= 0 && right_curtain->xPos() <= game_data->getWindowWidth() / 2.0f)
+	if (left_curtain->xPos() >= 0 && right_curtain->xPos() <= game_data->getWindowWidth() / 2)
 	{
 		left_curtain->xPos(0);
-		right_curtain->xPos(game_data->getWindowWidth() / 2.0f);
+		right_curtain->xPos(game_data->getWindowWidth() / 2);
 
 		game_data->getStateManager()->pop();
 		fade_end_callback();

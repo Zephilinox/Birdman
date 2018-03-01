@@ -20,13 +20,13 @@ FadeInState::FadeInState(GameData* game_data)
 		throw std::exception("Failed to load rightcurtain.png");
 	}
 
-	right_curtain->xPos(game_data->getWindowWidth() / 2.0f);
+	right_curtain->xPos(game_data->getWindowWidth() / 2);
 	timer.restart();
 }
   
 void FadeInState::update(const ASGE::GameTime& gt)
 {
-	if (closed && timer.getElapsedTime() > 0.1f)
+	if (closed && timer.getElapsedTime() > 0.2f)
 	{
 		closed = false;
 	}
@@ -36,8 +36,10 @@ void FadeInState::update(const ASGE::GameTime& gt)
 		left_curtain->xPos(left_curtain->xPos() - 500 * float((gt.delta_time.count() / 1000.0f)));
 		right_curtain->xPos(right_curtain->xPos() + 500 * float((gt.delta_time.count() / 1000.0f)));
 	
-		if (left_curtain->xPos() < -game_data->getWindowWidth() / 2 && right_curtain->xPos() > game_data->getWindowWidth())
+		if (left_curtain->xPos() <= -game_data->getWindowWidth() / 2 && right_curtain->xPos() >= game_data->getWindowWidth())
 		{
+			left_curtain->xPos(-game_data->getWindowWidth() / 2);
+			right_curtain->xPos(game_data->getWindowWidth());
 			game_data->getStateManager()->pop();
 		}
 	}

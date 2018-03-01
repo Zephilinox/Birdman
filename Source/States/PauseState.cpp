@@ -1,5 +1,9 @@
 #include "PauseState.hpp"
 
+//SELF
+#include "FadeOutState.hpp"
+#include "../Architecture/Timer.hpp"
+
 PauseState::PauseState(GameData* game_data)
 	: BaseState(game_data, true)
 	, menu(game_data)
@@ -26,7 +30,7 @@ PauseState::PauseState(GameData* game_data)
 	menu.getButton(1).on_click.connect([game_data]()
 	{
 		game_data->getStateManager()->pop();
-		game_data->getStateManager()->pop();
+		game_data->getStateManager()->push<FadeOutState>([](){});
 	});
 
 	menu.getButton(2).on_click.connect([game_data]()
