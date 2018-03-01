@@ -2,6 +2,7 @@
 
 //SELF
 #include "FadeOutState.hpp"
+#include "GameState.hpp"
 #include "../Architecture/Timer.hpp"
 
 PauseState::PauseState(GameData* game_data)
@@ -14,13 +15,10 @@ PauseState::PauseState(GameData* game_data)
 		throw "Failed to load BlackScreen.png";
 	}
 
-	//menu buttons
-	//this is rough and just for prototyping, might need something nicer for the actual game
-	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 - 120, "CONTINUE", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
-	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 - 40, "RESTART", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
-	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 40, "TOGGLE AUDIO", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
-	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 120, "EXIT", ASGE::COLOURS::DIMGRAY, ASGE::COLOURS::ANTIQUEWHITE);
-
+	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 - 120, "CONTINUE", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 - 40, "RESTART", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 40, "TOGGLE AUDIO", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 120, "EXIT", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
 
 	menu.getButton(0).on_click.connect([gd = game_data]()
 	{
@@ -30,7 +28,12 @@ PauseState::PauseState(GameData* game_data)
 	menu.getButton(1).on_click.connect([game_data]()
 	{
 		game_data->getStateManager()->pop();
-		game_data->getStateManager()->push<FadeOutState>([](){});
+		game_data->getStateManager()->push<FadeOutState>(
+		[game_data]()
+		{
+			game_data->getStateManager()->pop();
+			game_data->getStateManager()->push<GameState>();
+		});
 	});
 
 	menu.getButton(2).on_click.connect([game_data]()

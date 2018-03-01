@@ -21,8 +21,7 @@ SplashState::SplashState(GameData* game_data)
 		throw "Failed to load rightcurtain.png";
 	}
 
-	left_curtain->xPos(float(-game_data->getWindowWidth() / 2));
-	right_curtain->xPos(float(game_data->getWindowWidth()));
+	right_curtain->xPos(float(game_data->getWindowWidth() / 2));
 }
 
 void SplashState::update(const ASGE::GameTime& gt)
