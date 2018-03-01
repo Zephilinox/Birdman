@@ -105,7 +105,7 @@ void Scene::populateProps()
 {
 	for(unsigned int i = 0; i < number_of_props; i++)
 	{
-		std::unique_ptr<Prop> p(new Prop);
+		Prop* p = new Prop();
 		p->initSprite(game_data->getRenderer(), propTextureStrings[i]);
 		props_pool.push_back(std::move(*p));
 	}

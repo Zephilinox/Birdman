@@ -31,5 +31,8 @@ void Prop::initSprite(ASGE::Renderer * rend, std::string texture_name)
 
 void Prop::render(ASGE::Renderer* renderer) const
 {
-	renderer->renderSprite(*prop_sprite);
+	if(prop_sprite != nullptr)
+	{
+		renderer->renderSprite(*prop_sprite);
+	}
 }

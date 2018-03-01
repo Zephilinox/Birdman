@@ -46,27 +46,45 @@ void Play::create()
 	//Set values and links of each scene
 	scene1.name = "scene1";
 	scene1.scene_description = "The Theater is full, Riggan's attempt to ";
+
+	//Set props to scene type
 	scene1.initSceneProps(Play::KITCHEN);
+
+	//Set up the characters for the scene
 	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
 	scene1.initSceneCharacter(Play::SceneCharacters::MIKE);
 	scene1.initSceneCharacter(Play::SceneCharacters::LESLIE);
 	scene1.initSceneCharacter(Play::SceneCharacters::LAURA);
-	//TODO - Remove this
-	scene1.character_pool.at(0)->setPosition(100.0f, 100.0f);
 
-	scene1.dark.stage_description = "The play is going down a dark path...";
+	//Set each character's position
+	scene1.character_pool.at(0)->setPosition(100.0f, 100.0f);
+	scene1.character_pool.at(0)->setFacing(Character::CharacterFacing::SOUTH);
+
+	scene1.character_pool.at(1)->setPosition(300.0f, 100.0f);
+	scene1.character_pool.at(1)->setFacing(Character::CharacterFacing::SOUTH);
+	scene1.character_pool.at(2)->setPosition(400.0f, 200.0f);
+	scene1.character_pool.at(2)->setFacing(Character::CharacterFacing::WEST);
+	scene1.character_pool.at(3)->setPosition(200.0f, 300.0f);
+	scene1.character_pool.at(0)->setFacing(Character::CharacterFacing::NORTH);
+
+	scene1.dark.stage_description = "dark path 1";
 	scene1.dark.scene = &scene2;
 
-	scene1.light.stage_description = "The play is going down a light hearted route...";
+	scene1.light.stage_description = "light path 1";
 	scene1.light.scene = &scene3;
 
 	scene2.name = "scene2";
-	scene2.scene_description = "A dark apartment bedroom, two bodies move under the sheets...";
+	scene2.scene_description = "Kitchen part 2";
+	//Set props to scene type
+	scene2.initSceneProps(Play::KITCHEN);
+
+	//Set up the characters for the scene
+	scene2.initSceneCharacter(Play::SceneCharacters::RIGGAN);
 
 	//TODO implement next scenes
 	scene2.initSceneProps(Play::APARTMENT_BEDROOM);
-	scene2.initSceneCharacter(Play::SceneCharacters::RIGGAN);
-	scene2.initSceneCharacter(Play::SceneCharacters::MIKE);
+	//scene2.initSceneCharacter(Play::SceneCharacters::RIGGAN);
+	//scene2.initSceneCharacter(Play::SceneCharacters::MIKE);
 }
 
 void Play::update(float dt)
@@ -117,7 +135,8 @@ void Play::moveToNextNight()
 	}
 	else
 	{
-		//TODO - play finished, next play pls
+
+		//TODO - play finished, output approval to screen?
 	}
 
 }

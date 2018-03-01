@@ -66,5 +66,5 @@ private:
 	void loadCharacterTextureStrings();
 
 	CharacterFacing char_facing = SOUTH;
-	CharacterState char_state = WALKING;
+	CharacterState char_state = IDLE;
 };
