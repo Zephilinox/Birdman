@@ -8,6 +8,8 @@ class Character
 {
 public:
 
+
+	//TODO create variable of screen positions stage left, stage right, for default places characters can come in to the scene
 	enum CharacterFacing
 	{
 		NORTH = 0,

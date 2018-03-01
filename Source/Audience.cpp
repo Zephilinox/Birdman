@@ -102,17 +102,17 @@ void Audience::addToSad(int effect)
 //Takes an int, applies it to the responsiveness/multiplier then adds it to the approval
 void Audience::addToLight(int effect)
 {
-	light_approval += effect * sad_multiplier;
+	light_approval += effect * light_multiplier;
 }
 
 //Takes an int, applies it to the responsiveness/multiplier then adds it to the approval
 void Audience::addToDark(int effect)
 {
-	dark_approval += effect * sad_multiplier;
+	dark_approval += effect * dark_multiplier;
 }
 
 //Takes an int, applies it to the responsiveness/multiplier then adds it to the approval
 void Audience::addToComedy(int effect)
 {
-	comedy_approval += effect * sad_multiplier;
+	comedy_approval += effect * comedy_multiplier;
 }

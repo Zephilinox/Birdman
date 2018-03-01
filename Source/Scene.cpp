@@ -82,7 +82,6 @@ void Scene::initSceneCharacter(Play::SceneCharacters chars)
 	R->setIsActive(true);
 	R->setFacing(Character::CharacterFacing::EAST);
 	character_pool.push_back(std::move(R));
-
 }
 
 void Scene::loadPropTextureStrings()
@@ -104,17 +103,9 @@ void Scene::loadPropTextureStrings()
 
 void Scene::populateProps()
 {
-	//TODO Ricardo! this correct?
-	//ah.. I don't think so but I'm not sure, ask james?
-	//I have no idea what happens when you push a dereferenced pointer to a vector of values, does it copy it?
-	//if so, then that will cause a memory leak (x2, one for the prop you new'd, and one for the ASGE sprite the prop owns that never gets deleted)
-	//If that is the case, then better off doing something like this:
-	//Prop p;
-	//p->initSprite(...)
-	//props_pool.push_back(std::move(p))
 	for(unsigned int i = 0; i < number_of_props; i++)
 	{
-		Prop* p = new Prop;
+		std::unique_ptr<Prop> p(new Prop);
 		p->initSprite(game_data->getRenderer(), propTextureStrings[i]);
 		props_pool.push_back(std::move(*p));
 	}

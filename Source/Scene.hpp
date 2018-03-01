@@ -6,7 +6,7 @@
 #include "Prop.h"
 
 constexpr unsigned int number_of_props = 10;
-constexpr unsigned int number_of_characters = 5;
+constexpr unsigned int number_of_characters = 4;
 
 class GameData;
 
@@ -56,6 +56,6 @@ private:
 
 	SceneLink light;
 	SceneLink dark;
-	SceneLink serious;
-	SceneLink slapstick;
+	SceneLink sad;
+	SceneLink comedy;
 };

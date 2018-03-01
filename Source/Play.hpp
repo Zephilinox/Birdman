@@ -36,15 +36,11 @@ public:
 	enum SceneCharacters
 	{
 		RIGGAN =0,
-		LESLEY,
-		JOHN,
-		HANNAH,
+		LESLIE,
+		MIKE,
+		LAURA,
 	};
 
-	enum PropName
-	{
-		A = 0, B, C, D, E, F, G, H, I, J
-	};
 
 	Play(GameData* data);
 	~Play();

@@ -48,10 +48,9 @@ void Play::create()
 	scene1.scene_description = "The Theater is full, Riggan's attempt to ";
 	scene1.initSceneProps(Play::KITCHEN);
 	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
-	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
-	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
-	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
-	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
+	scene1.initSceneCharacter(Play::SceneCharacters::MIKE);
+	scene1.initSceneCharacter(Play::SceneCharacters::LESLIE);
+	scene1.initSceneCharacter(Play::SceneCharacters::LAURA);
 	//TODO - Remove this
 	scene1.character_pool.at(0)->setPosition(100.0f, 100.0f);
 
@@ -67,7 +66,7 @@ void Play::create()
 	//TODO implement next scenes
 	scene2.initSceneProps(Play::APARTMENT_BEDROOM);
 	scene2.initSceneCharacter(Play::SceneCharacters::RIGGAN);
-	scene2.initSceneCharacter(Play::SceneCharacters::JOHN);
+	scene2.initSceneCharacter(Play::SceneCharacters::MIKE);
 }
 
 void Play::update(float dt)
@@ -100,11 +99,11 @@ void Play::moveToNextScene()
 	}
 	else if (scenes[current_scene].serious_value > scenes[current_scene].slapstick_value)
 	{
-		current_scene = scenes[current_scene].serious.scene->scene_id;
+		current_scene = scenes[current_scene].sad.scene->scene_id;
 	}
 	else
 	{
-		current_scene = scenes[current_scene].slapstick.scene->scene_id;
+		current_scene = scenes[current_scene].comedy.scene->scene_id;
 		std::cout << "Make this better!";
 	}
 }

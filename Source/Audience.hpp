@@ -52,6 +52,7 @@ private:
 	float dark_approval = 0.0f;
 	float comedy_approval = 0.0f;
 
+
 	GameData* game_data;
 
 	std::unique_ptr<ASGE::Sprite> comedy_sprite;

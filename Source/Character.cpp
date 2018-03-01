@@ -61,8 +61,7 @@ void Character::initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend)
 		horizontal_walk_sprite.addFrame(charTextureStrings[5], 0.250f, 0.0f, 0.0f);
 		horizontal_walk_sprite.addFrame(charTextureStrings[6], 0.25f, 0.0f, 0.0f);
 		horizontal_walk_sprite.addFrame(charTextureStrings[5], 0.250f, 0.0f, 0.0f);
-		horizontal_walk_sprite.xPos = 300.0f;
-		horizontal_walk_sprite.yPos = 300.0f;
+
 
 		//forward
 		forward_walk_sprite.addFrame(charTextureStrings[7], 250.0f, 0.0f, 0.0f);
@@ -75,16 +74,100 @@ void Character::initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend)
 		backward_walk_sprite.addFrame(charTextureStrings[12], 250.0f, 0.0f, 0.0f);
 		break;
 	}
-	case Play::SceneCharacters::HANNAH:
+	case Play::SceneCharacters::LAURA:
 	{
+		idle_sprite_forward = rend->createUniqueSprite();
+		idle_sprite_forward->loadTexture(charTextureStrings[26]);
+
+		idle_sprite_back = rend->createUniqueSprite();
+		idle_sprite_back->loadTexture(charTextureStrings[27]);
+
+		idle_sprite_left = rend->createUniqueSprite();
+		idle_sprite_left->loadTexture(charTextureStrings[28]);
+
+		idle_sprite_right = rend->createUniqueSprite();
+		idle_sprite_right->loadTexture(charTextureStrings[29]);
+
+		//left to right
+		horizontal_walk_sprite.addFrame(charTextureStrings[30], 0.250f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[31], 0.250f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[32], 0.25f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[31], 0.250f, 0.0f, 0.0f);
+
+
+		//forward
+		forward_walk_sprite.addFrame(charTextureStrings[33], 250.0f, 0.0f, 0.0f);
+		forward_walk_sprite.addFrame(charTextureStrings[34], 250.0f, 0.0f, 0.0f);
+		forward_walk_sprite.addFrame(charTextureStrings[35], 250.0f, 0.0f, 0.0f);
+
+		//backward
+		backward_walk_sprite.addFrame(charTextureStrings[36], 250.0f, 0.0f, 0.0f);
+		backward_walk_sprite.addFrame(charTextureStrings[37], 250.0f, 0.0f, 0.0f);
+		backward_walk_sprite.addFrame(charTextureStrings[38], 250.0f, 0.0f, 0.0f);
 		break;
 	}	
-	case Play::SceneCharacters::JOHN:
+	case Play::SceneCharacters::MIKE:
 	{
+		idle_sprite_forward = rend->createUniqueSprite();
+		idle_sprite_forward->loadTexture(charTextureStrings[13]);
+
+		idle_sprite_back = rend->createUniqueSprite();
+		idle_sprite_back->loadTexture(charTextureStrings[14]);
+
+		idle_sprite_left = rend->createUniqueSprite();
+		idle_sprite_left->loadTexture(charTextureStrings[15]);
+
+		idle_sprite_right = rend->createUniqueSprite();
+		idle_sprite_right->loadTexture(charTextureStrings[16]);
+
+		//left to right
+		horizontal_walk_sprite.addFrame(charTextureStrings[17], 0.250f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[18], 0.250f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[19], 0.25f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[18], 0.250f, 0.0f, 0.0f);
+
+
+		//forward
+		forward_walk_sprite.addFrame(charTextureStrings[20], 250.0f, 0.0f, 0.0f);
+		forward_walk_sprite.addFrame(charTextureStrings[21], 250.0f, 0.0f, 0.0f);
+		forward_walk_sprite.addFrame(charTextureStrings[22], 250.0f, 0.0f, 0.0f);
+
+		//backward
+		backward_walk_sprite.addFrame(charTextureStrings[23], 250.0f, 0.0f, 0.0f);
+		backward_walk_sprite.addFrame(charTextureStrings[24], 250.0f, 0.0f, 0.0f);
+		backward_walk_sprite.addFrame(charTextureStrings[25], 250.0f, 0.0f, 0.0f);
 		break;
 	}	
-	case Play::SceneCharacters::LESLEY:
+	case Play::SceneCharacters::LESLIE:
 	{
+		idle_sprite_forward = rend->createUniqueSprite();
+		idle_sprite_forward->loadTexture(charTextureStrings[39]);
+
+		idle_sprite_back = rend->createUniqueSprite();
+		idle_sprite_back->loadTexture(charTextureStrings[40]);
+
+		idle_sprite_left = rend->createUniqueSprite();
+		idle_sprite_left->loadTexture(charTextureStrings[41]);
+
+		idle_sprite_right = rend->createUniqueSprite();
+		idle_sprite_right->loadTexture(charTextureStrings[42]);
+
+		//left to right
+		horizontal_walk_sprite.addFrame(charTextureStrings[43], 0.250f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[44], 0.250f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[45], 0.25f, 0.0f, 0.0f);
+		horizontal_walk_sprite.addFrame(charTextureStrings[44], 0.250f, 0.0f, 0.0f);
+
+
+		//forward
+		forward_walk_sprite.addFrame(charTextureStrings[46], 250.0f, 0.0f, 0.0f);
+		forward_walk_sprite.addFrame(charTextureStrings[47], 250.0f, 0.0f, 0.0f);
+		forward_walk_sprite.addFrame(charTextureStrings[48], 250.0f, 0.0f, 0.0f);
+
+		//backward
+		backward_walk_sprite.addFrame(charTextureStrings[49], 250.0f, 0.0f, 0.0f);
+		backward_walk_sprite.addFrame(charTextureStrings[50], 250.0f, 0.0f, 0.0f);
+		backward_walk_sprite.addFrame(charTextureStrings[51], 250.0f, 0.0f, 0.0f);
 		break;
 	}	
 	default:
@@ -118,9 +201,9 @@ void Character::loadCharacterTextureStrings()
 {
 	//TODO - maybe break this down so it's not such a fat function?
 	//TODO rename folders to follow actor names?
-	//RIGGAN IDLE
+	//RIGGAN - IDLE
 	charTextureStrings[0] = "../../Resources/Textures/Clint/Forwards/ClintF1.png";
-	charTextureStrings[1] = "../../Resources/Textures/Clint/Backwards/ClingB1.png";
+	charTextureStrings[1] = "../../Resources/Textures/Clint/Backwards/ClintB1.png";
 	charTextureStrings[2] = "../../Resources/Textures/Clint/LeftTurn/ClintL1.png";
 	charTextureStrings[3] = "../../Resources/Textures/Clint/RightTurn/ClintR1.png";
 
@@ -139,8 +222,72 @@ void Character::loadCharacterTextureStrings()
 	charTextureStrings[11] = "Clint/Backwards/ClintB3";
 	charTextureStrings[12] = "Clint/Backwards/ClintB4";
 
-	//LESLEY
-	//JOHN etc...
+
+	//Mike - IDLE
+	charTextureStrings[13] = "../../Resources/Textures/Mike/Forwards/MikeF1.png";
+	charTextureStrings[14] = "../../Resources/Textures/Mike/Backwards/MikeB1.png";
+	charTextureStrings[15] = "../../Resources/Textures/Mike/LeftTurn/MikeL1.png";
+	charTextureStrings[16] = "../../Resources/Textures/Mike/RightTurn/MikeR1.png";
+
+	//MIKE WALKING - RIGHT
+	charTextureStrings[17] = "Mike/RightTurn/MikeR2";
+	charTextureStrings[18] = "Mike/RightTurn/MikeR3";
+	charTextureStrings[19] = "Mike/RightTurn/MikeR4";
+
+	//MIKE WALKING - FORWARD
+	charTextureStrings[20] = "Mike/Forwards/MikeF2";
+	charTextureStrings[21] = "Mike/Forwards/MikeF3";
+	charTextureStrings[22] = "Mike/Forwards/MikeF4";
+
+	//MIKE WALKING = BACKWARDS
+	charTextureStrings[23] = "Mike/Backwards/MikeB2";
+	charTextureStrings[24] = "Mike/Backwards/MikeB3";
+	charTextureStrings[25] = "Mike/Backwards/MikeB4";
+
+	//LESLIE
+	//LESLIE - IDLE
+	charTextureStrings[26] = "../../Resources/Textures/Leslie/Forwards/LeslieF1.png";
+	charTextureStrings[27] = "../../Resources/Textures/Leslie/Backwards/LeslieB1.png";
+	charTextureStrings[28] = "../../Resources/Textures/Leslie/LeftTurn/LeslieL1.png";
+	charTextureStrings[29] = "../../Resources/Textures/Leslie/RightTurn/LeslieR1.png";
+
+	//LESLIE WALKING - RIGHT
+	charTextureStrings[30] = "Leslie/RightTurn/LeslieR2";
+	charTextureStrings[31] = "Leslie/RightTurn/LeslieR3";
+	charTextureStrings[32] = "Leslie/RightTurn/LeslieR4";
+
+	//LESLIE WALKING - FORWARD
+	charTextureStrings[33] = "Leslie/Forwards/LeslieF2";
+	charTextureStrings[34] = "Leslie/Forwards/LeslieF3";
+	charTextureStrings[35] = "Leslie/Forwards/LeslieF4";
+
+	//LESLIE WALKING = BACKWARDS
+	charTextureStrings[36] = "Leslie/Backwards/LeslieB2";
+	charTextureStrings[37] = "Leslie/Backwards/LeslieB3";
+	charTextureStrings[38] = "Leslie/Backwards/LeslieB4";
+
+	//LAURA
+	//LAURA - IDLE
+	charTextureStrings[39] = "../../Resources/Textures/Laura/Forwards/LauraF1.png";
+	charTextureStrings[40] = "../../Resources/Textures/Laura/Backwards/LauraB1.png";
+	charTextureStrings[41] = "../../Resources/Textures/Laura/LeftTurn/LauraL1.png";
+	charTextureStrings[42] = "../../Resources/Textures/Laura/RightTurn/LauraR1.png";
+
+	//LAURA WALKING - RIGHT
+	charTextureStrings[43] = "Laura/RightTurn/LauraR2";
+	charTextureStrings[44] = "Laura/RightTurn/LauraR3";
+	charTextureStrings[45] = "Laura/RightTurn/LauraR4";
+
+	//LAURA WALKING - FORWARD
+	charTextureStrings[46] = "Laura/Forwards/LauraF2";
+	charTextureStrings[47] = "Laura/Forwards/LauraF3";
+	charTextureStrings[48] = "Laura/Forwards/LauraF4";
+
+	//LAURA WALKING = BACKWARDS
+	charTextureStrings[49] = "Laura/Backwards/LauraB2";
+	charTextureStrings[50] = "Laura/Backwards/LauraB3";
+	charTextureStrings[51] = "Laura/Backwards/LauraB4";
+
 }
 
 
