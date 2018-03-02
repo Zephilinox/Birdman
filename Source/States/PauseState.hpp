@@ -22,4 +22,5 @@ public:
 private:
 	Menu menu;
 	std::unique_ptr<ASGE::Sprite> dim_background;
+	std::unique_ptr<ASGE::Sprite> pause_image;
 };

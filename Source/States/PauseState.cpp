@@ -9,17 +9,24 @@ PauseState::PauseState(GameData* game_data)
 	: BaseState(game_data, true)
 	, menu(game_data)
 	, dim_background(game_data->getRenderer()->createRawSprite())
+	, pause_image(game_data->getRenderer()->createRawSprite())
 {
 	if (!dim_background->loadTexture("../../Resources/Textures/BlackScreen.png"))
 	{
 		throw "Failed to load BlackScreen.png";
 	}
 
-	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 - 120, "CONTINUE", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
-	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 - 40, "RESTART", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
-	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 40, "TOGGLE AUDIO", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
-	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 120, "TOGGLE FULLSCREEN", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
-	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 200, "EXIT", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
+	if (!pause_image->loadTexture("../../Resources/Textures/UI/Pause.png"))
+	{
+		throw "Failed to load Pause.png";
+	}
+
+	const float c[3] = { 0.817, 0.668, 0.515 };
+	menu.addButton(game_data->getWindowWidth() / 2 - 40, game_data->getWindowHeight() / 2 - 60, "CONTINUE", c, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(game_data->getWindowWidth() / 2 - 35, game_data->getWindowHeight() / 2 - 20, "RESTART", c, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(game_data->getWindowWidth() / 2 - 60, game_data->getWindowHeight() / 2 + 20, "TOGGLE AUDIO", c, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 60, "TOGGLE FULLSCREEN", c, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(game_data->getWindowWidth() / 2 - 20, game_data->getWindowHeight() / 2 + 100, "EXIT", c, ASGE::COLOURS::ANTIQUEWHITE);
 
 	menu.getButton(0).on_click.connect([gd = game_data]()
 	{
@@ -80,6 +87,7 @@ void PauseState::update(const ASGE::GameTime &)
 void PauseState::render() const
 {
 	game_data->getRenderer()->renderSprite(*dim_background);
+	game_data->getRenderer()->renderSprite(*pause_image);
 	menu.render();
 }
 
