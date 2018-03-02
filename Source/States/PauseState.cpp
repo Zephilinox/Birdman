@@ -23,9 +23,9 @@ PauseState::PauseState(GameData* game_data)
 
 	const float c[3] = { 0.817, 0.668, 0.515 };
 	menu.addButton(game_data->getWindowWidth() / 2 - 40, game_data->getWindowHeight() / 2 - 60, "CONTINUE", c, ASGE::COLOURS::ANTIQUEWHITE);
-	menu.addButton(game_data->getWindowWidth() / 2 - 35, game_data->getWindowHeight() / 2 - 20, "RESTART", c, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(game_data->getWindowWidth() / 2 - 33, game_data->getWindowHeight() / 2 - 20, "RESTART", c, ASGE::COLOURS::ANTIQUEWHITE);
 	menu.addButton(game_data->getWindowWidth() / 2 - 60, game_data->getWindowHeight() / 2 + 20, "TOGGLE AUDIO", c, ASGE::COLOURS::ANTIQUEWHITE);
-	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 60, "TOGGLE FULLSCREEN", c, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(game_data->getWindowWidth() / 2 - 90, game_data->getWindowHeight() / 2 + 60, "TOGGLE FULLSCREEN", c, ASGE::COLOURS::ANTIQUEWHITE);
 	menu.addButton(game_data->getWindowWidth() / 2 - 20, game_data->getWindowHeight() / 2 + 100, "EXIT", c, ASGE::COLOURS::ANTIQUEWHITE);
 
 	menu.getButton(0).on_click.connect([gd = game_data]()
