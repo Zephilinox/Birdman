@@ -3,6 +3,9 @@
 //STD
 #include <array>
 #include <mutex>
+#include <string>
+#include <map>
+#include <experimental/map>
 
 //LIB
 #include <Engine/Keys.h>
@@ -35,6 +38,12 @@ public:
 	void update();
 	void handleInput(int key, int state);
 
+	void addAction(std::string action, unsigned id);
+	bool removeAction(std::string action, unsigned id);
+
+	bool isActionPressed(std::string action);
+	bool isActionDown(std::string action);
+
 	bool isKeyPressed(int key);
 	bool isKeyDown(int key) noexcept;
 
@@ -43,10 +52,10 @@ public:
 
 	GamePadData getGamePad();
 
-	int gamepad_button_up = 10;
-	int gamepad_button_down = 12;
-	int gamepad_button_enter = 0;
-	int gamepad_button_escape = 7;
+	int gamepad_button_up = ASGE::KEYS::KEY_LAST + 10;
+	int gamepad_button_down = ASGE::KEYS::KEY_LAST + 12;
+	int gamepad_button_enter = ASGE::KEYS::KEY_LAST + 0;
+	int gamepad_button_escape = ASGE::KEYS::KEY_LAST + 7;
 
 private:
 	void gamepadHandler(const ASGE::SharedEventData data);
@@ -57,10 +66,12 @@ private:
 
 	ASGE::Input* input;
 	std::mutex keys_mutex;
+	
+	std::multimap<std::string, int> actions;
 
 	std::array<int, ASGE::KEYS::KEY_LAST> toggle_keys;
 	std::array<int, ASGE::KEYS::KEY_LAST> keys;
 
-	std::array<int, ASGE::KEYS::KEY_LAST> buttons_last_frame;
-	std::array<int, ASGE::KEYS::KEY_LAST> buttons;
+	std::array<int, ASGE::KEYS::KEY_LAST + ASGE::KEYS::KEY_LAST> buttons_last_frame;
+	std::array<int, ASGE::KEYS::KEY_LAST + ASGE::KEYS::KEY_LAST> buttons;
 };

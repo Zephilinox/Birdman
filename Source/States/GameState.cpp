@@ -34,14 +34,12 @@ void GameState::update(const ASGE::GameTime& gt)
 	visual_dialogue.update(float(gt.delta_time.count()) / 1000.0f);
 	play_01.update(float(gt.delta_time.count()) / 1000.0f);
 
-	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER)
-		|| game_data->getInputManager()->isGamePadButtonPressed( game_data->getInputManager()->gamepad_button_enter))
+	if (game_data->getInputManager()->isActionPressed("enter"))
 	{
 		visual_dialogue.interact();
 	}
 
-	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ESCAPE)
-		|| game_data->getInputManager()->isGamePadButtonPressed(game_data->getInputManager()->gamepad_button_escape))
+	if (game_data->getInputManager()->isActionPressed("escape"))
 	{
 		game_data->getStateManager()->push<PauseState>();
 	}
