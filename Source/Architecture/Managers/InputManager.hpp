@@ -43,6 +43,11 @@ public:
 
 	GamePadData getGamePad();
 
+	int gamepad_button_up = 0;
+	int gamepad_button_down = 1;
+	int gamepad_button_enter = 2;
+	int gamepad_button_escape = 3;
+
 private:
 	void gamepadHandler(const ASGE::SharedEventData data);
 

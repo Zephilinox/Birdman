@@ -3,6 +3,9 @@
 //STD
 #include <cassert>
 
+//LIB
+#include <ini_parser.hpp>
+
 /**
 *   @brief   Constructor.
 *   @details Initializes the recorded state of all keys
@@ -17,6 +20,20 @@ InputManager::InputManager(ASGE::Input* input) noexcept
 	buttons.fill(ASGE::KEYS::KEY_RELEASED);
 
 	callback_id = input->addCallbackFnc(ASGE::EventType::E_GAMEPAD_STATUS, &InputManager::gamepadHandler, this);
+
+	ini_parser parser("settings.ini");
+
+	try
+	{
+		gamepad_button_up = parser.get_int("GamePadUp");
+		gamepad_button_down = parser.get_int("GamePadDown");
+		gamepad_button_enter = parser.get_int("GamePadEnter");
+		gamepad_button_escape = parser.get_int("GamePadEscape");
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << "\n";
+	}
 }
 
 InputManager::~InputManager()
@@ -47,15 +64,24 @@ void InputManager::update()
 	//http://www.glfw.org/docs/3.3/group__gamepad__buttons.html ?
 	if (game_pad.is_connected)
 	{
-		std::cout << "GamePad with ID " << game_pad.idx << " is connected\n";
 		assert(game_pad.no_of_buttons < ASGE::KEYS::KEY_LAST);
 
 		for (int i = 0; i < game_pad.no_of_buttons; ++i)
 		{
-			std::cout << "GamePad Button: " << game_pad.buttons[i];
-
 			buttons_last_frame[i] = buttons[i];
 			buttons[i] = game_pad.buttons[i];
+		}
+	}
+
+	//todo remove, only for testing
+	for (int i = 0; i < game_pad.no_of_buttons; ++i)
+	{
+		if (isGamePadButtonPressed(i))
+		{
+			if (game_pad.buttons[i])
+			{
+				std::cout << "GamePad Button Pressed: ID " << i << "\n";
+			}
 		}
 	}
 }
