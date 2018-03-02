@@ -59,6 +59,20 @@ bool BirdmanTheGame::init()
 		}
 	});
 
+	game_data->getInputManager()->addAction("enter", ASGE::KEYS::KEY_ENTER);
+	game_data->getInputManager()->addAction("enter", game_data->getInputManager()->gamepad_button_enter);
+
+	game_data->getInputManager()->addAction("escape", ASGE::KEYS::KEY_ESCAPE);
+	game_data->getInputManager()->addAction("escape", game_data->getInputManager()->gamepad_button_escape);
+
+	game_data->getInputManager()->addAction("up", ASGE::KEYS::KEY_UP);
+	game_data->getInputManager()->addAction("up", ASGE::KEYS::KEY_W);
+	game_data->getInputManager()->addAction("up", game_data->getInputManager()->gamepad_button_up);
+
+	game_data->getInputManager()->addAction("down", ASGE::KEYS::KEY_DOWN);
+	game_data->getInputManager()->addAction("down", ASGE::KEYS::KEY_S);
+	game_data->getInputManager()->addAction("down", game_data->getInputManager()->gamepad_button_down);
+
 	return true;
 }
 

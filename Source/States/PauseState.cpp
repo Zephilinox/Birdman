@@ -18,7 +18,8 @@ PauseState::PauseState(GameData* game_data)
 	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 - 120, "CONTINUE", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
 	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 - 40, "RESTART", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
 	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 40, "TOGGLE AUDIO", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
-	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 120, "EXIT", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 120, "TOGGLE FULLSCREEN", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
+	menu.addButton(game_data->getWindowWidth() / 2 - 80, game_data->getWindowHeight() / 2 + 200, "EXIT", ASGE::COLOURS::GRAY, ASGE::COLOURS::ANTIQUEWHITE);
 
 	menu.getButton(0).on_click.connect([gd = game_data]()
 	{
@@ -50,6 +51,18 @@ PauseState::PauseState(GameData* game_data)
 
 	menu.getButton(3).on_click.connect([game_data]()
 	{
+		if (game_data->getRenderer()->getWindowMode() == ASGE::Renderer::WindowMode::WINDOWED)
+		{
+			game_data->getRenderer()->setWindowedMode(ASGE::Renderer::WindowMode::FULLSCREEN);
+		}
+		else
+		{
+			game_data->getRenderer()->setWindowedMode(ASGE::Renderer::WindowMode::WINDOWED);
+		}
+	});
+
+	menu.getButton(4).on_click.connect([game_data]()
+	{
 		game_data->exit = true;
 	});
 }
@@ -58,7 +71,7 @@ void PauseState::update(const ASGE::GameTime &)
 {
 	menu.update();
 	
-	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ESCAPE))
+	if (game_data->getInputManager()->isActionPressed("escape"))
 	{
 		game_data->getStateManager()->pop();
 	}

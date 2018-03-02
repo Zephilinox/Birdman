@@ -9,33 +9,13 @@ Menu::Menu(GameData* game_data, bool vertical)
 {
 	buttons.reserve(4);
 	selected_button_id = 0;
-
-	if (vertical)
-	{
-		key_increment = ASGE::KEYS::KEY_UP;
-		key_increment_alt = ASGE::KEYS::KEY_W;
-		key_decrement = ASGE::KEYS::KEY_DOWN;
-		key_decrement_alt = ASGE::KEYS::KEY_S;
-	}
-	else
-	{
-		key_increment = ASGE::KEYS::KEY_LEFT;
-		key_increment_alt = ASGE::KEYS::KEY_A;
-		key_decrement = ASGE::KEYS::KEY_RIGHT;
-		key_decrement_alt = ASGE::KEYS::KEY_D;
-	}
-
-	gamepad_increment = game_data->getInputManager()->gamepad_button_up;
-	gamepad_decrement = game_data->getInputManager()->gamepad_button_down;
 }
 
 void Menu::update()
 {
 	if (buttons.empty()) return;
 
-	if (game_data->getInputManager()->isKeyPressed(key_decrement) ||
-		game_data->getInputManager()->isKeyPressed(key_decrement_alt)
-		|| game_data->getInputManager()->isGamePadButtonPressed(gamepad_decrement))
+	if (game_data->getInputManager()->isActionPressed("down"))
 	{
 		if (selected_button_id == buttons.size() - 1)
 		{
@@ -47,9 +27,7 @@ void Menu::update()
 		}
 	}
 	
-	if (game_data->getInputManager()->isKeyPressed(key_increment) ||
-		game_data->getInputManager()->isKeyPressed(key_increment_alt)
-		|| game_data->getInputManager()->isGamePadButtonPressed(gamepad_increment))
+	if (game_data->getInputManager()->isActionPressed("up"))
 	{
 		if (selected_button_id == 0)
 		{
@@ -61,8 +39,7 @@ void Menu::update()
 		}
 	}
 
-	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER)
-		|| game_data->getInputManager()->isGamePadButtonPressed(game_data->getInputManager()->gamepad_button_enter))
+	if (game_data->getInputManager()->isActionPressed("enter"))
 	{
 		game_data->getAudioManager()->play("button_click.wav");
 

@@ -25,10 +25,10 @@ InputManager::InputManager(ASGE::Input* input) noexcept
 
 	try
 	{
-		gamepad_button_up = parser.get_int("GamePadUp");
-		gamepad_button_down = parser.get_int("GamePadDown");
-		gamepad_button_enter = parser.get_int("GamePadEnter");
-		gamepad_button_escape = parser.get_int("GamePadEscape");
+		gamepad_button_up = parser.get_int("GamePadUp") + ASGE::KEYS::KEY_LAST;
+		gamepad_button_down = parser.get_int("GamePadDown") + ASGE::KEYS::KEY_LAST;
+		gamepad_button_enter = parser.get_int("GamePadEnter") + ASGE::KEYS::KEY_LAST;
+		gamepad_button_escape = parser.get_int("GamePadEscape") + ASGE::KEYS::KEY_LAST;
 	}
 	catch (std::exception& e)
 	{
@@ -66,22 +66,19 @@ void InputManager::update()
 	{
 		assert(game_pad.no_of_buttons < ASGE::KEYS::KEY_LAST);
 
-		for (int i = 0; i < game_pad.no_of_buttons; ++i)
+		for (int i = ASGE::KEYS::KEY_LAST; i < game_pad.no_of_buttons + ASGE::KEYS::KEY_LAST; ++i)
 		{
 			buttons_last_frame[i] = buttons[i];
-			buttons[i] = game_pad.buttons[i];
+			buttons[i] = game_pad.buttons[i - ASGE::KEYS::KEY_LAST];
 		}
 	}
 
 	//todo remove, only for testing
-	for (int i = 0; i < game_pad.no_of_buttons; ++i)
+	for (int i = ASGE::KEYS::KEY_LAST; i < game_pad.no_of_buttons + ASGE::KEYS::KEY_LAST; ++i)
 	{
 		if (isGamePadButtonPressed(i))
 		{
-			if (game_pad.buttons[i])
-			{
-				std::cout << "GamePad Button Pressed: ID " << i << "\n";
-			}
+			std::cout << "GamePad Button Pressed: ID " << i - ASGE::KEYS::KEY_LAST << "\n";
 		}
 	}
 }
@@ -102,6 +99,71 @@ void InputManager::handleInput(int key, int state)
 		toggle_keys[key] = state;
 		keys[key] = state;
 	}
+}
+
+void InputManager::addAction(std::string action, unsigned id)
+{
+	actions.insert({ action, id });
+}
+
+bool InputManager::removeAction(std::string action, unsigned id)
+{
+	bool removed = false;
+
+	std::experimental::erase_if(actions, [&](const auto& key_val)
+	{
+		if (key_val.first == action && key_val.second == id)
+		{
+			removed = true;
+			return true;
+		}
+
+		return false;
+	});
+
+	return removed;
+}
+
+bool InputManager::isActionPressed(std::string action)
+{
+	auto range = actions.equal_range(action);
+
+	bool pressed = false;
+
+	for (auto it = range.first; it != range.second; ++it)
+	{
+		if (it->second > 0 && it->second < ASGE::KEYS::KEY_LAST)
+		{
+			pressed = pressed || isKeyPressed(it->second);
+		}
+		else
+		{
+			pressed = pressed || isGamePadButtonPressed(it->second);
+		}
+	}
+
+	return pressed;
+}
+
+bool InputManager::isActionDown(std::string action)
+{
+	auto range = actions.equal_range(action);
+
+	bool down = false;
+
+	for (auto it = range.first; it != range.second; ++it)
+	{
+		if (it->second > 0 && it->second < ASGE::KEYS::KEY_LAST)
+		{
+			down = down || isKeyDown(it->second);
+		}
+		else
+		{
+			down = down || isGamePadButtonDown(it->second);
+		}
+	}
+
+	return down;
 }
 
 

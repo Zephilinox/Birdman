@@ -79,11 +79,11 @@ public:
 
 		if (entity_info.ownerID == game_data->getNetworkManager()->clientID)
 		{
-			if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_W))
+			if (game_data->getInputManager()->isActionDown("up"))
 			{
 				sprite.yPos -= 1000 * dt;
 			}
-			else if (game_data->getInputManager()->isKeyDown(ASGE::KEYS::KEY_S))
+			else if (game_data->getInputManager()->isActionDown("down"))
 			{
 				sprite.yPos += 1000 * dt;
 			}
