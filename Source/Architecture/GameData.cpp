@@ -6,9 +6,10 @@
 //LIB
 #include <ini_parser.hpp>
 
-GameData::GameData(ASGE::Renderer* renderer, int width, int height)
+GameData::GameData(ASGE::Renderer* renderer, ASGE::Input* input, int width, int height)
 	: renderer(renderer)
 	, state_manager(this)
+	, input_manager(input)
 	, font_manager(renderer)
 	, audio_manager("Resources/Sounds/")
 	, network_manager(this) //todo: evaluate if needed

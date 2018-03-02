@@ -15,7 +15,7 @@
 class GameData
 {
 public:
-	GameData(ASGE::Renderer* renderer, int width, int height);
+	GameData(ASGE::Renderer* renderer, ASGE::Input* input, int width, int height);
 
 	ASGE::Renderer* getRenderer() const noexcept;
 	StateManager* getStateManager() noexcept;

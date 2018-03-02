@@ -1,28 +1,61 @@
 #include "InputManager.hpp"
 
+//STD
+#include <cassert>
+
 /**
 *   @brief   Constructor.
 *   @details Initializes the recorded state of all keys
 */
-InputManager::InputManager() noexcept
+InputManager::InputManager(ASGE::Input* input) noexcept
+	: input(input)
 {
 	toggle_keys.fill(ASGE::KEYS::KEY_RELEASED);
 	keys.fill(ASGE::KEYS::KEY_RELEASED);
+
+	buttons_last_frame.fill(ASGE::KEYS::KEY_RELEASED);
+	buttons.fill(ASGE::KEYS::KEY_RELEASED);
+
+	callback_id = input->addCallbackFnc(ASGE::EventType::E_GAMEPAD_STATUS, &InputManager::gamepadHandler, this);
+}
+
+InputManager::~InputManager()
+{
+	input->unregisterCallback(callback_id);
 }
 
 
 void InputManager::update()
 {
-	std::lock_guard<std::mutex> guard(keys_mutex);
-	for (auto& key : keys)
 	{
-		//If the key hasn't been released since the last update
-		//Then set it to repeated so that
-		//KeyDown returns true but 
-		//KeyPressed returns false
-		if (key == ASGE::KEYS::KEY_PRESSED)
+		std::lock_guard<std::mutex> guard(keys_mutex);
+		for (auto& key : keys)
 		{
-			key = ASGE::KEYS::KEY_REPEATED;
+			//If the key hasn't been released since the last update
+			//Then set it to repeated so that
+			//KeyDown returns true but 
+			//KeyPressed returns false
+			if (key == ASGE::KEYS::KEY_PRESSED)
+			{
+				key = ASGE::KEYS::KEY_REPEATED;
+			}
+		}
+	}
+
+	auto game_pad = getGamePad();
+
+	//http://www.glfw.org/docs/3.3/group__gamepad__buttons.html ?
+	if (game_pad.is_connected)
+	{
+		std::cout << "GamePad with ID " << game_pad.idx << " is connected\n";
+		assert(game_pad.no_of_buttons < ASGE::KEYS::KEY_LAST);
+
+		for (int i = 0; i < game_pad.no_of_buttons; ++i)
+		{
+			std::cout << "GamePad Button: " << game_pad.buttons[i];
+
+			buttons_last_frame[i] = buttons[i];
+			buttons[i] = game_pad.buttons[i];
 		}
 	}
 }
@@ -74,4 +107,39 @@ bool InputManager::isKeyDown(int key) noexcept
 	[[gsl::suppress(bounds.2)]]
 	return (toggle_keys[key] != ASGE::KEYS::KEY_RELEASED ||
 		keys[key] != ASGE::KEYS::KEY_RELEASED);
+}
+
+bool InputManager::isGamePadButtonPressed(int button)
+{
+	return buttons_last_frame[button] == ASGE::KEYS::KEY_RELEASED &&
+		buttons_last_frame[button] != buttons[button];
+}
+
+bool InputManager::isGamePadButtonDown(int button)
+{
+	return buttons[button] == ASGE::KEYS::KEY_PRESSED;
+}
+
+GamePadData InputManager::getGamePad()
+{
+	//?
+	for (int i = 0; i < 100; ++i)
+	{
+		auto gamepad = input->getGamePad(i);
+		if (gamepad.is_connected)
+		{
+			return gamepad;
+		}
+	}
+
+	GamePadData gamepad(input->getGamePad(0));
+	return gamepad;
+}
+
+void InputManager::gamepadHandler(const ASGE::SharedEventData data)
+{
+	const auto gamepad_event = static_cast<const ASGE::GamePadEvent*>(data.get());
+
+	//todo: what's the point of this?
+	std::cout << "Gamepad Event Received (is connected) " << gamepad_event->connected;
 }

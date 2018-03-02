@@ -38,7 +38,7 @@ bool BirdmanTheGame::init()
 
 	key_handler_id = inputs->addCallbackFnc(ASGE::EventType::E_KEY, &BirdmanTheGame::keyHandler, this);
 
-	game_data = std::make_unique<GameData>(renderer.get(), game_width, game_height);
+	game_data = std::make_unique<GameData>(renderer.get(), inputs.get(), game_width, game_height);
 	game_data->getFontManager()->addFont("../../Resources/Fonts/DroidSansMono.ttf", "Default", 24);
 	game_data->getFontManager()->addFont("../../Resources/Fonts/DroidSansMono.ttf", "Dialogue", 18);
 	
@@ -65,6 +65,7 @@ bool BirdmanTheGame::init()
 void BirdmanTheGame::update(const ASGE::GameTime& gt)
 {
 	//Sleep if our FPS is too high so we avoid too much wasted CPU usage (2k+ fps)
+
 	if (5 - gt.delta_time.count() > 0)
 	{
 		std::this_thread::sleep_for(

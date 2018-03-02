@@ -6,6 +6,7 @@
 
 //LIB
 #include <Engine/Keys.h>
+#include <Engine/Input.h>
 
 namespace ASGE
 {
@@ -28,15 +29,33 @@ Use isKeyDown over isKeyPressed if at all possible.
 class InputManager
 {
 public:
-	InputManager() noexcept;
+	InputManager(ASGE::Input* input) noexcept;
+	~InputManager();
 
 	void update();
 	void handleInput(int key, int state);
+
 	bool isKeyPressed(int key);
 	bool isKeyDown(int key) noexcept;
 
+	bool isGamePadButtonPressed(int button);
+	bool isGamePadButtonDown(int button);
+
+	GamePadData getGamePad();
+
 private:
+	void gamepadHandler(const ASGE::SharedEventData data);
+
+	int gamepad_id;
+	bool gamepad_connected = false;
+	int callback_id;
+
+	ASGE::Input* input;
+	std::mutex keys_mutex;
+
 	std::array<int, ASGE::KEYS::KEY_LAST> toggle_keys;
 	std::array<int, ASGE::KEYS::KEY_LAST> keys;
-	std::mutex keys_mutex;
+
+	std::array<int, ASGE::KEYS::KEY_LAST> buttons_last_frame;
+	std::array<int, ASGE::KEYS::KEY_LAST> buttons;
 };
