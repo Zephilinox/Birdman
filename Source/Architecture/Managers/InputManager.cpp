@@ -149,7 +149,7 @@ bool InputManager::isGamePadButtonDown(int button)
 GamePadData InputManager::getGamePad()
 {
 	//?
-	for (int i = 0; i < 100; ++i)
+	for (int i = 0; i < 1; ++i)
 	{
 		auto gamepad = input->getGamePad(i);
 		if (gamepad.is_connected)
