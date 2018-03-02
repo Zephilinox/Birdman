@@ -31,9 +31,9 @@ void Scene::initSceneProps(Play::SceneProps layout)
 		case Play::SceneProps::KITCHEN:
 		{
 			props_pool.at(0).setIsActive(true);
-			props_pool.at(0).setPosition((game_data->getWindowWidth() * 0.5f) - (props_pool.at(0).getSprite()->width() * 0.5f), game_data->getWindowHeight() * 0.1f);
+			props_pool.at(0).setPosition((game_data->getWindowWidth() * 0.5f) - (props_pool.at(0).getSprite()->width() * 0.5f), game_data->getWindowHeight() * 0.2f);
 			props_pool.at(1).setIsActive(true);
-			props_pool.at(1).setPosition((game_data->getWindowWidth() * 0.5f) - (props_pool.at(1).getSprite()->width() * 0.5f), game_data->getWindowHeight() * 0.35f);
+			props_pool.at(1).setPosition((game_data->getWindowWidth() * 0.5f) - (props_pool.at(1).getSprite()->width() * 0.5f), game_data->getWindowHeight() * 0.4f);
 			break;
 		}
 		case Play::SceneProps::APARTMENT_BEDROOM:
