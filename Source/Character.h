@@ -52,8 +52,8 @@ private:
 
 	float x_position = 0.0f;
 	float y_position = 0.0f;
-	float target_x_position = 300.0f;
-	float target_y_position = 300.0f;
+	float target_x_position = 0.0f;
+	float target_y_position = 0.0f;
 
 	AnimatedSprite horizontal_walk_sprite;
 	AnimatedSprite forward_walk_sprite;

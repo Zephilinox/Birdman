@@ -15,8 +15,12 @@ Audience::Audience(GameData* data)
 	light_multiplier = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
 	dark_multiplier = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
 
-	loadAudienceSprites();
+	panel_pos_x = 940.0f;
+	panel_pos_y = 490.0f;
+	sprite_width_override = 320.0f;
+	sprite_height_override = 220.0f;
 
+	loadAudienceSprites();
 }
 
 int Audience::getSadApproval()
@@ -64,18 +68,71 @@ void Audience::varyApprovalsBetweenNights()
 
 void Audience::loadAudienceSprites()
 {
-	comedy_sprite = game_data->getRenderer()->createUniqueSprite();
-	sad_sprite = game_data->getRenderer()->createUniqueSprite();
-	light_sprite = game_data->getRenderer()->createUniqueSprite();
-	dark_sprite = game_data->getRenderer()->createUniqueSprite();
+	perfect_sprite = game_data->getRenderer()->createUniqueSprite();
+	great_sprite = game_data->getRenderer()->createUniqueSprite();
+	good_sprite = game_data->getRenderer()->createUniqueSprite();
+	indifferent_sprite = game_data->getRenderer()->createUniqueSprite();
 	
-	//TODO - Brendon - This is where we'll load the sprites for the audience reactions.
-	//Add them in when you have them
 
-	/*comedy_sprite->loadTexture("");
-	sad_sprite->loadTexture("");
-	light_sprite->loadTexture("");
-	dark_sprite->loadTexture("");*/
+	perfect_sprite->loadTexture("../../Resources/Textures/Audience/Perfect.jpg");
+	great_sprite->loadTexture("../../Resources/Textures/Audience/Excellent.jpg");
+	good_sprite->loadTexture("../../Resources/Textures/Audience/Good.jpg");
+	indifferent_sprite->loadTexture("../../Resources/Textures/Audience/Calm.jpg");
+
+	perfect_sprite->xPos(panel_pos_x);
+	perfect_sprite->yPos(panel_pos_y);
+
+	great_sprite->xPos(panel_pos_x);
+	great_sprite->yPos(panel_pos_y);
+
+	good_sprite->xPos(panel_pos_x);
+	good_sprite->yPos(panel_pos_y);
+
+	indifferent_sprite->xPos(panel_pos_x);
+	indifferent_sprite->yPos(panel_pos_y);
+
+	perfect_sprite->width(sprite_width_override);
+	perfect_sprite->height(sprite_height_override);
+
+	great_sprite->width(sprite_width_override);
+	great_sprite->height(sprite_height_override);
+
+	good_sprite->width(sprite_width_override);
+	good_sprite->height(sprite_height_override);
+
+	indifferent_sprite->width(sprite_width_override);
+	indifferent_sprite->height(sprite_height_override);
+}
+
+
+void Audience::update(float dt)
+{
+	//overallApproval = sad_approval + light_approval + dark_approval + comedy_approval;
+	//overallApproval *= 0.25f;
+	
+	//TODO -remove and uncomment above - Testing only
+	overallApproval += 10.0f * dt;
+
+}
+
+void Audience::render() const
+{
+	if(overallApproval >= 75.0f)
+	{
+		game_data->getRenderer()->renderSprite(*perfect_sprite);
+	}
+	else if(overallApproval >= 50.0f)
+	{
+		game_data->getRenderer()->renderSprite(*great_sprite);
+	}
+	else if(overallApproval >= 25.0f)
+	{
+		game_data->getRenderer()->renderSprite(*good_sprite);
+	}
+	else
+	{
+		game_data->getRenderer()->renderSprite(*indifferent_sprite);
+	}
 }
 
 void Audience::setStartingApprovals(int starting_val)
@@ -88,8 +145,6 @@ void Audience::setStartingApprovals(int starting_val)
 
 float Audience::getOverallApproval()
 {
-	float overall_approval = sad_approval + light_approval + dark_approval + comedy_approval;
-	overall_approval *= 0.25f;
 	return overallApproval;
 }
 
@@ -115,4 +170,10 @@ void Audience::addToDark(int effect)
 void Audience::addToComedy(int effect)
 {
 	comedy_approval += effect * comedy_multiplier;
+}
+
+void Audience::applyBoredom()
+{
+	//TODO balance this lowering, should occur with each actual dialogue choice made by player?
+	overallApproval *= 0.9f;
 }

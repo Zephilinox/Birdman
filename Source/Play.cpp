@@ -89,6 +89,7 @@ void Play::create()
 void Play::update(float dt)
 {
 	scenes[current_scene].update(dt);
+	audience.update(dt);
 }
 
 void Play::render() const
@@ -97,6 +98,7 @@ void Play::render() const
 	game_data->getRenderer()->renderSprite(*stage);
 
 	scenes[current_scene].render();
+	audience.render();
 	//Render  VisualDialogue*
 }
 

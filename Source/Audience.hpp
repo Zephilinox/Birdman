@@ -29,6 +29,10 @@ public:
 	void varyApprovalsBetweenNights();
 	void loadAudienceSprites();
 
+	void update(float dt);
+	void render() const;
+
+
 	void setStartingApprovals(int starting_val);
 
 	float getOverallApproval();
@@ -38,6 +42,8 @@ public:
 	void addToLight(int);
 	void addToDark(int);
 	void addToComedy(int);
+
+	void applyBoredom();
 
 private:
 	int sad_multiplier = 0;
@@ -52,11 +58,16 @@ private:
 	float dark_approval = 0.0f;
 	float comedy_approval = 0.0f;
 
+	float panel_pos_x;
+	float panel_pos_y;
+
+	float sprite_width_override;
+	float sprite_height_override;
 
 	GameData* game_data;
 
-	std::unique_ptr<ASGE::Sprite> comedy_sprite;
-	std::unique_ptr<ASGE::Sprite> sad_sprite;
-	std::unique_ptr<ASGE::Sprite> light_sprite;
-	std::unique_ptr<ASGE::Sprite> dark_sprite;
+	std::unique_ptr<ASGE::Sprite> perfect_sprite;
+	std::unique_ptr<ASGE::Sprite> great_sprite;
+	std::unique_ptr<ASGE::Sprite> good_sprite;
+	std::unique_ptr<ASGE::Sprite> indifferent_sprite;
 };
