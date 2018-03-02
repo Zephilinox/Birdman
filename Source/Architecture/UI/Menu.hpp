@@ -34,6 +34,8 @@ private:
 
 	int key_increment;
 	int key_increment_alt;
+	int gamepad_increment;
 	int key_decrement;
 	int key_decrement_alt;
+	int gamepad_decrement;
 };

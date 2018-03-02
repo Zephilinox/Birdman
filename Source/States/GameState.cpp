@@ -34,12 +34,14 @@ void GameState::update(const ASGE::GameTime& gt)
 	visual_dialogue.update(float(gt.delta_time.count()) / 1000.0f);
 	play_01.update(float(gt.delta_time.count()) / 1000.0f);
 
-	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER))
+	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ENTER)
+		|| game_data->getInputManager()->isGamePadButtonPressed( game_data->getInputManager()->gamepad_button_enter))
 	{
 		visual_dialogue.interact();
 	}
 
-	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ESCAPE))
+	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_ESCAPE)
+		|| game_data->getInputManager()->isGamePadButtonPressed(game_data->getInputManager()->gamepad_button_escape))
 	{
 		game_data->getStateManager()->push<PauseState>();
 	}
@@ -309,7 +311,7 @@ void GameState::dialogue_kitchen()
 		return "kitchen/start";
 	});
 
-	dialogue_tree.addDialogue("kitchen/start", "lesley",
+	dialogue_tree.addDialogue("kitchen/start", "leslie",
 	[&]()
 	{
 		auto leslie = play_01.getScene()->getCharacter(Play::LESLIE);
@@ -320,20 +322,20 @@ void GameState::dialogue_kitchen()
 
 	dialogue_tree.addDialogue("kitchen/start1", "ralph", "Yeah. He loved her so much he tried to kill her.", "kitchen/start2");
 	dialogue_tree.addDialogue("kitchen/start2", "laura", "He tried to kill you?", "kitchen/start3");
-	dialogue_tree.addDialogue("kitchen/start3", "lesley", "No.\nOkay, well he did beat me up one night.", "kitchen/start4");
-	dialogue_tree.addDialogue("kitchen/start4", "lesley", "He dragged me around the living room by my ankles, yelling\n\"I Love you, I love you, bitch.\"", "kitchen/start5");
+	dialogue_tree.addDialogue("kitchen/start3", "leslie", "No.\nOkay, well he did beat me up one night.", "kitchen/start4");
+	dialogue_tree.addDialogue("kitchen/start4", "leslie", "He dragged me around the living room by my ankles, yelling\n\"I Love you, I love you, bitch.\"", "kitchen/start5");
 	dialogue_tree.addDialogue("kitchen/start5", "ralph", "What do you do with a love like that?", "kitchen/start6");
 	dialogue_tree.addDialogue("kitchen/start6", "ralph", "How is that...\nThat is not love and you know it.\nWhy do you insist on calling it...", "kitchen/start7");
-	dialogue_tree.addDialogue("kitchen/start7", "lesley", "You can say what you want, but I know what it was.", "kitchen/start8");
+	dialogue_tree.addDialogue("kitchen/start7", "leslie", "You can say what you want, but I know what it was.", "kitchen/start8");
 	dialogue_tree.addDialogue("kitchen/start8", "ralph", "What about you, Nick?\nDoes that sound like love to you?", "kitchen/start9");
 	dialogue_tree.addDialogue("kitchen/start9", "riggan", "Sorry I'm late.\nI'm the wrong person to ask.\nI've only heard his name mentioned in passing.", "kitchen/start10");
 	dialogue_tree.addDialogue("kitchen/start10", "riggan", "You'd have to know the particulars\nBut I think what you're saying is\nthat love is absolute.", "kitchen/start11");
 	dialogue_tree.addDialogue("kitchen/start11", "ralph", "Yeah. The kind of love I'm talking about is...", "kitchen/start12");
 	dialogue_tree.addDialogue("kitchen/start12", "ralph", "The kind of love I'm talking about, you don't try and kill people.", "kitchen/start13");
-	dialogue_tree.addDialogue("kitchen/start13", "lesley", "It was love, Mel.\nTo Eddie, it was.", "kitchen/start14");
-	dialogue_tree.addDialogue("kitchen/start14", "lesley", "I don't care what anybody says.\nHe was ready to die for it.", "kitchen/start15");
+	dialogue_tree.addDialogue("kitchen/start13", "leslie", "It was love, Mel.\nTo Eddie, it was.", "kitchen/start14");
+	dialogue_tree.addDialogue("kitchen/start14", "leslie", "I don't care what anybody says.\nHe was ready to die for it.", "kitchen/start15");
 	dialogue_tree.addDialogue("kitchen/start15", "ralph", "Ask her what he did after she left him.", "kitchen/start16");
-	dialogue_tree.addDialogue("kitchen/start16", "lesley", "He shot himself in the mouth.\nBut he screwed that up, too.\nPoor Ed.", "kitchen/start17");
+	dialogue_tree.addDialogue("kitchen/start16", "leslie", "He shot himself in the mouth.\nBut he screwed that up, too.\nPoor Ed.", "kitchen/start17");
 	dialogue_tree.addDialogue("kitchen/start17", "ralph", "Poor Ed, my ass.\nThe guy was dangerous.", "kitchen/start18");
 	dialogue_tree.addDialogue("kitchen/start18", "laura", "How'd he screw it up if he shot himself in the mouth?", "kitchen/start19");
 	dialogue_tree.addDialogue("kitchen/start19", "ralph", "He used to carry this twenty-two.\nWe lived like fugitives those days.\n", "kitchen/start20");

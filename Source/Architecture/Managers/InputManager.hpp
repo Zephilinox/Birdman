@@ -29,18 +29,6 @@ Use isKeyDown over isKeyPressed if at all possible.
 class InputManager
 {
 public:
-
-	enum GamePadButtonPressed
-	{
-		A =0,
-		B,
-		X,
-		Y,
-		UP = 10,
-		DOWN = 12,
-		START = 7
-	};
-
 	InputManager(ASGE::Input* input) noexcept;
 	~InputManager();
 
@@ -55,10 +43,10 @@ public:
 
 	GamePadData getGamePad();
 
-	int gamepad_button_up = 0;
-	int gamepad_button_down = 1;
-	int gamepad_button_enter = 2;
-	int gamepad_button_escape = 3;
+	int gamepad_button_up = 10;
+	int gamepad_button_down = 12;
+	int gamepad_button_enter = 0;
+	int gamepad_button_escape = 7;
 
 private:
 	void gamepadHandler(const ASGE::SharedEventData data);
