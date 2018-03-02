@@ -31,4 +31,5 @@ private:
 	Play play_01;
 
 	std::unique_ptr<ASGE::Sprite> bottom_panel;
+	std::unique_ptr<ASGE::Sprite> top_panel;
 };

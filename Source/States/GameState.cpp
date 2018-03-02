@@ -19,9 +19,12 @@ GameState::GameState(GameData* game_data)
 	, visual_dialogue(game_data, &dialogue_tree, "start_extra")
 	, play_01(game_data)
 	, bottom_panel(game_data->getRenderer()->createRawSprite())
+	, top_panel(game_data->getRenderer()->createRawSprite())
 {
 	bottom_panel->loadTexture("../../Resources/Textures/UI/BottomPanel.png");
 	bottom_panel->yPos(468);
+	
+	top_panel->loadTexture("../../Resources/Textures/UI/TopPanel.png");
 
 	play_01.create();
 	dialogue_init();
@@ -50,6 +53,7 @@ void GameState::render() const
 	game_data->getRenderer()->renderSprite(*bottom_panel);
 	visual_dialogue.render();
 	play_01.render();
+	game_data->getRenderer()->renderSprite(*top_panel);
 }
 
 void GameState::onActive()
