@@ -41,12 +41,12 @@ void Menu::update()
 
 	if (game_data->getInputManager()->isActionPressed("enter"))
 	{
-		game_data->getAudioManager()->play("button_click.wav");
-
 		if (buttons.size())
 		{
 			buttons[selected_button_id].on_click.emit();
 		}
+
+		game_data->getAudioManager()->play("button_click.wav");
 	}
 }
 

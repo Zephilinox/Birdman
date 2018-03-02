@@ -15,10 +15,10 @@ Audience::Audience(GameData* data)
 	light_multiplier = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
 	dark_multiplier = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
 
-	panel_pos_x = 940.0f;
-	panel_pos_y = 490.0f;
-	sprite_width_override = 320.0f;
-	sprite_height_override = 220.0f;
+	panel_pos_x = 926.0f;
+	panel_pos_y = 476.0f;
+	sprite_width_override = 346.0f;
+	sprite_height_override = 236.0f;
 
 	loadAudienceSprites();
 }
