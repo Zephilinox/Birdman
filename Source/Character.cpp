@@ -204,13 +204,13 @@ void Character::loadCharacterTextureStrings()
 	//RIGGAN - IDLE
 	charTextureStrings[0] = "../../Resources/Textures/Clint/Forwards/ClintF1.png";
 	charTextureStrings[1] = "../../Resources/Textures/Clint/Backwards/ClintB1.png";
-	charTextureStrings[2] = "../../Resources/Textures/Clint/LeftTurn/ClintL1.png";
-	charTextureStrings[3] = "../../Resources/Textures/Clint/RightTurn/ClintR1.png";
+	charTextureStrings[2] = "../../Resources/Textures/Clint/Left Turn/ClintL1.png";
+	charTextureStrings[3] = "../../Resources/Textures/Clint/Right Turn/ClintR1.png";
 
 	//RIGGAN WALKING - RIGHT
-	charTextureStrings[4] = "Clint/RightTurn/ClintR2";
-	charTextureStrings[5] = "Clint/RightTurn/ClintR3";
-	charTextureStrings[6] = "Clint/RightTurn/ClintR4";
+	charTextureStrings[4] = "Clint/Right Turn/ClintR2";
+	charTextureStrings[5] = "Clint/Right Turn/ClintR3";
+	charTextureStrings[6] = "Clint/Right Turn/ClintR4";
 
 	//RIGGAN WALKING - FORWARD
 	charTextureStrings[7] = "Clint/Forwards/ClintF2";
