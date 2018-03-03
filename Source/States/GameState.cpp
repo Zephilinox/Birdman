@@ -471,7 +471,7 @@ void GameState::dialogue_kitchen()
 
 	//If Dark Option - Pick 2 - ()
 
-	dialogue_tree.addDialogue("apartment/start2", "riggan", "You bang on the door loudly with force and open the door*", "Apartment/start3");
+	dialogue_tree.addDialogue("apartment/start2", "riggan", "ou bang on the door loudly with force and open the door*", "Apartment/start3");
 	dialogue_tree.addDialogue("apartment/start3", "riggan", "Terri????", "Apartment/start4");
 	dialogue_tree.addDialogue("apartment/start4", "leslie", "Ed!...\n What are you doing here?", "Apartment/start5");
 	dialogue_tree.addDialogue("apartment/start5", "riggan", "Why? I need you to tell me why.\n I lived for you, I worshipped you...", "Apartment/start6");
