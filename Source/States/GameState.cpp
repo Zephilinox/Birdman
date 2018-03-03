@@ -70,16 +70,12 @@ void GameState::dialogue_init()
 {
 	dialogue_tree.getActor("player")->realName = "TeamBirb";
 	auto spr = game_data->getRenderer()->createUniqueSprite();
-	spr->loadTexture("../../Resources/Textures/Mike/MikeP1.png");
-	spr->width(spr->width() * 2);
-	spr->height(spr->height() * 2);
+	spr->loadTexture("../../Resources/Textures/Mike/spl1.png");
 	dialogue_tree.getActor("player")->portrait = std::move(spr);
 
 	dialogue_tree.getActor("strange_npc")->realName = "Stranger";
 	spr = game_data->getRenderer()->createUniqueSprite();
-	spr->loadTexture("../../Resources/Textures/Mike/MikeP1.png");
-	spr->width(spr->width() * 2);
-	spr->height(spr->height() * 2);
+	spr->loadTexture("../../Resources/Textures/Leslie/hpl1.png");
 	dialogue_tree.getActor("strange_npc")->portrait = std::move(spr);
 
 	dialogue_tree.addPlayerOption("start_extra",
@@ -268,9 +264,7 @@ void GameState::dialogue_init()
 	//Town Scene
 	dialogue_tree.getActor("blab_npc")->realName = "Old Man";
 	spr = game_data->getRenderer()->createUniqueSprite();
-	spr->loadTexture("../../Resources/Textures/Mike/MikeP1.png");
-	spr->width(spr->width() * 2);
-	spr->height(spr->height() * 2);
+	spr->loadTexture("../../Resources/Textures/Laura/ppl1.png");
 	dialogue_tree.getActor("blab_npc")->portrait = std::move(spr);
 
 	dialogue_tree.addDialogue("town/start", "", "*You spot the town of Bree in the distance.*", "");
