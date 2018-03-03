@@ -173,6 +173,24 @@ void Character::initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend)
 	default:
 		break;
 	}
+
+	float wid = idle_sprite_forward->width() * 3.0f;
+	float hite = idle_sprite_forward->height() * 3.0f;
+
+	//UPSCALE
+	idle_sprite_forward->width(wid);
+	idle_sprite_forward->height(hite);
+
+	idle_sprite_right->width(wid);
+	idle_sprite_right->height(hite);
+
+	idle_sprite_back->width(wid);
+	idle_sprite_back->height(hite);
+
+	idle_sprite_left->width(wid);
+	idle_sprite_left->height(hite);
+
+
 }
 
 void Character::setPosition(float x, float y)

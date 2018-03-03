@@ -1,5 +1,6 @@
 #include "Play.hpp"
 #include "Architecture\GameData.hpp"
+#include "States\FadeOutState.hpp"
 
 //SELF
 #include "Scene.hpp"
@@ -29,13 +30,21 @@ void Play::create()
 	}
 
 	Scene& scene1 = scenes[0];
+	scene1.scene_id = 0;
 	Scene& scene2 = scenes[1];
+	scene2.scene_id = 1;
 	Scene& scene3 = scenes[2];
+	scene3.scene_id = 2;
 	Scene& scene4 = scenes[3];
+	scene4.scene_id = 3;
 	Scene& scene5 = scenes[4];
+	scene5.scene_id = 4;
 	Scene& scene6 = scenes[5];
+	scene6.scene_id = 5;
 	Scene& scene7 = scenes[6];
+	scene7.scene_id = 6;
 	Scene& scene8 = scenes[7];
+	scene8.scene_id = 7;
 	Scene& scene9 = scenes[8];
 	Scene& scene10 = scenes[9];
 
@@ -55,13 +64,12 @@ void Play::create()
 	//Set each character's position
 	scene1.character_pool.at(0)->setPosition(100.0f, 100.0f);
 	scene1.character_pool.at(0)->setFacing(Character::CharacterFacing::SOUTH);
-
 	scene1.character_pool.at(1)->setPosition(300.0f, 100.0f);
 	scene1.character_pool.at(1)->setFacing(Character::CharacterFacing::SOUTH);
 	scene1.character_pool.at(2)->setPosition(400.0f, 200.0f);
 	scene1.character_pool.at(2)->setFacing(Character::CharacterFacing::WEST);
 	scene1.character_pool.at(3)->setPosition(200.0f, 300.0f);
-	scene1.character_pool.at(0)->setFacing(Character::CharacterFacing::NORTH);
+	scene1.character_pool.at(3)->setFacing(Character::CharacterFacing::NORTH);
 
 	scene1.dark.stage_description = "dark path 1";
 	scene1.dark.scene = &scene2;
@@ -69,16 +77,22 @@ void Play::create()
 	scene1.light.stage_description = "light path 1";
 	scene1.light.scene = &scene3;
 
+	scene1.sad.stage_description = "sad path 1";
+	scene1.dark.scene = &scene2;
+
+	scene1.comedy.stage_description = "comedy path 1";
+	scene1.comedy.scene = &scene2;
+
 	scene2.name = "scene2";
 	scene2.scene_description = "Kitchen part 2";
 	//Set props to scene type
-	scene2.initSceneProps(Play::KITCHEN);
+	scene2.initSceneProps(Play::APARTMENT_BEDROOM);
 
 	//Set up the characters for the scene
 	scene2.initSceneCharacter(Play::SceneCharacters::RIGGAN);
 
 	//TODO implement next scenes
-	scene2.initSceneProps(Play::APARTMENT_BEDROOM);
+
 	//scene2.initSceneCharacter(Play::SceneCharacters::RIGGAN);
 	//scene2.initSceneCharacter(Play::SceneCharacters::MIKE);
 
@@ -104,27 +118,32 @@ void Play::render() const
 
 void Play::moveToNextScene()
 {
-	//TODO - redo this, it's ugly as shitfuck
-	if (scenes[current_scene].light_value > scenes[current_scene].dark_value &&
-		scenes[current_scene].light_value > scenes[current_scene].serious_value &&
-		scenes[current_scene].light_value > scenes[current_scene].slapstick_value)
+
+	game_data->getStateManager()->push<FadeOutState>(
+		[&]()
 	{
-		current_scene = scenes[current_scene].light.scene->scene_id;
-	}
-	else if (scenes[current_scene].dark_value > scenes[current_scene].serious_value&&
-		scenes[current_scene].dark_value > scenes[current_scene].slapstick_value)
-	{
-		current_scene = scenes[current_scene].dark.scene->scene_id;
-	}
-	else if (scenes[current_scene].serious_value > scenes[current_scene].slapstick_value)
-	{
-		current_scene = scenes[current_scene].sad.scene->scene_id;
-	}
-	else
-	{
-		current_scene = scenes[current_scene].comedy.scene->scene_id;
-		std::cout << "Make this better!";
-	}
+		//TODO - redo this, it's ugly as shitfuck
+		if(scenes[current_scene].light_value > scenes[current_scene].dark_value &&
+			scenes[current_scene].light_value > scenes[current_scene].sad_value &&
+			scenes[current_scene].light_value > scenes[current_scene].comedy_value)
+		{
+			current_scene = scenes[current_scene].light.scene->scene_id;
+		}
+		else if(scenes[current_scene].dark_value > scenes[current_scene].sad_value&&
+			scenes[current_scene].dark_value > scenes[current_scene].comedy_value)
+		{
+			current_scene = scenes[current_scene].dark.scene->scene_id;
+		}
+		else if(scenes[current_scene].sad_value > scenes[current_scene].comedy_value)
+		{
+			current_scene = scenes[current_scene].sad.scene->scene_id;
+		}
+		else
+		{
+			current_scene = scenes[current_scene].comedy.scene->scene_id;
+			std::cout << "Make this better!";
+		}
+	});
 }
 
 void Play::moveToNextNight()
@@ -145,4 +164,9 @@ void Play::moveToNextNight()
 Scene* Play::getScene()
 {
 	return &scenes[current_scene];
+}
+
+Audience* Play::getAudience()
+{
+	return &audience;
 }

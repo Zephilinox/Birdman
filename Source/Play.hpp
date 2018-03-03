@@ -42,6 +42,8 @@ public:
 	void moveToNextNight();
 
 	Scene* getScene();
+	Audience* getAudience();
+
 
 private:
 	std::vector<Scene> scenes;

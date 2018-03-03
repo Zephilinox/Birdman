@@ -313,6 +313,11 @@ void GameState::dialogue_kitchen()
 		auto leslie = play_01.getScene()->getCharacter(Play::LESLIE);
 		leslie->setFacing(Character::CharacterFacing::SOUTH);
 		leslie->setPosition(400, 300);
+		//How to effect the play, scene and audience
+		play_01.getAudience()->addToComedy(10);
+		play_01.getAudience()->applyBoredom();
+		play_01.getScene()->addToComedy(1);
+		play_01.moveToNextScene();
 		return "He loved me.";
 	}, "kitchen/start1");
 
@@ -331,6 +336,8 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addPlayerOption("kitchen/option1", "Cold", "kitchen/comedy/start9");
 	dialogue_tree.addPlayerOption("kitchen/option1", "Indecisive", "kitchen/light/start9");
 	dialogue_tree.addPlayerOption("kitchen/option1", "Disagree", "kitchen/dark/start9");
+
+
 
 	//If Sad Option  - Pick 1 - (done)
 	dialogue_tree.addDialogue("kitchen/sad/start9", "riggan", "Sorry I'm late.\nI'm the wrong person to ask.\nI've only heard his name mentioned in passing.", "kitchen/sad/start10");

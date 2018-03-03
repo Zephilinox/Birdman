@@ -31,6 +31,11 @@ public:
 	void populateProps();
 	void setSceneID(int id);
 
+	void addToLight(int value);
+	void addToDark(int value);
+	void addToComedy(int value);
+	void addToSad(int value);
+
 	Character* getCharacter(Play::SceneCharacters character);
 
 	void update(float dt);
@@ -49,8 +54,8 @@ private:
 
 	int light_value = 0;
 	int dark_value = 0;
-	int serious_value = 0;
-	int slapstick_value = 0;
+	int sad_value = 0;
+	int comedy_value = 0;
 
 	int scene_id = 0;
 
