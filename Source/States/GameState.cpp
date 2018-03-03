@@ -380,37 +380,38 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/sad/start10", "riggan", "You'd have to know the particulars\nBut I think what you're saying is\nthat love is absolute.", "kitchen/sad/start11");
 	dialogue_tree.addDialogue("kitchen/sad/start11", "mel", "Yeah. The kind of love I'm talking about is...", "kitchen/sad/start12");
 	dialogue_tree.addDialogue("kitchen/sad/start12", "mel", "The kind of love I'm talking about, you don't try and kill people.", "kitchen/sad/start13");
-	dialogue_tree.addDialogue("kitchen/sad/start13", "leslie", "It was love, Mel.\nTo Eddie, it was.", "kitchen/sad/start14");
-	dialogue_tree.addDialogue("kitchen/sad/start14", "leslie", "I don't care what anybody says.\nHe was ready to die for it.", "kitchen/sad/start15");
+	dialogue_tree.addDialogue("kitchen/sad/start13", "terri", "It was love, Mel.\nTo Eddie, it was.", "kitchen/sad/start14");
+	dialogue_tree.addDialogue("kitchen/sad/start14", "terri", "I don't care what anybody says.\nHe was ready to die for it.", "kitchen/sad/start15");
 	dialogue_tree.addDialogue("kitchen/sad/start15", "mel", "Ask her what he did after she left him.", "kitchen/sad/start16");
-	dialogue_tree.addDialogue("kitchen/sad/start16", "leslie", "He shot himself in the mouth.\nBut he screwed that up, too.\nPoor Ed.", "kitchen/sad/start17");
+	dialogue_tree.addDialogue("kitchen/sad/start16", "terri", "He shot himself in the mouth.\nBut he screwed that up, too.\nPoor Ed.", "kitchen/sad/start17");
 	dialogue_tree.addDialogue("kitchen/sad/start17", "mel", "Poor Ed, my ass.\nThe guy was dangerous.", "kitchen/sad/start18");
 	dialogue_tree.addDialogue("kitchen/sad/start18", "laura", "How'd he screw it up if he shot himself in the mouth?", "kitchen/sad/start19");
 	dialogue_tree.addDialogue("kitchen/sad/start19", "mel", "He used to carry this twenty-two.\nWe lived like fugitives those days.\n", "kitchen/sad/start20");
 	dialogue_tree.addDialogue("kitchen/sad/start20", "mel", "I never knew if he was going to come\nout of the bushes or from behind\na car and just start shooting.", "kitchen/sad/start21");
 	dialogue_tree.addDialogue("kitchen/sad/start21", "mel", "The man was crazy.\nHe was capable of anything.", "kitchen/sad/start22");
 	dialogue_tree.addDialogue("kitchen/sad/start22", "laura", "Christ. What a nightmare...", "kitchen/sad/start23");
-	dialogue_tree.addDialogue("kitchen/sad/start23", "ralph", "He used to call me at the hospital and say...", "kitchen/sad/start24");
-	dialogue_tree.addDialogue("kitchen/sad/start24", "ralph", "Son of a bitch. Your days are numbered.", "kitchen/sad/start25");
-
-	dialogue_tree.addDialogue("kitchen/sad/start25", "Nick", "The maniac shot himself right in front of us\n I rode with him in the ambulance to the hospital.", "kitchen/sad/start26");
-	dialogue_tree.addDialogue("kitchen/sad/start26", "Terri", "I'll never get that image out of my head.\n Right before he did it, his eyes...\n they were so sad.", "kitchen/sad/start27");
-	dialogue_tree.addDialogue("kitchen/sad/start27", "Laura", "Did you have to treat him?", "kitchen/sad/start28");
-	dialogue_tree.addDialogue("kitchen/sad/start28", "Mel", "I didn't have to, But i did.\nHe was in bad shape.", "kitchen/sad/start29");
-	dialogue_tree.addDialogue("kitchen/sad/start29", "Mel", "His head swelled up to like twice the size of a normal head.\nI'd never seen anything like it.", "kitchen/sad/start30");
-	dialogue_tree.addDialogue("kitchen/sad/start30", "Mel", "And I swear to God.\nThat i hope i never do again", "kitchen/sad/start31");
-	dialogue_tree.addDialogue("kitchen/sad/start31", "Mel", "Ask Nick what real love is.\nHe'll agree with me, You watch", "kitchen/sad/start32");
-	dialogue_tree.addDialogue("kitchen/sad/start32", "Terri", "Why don't we just head to the restaurant?", "kitchen/sad/start33");
-	dialogue_tree.addDialogue("kitchen/sad/start33", "Laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\n He's been depressed.", "kitchen/sad/start34");
-	dialogue_tree.addDialogue("kitchen/sad/start34", "Laura", "I'm worried about him, he's been...", "kitchen/sad/start35");
-	dialogue_tree.addDialogue("kitchen/sad/start35", "Nick", "Been what? , I'll tell you what real love is\n This happened a few months ago.", "kitchen/sad/start36");
-	dialogue_tree.addDialogue("kitchen/sad/start36", "Nick", "And it ought to make us ashamed when we talk\n like we know what we're talking about when we talk about love.", "kitchen/sad/start37");
-	dialogue_tree.addDialogue("kitchen/sad/start37", "Laura", "Nick, for God's sake. Are you getting drunk?", "kitchen/sad/start38");
-	dialogue_tree.addDialogue("kitchen/sad/start38", "Nick", "I don't have to be drunk to say what I think.", "kitchen/sad/start39");
-	dialogue_tree.addDialogue("kitchen/sad/start39", "Mel", "Nobody's drunk. We're just having a few drinks", "kitchen/sad/start40");
-	dialogue_tree.addDialogue("kitchen/sad/start40", "Mel", "You've had more than a few.", "kitchen/sad/start41");
-	dialogue_tree.addDialogue("kitchen/sad/start41", "Mel", "What are you, counting?", "kitchen/sad/start42");
-	dialogue_tree.addDialogue("kitchen/sad/start42", "Mel", "Don't talk like a drunk if you not...\"", "");
+	dialogue_tree.addDialogue("kitchen/sad/start23", "mel", "He used to call me at the hospital and say...", "kitchen/sad/start24");
+	dialogue_tree.addDialogue("kitchen/sad/start24", "mel", "Son of a bitch. Your days are numbered.", "kitchen/sad/start25");
+	dialogue_tree.addDialogue("kitchen/sad/start25", "mel", "The maniac shot himself right in front of us\n I rode with him in the ambulance to the hospital.", "kitchen/sad/start26");
+	dialogue_tree.addDialogue("kitchen/sad/start26", "terri", "I'll never get that image out of my head.\n Right before he did it, his eyes...\n they were so sad.", "kitchen/sad/start27");
+	dialogue_tree.addDialogue("kitchen/sad/start27", "laura", "Did you have to treat him?", "kitchen/sad/start28");
+	dialogue_tree.addDialogue("kitchen/sad/start28", "mel", "I didn't have to, But i did.\nHe was in bad shape.", "kitchen/sad/start29");
+	dialogue_tree.addDialogue("kitchen/sad/start29", "mel", "His head swelled up to like twice the size of a normal head.\nI'd never seen anything like it.", "kitchen/sad/start30");
+	dialogue_tree.addDialogue("kitchen/sad/start30", "mel", "And I swear to God.\nThat i hope i never do again", "kitchen/sad/start31");
+	dialogue_tree.addDialogue("kitchen/sad/start31", "mel", "Ask Nick what real love is.\nHe'll agree with me, You watch", "kitchen/sad/start32");
+	dialogue_tree.addDialogue("kitchen/sad/start32", "terri", "Why don't we just head to the restaurant?", "kitchen/sad/start33");
+	dialogue_tree.addDialogue("kitchen/sad/start33", "laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\n He's been depressed.", "kitchen/sad/start34");
+	dialogue_tree.addDialogue("kitchen/sad/start34", "laura", "I'm worried about him, he's been...", "kitchen/sad/start35");
+	dialogue_tree.addDialogue("kitchen/sad/start35", "nick", "Been what? , I'll tell you what real love is\n This happened a few months ago.", "kitchen/sad/start36");
+	dialogue_tree.addDialogue("kitchen/sad/start36", "nick", "And it ought to make us ashamed when we talk\n like we know what we're talking about when we talk about love.", "kitchen/sad/start37");
+	dialogue_tree.addDialogue("kitchen/sad/start37", "laura", "Nick, for God's sake. Are you getting drunk?", "kitchen/sad/start38");
+	dialogue_tree.addDialogue("kitchen/sad/start38", "nick", "I don't have to be drunk to say what I think.", "kitchen/sad/start39");
+	dialogue_tree.addDialogue("kitchen/sad/start39", "mel", "Nobody's drunk. We're just having a few drinks", "kitchen/sad/start40");
+	dialogue_tree.addDialogue("kitchen/sad/start40", "terri", "You've had more than a few.", "kitchen/sad/start41");
+	dialogue_tree.addDialogue("kitchen/sad/start41", "nick", "What are you, counting?", "kitchen/sad/start42");
+	dialogue_tree.addDialogue("kitchen/sad/start42", "laura", "Don't talk like a drunk if you not...\"", "");
+	
+	//Options for Riggan/nick's Speech after this
 	
 
 	//If Sad Option - Pick 2 - (done)
@@ -450,6 +451,24 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/comedy/start22", "laura", "Christ. What a nightmare...", "kitchen/comedy/start23");
 	dialogue_tree.addDialogue("kitchen/comedy/start23", "mel", "He used to call me at the hospital and say...", "kitchen/comedy/start24");
 	dialogue_tree.addDialogue("kitchen/comedy/start24", "mel", "\"Son of a bitch. Your days are numbered.\"", "kitchen/start0");
+	dialogue_tree.addDialogue("kitchen/sad/start25", "mel", "The maniac shot himself right in front of us\n I rode with him in the ambulance to the hospital.", "kitchen/sad/start26");
+	dialogue_tree.addDialogue("kitchen/sad/start26", "terri", "I'll never get that image out of my head.\n Right before he did it, his eyes...\n they were so sad.", "kitchen/sad/start27");
+	dialogue_tree.addDialogue("kitchen/sad/start27", "laura", "Did you have to treat him?", "kitchen/sad/start28");
+	dialogue_tree.addDialogue("kitchen/sad/start28", "mel", "I didn't have to, But i did.\nHe was in bad shape.", "kitchen/sad/start29");
+	dialogue_tree.addDialogue("kitchen/sad/start29", "mel", "His head swelled up to like twice the size of a normal head.\nI'd never seen anything like it.", "kitchen/sad/start30");
+	dialogue_tree.addDialogue("kitchen/sad/start30", "mel", "And I swear to God.\nThat i hope i never do again", "kitchen/sad/start31");
+	dialogue_tree.addDialogue("kitchen/sad/start31", "mel", "Ask Nick what real love is.\nHe'll agree with me, You watch", "kitchen/sad/start32");
+	dialogue_tree.addDialogue("kitchen/sad/start32", "terri", "Why don't we just head to the restaurant?", "kitchen/sad/start33");
+	dialogue_tree.addDialogue("kitchen/sad/start33", "laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\n He's been depressed.", "kitchen/sad/start34");
+	dialogue_tree.addDialogue("kitchen/sad/start34", "laura", "I'm worried about him, he's been...", "kitchen/sad/start35");
+	dialogue_tree.addDialogue("kitchen/sad/start35", "nick", "Been what? , I'll tell you what real love is\n This happened a few years ago back in 1982\n I was a teen still back then.", "kitchen/sad/start36");
+	dialogue_tree.addDialogue("kitchen/sad/start36", "nick", "And it ought to make us ashamed when we talk\nWe have forgotten how to truly love unlike back then.", "kitchen/sad/start37");
+	dialogue_tree.addDialogue("kitchen/sad/start37", "laura", "Nick, for God's sake. Are you getting drunk?", "kitchen/sad/start38");
+	dialogue_tree.addDialogue("kitchen/sad/start38", "nick", "I don't have to be drunk to think back on good memories.", "kitchen/sad/start39");
+	dialogue_tree.addDialogue("kitchen/sad/start39", "mel", "Nobody's drunk. We're just having a few drinks", "kitchen/sad/start40");
+	dialogue_tree.addDialogue("kitchen/sad/start40", "terri", "You've had more than a few.", "kitchen/sad/start41");
+	dialogue_tree.addDialogue("kitchen/sad/start41", "nick", "Why you have to be so boring,\n we are just having a bit of fun?", "kitchen/sad/start42");
+	dialogue_tree.addDialogue("kitchen/sad/start42", "laura", "Don't talk like a drunk if you not...\"", "");
 
 	//If Comedy Option - Pick 2 - ()
 	dialogue_tree.addDialogue("apartment/start1", "riggan", "Terri!\nI know your in there, I'm coming in!", "Apartment/start2");
@@ -496,6 +515,24 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/light/start22", "laura", "Christ. What a nightmare...", "kitchen/light/start23");
 	dialogue_tree.addDialogue("kitchen/light/start23", "mel", "He used to call me at the hospital and say...", "kitchen/light/start24");
 	dialogue_tree.addDialogue("kitchen/light/start24", "mel", "\"Son of a bitch. Your days are numbered.\"", "kitchen/start0");
+	dialogue_tree.addDialogue("kitchen/sad/start25", "mel", "The maniac shot himself right in front of us\n I rode with him in the ambulance to the hospital.", "kitchen/sad/start26");
+	dialogue_tree.addDialogue("kitchen/sad/start26", "terri", "I'll never get that image out of my head.\n Right before he did it, his eyes...\n they were so sad.", "kitchen/sad/start27");
+	dialogue_tree.addDialogue("kitchen/sad/start27", "laura", "Did you have to treat him?", "kitchen/sad/start28");
+	dialogue_tree.addDialogue("kitchen/sad/start28", "mel", "I didn't have to, But i did.\nHe was in bad shape.", "kitchen/sad/start29");
+	dialogue_tree.addDialogue("kitchen/sad/start29", "mel", "His head swelled up to like twice the size of a normal head.\nI'd never seen anything like it.", "kitchen/sad/start30");
+	dialogue_tree.addDialogue("kitchen/sad/start30", "mel", "And I swear to God.\nThat i hope i never do again", "kitchen/sad/start31");
+	dialogue_tree.addDialogue("kitchen/sad/start31", "mel", "Ask Nick what real love is.\nHe'll agree with me, You watch", "kitchen/sad/start32");
+	dialogue_tree.addDialogue("kitchen/sad/start32", "terri", "Why don't we just head to the restaurant?", "kitchen/sad/start33");
+	dialogue_tree.addDialogue("kitchen/sad/start33", "laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\n He's been depressed.", "kitchen/sad/start34");
+	dialogue_tree.addDialogue("kitchen/sad/start34", "laura", "I'm worried about him, he's been...", "kitchen/sad/start35");
+	dialogue_tree.addDialogue("kitchen/sad/start35", "nick", "Been what?\n Im fine dont worry Laura,But I will tell you what real love is\n This happened some time ago.", "kitchen/sad/start36");
+	dialogue_tree.addDialogue("kitchen/sad/start36", "nick", "It will make us feel ashamed when we talk about love\n we talk about love as if we know it well, but that is wrong.", "kitchen/sad/start37");
+	dialogue_tree.addDialogue("kitchen/sad/start37", "laura", "Nick, for God's sake. Are you getting drunk?", "kitchen/sad/start38");
+	dialogue_tree.addDialogue("kitchen/sad/start38", "nick", "No of course not just enjoying some cocktail with my friends.", "kitchen/sad/start39");
+	dialogue_tree.addDialogue("kitchen/sad/start39", "mel", "Yeah nobodies getting drunk.\n We're just having a few drinks as friends", "kitchen/sad/start40");
+	dialogue_tree.addDialogue("kitchen/sad/start40", "terri", "You've had more than a few.", "kitchen/sad/start41");
+	dialogue_tree.addDialogue("kitchen/sad/start41", "nick", "Common Terri relax, have some fun?", "kitchen/sad/start42");
+	dialogue_tree.addDialogue("kitchen/sad/start42", "laura", "Don't talk like your plan is going to get drunk then...\"", "");
 
 	//If Light Option - Pick 2 - ()
 	dialogue_tree.addDialogue("apartment/start1", "riggan", "Terri!\nCome answer the door Terri, we need to talk!\nI know you're in there.", "Apartment/start2");
@@ -534,6 +571,25 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/dark/start22", "laura", "Christ. What a nightmare...", "kitchen/dark/start23");
 	dialogue_tree.addDialogue("kitchen/dark/start23", "mel", "He used to call me at the hospital and say...", "kitchen/dark/start24");
 	dialogue_tree.addDialogue("kitchen/dark/start24", "mel", "\"Son of a bitch. Your days are numbered.\"", "kitchen/start0");
+	
+	dialogue_tree.addDialogue("kitchen/sad/start25", "mel", "The maniac shot himself right in front of us\n I rode with him in the ambulance to the hospital.", "kitchen/sad/start26");
+	dialogue_tree.addDialogue("kitchen/sad/start26", "terri", "I'll never get that image out of my head.\n Right before he did it, his eyes...\n they were so sad.", "kitchen/sad/start27");
+	dialogue_tree.addDialogue("kitchen/sad/start27", "laura", "Did you have to treat him?", "kitchen/sad/start28");
+	dialogue_tree.addDialogue("kitchen/sad/start28", "mel", "I didn't have to, But i did.\nHe was in bad shape.", "kitchen/sad/start29");
+	dialogue_tree.addDialogue("kitchen/sad/start29", "mel", "His head swelled up to like twice the size of a normal head.\nI'd never seen anything like it.", "kitchen/sad/start30");
+	dialogue_tree.addDialogue("kitchen/sad/start30", "mel", "And I swear to God.\nThat i hope i never do again", "kitchen/sad/start31");
+	dialogue_tree.addDialogue("kitchen/sad/start31", "mel", "Ask Nick what real love is.\nHe'll agree with me, You watch", "kitchen/sad/start32");
+	dialogue_tree.addDialogue("kitchen/sad/start32", "terri", "Why don't we just head to the restaurant?", "kitchen/sad/start33");
+	dialogue_tree.addDialogue("kitchen/sad/start33", "laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\n He's been depressed.", "kitchen/sad/start34");
+	dialogue_tree.addDialogue("kitchen/sad/start34", "laura", "I'm worried about him, he's been...", "kitchen/sad/start35");
+	dialogue_tree.addDialogue("kitchen/sad/start35", "nick", "Been what? , I'll tell you what real love is\n This happened a few months ago.", "kitchen/sad/start36");
+	dialogue_tree.addDialogue("kitchen/sad/start36", "nick", "And it ought to make us ashamed when we talk\n like we know what we're talking about when we talk about love.", "kitchen/sad/start37");
+	dialogue_tree.addDialogue("kitchen/sad/start37", "laura", "Nick, for God's sake. Are you getting drunk?", "kitchen/sad/start38");
+	dialogue_tree.addDialogue("kitchen/sad/start38", "nick", "I don't have to be drunk to say what I think.", "kitchen/sad/start39");
+	dialogue_tree.addDialogue("kitchen/sad/start39", "mel", "Nobody's drunk. We're just having a few drinks", "kitchen/sad/start40");
+	dialogue_tree.addDialogue("kitchen/sad/start40", "terri", "You've had more than a few.", "kitchen/sad/start41");
+	dialogue_tree.addDialogue("kitchen/sad/start41", "nick", "What are you, counting?", "kitchen/sad/start42");
+	dialogue_tree.addDialogue("kitchen/sad/start42", "laura", "Don't talk like a drunk if you not...\"", "");
 
 	//If Dark Option - Pick 2 - ()
 	dialogue_tree.addDialogue("apartment/start2", "riggan", "*You bang on the door loudly with force and open the door*", "Apartment/start3");
