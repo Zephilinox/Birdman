@@ -1,13 +1,15 @@
 # Birdman The Game 
-A game based on the movie Birdman 
+A story game based on the movie Birdman 
 
-# Building
+## Building
 Visual Studio 2017
 
-# Playing
+## Playing
 
 W/UP S/DOWN for moving around menus
+
 ENTER to select
+
 ESCAPE to open the pause menu
 
-GamePad Supported: see settings.ini for GamePad button mappings.
+GamePad Supported: see settings.ini for GamePad button mappings
