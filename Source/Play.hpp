@@ -52,7 +52,6 @@ private:
 	std::unique_ptr<ASGE::Sprite> stage;
 
 	int current_scene = 0;
-	//TODO see this
-	//Chris - each night 1 = preview1, 2 = preview 2, 3 = opening night
+	int next_scene = 0;
 	int night = 1;
 };
