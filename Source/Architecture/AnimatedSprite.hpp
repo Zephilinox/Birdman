@@ -29,7 +29,7 @@ public:
 	AnimatedSprite& operator= (AnimatedSprite&& other) = delete;
 	void update(double dt);
 
-	void addFrame(std::string texture, float frame_length_seconds, float relative_x = 0, float relative_y = 0);
+	void addFrame(std::string texture, float frame_length_seconds, float relative_x = 0, float relative_y = 0, float width_mult = 1, float height_mult = 1);
 	ASGE::Sprite* getCurrentFrameSprite() const;
 
 	void play() noexcept;

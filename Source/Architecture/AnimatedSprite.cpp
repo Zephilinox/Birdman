@@ -23,7 +23,7 @@ void AnimatedSprite::update(double dt_milli)
 	}
 }
 
-void AnimatedSprite::addFrame(std::string texture, float frame_length_seconds,  float relative_x, float relative_y)
+void AnimatedSprite::addFrame(std::string texture, float frame_length_seconds,  float relative_x, float relative_y, float width_mult, float height_mult)
 {
 	FrameData frame_data;
 	frame_data.frame_length_seconds = frame_length_seconds;
@@ -36,6 +36,9 @@ void AnimatedSprite::addFrame(std::string texture, float frame_length_seconds,  
 	{
 		throw std::exception(std::string("[Animation::addFrame()] Failed to load texture '..\\..\\Resources\\Textures\\'" + texture + ".png").c_str());
 	}
+
+	frames.back().first->width(frames.back().first->width() * width_mult);
+	frames.back().first->height(frames.back().first->height() * height_mult);
 }
 
 ASGE::Sprite* AnimatedSprite::getCurrentFrameSprite() const
