@@ -359,21 +359,10 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/start8", "mel", "What about you, Nick?\nDoes that sound like love to you?", "kitchen/option1");
 
 	//How to - inline function to move scene based on player choices
-	dialogue_tree.addPlayerOption("kitchen/option1", "Dismissive", [&]()
-	{
-		//add an arbitrary value to the "sad" value of the audience, this is applied to a multiplier, then offset by boredom.
-		play_01.getAudience()->addToSad(10);
-		//add an arbitrary value to the "sad" value of the scene, this is used to determine which scene is gone to next.
-		play_01.getScene()->addToSad(1);
-		//Determines which scene the play will go to next based on the values stored in scene. Transitions and moves to that scene.
-		play_01.moveToNextScene();
-		return "kitchen/sad/start9";
-	});
+	dialogue_tree.addPlayerOption("kitchen/option1", "Dismissive", "kitchen/sad/start9");
 	dialogue_tree.addPlayerOption("kitchen/option1", "Cold", "kitchen/comedy/start9");
 	dialogue_tree.addPlayerOption("kitchen/option1", "Indecisive", "kitchen/light/start9");
 	dialogue_tree.addPlayerOption("kitchen/option1", "Disagree", "kitchen/dark/start9");
-
-
 
 	//If Sad Option  - Pick 1 - (done)
 	dialogue_tree.addDialogue("kitchen/sad/start9", "riggan", "Sorry I'm late.\nI'm the wrong person to ask.\nI've only heard his name mentioned in passing.", "kitchen/sad/start10");
@@ -410,10 +399,28 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/sad/start39", "Mel", "Nobody's drunk. We're just having a few drinks", "kitchen/sad/start40");
 	dialogue_tree.addDialogue("kitchen/sad/start40", "Mel", "You've had more than a few.", "kitchen/sad/start41");
 	dialogue_tree.addDialogue("kitchen/sad/start41", "Mel", "What are you, counting?", "kitchen/sad/start42");
-	dialogue_tree.addDialogue("kitchen/sad/start42", "Mel", "Don't talk like a drunk if you not...\"", "");
-	
+	dialogue_tree.addDialogue("kitchen/sad/start42", "Mel", "Don't talk like a drunk if you not...\"", [&]()
+	{
+		//add an arbitrary value to the "sad" value of the audience, this is applied to a multiplier, then offset by boredom.
+		play_01.getAudience()->addToSad(10);
+		//add an arbitrary value to the "sad" value of the scene, this is used to determine which scene is gone to next.
+		play_01.getScene()->addToSad(1);
+		//Determines which scene the play will go to next based on the values stored in scene. Transitions and moves to that scene.
+		play_01.moveToNextScene();
+		return "apartment/sad/start0";
+	});
 
 	//If Sad Option - Pick 2 - (done)
+	dialogue_tree.addDialogue("apartment/sad/start0", "",
+	[&]()
+	{
+		return play_01.getScene()->getDescription();
+	},
+	[&]()
+	{
+		return "apartment/sad/start1";
+	});
+
 	dialogue_tree.addDialogue("apartment/sad/start1", "riggan", "Terri! Terri!\nTerri! I know you're in there!", "Apartment/sad/start2");
 	dialogue_tree.addDialogue("apartment/sad/start2", "riggan", "*You bang on the door loudly with force. It opens.*", "Apartment/sad/start3");
 	dialogue_tree.addDialogue("apartment/sad/start3", "riggan", "Terri????", "Apartment/sad/start4");
@@ -452,6 +459,16 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/comedy/start24", "mel", "\"Son of a bitch. Your days are numbered.\"", "kitchen/start0");
 
 	//If Comedy Option - Pick 2 - ()
+	dialogue_tree.addDialogue("apartment/comedy/start0", "",
+	[&]()
+	{
+		return play_01.getScene()->getDescription();
+	},
+	[&]()
+	{
+		return "apartment/comedy/start1";
+	});
+
 	dialogue_tree.addDialogue("apartment/start1", "riggan", "Terri!\nI know your in there, I'm coming in!", "Apartment/start2");
 	dialogue_tree.addDialogue("apartment/start2", "riggan", "*You enter through the door*", "Apartment/start3");
 	dialogue_tree.addDialogue("apartment/start3", "riggan", "How's it going", "Apartment/start4");
@@ -498,6 +515,16 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/light/start24", "mel", "\"Son of a bitch. Your days are numbered.\"", "kitchen/start0");
 
 	//If Light Option - Pick 2 - ()
+	dialogue_tree.addDialogue("apartment/light/start0", "",
+	[&]()
+	{
+		return play_01.getScene()->getDescription();
+	},
+	[&]()
+	{
+		return "apartment/light/start1";
+	}); 
+
 	dialogue_tree.addDialogue("apartment/start1", "riggan", "Terri!\nCome answer the door Terri, we need to talk!\nI know you're in there.", "Apartment/start2");
 	dialogue_tree.addDialogue("apartment/start2", "riggan", "*You repetitively knock on the door\nAs you try to force your way in\nYou find the door is open.*", "Apartment/start3");
 	dialogue_tree.addDialogue("apartment/start3", "riggan", "Terri????", "Apartment/start4");
@@ -536,6 +563,16 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/dark/start24", "mel", "\"Son of a bitch. Your days are numbered.\"", "kitchen/start0");
 
 	//If Dark Option - Pick 2 - ()
+	dialogue_tree.addDialogue("apartment/dark/start0", "",
+	[&]()
+	{
+		return play_01.getScene()->getDescription();
+	},
+	[&]()
+	{
+		return "apartment/dark/start1";
+	});
+
 	dialogue_tree.addDialogue("apartment/start2", "riggan", "*You bang on the door loudly with force and open the door*", "Apartment/start3");
 	dialogue_tree.addDialogue("apartment/start3", "riggan", "Terri????", "Apartment/start4");
 	dialogue_tree.addDialogue("apartment/start4", "leslie", "Ed!...\n What are you doing here?", "Apartment/start5");
