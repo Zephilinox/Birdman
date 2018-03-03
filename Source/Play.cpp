@@ -51,7 +51,7 @@ void Play::create()
 
 	//Set values and links of each scene
 	scene1.name = "scene1";
-	scene1.scene_description = "*The Theater is full, Riggan's attempt to \n blah blah blah etc*";
+	scene1.scene_description = "*The Theater is full. The curtains open...*";
 
 	//Set props to scene type
 	scene1.initSceneProps(Play::KITCHEN);
@@ -88,7 +88,7 @@ void Play::create()
 	scene1.dark.scene = &scene5;
 
 	scene2.name = "scene2";
-	scene2.scene_description = "Kitchen part 2";
+	scene2.scene_description = "*Enter apartment description here*";
 	//Set props to scene type
 	scene2.initSceneProps(Play::APARTMENT_BEDROOM);
 
@@ -120,9 +120,8 @@ void Play::render() const
 
 void Play::moveToNextScene()
 {
-
 	game_data->getStateManager()->push<FadeOutState>(
-		[&]()
+	[&]()
 	{
 		//Determine the highest value and set the current scene as the one it points to
 		if(scenes[current_scene].light_value > scenes[current_scene].dark_value &&
