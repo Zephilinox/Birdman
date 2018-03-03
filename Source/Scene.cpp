@@ -116,6 +116,26 @@ void Scene::setSceneID(int id)
 	scene_id = id;
 }
 
+void Scene::addToLight(int value)
+{
+	light_value += value;
+}
+
+void Scene::addToDark(int value)
+{
+	dark_value += value;
+}
+
+void Scene::addToComedy(int value)
+{
+	comedy_value += value;
+}
+
+void Scene::addToSad(int value)
+{
+	sad_value += value;
+}
+
 Character* Scene::getCharacter(Play::SceneCharacters character)
 {
 	return character_pool[character].get();

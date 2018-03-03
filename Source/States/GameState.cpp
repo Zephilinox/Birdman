@@ -298,21 +298,26 @@ void GameState::dialogue_init()
 void GameState::dialogue_kitchen()
 {
 	dialogue_tree.addDialogue("start", "",
-	[&]()
+		[&]()
 	{
 		return play_01.getScene()->getDescription();
 	},
-	[&]()
+		[&]()
 	{
 		return "kitchen/start";
 	});
 
 	dialogue_tree.addDialogue("kitchen/start", "leslie",
-	[&]()
+		[&]()
 	{
 		auto leslie = play_01.getScene()->getCharacter(Play::LESLIE);
 		leslie->setFacing(Character::CharacterFacing::SOUTH);
 		leslie->setPosition(400, 300);
+		//How to effect the play, scene and audience
+		play_01.getAudience()->addToComedy(10);
+		play_01.getAudience()->applyBoredom();
+		play_01.getScene()->addToComedy(1);
+		play_01.moveToNextScene();
 		return "He loved me.";
 	}, "kitchen/start1");
 
@@ -326,6 +331,8 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/start6", "ralph", "How is that...\nThat is not love and you know it.\nWhy do you insist on calling it...", "kitchen/start7");
 	dialogue_tree.addDialogue("kitchen/start7", "leslie", "You can say what you want, but I know what it was.", "kitchen/start8");
 	dialogue_tree.addDialogue("kitchen/start8", "ralph", "What about you, Nick?\nDoes that sound like love to you?", "kitchen/start9");
+
+
 
 
 	//If Sad Option  - Pick 1 - (done)
@@ -486,3 +493,4 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/start16", "riggan", "I just wanted to be what you wanted.", "Apartment/start17");
 	dialogue_tree.addDialogue("apartment/start17", "riggan", "Now i spend every fucking minute praying to be somebody else.\nSomeone I'm not.\n Anyone...", "Apartment/start18");
 	dialogue_tree.addDialogue("apartment/start18", "mike", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"", "");
+}
