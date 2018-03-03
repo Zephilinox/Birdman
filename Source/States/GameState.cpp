@@ -322,6 +322,8 @@ void GameState::dialogue_kitchen()
 		return "He loved me.";
 	}, "kitchen/start1");
 
+	//Intro Scene
+
 	dialogue_tree.addDialogue("kitchen/start1", "ralph", "Yeah. He loved her so much he tried to kill her.", "kitchen/start2");
 	dialogue_tree.addDialogue("kitchen/start2", "laura", "He tried to kill you?", "kitchen/start3");
 	dialogue_tree.addDialogue("kitchen/start3", "leslie", "No.\nOkay, well he did beat me up one night.", "kitchen/start4");
@@ -330,6 +332,10 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/start6", "ralph", "How is that...\nThat is not love and you know it.\nWhy do you insist on calling it...", "kitchen/start7");
 	dialogue_tree.addDialogue("kitchen/start7", "leslie", "You can say what you want, but I know what it was.", "kitchen/start8");
 	dialogue_tree.addDialogue("kitchen/start8", "ralph", "What about you, Nick?\nDoes that sound like love to you?", "kitchen/start9");
+
+
+	//If Sad Option  - Pick 1 - (done)
+
 	dialogue_tree.addDialogue("kitchen/start9", "riggan", "Sorry I'm late.\nI'm the wrong person to ask.\nI've only heard his name mentioned in passing.", "kitchen/start10");
 	dialogue_tree.addDialogue("kitchen/start10", "riggan", "You'd have to know the particulars\nBut I think what you're saying is\nthat love is absolute.", "kitchen/start11");
 	dialogue_tree.addDialogue("kitchen/start11", "ralph", "Yeah. The kind of love I'm talking about is...", "kitchen/start12");
@@ -346,4 +352,143 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/start22", "laura", "Christ. What a nightmare...", "kitchen/start23");
 	dialogue_tree.addDialogue("kitchen/start23", "ralph", "He used to call me at the hospital and say...", "kitchen/start24");
 	dialogue_tree.addDialogue("kitchen/start24", "ralph", "\"Son of a bitch. Your days are numbered.\"", "");
-}
+
+	//If Sad Option - Pick 2 - (done)
+
+	dialogue_tree.addDialogue("apartment/start1", "riggan", "Terri! Terri!\nTerri! I know you're in there!", "Apartment/start2");
+	dialogue_tree.addDialogue("apartment/start2", "riggan", "*You bang on the door loudly with force and open the door*", "Apartment/start3");
+	dialogue_tree.addDialogue("apartment/start3", "riggan", "Terri????", "Apartment/start4");
+	dialogue_tree.addDialogue("apartment/start4", "leslie", "Ed!...\n What are you doing here?", "Apartment/start5");
+	dialogue_tree.addDialogue("apartment/start5", "riggan", "Why? I need you to tell me why.\n I lived for you, I worshipped you...", "Apartment/start6");
+	dialogue_tree.addDialogue("apartment/start6", "mike", "Listen Ed, I know this is hard but...", "Apartment/start7");
+	dialogue_tree.addDialogue("apartment/start7", "riggan", "Fuck you.\n Shut up\nFuck you!", "Apartment/start8");
+	dialogue_tree.addDialogue("apartment/start8", "riggan", "*You push Mike, he falls to the floor*", "Apartment/start9");
+	dialogue_tree.addDialogue("apartment/start9", "leslie", "Eddie!\nPlease!", "Apartment/start10");
+	dialogue_tree.addDialogue("apartment/start10", "riggan", "*You point the gun at Mike's head*", "Apartment/start11");
+	dialogue_tree.addDialogue("apartment/start11", "riggan", "What's wrong with me.\n Why do I end up having to be people to love me?", "Apartment/start12");
+	dialogue_tree.addDialogue("apartment/start12", "leslie", "Ed.\nEddie.\nPlease..... Give me the gun.", "Apartment/start13");
+	dialogue_tree.addDialogue("apartment/start13", "leslie", "*Leslie begin to cry*", "Apartment/start14");
+	dialogue_tree.addDialogue("apartment/start14", "leslie", "Just look at me.\n I was drowning.\n I was not capable of...", "Apartment/start15");
+	dialogue_tree.addDialogue("apartment/start15", "leslie", "You deserve to be loved.\n You do.", "Apartment/start16");
+	dialogue_tree.addDialogue("apartment/start16", "riggan", "I just wanted to be what you wanted.", "Apartment/start17");
+	dialogue_tree.addDialogue("apartment/start17", "riggan", "Now i spend every fucking minute praying to be somebody else.\nSomeone I'm not.\n Anyone...", "Apartment/start18");
+	dialogue_tree.addDialogue("apartment/start18", "mike", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"", "");
+
+	//If Comedy Option - Pick 1 - (done)
+
+	dialogue_tree.addDialogue("kitchen/start9", "riggan", "Well if you ask me.\nSeems like the guy likes tough love.\nIf thats the case reply with tough love.", "kitchen/start10");
+	dialogue_tree.addDialogue("kitchen/start10", "riggan", "if you still loved him.\nYou should of them smacked him with a pan or even a bat.", "kitchen/start11");
+	dialogue_tree.addDialogue("kitchen/start11", "ralph", "This isnt something to joke about. The kind of love I'm talking about is...", "kitchen/start12");
+	dialogue_tree.addDialogue("kitchen/start12", "ralph", "The kind of love I'm talking about, you don't try and kill people nore hurt.", "kitchen/start13");
+	dialogue_tree.addDialogue("kitchen/start13", "leslie", "It was love, Mel.\nTo Eddie, it was.", "kitchen/start14");
+	dialogue_tree.addDialogue("kitchen/start14", "leslie", "I don't care what anybody says.\nHe was ready to die for it.", "kitchen/start15");
+	dialogue_tree.addDialogue("kitchen/start15", "ralph", "Ask her what he did after she left him.", "kitchen/start16");
+	dialogue_tree.addDialogue("kitchen/start16", "leslie", "He shot himself in the mouth.\nBut he screwed that up, too.\nPoor Ed.", "kitchen/start17");
+	dialogue_tree.addDialogue("kitchen/start17", "ralph", "Poor Ed, my ass.\nThe guy was dangerous.", "kitchen/start18");
+	dialogue_tree.addDialogue("kitchen/start18", "laura", "How'd he screw it up if he shot himself in the mouth?", "kitchen/start19");
+	dialogue_tree.addDialogue("kitchen/start19", "ralph", "He used to carry this twenty-two.\nWe lived like fugitives those days.\n", "kitchen/start20");
+	dialogue_tree.addDialogue("kitchen/start20", "ralph", "I never knew if he was going to come\nout of the bushes or from behind\na car and just start shooting.", "kitchen/start21");
+	dialogue_tree.addDialogue("kitchen/start21", "ralph", "The man was crazy.\nHe was capable of anything.", "kitchen/start22");
+	dialogue_tree.addDialogue("kitchen/start22", "laura", "Christ. What a nightmare...", "kitchen/start23");
+	dialogue_tree.addDialogue("kitchen/start23", "ralph", "He used to call me at the hospital and say...", "kitchen/start24");
+	dialogue_tree.addDialogue("kitchen/start24", "ralph", "\"Son of a bitch. Your days are numbered.\"", "");
+
+	//If Comedy Option - Pick 2 - ()
+
+	dialogue_tree.addDialogue("apartment/start1", "riggan", "Terri! Terri!\nTerri! I know you're in there!", "Apartment/start2");
+	dialogue_tree.addDialogue("apartment/start2", "riggan", "*You bang on the door loudly with force and open the door*", "Apartment/start3");
+	dialogue_tree.addDialogue("apartment/start3", "riggan", "Terri????", "Apartment/start4");
+	dialogue_tree.addDialogue("apartment/start4", "leslie", "Ed!...\n What are you doing here?", "Apartment/start5");
+	dialogue_tree.addDialogue("apartment/start5", "riggan", "Why? I need you to tell me why.\n I lived for you, I worshipped you...", "Apartment/start6");
+	dialogue_tree.addDialogue("apartment/start6", "mike", "Listen Ed, I know this is hard but...", "Apartment/start7");
+	dialogue_tree.addDialogue("apartment/start7", "riggan", "Fuck you.\n Shut up\nFuck you!", "Apartment/start8");
+	dialogue_tree.addDialogue("apartment/start8", "riggan", "*You push Mike, he falls to the floor*", "Apartment/start9");
+	dialogue_tree.addDialogue("apartment/start9", "leslie", "Eddie!\nPlease!", "Apartment/start10");
+	dialogue_tree.addDialogue("apartment/start10", "riggan", "*You point the gun at Mike's head*", "Apartment/start11");
+	dialogue_tree.addDialogue("apartment/start11", "riggan", "What's wrong with me.\n Why do I end up having to be people to love me?", "Apartment/start12");
+	dialogue_tree.addDialogue("apartment/start12", "leslie", "Ed.\nEddie.\nPlease..... Give me the gun.", "Apartment/start13");
+	dialogue_tree.addDialogue("apartment/start13", "leslie", "*Leslie begin to cry*", "Apartment/start14");
+	dialogue_tree.addDialogue("apartment/start14", "leslie", "Just look at me.\n I was drowning.\n I was not capable of...", "Apartment/start15");
+	dialogue_tree.addDialogue("apartment/start15", "leslie", "You deserve to be loved.\n You do.", "Apartment/start16");
+	dialogue_tree.addDialogue("apartment/start16", "riggan", "I just wanted to be what you wanted.", "Apartment/start17");
+	dialogue_tree.addDialogue("apartment/start17", "riggan", "Now i spend every fucking minute praying to be somebody else.\nSomeone I'm not.\n Anyone...", "Apartment/start18");
+	dialogue_tree.addDialogue("apartment/start18", "mike", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"", "");
+
+	//If Light Option - Pick 1 - (done)
+
+	dialogue_tree.addDialogue("kitchen/start9", "riggan", "Apologises for being late. \nWell he might of loved her deep down.\nI've only heard his name mentioned in passing.", "kitchen/start10");
+	dialogue_tree.addDialogue("kitchen/start10", "riggan", "He didnt seem like to bad a man then.\nBut i don't think thats really love.\nYou don't try to kill people you love!", "kitchen/start11");
+	dialogue_tree.addDialogue("kitchen/start11", "ralph", "Exactly it like you've read my mind.", "kitchen/start12");
+	dialogue_tree.addDialogue("kitchen/start12", "ralph", "With real love, you don't try and kill people.", "kitchen/start13");
+	dialogue_tree.addDialogue("kitchen/start13", "leslie", "It was love, Mel.\nTo Eddie, it was.", "kitchen/start14");
+	dialogue_tree.addDialogue("kitchen/start14", "leslie", "I don't care what anybody says.\nHe was ready to die for it.", "kitchen/start15");
+	dialogue_tree.addDialogue("kitchen/start15", "ralph", "Ask her what he did after she left him.", "kitchen/start16");
+	dialogue_tree.addDialogue("kitchen/start16", "leslie", "He shot himself in the mouth.\nBut he screwed that up, too.\nPoor Ed.", "kitchen/start17");
+	dialogue_tree.addDialogue("kitchen/start17", "ralph", "Poor Ed, my ass.\nThe guy was dangerous.", "kitchen/start18");
+	dialogue_tree.addDialogue("kitchen/start18", "laura", "How'd he screw it up if he shot himself in the mouth?", "kitchen/start19");
+	dialogue_tree.addDialogue("kitchen/start19", "ralph", "He used to carry this twenty-two.\nWe lived like fugitives those days.\n", "kitchen/start20");
+	dialogue_tree.addDialogue("kitchen/start20", "ralph", "I never knew if he was going to come\nout of the bushes or from behind\na car and just start shooting.", "kitchen/start21");
+	dialogue_tree.addDialogue("kitchen/start21", "ralph", "The man was crazy.\nHe was capable of anything.", "kitchen/start22");
+	dialogue_tree.addDialogue("kitchen/start22", "laura", "Christ. What a nightmare...", "kitchen/start23");
+	dialogue_tree.addDialogue("kitchen/start23", "ralph", "He used to call me at the hospital and say...", "kitchen/start24");
+	dialogue_tree.addDialogue("kitchen/start24", "ralph", "\"Son of a bitch. Your days are numbered.\"", "");
+
+	//If Light Option - Pick 2 - ()
+
+	dialogue_tree.addDialogue("apartment/start1", "riggan", "Terri!\nCome answer the door Terri, we need to talk\nI know your in there", "Apartment/start2");
+	dialogue_tree.addDialogue("apartment/start2", "riggan", "*You repetitvely knock the door then try to open the door to find its open*", "Apartment/start3");
+	dialogue_tree.addDialogue("apartment/start3", "riggan", "Terri????", "Apartment/start4");
+	dialogue_tree.addDialogue("apartment/start4", "leslie", "Ed!...\n What are you doing here?", "Apartment/start5");
+	dialogue_tree.addDialogue("apartment/start5", "riggan", "I need you to tell me why.\nWhy would you do this to me\n I lived for you, I worshipped you...", "Apartment/start6");
+	dialogue_tree.addDialogue("apartment/start6", "mike", "Listen Ed, I know your in a bad place right now...", "Apartment/start7");
+	dialogue_tree.addDialogue("apartment/start7", "riggan", "Shut up\nI don't want to hear anything from you!", "Apartment/start8");
+	dialogue_tree.addDialogue("apartment/start8", "riggan", "*You push Mike, he falls to the floor*", "Apartment/start9");
+	dialogue_tree.addDialogue("apartment/start9", "leslie", "Eddie!\nPlease!", "Apartment/start10");
+	dialogue_tree.addDialogue("apartment/start10", "riggan", "*You point the gun at Mike's head*", "Apartment/start11");
+	dialogue_tree.addDialogue("apartment/start11", "riggan", "What's wrong with me.\n Why do I end up having to be people to love me?", "Apartment/start12");
+	dialogue_tree.addDialogue("apartment/start12", "leslie", "Ed.\nEddie.\nPlease..... Give me the gun.", "Apartment/start13");
+	dialogue_tree.addDialogue("apartment/start13", "leslie", "*Leslie begin to cry*", "Apartment/start14");
+	dialogue_tree.addDialogue("apartment/start14", "leslie", "Just look at me.\n I was drowning.\n I was not capable of...", "Apartment/start15");
+	dialogue_tree.addDialogue("apartment/start15", "leslie", "You deserve to be loved.\n You do.", "Apartment/start16");
+	dialogue_tree.addDialogue("apartment/start16", "riggan", "I just wanted to be what you wanted.", "Apartment/start17");
+	dialogue_tree.addDialogue("apartment/start17", "riggan", "Now i spend every fucking minute praying to be somebody else.\nSomeone I'm not.\n Anyone...", "Apartment/start18");
+	dialogue_tree.addDialogue("apartment/start18", "mike", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"", "");
+
+	//If Dark Option - Pick 1 - (done)
+
+	dialogue_tree.addDialogue("kitchen/start9", "riggan", "He beat you?!\nIf he was you should of stuck up for yourself.\nI think if you....", "kitchen/start10");
+	dialogue_tree.addDialogue("kitchen/start10", "riggan", "Beated him to on deaths door he would of learnt his lesson\nIf he did to you then he deserves it.", "kitchen/start11");
+	dialogue_tree.addDialogue("kitchen/start11", "ralph", "Nick i dont think that to correct thing to do...", "kitchen/start12");
+	dialogue_tree.addDialogue("kitchen/start12", "ralph", "What i was try to say was,\nThe kind of love I'm talking about, you don't try and kill people.", "kitchen/start13");
+	dialogue_tree.addDialogue("kitchen/start13", "leslie", "It was love, Mel.\nTo Eddie, it was.", "kitchen/start14");
+	dialogue_tree.addDialogue("kitchen/start14", "leslie", "I don't care what anybody says.\nHe was ready to die for it.", "kitchen/start15");
+	dialogue_tree.addDialogue("kitchen/start15", "ralph", "Ask her what he did after she left him.", "kitchen/start16");
+	dialogue_tree.addDialogue("kitchen/start16", "leslie", "He shot himself in the mouth.\nBut he screwed that up, too.\nPoor Ed.", "kitchen/start17");
+	dialogue_tree.addDialogue("kitchen/start17", "ralph", "Poor Ed, my ass.\nThe guy was dangerous.", "kitchen/start18");
+	dialogue_tree.addDialogue("kitchen/start18", "laura", "How'd he screw it up if he shot himself in the mouth?", "kitchen/start19");
+	dialogue_tree.addDialogue("kitchen/start19", "ralph", "He used to carry this twenty-two.\nWe lived like fugitives those days.\n", "kitchen/start20");
+	dialogue_tree.addDialogue("kitchen/start20", "ralph", "I never knew if he was going to come\nout of the bushes or from behind\na car and just start shooting.", "kitchen/start21");
+	dialogue_tree.addDialogue("kitchen/start21", "ralph", "The man was crazy.\nHe was capable of anything.", "kitchen/start22");
+	dialogue_tree.addDialogue("kitchen/start22", "laura", "Christ. What a nightmare...", "kitchen/start23");
+	dialogue_tree.addDialogue("kitchen/start23", "ralph", "He used to call me at the hospital and say...", "kitchen/start24");
+	dialogue_tree.addDialogue("kitchen/start24", "ralph", "\"Son of a bitch. Your days are numbered.\"", "");
+
+	//If Dark Option - Pick 2 - ()
+
+	dialogue_tree.addDialogue("apartment/start2", "riggan", "*You bang on the door loudly with force and open the door*", "Apartment/start3");
+	dialogue_tree.addDialogue("apartment/start3", "riggan", "Terri????", "Apartment/start4");
+	dialogue_tree.addDialogue("apartment/start4", "leslie", "Ed!...\n What are you doing here?", "Apartment/start5");
+	dialogue_tree.addDialogue("apartment/start5", "riggan", "Why? I need you to tell me why.\n I lived for you, I worshipped you...", "Apartment/start6");
+	dialogue_tree.addDialogue("apartment/start6", "mike", "Listen Ed, I know this is hard but...", "Apartment/start7");
+	dialogue_tree.addDialogue("apartment/start7", "riggan", "Fuck you.\n Shut up\nFuck you!", "Apartment/start8");
+	dialogue_tree.addDialogue("apartment/start8", "riggan", "*You push Mike, he falls to the floor*", "Apartment/start9");
+	dialogue_tree.addDialogue("apartment/start9", "leslie", "Eddie!\nPlease!", "Apartment/start10");
+	dialogue_tree.addDialogue("apartment/start10", "riggan", "*You point the gun at Mike's head*", "Apartment/start11");
+	dialogue_tree.addDialogue("apartment/start11", "riggan", "What's wrong with me.\n Why do I end up having to be people to love me?", "Apartment/start12");
+	dialogue_tree.addDialogue("apartment/start12", "leslie", "Ed.\nEddie.\nPlease..... Give me the gun.", "Apartment/start13");
+	dialogue_tree.addDialogue("apartment/start13", "leslie", "*Leslie begin to cry*", "Apartment/start14");
+	dialogue_tree.addDialogue("apartment/start14", "leslie", "Just look at me.\n I was drowning.\n I was not capable of...", "Apartment/start15");
+	dialogue_tree.addDialogue("apartment/start15", "leslie", "You deserve to be loved.\n You do.", "Apartment/start16");
+	dialogue_tree.addDialogue("apartment/start16", "riggan", "I just wanted to be what you wanted.", "Apartment/start17");
+	dialogue_tree.addDialogue("apartment/start17", "riggan", "Now i spend every fucking minute praying to be somebody else.\nSomeone I'm not.\n Anyone...", "Apartment/start18");
+	dialogue_tree.addDialogue("apartment/start18", "mike", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"", "");
