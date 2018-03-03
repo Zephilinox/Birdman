@@ -19,10 +19,10 @@ public:
 	Audience(GameData* data);
 	~Audience() = default;
 
-	int getSadApproval();
-	int getLightApproval();
-	int getDarkApproval();
-	int getComedyApproval();
+	float getSadApproval();
+	float getLightApproval();
+	float getDarkApproval();
+	float getComedyApproval();
 
 
 	//todo: consider doing this in the constructor instead of having an init function

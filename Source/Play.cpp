@@ -22,7 +22,6 @@ Play::Play(GameData* data): audience(data)
 
 void Play::create()
 {
-
 	//TODO implement scene linked list creation here
 	//Call functions here based on the play to instanciate
 	for (int i = 0; i < number_of_scenes; i++)
@@ -94,7 +93,6 @@ void Play::create()
 	scene2.initSceneCharacter(Play::SceneCharacters::RIGGAN);
 
 	//TODO implement next scenes
-
 	//scene2.initSceneCharacter(Play::SceneCharacters::RIGGAN);
 	//scene2.initSceneCharacter(Play::SceneCharacters::MIKE);
 
@@ -112,7 +110,6 @@ void Play::render() const
 {
 	//Render stage background
 	game_data->getRenderer()->renderSprite(*stage);
-
 	scenes[current_scene].render();
 	audience.render();
 	//Render  VisualDialogue*
@@ -124,7 +121,7 @@ void Play::moveToNextScene()
 	game_data->getStateManager()->push<FadeOutState>(
 		[&]()
 	{
-		//TODO - redo this, it's ugly as shitfuck
+		//Determine the highest value and set the current scene as the one it points to
 		if(scenes[current_scene].light_value > scenes[current_scene].dark_value &&
 			scenes[current_scene].light_value > scenes[current_scene].sad_value &&
 			scenes[current_scene].light_value > scenes[current_scene].comedy_value)
@@ -143,7 +140,6 @@ void Play::moveToNextScene()
 		else
 		{
 			current_scene = scenes[current_scene].comedy.scene->scene_id;
-			std::cout << "Make this better!";
 		}
 	});
 }
@@ -154,10 +150,10 @@ void Play::moveToNextNight()
 	{
 		night++;
 		audience.varyApprovalsBetweenNights();
+		current_scene = 0;
 	}
 	else
 	{
-
 		//TODO - play finished, output approval to screen?
 	}
 
