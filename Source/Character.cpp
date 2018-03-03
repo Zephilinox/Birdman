@@ -39,7 +39,6 @@ bool Character::getIsActive() const
 
 void Character::initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend)
 {
-	//TODO load textures appropriate to the character
 	switch(actor)
 	{
 	case Play::SceneCharacters::RIGGAN:
@@ -202,7 +201,10 @@ void Character::setPosition(float x, float y)
 void Character::slowMoveToPosition(float x, float y)
 {
 	char_state = CharacterState::WALKING;
-	move_speed = 10.0f;
+	horizontal_walk_sprite.play();
+	backward_walk_sprite.play();
+	forward_walk_sprite.play();
+	move_speed = 3.0f;
 	target_x_position = x;
 	target_y_position = y;
 }
@@ -210,14 +212,16 @@ void Character::slowMoveToPosition(float x, float y)
 void Character::fastMoveToPosition(float x, float y)
 {
 	char_state = CharacterState::WALKING;
-	move_speed = 25.0f;
+	horizontal_walk_sprite.play();
+	backward_walk_sprite.play();
+	forward_walk_sprite.play();
+	move_speed = 5.0f;
 	target_x_position = x;
 	target_y_position = y;
 }
 
 void Character::loadCharacterTextureStrings()
 {
-	//TODO - maybe break this down so it's not such a fat function?
 	//TODO rename folders to follow actor names?
 	//RIGGAN - IDLE
 	charTextureStrings[0] = "../../Resources/Textures/Clint/Forwards/ClintF1.png";
@@ -315,34 +319,39 @@ void Character::update(float dt)
 	//update all sprites positions to the same values
 	idle_sprite_forward->xPos(x_position);
 	idle_sprite_forward->yPos(y_position);
+
 	idle_sprite_right->xPos(x_position);
 	idle_sprite_right->yPos(y_position);
+
 	idle_sprite_back->xPos(x_position);
 	idle_sprite_back->yPos(y_position);
+
 	idle_sprite_left->xPos(x_position);
 	idle_sprite_left->yPos(y_position);
 
-	forward_walk_sprite.update(dt);
-	backward_walk_sprite.update(dt);
-	horizontal_walk_sprite.update(dt);
+	//update anim sprite poses
+	forward_walk_sprite.xPos = x_position;
+	backward_walk_sprite.xPos = x_position;
+	horizontal_walk_sprite.xPos = x_position;
+
+	forward_walk_sprite.yPos = y_position;
+	backward_walk_sprite.yPos = y_position;
+	horizontal_walk_sprite.yPos = y_position;
 
 	switch(char_state)
 	{
 	case IDLE:
 		{
-		//TODO - refactor to not be setting these all the time?
-		horizontal_walk_sprite.restart();
-		horizontal_walk_sprite.pause();
-		backward_walk_sprite.restart();
-		backward_walk_sprite.pause();
-		forward_walk_sprite.restart();
-		forward_walk_sprite.pause();
-
 		break;
 		}
 
 	case WALKING:
 		{
+
+		forward_walk_sprite.update(dt);
+		backward_walk_sprite.update(dt);
+		horizontal_walk_sprite.update(dt);
+
 		bool xPosMatched = false;
 		bool yPosMatched = false;
 
@@ -375,11 +384,15 @@ void Character::update(float dt)
 			if(yPosMatched && xPosMatched)
 			{
 				char_state = CharacterState::IDLE;
+
+				horizontal_walk_sprite.restart();
+				horizontal_walk_sprite.pause();
+				backward_walk_sprite.restart();
+				backward_walk_sprite.pause();
+				forward_walk_sprite.restart();
+				forward_walk_sprite.pause();
 			}
 
-			horizontal_walk_sprite.play();
-			backward_walk_sprite.play();
-			forward_walk_sprite.play();
 			break;
 		}
 	default:
@@ -395,7 +408,6 @@ void Character::render(ASGE::Renderer* renderer) const
 		{
 			case IDLE:
 			{
-				//TODO - render current idle sprite
 				//render idle sprite in current facing
 				switch(char_facing)
 				{

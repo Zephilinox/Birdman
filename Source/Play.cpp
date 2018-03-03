@@ -72,6 +72,9 @@ void Play::create()
 	scene1.character_pool.at(3)->setPosition(200.0f, 300.0f);
 	scene1.character_pool.at(3)->setFacing(Character::CharacterFacing::NORTH);
 
+
+	scene1.character_pool.at(3)->slowMoveToPosition(1000.0f, 700.0f);
+
 	scene1.comedy.stage_description = "comedy path 1";
 	scene1.comedy.scene = &scene2;
 
