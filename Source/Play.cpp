@@ -97,6 +97,8 @@ void Play::create()
 	//scene2.initSceneCharacter(Play::SceneCharacters::MIKE);
 
 	//So AnimatedSprites get drawn while the curtain is closed
+	scene3.scene_description = "*Enter apartment description here*";
+	scene4.scene_description = "*Enter apartment description here*";
 	update(1.0f / 60.0f);
 }
 
@@ -117,29 +119,31 @@ void Play::render() const
 
 void Play::moveToNextScene()
 {
+	//Determine the highest value and set the current scene as the one it points to
+	if (scenes[current_scene].light_value > scenes[current_scene].dark_value &&
+		scenes[current_scene].light_value > scenes[current_scene].sad_value &&
+		scenes[current_scene].light_value > scenes[current_scene].comedy_value)
+	{
+		next_scene = scenes[current_scene].light.scene->scene_id;
+	}
+	else if (scenes[current_scene].dark_value > scenes[current_scene].sad_value&&
+		scenes[current_scene].dark_value > scenes[current_scene].comedy_value)
+	{
+		next_scene = scenes[current_scene].dark.scene->scene_id;
+	}
+	else if (scenes[current_scene].sad_value > scenes[current_scene].comedy_value)
+	{
+		next_scene = scenes[current_scene].sad.scene->scene_id;
+	}
+	else
+	{
+		next_scene = scenes[current_scene].comedy.scene->scene_id;
+	}
+
 	game_data->getStateManager()->push<FadeOutState>(
 	[&]()
 	{
-		//Determine the highest value and set the current scene as the one it points to
-		if(scenes[current_scene].light_value > scenes[current_scene].dark_value &&
-			scenes[current_scene].light_value > scenes[current_scene].sad_value &&
-			scenes[current_scene].light_value > scenes[current_scene].comedy_value)
-		{
-			current_scene = scenes[current_scene].light.scene->scene_id;
-		}
-		else if(scenes[current_scene].dark_value > scenes[current_scene].sad_value&&
-			scenes[current_scene].dark_value > scenes[current_scene].comedy_value)
-		{
-			current_scene = scenes[current_scene].dark.scene->scene_id;
-		}
-		else if(scenes[current_scene].sad_value > scenes[current_scene].comedy_value)
-		{
-			current_scene = scenes[current_scene].sad.scene->scene_id;
-		}
-		else
-		{
-			current_scene = scenes[current_scene].comedy.scene->scene_id;
-		}
+		current_scene = next_scene;
 	});
 }
 
@@ -161,6 +165,11 @@ void Play::moveToNextNight()
 Scene* Play::getScene()
 {
 	return &scenes[current_scene];
+}
+
+Scene* Play::getNextScene()
+{
+	return &scenes[next_scene];
 }
 
 Audience* Play::getAudience()

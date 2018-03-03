@@ -42,8 +42,8 @@ public:
 	void moveToNextNight();
 
 	Scene* getScene();
+	Scene* getNextScene();
 	Audience* getAudience();
-
 
 private:
 	std::vector<Scene> scenes;
@@ -55,6 +55,7 @@ private:
 	std::unique_ptr<ASGE::Sprite> stage;
 
 	int current_scene = 0;
+	int next_scene = 0;
 	//TODO see this
 	//Chris - each night 1 = preview1, 2 = preview 2, 3 = opening night
 	int night = 1;

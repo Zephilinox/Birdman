@@ -414,7 +414,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/sad/start0", "",
 	[&]()
 	{
-		return play_01.getScene()->getDescription();
+		return play_01.getNextScene()->getDescription();
 	},
 	[&]()
 	{
@@ -462,7 +462,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/comedy/start0", "",
 	[&]()
 	{
-		return play_01.getScene()->getDescription();
+		return play_01.getNextScene()->getDescription();
 	},
 	[&]()
 	{
@@ -518,7 +518,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/light/start0", "",
 	[&]()
 	{
-		return play_01.getScene()->getDescription();
+		return play_01.getNextScene()->getDescription();
 	},
 	[&]()
 	{
@@ -566,7 +566,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/dark/start0", "",
 	[&]()
 	{
-		return play_01.getScene()->getDescription();
+		return play_01.getNextScene()->getDescription();
 	},
 	[&]()
 	{
