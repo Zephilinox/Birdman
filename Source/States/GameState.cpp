@@ -355,7 +355,27 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/sad/start21", "ralph", "The man was crazy.\nHe was capable of anything.", "kitchen/sad/start22");
 	dialogue_tree.addDialogue("kitchen/sad/start22", "laura", "Christ. What a nightmare...", "kitchen/sad/start23");
 	dialogue_tree.addDialogue("kitchen/sad/start23", "ralph", "He used to call me at the hospital and say...", "kitchen/sad/start24");
-	dialogue_tree.addDialogue("kitchen/sad/start24", "ralph", "\"Son of a bitch. Your days are numbered.\"", "");
+	dialogue_tree.addDialogue("kitchen/sad/start24", "ralph", "Son of a bitch. Your days are numbered.", "kitchen/sad/start25");
+
+	dialogue_tree.addDialogue("kitchen/sad/start25", "Nick", "The maniac shot himself right in front of us\n I rode with him in the ambulance to the hospital.", "kitchen/sad/start26");
+	dialogue_tree.addDialogue("kitchen/sad/start26", "Terri", "I'll never get that image out of my head.\n Right before he did it, his eyes...\n they were so sad.", "kitchen/sad/start27");
+	dialogue_tree.addDialogue("kitchen/sad/start27", "Laura", "Did you have to treat him?", "kitchen/sad/start28");
+	dialogue_tree.addDialogue("kitchen/sad/start28", "Mel", "I didn't have to, But i did.\nHe was in bad shape.", "kitchen/sad/start29");
+	dialogue_tree.addDialogue("kitchen/sad/start29", "Mel", "His head swelled up to like twice the size of a normal head.\nI'd never seen anything like it.", "kitchen/sad/start30");
+	dialogue_tree.addDialogue("kitchen/sad/start30", "Mel", "And I swear to God.\nThat i hope i never do again", "kitchen/sad/start31");
+	dialogue_tree.addDialogue("kitchen/sad/start31", "Mel", "Ask Nick what real love is.\nHe'll agree with me, You watch", "kitchen/sad/start32");
+	dialogue_tree.addDialogue("kitchen/sad/start32", "Terri", "Why don't we just head to the restaurant?", "kitchen/sad/start33");
+	dialogue_tree.addDialogue("kitchen/sad/start33", "Laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\n He's been depressed.", "kitchen/sad/start34");
+	dialogue_tree.addDialogue("kitchen/sad/start34", "Laura", "I'm worried about him, he's been...", "kitchen/sad/start35");
+	dialogue_tree.addDialogue("kitchen/sad/start35", "Nick", "Been what? , I'll tell you what real love is\n This happened a few months ago.", "kitchen/sad/start36");
+	dialogue_tree.addDialogue("kitchen/sad/start36", "Nick", "And it ought to make us ashamed when we talk\n like we know what we're talking about when we talk about love.", "kitchen/sad/start37");
+	dialogue_tree.addDialogue("kitchen/sad/start37", "Laura", "Nick, for God's sake. Are you getting drunk?", "kitchen/sad/start38");
+	dialogue_tree.addDialogue("kitchen/sad/start38", "Nick", "I don't have to be drunk to say what I think.", "kitchen/sad/start39");
+	dialogue_tree.addDialogue("kitchen/sad/start39", "Mel", "Nobody's drunk. We're just having a few drinks", "kitchen/sad/start40");
+	dialogue_tree.addDialogue("kitchen/sad/start40", "Mel", "You've had more than a few.", "kitchen/sad/start41");
+	dialogue_tree.addDialogue("kitchen/sad/start41", "Mel", "What are you, counting?", "kitchen/sad/start42");
+	dialogue_tree.addDialogue("kitchen/sad/start42", "Mel", "Don't talk like a drunk if you not...\"", "");
+	
 
 	//If Sad Option - Pick 2 - (done)
 	dialogue_tree.addDialogue("apartment/sad/start1", "riggan", "Terri! Terri!\nTerri! I know you're in there!", "Apartment/sad/start2");
@@ -402,7 +422,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/start2", "riggan", "*You enter through the door*", "Apartment/start3");
 	dialogue_tree.addDialogue("apartment/start3", "riggan", "How's it going", "Apartment/start4");
 	dialogue_tree.addDialogue("apartment/start4", "leslie", "Ed!...\n What are you doing here?", "Apartment/start5");
-	dialogue_tree.addDialogue("apartment/start5", "riggan", "Why? Did Mel not tell you>.\n Mel knows how much i worship you...\nSo he invited me for a threesome", "Apartment/start6");
+	dialogue_tree.addDialogue("apartment/start5", "riggan", "What? Did Mel not tell you?.\n Mel knows how much i worship you...\nSo he invited me for a threesome", "Apartment/start6");
 	dialogue_tree.addDialogue("apartment/start6", "mike", "Listen Ed, I know this is hard but...\n the threesome is off", "Apartment/start7");
 	dialogue_tree.addDialogue("apartment/start7", "riggan", "Fuck you.\n Shut up\nWhy would you do this to me!", "Apartment/start8");
 	dialogue_tree.addDialogue("apartment/start8", "riggan", "*You push Mel, he falls to the floor*", "Apartment/start9");
@@ -416,6 +436,9 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/start16", "riggan", "I just wanted to be what you wanted.", "Apartment/start17");
 	dialogue_tree.addDialogue("apartment/start17", "riggan", "Now i spend every fucking minute thinking of this fake bastard.\nI can't believe you left me for him.\nAnyone else but him", "Apartment/start18");
 	dialogue_tree.addDialogue("apartment/start18", "mike", "Put down the gun, Ed.\nDon't do anything stupid.", "Apartment/start19");
+
+	//If Comedy Option - Pick 3 - ()
+
 	dialogue_tree.addDialogue("apartment/start19", "riggan", "*You spray water into Mel's face*", "Apartment/start20");
 	dialogue_tree.addDialogue("apartment/start20", "mike", "*Mel's makeup caked face starts to run, it now shows the monster beneath*", "Apartment/start21");
 	dialogue_tree.addDialogue("apartment/start21", "riggan", "Oh my god, you left this for me\nI can't even look at you Terri\n I can't believe i almost had a threesome with that...", "Apartment/start22");
