@@ -1,5 +1,6 @@
 #include "Play.hpp"
 #include "Architecture\GameData.hpp"
+#include "States\FadeOutState.hpp"
 
 //SELF
 #include "Scene.hpp"
@@ -117,27 +118,32 @@ void Play::render() const
 
 void Play::moveToNextScene()
 {
-	//TODO - redo this, it's ugly as shitfuck
-	if (scenes[current_scene].light_value > scenes[current_scene].dark_value &&
-		scenes[current_scene].light_value > scenes[current_scene].sad_value &&
-		scenes[current_scene].light_value > scenes[current_scene].comedy_value)
+
+	game_data->getStateManager()->push<FadeOutState>(
+		[&]()
 	{
-		current_scene = scenes[current_scene].light.scene->scene_id;
-	}
-	else if (scenes[current_scene].dark_value > scenes[current_scene].sad_value&&
-		scenes[current_scene].dark_value > scenes[current_scene].comedy_value)
-	{
-		current_scene = scenes[current_scene].dark.scene->scene_id;
-	}
-	else if (scenes[current_scene].sad_value > scenes[current_scene].comedy_value)
-	{
-		current_scene = scenes[current_scene].sad.scene->scene_id;
-	}
-	else
-	{
-		current_scene = scenes[current_scene].comedy.scene->scene_id;
-		std::cout << "Make this better!";
-	}
+		//TODO - redo this, it's ugly as shitfuck
+		if(scenes[current_scene].light_value > scenes[current_scene].dark_value &&
+			scenes[current_scene].light_value > scenes[current_scene].sad_value &&
+			scenes[current_scene].light_value > scenes[current_scene].comedy_value)
+		{
+			current_scene = scenes[current_scene].light.scene->scene_id;
+		}
+		else if(scenes[current_scene].dark_value > scenes[current_scene].sad_value&&
+			scenes[current_scene].dark_value > scenes[current_scene].comedy_value)
+		{
+			current_scene = scenes[current_scene].dark.scene->scene_id;
+		}
+		else if(scenes[current_scene].sad_value > scenes[current_scene].comedy_value)
+		{
+			current_scene = scenes[current_scene].sad.scene->scene_id;
+		}
+		else
+		{
+			current_scene = scenes[current_scene].comedy.scene->scene_id;
+			std::cout << "Make this better!";
+		}
+	});
 }
 
 void Play::moveToNextNight()
