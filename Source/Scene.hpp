@@ -48,7 +48,6 @@ private:
 
 	GameData* game_data;
 
-	//TODO - object pool of props
 	std::vector<Prop> props_pool;
 	std::vector<std::unique_ptr<Character>> character_pool;
 

@@ -8,7 +8,6 @@
 
 Audience::Audience(GameData* data)
 {
-	//TODO: move this to some kind of RNG class we can use anywhere
 	game_data = data;
 
 	panel_pos_x = 926.0f;
@@ -185,6 +184,5 @@ void Audience::addToComedy(float effect)
 
 void Audience::applyBoredom()
 {
-	//TODO balance this lowering, should occur with each actual dialogue choice made by player?
 	overallApproval *= 0.9f;
 }
