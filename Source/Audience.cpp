@@ -20,22 +20,22 @@ Audience::Audience(GameData* data)
 	setStartingApprovalMultipliers(1.0f);
 }
 
-int Audience::getSadApproval()
+float Audience::getSadApproval()
 {
 	return sad_multiplier;
 }
 
-int Audience::getLightApproval()
+float Audience::getLightApproval()
 {
 	return light_multiplier;
 }
 
-int Audience::getDarkApproval()
+float Audience::getDarkApproval()
 {
 	return dark_multiplier;
 }
 
-int Audience::getComedyApproval()
+float Audience::getComedyApproval()
 {
 	return comedy_multiplier;
 }
