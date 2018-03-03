@@ -11,6 +11,7 @@ Play::Play(GameData* data): audience(data)
 {
 	scenes.reserve(number_of_scenes);
 	game_data = data;
+
 	stage = data->getRenderer()->createUniqueSprite();
 	stage->loadTexture("../../Resources/Textures/stage.png");
 	stage->width((float)data->getWindowWidth());
@@ -21,6 +22,7 @@ Play::Play(GameData* data): audience(data)
 
 void Play::create()
 {
+
 	//TODO implement scene linked list creation here
 	//Call functions here based on the play to instanciate
 	for (int i = 0; i < number_of_scenes; i++)
@@ -71,17 +73,17 @@ void Play::create()
 	scene1.character_pool.at(3)->setPosition(200.0f, 300.0f);
 	scene1.character_pool.at(3)->setFacing(Character::CharacterFacing::NORTH);
 
-	scene1.dark.stage_description = "dark path 1";
-	scene1.dark.scene = &scene2;
+	scene1.comedy.stage_description = "comedy path 1";
+	scene1.comedy.scene = &scene2;
 
 	scene1.light.stage_description = "light path 1";
 	scene1.light.scene = &scene3;
 
 	scene1.sad.stage_description = "sad path 1";
-	scene1.dark.scene = &scene2;
+	scene1.sad.scene = &scene4;
 
-	scene1.comedy.stage_description = "comedy path 1";
-	scene1.comedy.scene = &scene2;
+	scene1.dark.stage_description = "dark path 1";
+	scene1.dark.scene = &scene5;
 
 	scene2.name = "scene2";
 	scene2.scene_description = "Kitchen part 2";

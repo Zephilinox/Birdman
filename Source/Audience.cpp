@@ -1,6 +1,7 @@
 #include "Audience.hpp"
 #include "Rng.h"
 #include "Architecture\GameData.hpp"
+#include <algorithm>
 
 //STD
 #include <random>
@@ -10,35 +11,31 @@ Audience::Audience(GameData* data)
 	//TODO: move this to some kind of RNG class we can use anywhere
 	game_data = data;
 
-	sad_multiplier = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
-	comedy_multiplier = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
-	light_multiplier = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
-	dark_multiplier = game_data->getRandomNumberGenerator()->getRandomInt(1, max_approval);
-
 	panel_pos_x = 926.0f;
 	panel_pos_y = 476.0f;
 	sprite_width_override = 346.0f;
 	sprite_height_override = 236.0f;
 
 	loadAudienceSprites();
+	setStartingApprovalMultipliers(1.0f);
 }
 
-int Audience::getSadApproval()
+float Audience::getSadApproval()
 {
 	return sad_multiplier;
 }
 
-int Audience::getLightApproval()
+float Audience::getLightApproval()
 {
 	return light_multiplier;
 }
 
-int Audience::getDarkApproval()
+float Audience::getDarkApproval()
 {
 	return dark_multiplier;
 }
 
-int Audience::getComedyApproval()
+float Audience::getComedyApproval()
 {
 	return comedy_multiplier;
 }
@@ -46,24 +43,25 @@ int Audience::getComedyApproval()
 void Audience::varyApprovalsBetweenNights()
 {
 	float ten_percent_sad = sad_multiplier / 10.0f;
-	float ten_percent_shocking = comedy_multiplier / 10.0f;
+	float ten_percent_comedy = comedy_multiplier / 10.0f;
 	float ten_percent_light = light_multiplier/10.0f;
 	float ten_percent_dark = dark_multiplier / 10.0f;
 
-	//TODO: move this to some kind of RNG class we can use anywhere
-	std::random_device rd;
-	std::mt19937 mt(rd());
 
-	std::uniform_int_distribution<int> sad_variance(-ten_percent_sad, ten_percent_sad);
-	std::uniform_int_distribution<int> shocking_variance(-ten_percent_shocking, ten_percent_shocking);
-	std::uniform_int_distribution<int> light_variance(-ten_percent_light, ten_percent_light);
-	std::uniform_int_distribution<int> dark_variance(-ten_percent_dark, ten_percent_dark);
+	float sad_variance = game_data->getRandomNumberGenerator()->getRandomFloat(-ten_percent_sad, ten_percent_sad);
+	float comedy_variance = game_data->getRandomNumberGenerator()->getRandomFloat(-ten_percent_comedy, ten_percent_comedy);
+	float dark_variance = game_data->getRandomNumberGenerator()->getRandomFloat(-ten_percent_dark, ten_percent_dark);
+	float light_variance = game_data->getRandomNumberGenerator()->getRandomFloat(-ten_percent_light, ten_percent_light);
 
-	sad_multiplier += (int)sad_variance(mt);
-	comedy_multiplier += (int)shocking_variance(mt);
-	light_multiplier += (int)light_variance(mt);
-	dark_multiplier += (int)dark_variance(mt);
+	sad_multiplier += sad_variance;
+	comedy_multiplier += comedy_variance;
+	light_multiplier += light_variance;
+	dark_multiplier += dark_variance;
 
+	sad_multiplier = std::clamp(sad_multiplier, 0.1f, 1.4f);
+	comedy_multiplier = std::clamp(comedy_multiplier, 0.1f, 1.4f);
+	light_multiplier = std::clamp(light_multiplier, 0.1f, 1.4f);
+	dark_multiplier = std::clamp(dark_multiplier, 0.1f, 1.4f);
 }
 
 void Audience::loadAudienceSprites()
@@ -107,12 +105,6 @@ void Audience::loadAudienceSprites()
 
 void Audience::update(float dt)
 {
-	//overallApproval = sad_approval + light_approval + dark_approval + comedy_approval;
-	//overallApproval *= 0.25f;
-	
-	//TODO -remove and uncomment above - Testing only
-	overallApproval += 10.0f * dt;
-
 }
 
 void Audience::render() const
@@ -135,12 +127,12 @@ void Audience::render() const
 	}
 }
 
-void Audience::setStartingApprovals(int starting_val)
+void Audience::setStartingApprovalMultipliers(int starting_val)
 {
-	comedy_multiplier = starting_val;
-	dark_multiplier = starting_val;
-	light_multiplier = starting_val;
-	sad_multiplier = starting_val;
+	comedy_multiplier = game_data->getRandomNumberGenerator()->getRandomFloat(starting_val - 0.7f, starting_val);
+	dark_multiplier = game_data->getRandomNumberGenerator()->getRandomFloat(starting_val - 0.7f, starting_val);
+	light_multiplier = game_data->getRandomNumberGenerator()->getRandomFloat(starting_val - 0.7f, starting_val);
+	sad_multiplier = game_data->getRandomNumberGenerator()->getRandomFloat(starting_val - 0.7f, starting_val);
 }
 
 float Audience::getOverallApproval()
@@ -148,28 +140,47 @@ float Audience::getOverallApproval()
 	return overallApproval;
 }
 
+void Audience::updateApproval()
+{
+	overallApproval = sad_approval + light_approval + dark_approval + comedy_approval;
+	overallApproval *= 0.25f;
+	overallApproval = std::clamp(overallApproval, 0.0f, 1.0f);
+}
+
 //Takes an int, applies it to the responsiveness/multiplier then adds it to the approval
-void Audience::addToSad(int effect)
+void Audience::addToSad(float effect)
 {
 	sad_approval += effect * sad_multiplier;
+	updateApproval();
+	applyBoredom();
+	sad_approval = std::clamp(sad_approval, 0.0f, 1.4f);
 }
 
 //Takes an int, applies it to the responsiveness/multiplier then adds it to the approval
-void Audience::addToLight(int effect)
+void Audience::addToLight(float effect)
 {
 	light_approval += effect * light_multiplier;
+	updateApproval();
+	applyBoredom();
+	light_approval = std::clamp(light_approval, 0.0f, 1.4f);
 }
 
 //Takes an int, applies it to the responsiveness/multiplier then adds it to the approval
-void Audience::addToDark(int effect)
+void Audience::addToDark(float effect)
 {
 	dark_approval += effect * dark_multiplier;
+	updateApproval();
+	applyBoredom();
+	dark_approval = std::clamp(dark_approval, 0.0f, 1.4f);
 }
 
 //Takes an int, applies it to the responsiveness/multiplier then adds it to the approval
-void Audience::addToComedy(int effect)
+void Audience::addToComedy(float effect)
 {
 	comedy_approval += effect * comedy_multiplier;
+	updateApproval();
+	applyBoredom();
+	dark_approval = std::clamp(dark_approval, 0.0f, 1.4f);
 }
 
 void Audience::applyBoredom()
