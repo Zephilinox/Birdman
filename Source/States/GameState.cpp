@@ -297,11 +297,15 @@ void GameState::dialogue_init()
 
 void GameState::dialogue_kitchen()
 {
-	auto riggan = dialogue_tree.getActor("riggan");
-	riggan->realName = "Nick"; //for kitchen scene, Ed in apartment
-	auto riggan_pic = game_data->getRenderer()->createUniqueSprite();
-	riggan_pic->loadTexture("../../Resources/Textures/Clint/cpl1.png");
-	riggan->portrait = std::move(riggan_pic);
+	auto nick = dialogue_tree.getActor("nick");
+	auto nick_pic = game_data->getRenderer()->createUniqueSprite();
+	nick_pic->loadTexture("../../Resources/Textures/Clint/cpl1.png");
+	nick->portrait = std::move(nick_pic);
+
+	auto ed = dialogue_tree.getActor("ed");
+	auto ed_pic = game_data->getRenderer()->createUniqueSprite();
+	ed_pic->loadTexture("../../Resources/Textures/Clint/cpl1.png");
+	ed->portrait = std::move(ed_pic);
 
 	auto leslie = dialogue_tree.getActor("leslie");
 	auto leslie_pic = game_data->getRenderer()->createUniqueSprite();
