@@ -9,7 +9,7 @@ namespace ASGE
 
 class GameData;
 
-constexpr unsigned int max_approval = 100;
+constexpr float max_approval = 100.0f;
 
 class Audience
 {
@@ -27,36 +27,36 @@ public:
 
 	//todo: consider doing this in the constructor instead of having an init function
 	void varyApprovalsBetweenNights();
+	void updateApproval();
 	void loadAudienceSprites();
 
 	void update(float dt);
 	void render() const;
 
 
-	void setStartingApprovals(int starting_val);
-
+	void setStartingApprovalMultipliers(int starting_val);
 	float getOverallApproval();
 
 	//Use these to add values (positive or negative) to the approval
-	void addToSad(int);
-	void addToLight(int);
-	void addToDark(int);
-	void addToComedy(int);
+	void addToSad(float);
+	void addToLight(float);
+	void addToDark(float);
+	void addToComedy(float);
 
 	void applyBoredom();
 
 private:
-	int sad_multiplier = 0;
-	int light_multiplier = 0;
-	int dark_multiplier = 0;
-	int comedy_multiplier = 0;
+	float sad_multiplier = 0.0f;
+	float light_multiplier = 0.0f;
+	float dark_multiplier = 0.0f;
+	float comedy_multiplier = 0.0f;
 
 	float overallApproval = 0.0f;
 
-	float sad_approval = 0.0f;
-	float light_approval = 0.0f;
-	float dark_approval = 0.0f;
-	float comedy_approval = 0.0f;
+	float sad_approval = 20.0f;
+	float light_approval = 20.0f;
+	float dark_approval = 20.0f;
+	float comedy_approval = 20.0f;
 
 	float panel_pos_x;
 	float panel_pos_y;
