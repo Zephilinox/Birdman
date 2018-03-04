@@ -44,7 +44,7 @@ void NetworkManager::initialize(bool hostServer)
 	{
 		client.connect(enetpp::client_connect_params()
 			.set_channel_count(2)
-			.set_server_host_name_and_port("localhost", 11111));
+			.set_server_host_name_and_port("80.234.252.236", 11111));
 	}
 }
 
