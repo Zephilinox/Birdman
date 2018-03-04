@@ -71,10 +71,10 @@ void Audience::loadAudienceSprites()
 	indifferent_sprite = game_data->getRenderer()->createUniqueSprite();
 	
 
-	perfect_sprite->loadTexture("../../Resources/Textures/Audience/Perfect.jpg");
-	great_sprite->loadTexture("../../Resources/Textures/Audience/Excellent.jpg");
-	good_sprite->loadTexture("../../Resources/Textures/Audience/Good.jpg");
-	indifferent_sprite->loadTexture("../../Resources/Textures/Audience/Calm.jpg");
+	perfect_sprite->loadTexture("../../Resources/Textures/Audience/Perfect.png");
+	great_sprite->loadTexture("../../Resources/Textures/Audience/Excellent.png");
+	good_sprite->loadTexture("../../Resources/Textures/Audience/Good.png");
+	indifferent_sprite->loadTexture("../../Resources/Textures/Audience/Calm.png");
 
 	perfect_sprite->xPos(panel_pos_x);
 	perfect_sprite->yPos(panel_pos_y);
@@ -87,18 +87,6 @@ void Audience::loadAudienceSprites()
 
 	indifferent_sprite->xPos(panel_pos_x);
 	indifferent_sprite->yPos(panel_pos_y);
-
-	perfect_sprite->width(sprite_width_override);
-	perfect_sprite->height(sprite_height_override);
-
-	great_sprite->width(sprite_width_override);
-	great_sprite->height(sprite_height_override);
-
-	good_sprite->width(sprite_width_override);
-	good_sprite->height(sprite_height_override);
-
-	indifferent_sprite->width(sprite_width_override);
-	indifferent_sprite->height(sprite_height_override);
 }
 
 
