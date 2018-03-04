@@ -515,11 +515,18 @@ void GameState::dialogue_kitchen()
 
 	//If Sad Option - Pick 3 - 
 	dialogue_tree.addDialogue("kitchen/sad/start46", "nick", "Fucking teenager.\nBy the time I got to the hospital,\nThe kid was dead.", "kitchen/sad/start47");
-	dialogue_tree.addDialogue("kitchen/sad/start47", "nick", "He was off in a corner laid out on a gurney.\nWe took the old couple up to the O.R...", "kitchen/sad/start48");
+	dialogue_tree.addDialogue("kitchen/sad/start47", "nick", "He was off in a corner laid out on a gurney.\nWe took the old couple up to the O.R...",
+		[&]()
+	{
+		auto mover = play_01.getScene()->getCharacter(Play::RIGGAN);
+		mover->setFacing(Character::CharacterFacing::EAST);
+		mover->slowMoveToPosition(game_data->getWindowWidth() * 0.6f, game_data->getWindowHeight() * 0.45f);
+		return "kitchen/sad/start48";
+	});
 	dialogue_tree.addDialogue("kitchen/sad/start48", "nick", "They were a mess.\nWe worked like hell on them for most of the night...", "kitchen/option4");
 
 	//If Sad Option - Pick 4 - (done)
-	dialogue_tree.addDialogue("kitchen/sad/start49", "nick","When we were done,\n we wrapped then in full body casts.\nThe husband was depressed", "kitchen/sad/start50");
+	dialogue_tree.addDialogue("kitchen/sad/start49", "nick","When we were done,\nwe wrapped them in full body casts.\nThe husband was depressed", "kitchen/sad/start50");
 	dialogue_tree.addDialogue("kitchen/sad/start50", "nick","I told him his wife was gonna pull through,\nHe was still depressed.", "kitchen/sad/start51");
 	dialogue_tree.addDialogue("kitchen/sad/start51", "nick", "So,\nI got up to his mouth hole and asked him why", "kitchen/sad/start52");
 	dialogue_tree.addDialogue("kitchen/sad/start52", "nick", "And he told me it was because\nhe couldn't see her through the eye holes.", "kitchen/sad/start53");
@@ -600,7 +607,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/comedy/start32", "terri", "Why don't we just head to the restaurant?", "kitchen/comedy/start33");
 	dialogue_tree.addDialogue("kitchen/comedy/start33", "laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\n He's been depressed.", "kitchen/comedy/start34");
 	dialogue_tree.addDialogue("kitchen/comedy/start34", "laura", "I'm worried about him, he's been...", "kitchen/comedy/start35");
-	dialogue_tree.addDialogue("kitchen/comedy/start35", "nick", "Been what? , I'll tell you what real love is\n This happened a few years ago back in 1982\n I was a teen still back then.", "kitchen/comedy/start36");
+	dialogue_tree.addDialogue("kitchen/comedy/start35", "nick", "Been what?\n I'll tell you what real love is\nThis happened a few years ago back in 1982\n I was a teen still back then.", "kitchen/comedy/start36");
 	dialogue_tree.addDialogue("kitchen/comedy/start36", "nick", "And it ought to make us ashamed when we talk\nWe have forgotten how to truly love unlike back then.", "kitchen/comedy/start37");
 	dialogue_tree.addDialogue("kitchen/comedy/start37", "laura", "Nick, for God's sake. Are you getting drunk?", "kitchen/comedy/start38");
 	dialogue_tree.addDialogue("kitchen/comedy/start38", "nick", "I don't have to be drunk to think back on good memories.", "kitchen/comedy/start39");
