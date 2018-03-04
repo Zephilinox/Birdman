@@ -90,13 +90,13 @@ void Play::create()
 	scene1.comedy.stage_description = "comedy path 1";
 	scene1.comedy.scene = &scene2;
 	scene1.light.stage_description = "light path 1";
-	scene1.light.scene = &scene3;
+	scene1.light.scene = &scene2;
 
 	scene1.sad.stage_description = "sad path 1";
-	scene1.sad.scene = &scene4;
+	scene1.sad.scene = &scene2;
 
 	scene1.dark.stage_description = "dark path 1";
-	scene1.dark.scene = &scene5;
+	scene1.dark.scene = &scene2;
 
 	scene2.name = "Apartment";
 	scene2.scene_description = "*Enter apartment description here*";
@@ -105,10 +105,17 @@ void Play::create()
 
 	//Set up the characters for the scene
 	scene2.initSceneCharacter(Play::SceneCharacters::RIGGAN);
+	scene2.initSceneCharacter(Play::SceneCharacters::MIKE);
+	scene2.initSceneCharacter(Play::SceneCharacters::LESLIE);
 
-	//TODO implement next scenes
-	//scene2.initSceneCharacter(Play::SceneCharacters::RIGGAN);
-	//scene2.initSceneCharacter(Play::SceneCharacters::MIKE);
+	scene1.character_pool.at(RIGGAN)->setPosition(100.0f, 100.0f);
+	scene1.character_pool.at(RIGGAN)->setFacing(Character::CharacterFacing::SOUTH);
+
+	scene1.character_pool.at(MIKE)->setPosition(550.0f, 320.0f);
+	scene1.character_pool.at(MIKE)->setFacing(Character::CharacterFacing::EAST);
+
+	scene1.character_pool.at(LESLIE)->setPosition(614.0f, 270.0f);
+	scene1.character_pool.at(LESLIE)->setFacing(Character::CharacterFacing::SOUTH);
 
 	//So AnimatedSprites get drawn while the curtain is closed
 	scene3.name = "Apartment";
@@ -158,6 +165,8 @@ void Play::render() const
 
 	underline->yPos(83);
 	game_data->getRenderer()->renderSprite(*underline);
+
+	game_data->getRenderer()->renderText(std::to_string(current_scene), game_data->getWindowWidth() * 0.5f, game_data->getWindowHeight() * 0.1f, ASGE::COLOURS::ANTIQUEWHITE);
 }
 
 void Play::moveToNextScene()
