@@ -794,11 +794,11 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/comedy/start10", "ed", "*You pull a water gun out your jacket\n then point it to Mel's head*", "apartment/comedy/start11");
 	dialogue_tree.addDialogue("apartment/comedy/start11", "ed", "Why would you hurt my feelings like this.\nWhy do I end up having to be the failed third wheel?", "apartment/comedy/start12");
 	dialogue_tree.addDialogue("apartment/comedy/start12", "terri", "Ed.\nEddie.\nPlease..... Give me the gun.", "apartment/comedy/start13");
-	dialogue_tree.addDialogue("apartment/comedy/start13", "terri", "*Terri begin to cry*", "apartment/comedy/start14");
+	dialogue_tree.addDialogue("apartment/comedy/start13", "terri", "*Terri begins to cry*", "apartment/comedy/start14");
 	dialogue_tree.addDialogue("apartment/comedy/start14", "terri", "If you really want me, then have me.\nJust dont hurt Mel.\nI am not capable of...", "apartment/comedy/start15");
-	dialogue_tree.addDialogue("apartment/comedy/start15", "terri", "You deserve to be loved.\nYou do and I even mean not as a third wheel.", "apartment/comedy/start16");
+	dialogue_tree.addDialogue("apartment/comedy/start15", "terri", "You deserve to be loved.\nYou do. And not as a third wheel.", "apartment/comedy/start16");
 	dialogue_tree.addDialogue("apartment/comedy/start16", "ed", "I just wanted to be what you wanted.", "apartment/comedy/start17");
-	dialogue_tree.addDialogue("apartment/comedy/start17", "ed", "Now i spend every fucking minute thinking\n of this fake bastard.\nI can't believe you left me for him, Anyone else but him", "apartment/comedy/start18");
+	dialogue_tree.addDialogue("apartment/comedy/start17", "ed", "Now I spend every minute thinking about this fake bastard.\nI can't believe you left me for him, anyone else but him.", "apartment/comedy/start18");
 	dialogue_tree.addDialogue("apartment/comedy/start18", "mel", "Put down the gun, Ed.\nDon't do anything stupid.", "apartment/option1C");
 
 	//INSERT PLAYER OPTION HERE
@@ -807,8 +807,8 @@ void GameState::dialogue_kitchen()
 
 	dialogue_tree.addDialogue("apartment/comedy/start19", "ed", "*You spray water into Mel's face*", "apartment/comedy/start20");
 	dialogue_tree.addDialogue("apartment/comedy/start20", "mel", "*Mel's makeup caked face starts to run.\nIt now shows the monster beneath*", "apartment/comedy/start21");
-	dialogue_tree.addDialogue("apartment/comedy/start21", "ed", "Oh my god, you left me for this\nI can't even look at you Terri\nI can't believe i wanted a threesome with that...", "apartment/comedy/start22");
-	dialogue_tree.addDialogue("apartment/comedy/start22", "ed", "*You walk out the room\nYou are so shocked and disgusted\nYou might shoot yourself*", "next night");
+	dialogue_tree.addDialogue("apartment/comedy/start21", "ed", "You left me for this?\nI can't even look at you Terri.\nI can't believe i wanted a threesome with... that", "apartment/comedy/start22");
+	dialogue_tree.addDialogue("apartment/comedy/start22", "ed", "*You leave the room\n Shocked by the monstrous revelation,\nyou decide to shoot yourself*", "next night");
 
 
 	//If Light Option - Pick 1 - (done)
