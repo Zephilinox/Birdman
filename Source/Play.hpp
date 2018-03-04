@@ -37,11 +37,7 @@ public:
 	void render() const;
 	void moveToNextScene();
 	void moveToNextNight();
-
-	void reset();
-
 	
-
 	Scene* getScene();
 	Scene* getNextScene();
 	Audience* getAudience();
@@ -60,4 +56,6 @@ private:
 	int current_scene = 0;
 	int next_scene = 0;
 	int night = 1;
+
+	std::unique_ptr<ASGE::Sprite> top_left_panel;
 };

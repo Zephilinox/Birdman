@@ -6,7 +6,8 @@
 #include "States/FadeOutState.hpp"
 #include "States/GameState.hpp"
 
-Play::Play(GameData* data): audience(data)
+Play::Play(GameData* data)
+	: audience(data)
 {
 	scenes.reserve(number_of_scenes);
 	game_data = data;
@@ -21,6 +22,9 @@ Play::Play(GameData* data): audience(data)
 
 void Play::create()
 {
+	top_left_panel = std::move(game_data->getRenderer()->createUniqueSprite());
+	top_left_panel->loadTexture("../../Resources/Textures/UI/TopLeftPanel.png");
+
 	//TODO implement scene linked list creation here
 	//Call functions here based on the play to instanciate
 	for (int i = 0; i < number_of_scenes; i++)
@@ -50,7 +54,7 @@ void Play::create()
 	Scene& scene10 = scenes[9];
 
 	//Set values and links of each scene
-	scene1.name = "scene1";
+	scene1.name = "Kitchen";
 	scene1.scene_description = "*The Theater is full. The curtains open...*";
 
 	//Set props to scene type
@@ -88,7 +92,7 @@ void Play::create()
 	scene1.dark.stage_description = "dark path 1";
 	scene1.dark.scene = &scene5;
 
-	scene2.name = "scene2";
+	scene2.name = "Apartment";
 	scene2.scene_description = "*Enter apartment description here*";
 	//Set props to scene type
 	scene2.initSceneProps(Play::APARTMENT_BEDROOM);
@@ -101,7 +105,9 @@ void Play::create()
 	//scene2.initSceneCharacter(Play::SceneCharacters::MIKE);
 
 	//So AnimatedSprites get drawn while the curtain is closed
+	scene3.name = "Apartment";
 	scene3.scene_description = "*Enter apartment description here*";
+	scene4.name = "Apartment";
 	scene4.scene_description = "*Enter apartment description here*";
 	update(1.0f / 60.0f);
 }
@@ -121,20 +127,24 @@ void Play::render() const
 	//render audience
 	audience.render();
 
+	game_data->getRenderer()->renderSprite(*top_left_panel);
+
 	switch (night)
 	{
 	case 1:
-		game_data->getRenderer()->renderText("First Preview Night", 20, 40, ASGE::COLOURS::ANTIQUEWHITE);
+		game_data->getRenderer()->renderText("First Preview Night", 20, 40);
 		break;
 	case 2:
-		game_data->getRenderer()->renderText("Second Preview Night", 20, 40, ASGE::COLOURS::ANTIQUEWHITE);
+		game_data->getRenderer()->renderText("Second Preview Night", 20, 40);
 		break;
 	case 3:
-		game_data->getRenderer()->renderText("Opening Night", 20, 40, ASGE::COLOURS::ANTIQUEWHITE);
+		game_data->getRenderer()->renderText("Opening Night", 20, 40);
 		break;
 	default:
 		std::cout << "ERROR: NIGHTS IS UNDER 1 OR ABOVE 3\n";
 	}
+
+	game_data->getRenderer()->renderText(scenes[current_scene].name, 20, 80);
 }
 
 void Play::moveToNextScene()
