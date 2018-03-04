@@ -46,6 +46,7 @@ GameState::GameState(GameData* game_data)
 			current_music_path = audio_msg->audio_path;
 		}
 	});
+
 }
 
 void GameState::update(const ASGE::GameTime& gt)
