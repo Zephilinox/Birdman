@@ -600,11 +600,44 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/sad/start21", "terri", "No...", "apartment/sad/start22");
 	dialogue_tree.addDialogue("apartment/sad/start22", "ed", "And you never will...", "apartment/sad/start23");
 	dialogue_tree.addDialogue("apartment/sad/start23", "terri", "I'm sorry Ed", "apartment/sad/start24");
-	dialogue_tree.addDialogue("apartment/sad/start24", "ed", "I don't exist.\nI'm not even here.", "apartment/sad/start25");
+	dialogue_tree.addDialogue("apartment/sad/start24", "ed", "I don't exist.\nI'm not even here.",
+		[&]()
+	{
+		auto riggan = play_01.getScene()->getCharacter(Play::SceneCharacters::RIGGAN);
+		riggan->setFacing(Character::CharacterFacing::SOUTH);
+		riggan->fastMoveToPosition(riggan->getXPosition(), riggan->getYPosition() + 100.0f);
+		auto leslie = play_01.getScene()->getCharacter(Play::SceneCharacters::LESLIE);
+		leslie->setFacing(Character::CharacterFacing::SOUTH);
+		leslie->fastMoveToPosition(leslie->getXPosition(), riggan->getYPosition() + 10.0f);
+		auto mike = play_01.getScene()->getCharacter(Play::SceneCharacters::MIKE);
+		mike->setFacing(Character::CharacterFacing::SOUTH);
+		return  "apartment/sad/start25";
+	});
 	dialogue_tree.addDialogue("apartment/sad/start25", "ed", "I don't exist.\nNone of this matters.", "apartment/sad/start26");
-	dialogue_tree.addDialogue("apartment/sad/start26", "ed", "*Ed points the gun at Terri...*", "apartment/sad/start27");
-	dialogue_tree.addDialogue("apartment/sad/start27", "ed", "*Then towards Mel*", "apartment/sad/start28");
-	dialogue_tree.addDialogue("apartment/sad/start28", "ed", "*Finally towards his own head...*", "apartment/sad/start29");
+	dialogue_tree.addDialogue("apartment/sad/start26", "ed", "*Ed points the gun at Terri...*",
+		
+		[&]()
+	{
+		auto riggan = play_01.getScene()->getCharacter(Play::SceneCharacters::RIGGAN);
+		riggan->setFacing(Character::CharacterFacing::EAST);
+		auto leslie = play_01.getScene()->getCharacter(Play::SceneCharacters::LESLIE);
+		leslie->setFacing(Character::CharacterFacing::WEST);
+		return  "apartment/sad/start27";
+	});
+	dialogue_tree.addDialogue("apartment/sad/start27", "ed", "*Then towards Mel*",
+		[&]()
+	{
+		auto riggan = play_01.getScene()->getCharacter(Play::SceneCharacters::RIGGAN);
+		riggan->setFacing(Character::CharacterFacing::NORTH);
+		return  "apartment/sad/start28";
+	});
+	dialogue_tree.addDialogue("apartment/sad/start28", "ed", "*Finally towards his own head...*",
+		[&]()
+	{
+		auto riggan = play_01.getScene()->getCharacter(Play::SceneCharacters::RIGGAN);
+		riggan->setFacing(Character::CharacterFacing::SOUTH);
+		return  "apartment/sad/start29";
+	});
 	dialogue_tree.addDialogue("apartment/sad/start29", "ed", "*Ed then pulls the trigger and drops to the floor dead!*", "next night");
 
 
