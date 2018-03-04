@@ -1,15 +1,6 @@
 #include "Prop.h"
 #include <Engine\Renderer.h>
 
-Prop::~Prop()
-{
-	if(prop_sprite != nullptr)
-	{
-		delete prop_sprite;
-		prop_sprite = nullptr;
-	}
-}
-
 void Prop::setIsActive(bool new_active) 
 {
 	isActive = new_active;
@@ -26,21 +17,21 @@ void Prop::setPosition(float x, float y)
 	prop_sprite->yPos(y);
 }
 
-ASGE::Sprite * Prop::getSprite()
+ASGE::Sprite* Prop::getSprite()
 {
-	return prop_sprite;
+	return prop_sprite.get();
 }
 
-void Prop::initSprite(ASGE::Renderer * rend, std::string texture_name)
+void Prop::initSprite(ASGE::Renderer* rend, std::string texture_name)
 {
-	prop_sprite = rend->createRawSprite();
+	prop_sprite.reset(rend->createRawSprite());
 	prop_sprite->loadTexture(texture_name);
 }
 
 void Prop::render(ASGE::Renderer* renderer) const
 {
-	if(prop_sprite != nullptr)
+	if (prop_sprite)
 	{
-		renderer->renderSprite(*prop_sprite);
+		renderer->renderSprite(*prop_sprite.get());
 	}
 }
