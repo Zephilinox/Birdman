@@ -191,7 +191,11 @@ void VisualDialogue::render() const
 	{
 		//There is no way to know the length of a name in pixels, so we can't center this
 		game_data->getRenderer()->renderText(speaker->realName.c_str(), 740, game_data->getWindowHeight() - 210);
-		game_data->getRenderer()->renderSprite(*speaker_underline);
+		
+		if (speaker->realName != "")
+		{
+			game_data->getRenderer()->renderSprite(*speaker_underline);
+		}
 
 		if (speaker->portrait)
 		{
