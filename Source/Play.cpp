@@ -165,6 +165,12 @@ void Play::moveToNextNight()
 
 }
 
+void Play::reset()
+{
+	current_scene = 0;
+	next_scene = 0;
+}
+
 Scene* Play::getScene()
 {
 	return &scenes[current_scene];

@@ -442,7 +442,12 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/sad/start15", "leslie", "You deserve to be loved.\nYou do.", "apartment/sad/start16");
 	dialogue_tree.addDialogue("apartment/sad/start16", "riggan", "I just wanted to be what you wanted.", "apartment/sad/start17");
 	dialogue_tree.addDialogue("apartment/sad/start17", "riggan", "Now I spend every fucking minute praying to be somebody else.\nSomeone I'm not.\nAnyone...", "apartment/sad/start18");
-	dialogue_tree.addDialogue("apartment/sad/start18", "mike", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"", "kitchen/start0");
+	dialogue_tree.addDialogue("apartment/sad/start18", "mike", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"",
+	[&]()
+	{
+		play_01.reset();
+		return "kitchen/start0";
+	});
 
 	//If Comedy Option - Pick 1 - (done)
 	dialogue_tree.addDialogue("kitchen/comedy/start9", "riggan", "Well if you ask me.\nSeems like the guy likes tough love.\nIf thats the case reply with tough love.", "kitchen/comedy/start10");
