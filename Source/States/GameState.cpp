@@ -879,36 +879,36 @@ void GameState::dialogue_kitchen()
 		return "apartment/light/start1";
 	});
 
-	dialogue_tree.addDialogue("apartment/light/start1", "ed", "Terri!\nCome answer the door Terri, we need to talk!\nI know you're in there.", "apartment/light/start2");
-	dialogue_tree.addDialogue("apartment/light/start2", "ed", "*You repetitively knock on the door\nAs you try to force your way in\nYou find the door is open.*", "apartment/light/start3");
+	dialogue_tree.addDialogue("apartment/light/start1", "ed", "Terri! Answer the door Terri, we need to talk!\nI know you're in there!", "apartment/light/start2");
+	dialogue_tree.addDialogue("apartment/light/start2", "ed", "*You repetitively knock on the door. As you try to force\nyour way in you find the door is open.*", "apartment/light/start3");
 	dialogue_tree.addDialogue("apartment/light/start3", "ed", "Terri????", "apartment/light/start4");
 	dialogue_tree.addDialogue("apartment/light/start4", "terri", "Ed!...\nWhat are you doing here?", "apartment/light/start5");
-	dialogue_tree.addDialogue("apartment/light/start5", "ed", "I need you to tell me why.\nWhy would you do this to me\nI lived for you, I worshipped you...", "apartment/light/start6");
+	dialogue_tree.addDialogue("apartment/light/start5", "ed", "I need you to tell me why. Why would you do this to me!\nI lived for you... I worshipped you...", "apartment/light/start6");
 	dialogue_tree.addDialogue("apartment/light/start6", "mel", "Listen Ed, I know you're in a bad place right now...", "apartment/light/start7");
-	dialogue_tree.addDialogue("apartment/light/start7", "ed", "Shut up!\nI don't want to hear anything from you!", "apartment/light/start8");
-	dialogue_tree.addDialogue("apartment/light/start8", "ed", "*You push Mel, he falls to the floor*", "apartment/light/start9");
-	dialogue_tree.addDialogue("apartment/light/start9", "terri", "Eddie!\nPlease!", "apartment/light/start10");
+	dialogue_tree.addDialogue("apartment/light/start7", "ed", "Shut up.\nI don't want to hear anything from you!", "apartment/light/start8");
+	dialogue_tree.addDialogue("apartment/light/start8", "ed", "*You push Mel. He falls to the floor*", "apartment/light/start9");
+	dialogue_tree.addDialogue("apartment/light/start9", "terri", "Eddie! Please!", "apartment/light/start10");
 	dialogue_tree.addDialogue("apartment/light/start10", "ed", "*You point your gun towards Mel*", "apartment/light/start11");
 	dialogue_tree.addDialogue("apartment/light/start11", "ed", "What's wrong with me.\nWhy do I end up having to beg people to love me?", "apartment/light/start12");
-	dialogue_tree.addDialogue("apartment/light/start12", "terri", "Ed.\nEddie.\nPlease... Give me the gun.", "apartment/light/start13");
-	dialogue_tree.addDialogue("apartment/light/start13", "terri", "*Terri begin to cry*", "apartment/light/start14");
-	dialogue_tree.addDialogue("apartment/light/start14", "terri", "Just look at me.\nI was drowning.\nI was not capable of...", "apartment/light/start15");
+	dialogue_tree.addDialogue("apartment/light/start12", "terri", "Ed.\nEddie.\nPlease... give me the gun.", "apartment/light/start13");
+	dialogue_tree.addDialogue("apartment/light/start13", "terri", "*Terri begins to cry*", "apartment/light/start14");
+	dialogue_tree.addDialogue("apartment/light/start14", "terri", "Just look at me. I was drowning.\nI was not capable of...", "apartment/light/start15");
 	dialogue_tree.addDialogue("apartment/light/start15", "terri", "You deserve to be loved.\nYou do.", "apartment/light/start16");
-	dialogue_tree.addDialogue("apartment/light/start16", "ed", "I just wanted to be what you wanted, its all I ever wanted.\nI did it for you!.", "apartment/light/start17");
-	dialogue_tree.addDialogue("apartment/light/start17", "ed", "Now I spend every fucking minute praying to be somebody else.\nSomeone I'm not.\nI love you, after all I've done for you", "apartment/light/start18");
-	dialogue_tree.addDialogue("apartment/light/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"", "apartment/option1L");
+	dialogue_tree.addDialogue("apartment/light/start16", "ed", "I just wanted to be what you wanted. Its all I ever wanted.\nI did it for you!", "apartment/light/start17");
+	dialogue_tree.addDialogue("apartment/light/start17", "ed", "Now I spend every fucking minute praying to be somebody else.\nSomebody I'm not.\nI love you, after all I've done for you.", "apartment/light/start18");
+	dialogue_tree.addDialogue("apartment/light/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore.", "apartment/option1L");
 
 	//If Light Option - Pick 5 - ()
 
-	dialogue_tree.addDialogue("apartment/light/start19", "ed", "I'm really sorry Terri\nPlease just give me another chance\nI'll do anything for you, I can change!", "apartment/light/start20");
-	dialogue_tree.addDialogue("apartment/light/start20", "terri", "*I don't know Ed...\nI don't want to get hurt like before...", "apartment/light/start21");
+	dialogue_tree.addDialogue("apartment/light/start19", "ed", "I'm really sorry Terri. Please just give me another chance.\nI'll do anything for you. I can change!", "apartment/light/start20");
+	dialogue_tree.addDialogue("apartment/light/start20", "terri", "*I don't know Ed... I don't want to get hurt like before.", "apartment/light/start21");
 	dialogue_tree.addDialogue("apartment/light/start21", "ed", "Please Terri, I'm begging you.\nPlease just give me one more chance! you won't regret it.", "apartment/light/start22");
-	dialogue_tree.addDialogue("apartment/light/start22", "mel", "Terri...\nYou can't seriously be thinking about it\nThat's insane! after everything he's just done?!", "apartment/light/start23");
+	dialogue_tree.addDialogue("apartment/light/start22", "mel", "Terri... you can't seriously be considering it\nThat's insane! after everything he's just done?!", "apartment/light/start23");
 	dialogue_tree.addDialogue("apartment/light/start23", "terri", "Be quiet Mel!\nYou don't understand how much I love him.", "apartment/light/start24");
 	dialogue_tree.addDialogue("apartment/light/start24", "mel", "Fine, I'll leave!\nI don't want to be a part of this mess!", "apartment/light/start25");
 	dialogue_tree.addDialogue("apartment/light/start25", "mel", "*Mel storms out the apartment*", "apartment/light/start26");
-	dialogue_tree.addDialogue("apartment/light/start26", "ed", "Terri so does this mean...\nYou'll give me another chance?", "apartment/light/start27");
-	dialogue_tree.addDialogue("apartment/light/start27", "terri", "Yes Ed I will\nBut if you ever hurt me again... it's over", "apartment/light/start28");
+	dialogue_tree.addDialogue("apartment/light/start26", "ed", "Terri so does this mean... you'll give me another chance?", "apartment/light/start27");
+	dialogue_tree.addDialogue("apartment/light/start27", "terri", "Yes Ed, I will, but if you ever hurt me again... it's over.", "apartment/light/start28");
 	dialogue_tree.addDialogue("apartment/light/start28", "ed", "Don't worry I won't!\nI love you Terri!", "next night");
 
 	//If Dark Option - Pick 1 - (done)
@@ -1118,7 +1118,7 @@ void GameState::dialogue_kitchen()
 		play_01.getScene()->addToSad(1);
 		return  "kitchen/sad/start47";
 	});
-	dialogue_tree.addPlayerOption("kitchen/option3L", "The eeen gets high off of painkillers.",
+	dialogue_tree.addPlayerOption("kitchen/option3L", "The teen gets high off of painkillers.",
 		[&]()
 	{
 		play_01.getAudience()->addToComedy(15);
@@ -1282,21 +1282,21 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("empty", "", "", "empty");
 
 	//Player Option 5 Light Line
-	dialogue_tree.addPlayerOption("apartment/option1L", "Take you own life",
+	dialogue_tree.addPlayerOption("apartment/option1L", "Take your own life.",
 		[&]()
 	{
 		play_01.getAudience()->addToSad(15);
 		play_01.getScene()->addToSad(1);
 		return"apartment/sad/start19";
 	});
-	dialogue_tree.addPlayerOption("apartment/option1L", "Pull a water gun out, then spray Mel",
+	dialogue_tree.addPlayerOption("apartment/option1L", "Pull a water gun out, then spray Mel.",
 		[&]()
 	{
 		play_01.getAudience()->addToComedy(15);
 		play_01.getScene()->addToComedy(1);
 		return "apartment/comedy/start19";
 	});
-	dialogue_tree.addPlayerOption("apartment/option1L", "Beg Terri for another chance",
+	dialogue_tree.addPlayerOption("apartment/option1L", "Beg Terri for another chance.",
 		[&]()
 	{
 		play_01.getAudience()->addToLight(15);
