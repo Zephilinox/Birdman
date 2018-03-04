@@ -20,17 +20,17 @@ Play::Play(GameData* data)
 	stage->height((float)data->getWindowHeight() * 0.65f);
 	stage->xPos(0.0f);
 	stage->yPos(0.0f);
-}
 
-void Play::create()
-{
 	top_left_panel = std::move(game_data->getRenderer()->createUniqueSprite());
 	top_left_panel->loadTexture("../../Resources/Textures/UI/TopLeftPanel.png");
 
 	underline = std::move(game_data->getRenderer()->createUniqueSprite());
 	underline->loadTexture("../../Resources/Textures/UI/SpeakerUnderline.png");
 	underline->width(210);
+}
 
+void Play::create()
+{
 	//TODO implement scene linked list creation here
 	//Call functions here based on the play to instanciate
 	for (int i = 0; i < number_of_scenes; i++)
@@ -204,6 +204,10 @@ void Play::moveToNextNight()
 			next_scene = 0;
 			game_data->getAudioManager()->play("FF7.wav", true);
 			game_data->getMessageQueue()->sendMessage<AudioChangeMessage>("FF7.wav");
+
+			//reset scenes
+			scenes.clear();
+			create();
 		});
 	}
 	else
