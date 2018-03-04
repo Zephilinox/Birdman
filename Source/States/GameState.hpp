@@ -34,5 +34,5 @@ private:
 	std::unique_ptr<ASGE::Sprite> top_panel;
 
 	ManagedConnection managed_con;
-	std::string current_music_path;
+	std::string current_music_path = "FF7.wav";
 };

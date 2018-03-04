@@ -23,6 +23,9 @@ GameState::GameState(GameData* game_data)
 	, bottom_panel(game_data->getRenderer()->createRawSprite())
 	, top_panel(game_data->getRenderer()->createRawSprite())
 {
+	game_data->getAudioManager()->reset();
+	game_data->getAudioManager()->play("FF7.wav", true);
+
 	bottom_panel->loadTexture("../../Resources/Textures/UI/BottomPanel.png");
 	bottom_panel->yPos(468);
 	
@@ -348,8 +351,6 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/start0", "",
 		[&]()
 	{
-		game_data->getAudioManager()->play("FF7.wav", true);
-		game_data->getMessageQueue()->sendMessage<AudioChangeMessage>("FF7.wav");
 		return play_01.getScene()->getDescription();
 	},
 		[&]()
@@ -476,7 +477,7 @@ void GameState::dialogue_kitchen()
 		[&]()
 	{
 		play_01.moveToNextNight();
-		return "kitchen/start0";
+		return "empty";
 	});
 
 	//If Sad Option - Pick 3 - ()
@@ -532,7 +533,7 @@ void GameState::dialogue_kitchen()
 		[&]()
 	{
 		play_01.moveToNextNight();
-		return "apartment/comedy/start0";
+		return "empty";
 	});
 
 	//If Comedy Option - Pick 2 - ()
@@ -615,7 +616,7 @@ void GameState::dialogue_kitchen()
 	[&]()
 	{
 		play_01.moveToNextNight();
-		return "apartment/light/start0";
+		return "empty";
 	});
 
 	//If Light Option - Pick 2 - ()
@@ -651,7 +652,7 @@ void GameState::dialogue_kitchen()
 	[&]()
 	{
 		play_01.moveToNextNight();
-		return "kitchen/start0";
+		return "empty";
 	});
 
 	//If Light Option - Pick 3 - ()
@@ -706,7 +707,7 @@ void GameState::dialogue_kitchen()
 	[&]()
 	{
 		play_01.moveToNextNight();
-		return "apartment/dark/start0";
+		return "empty";
 	});
 
 	//If Dark Option - Pick 2 - ()
@@ -741,7 +742,7 @@ void GameState::dialogue_kitchen()
 	[&]()
 	{
 		play_01.moveToNextNight();
-		return "kitchen/start0";
+		return "empty";
 	});
 
 	//If Dark Option - Pick 3 - ()
@@ -756,7 +757,5 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/dark/start27", "mel", "Goodbye Terri....\nI'll always love you in my heart", "apartment/dark/start28");
 	dialogue_tree.addDialogue("apartment/dark/start28", "mel", "*Mel then shoots Terri 3 times in the stomach and procceds to leave the apartment*", "apartment/dark/start14");
 
-
-
-
+	dialogue_tree.addDialogue("empty", "", "", "empty");
 }

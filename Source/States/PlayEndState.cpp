@@ -32,10 +32,10 @@ PlayEndState::PlayEndState(GameData * game_data, float score)
 	//on click, reset game
 	ok_popup.getButton(0).on_click.connect([game_data]()
 	{
-		game_data->getStateManager()->pop();
 		game_data->getStateManager()->push<FadeOutState>(
 			[game_data]()
 		{
+			game_data->getStateManager()->pop();
 			game_data->getStateManager()->pop();
 			game_data->getStateManager()->push<GameState>();
 		});
