@@ -192,6 +192,11 @@ void Play::moveToNextNight()
 	}
 }
 
+void Play::reset()
+{
+
+}
+
 Scene* Play::getScene()
 {
 	return &scenes[current_scene];
