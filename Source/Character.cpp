@@ -40,21 +40,19 @@ bool Character::getIsActive() const
 void Character::initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend)
 {
 
+	idle_sprite_forward = rend->createUniqueSprite();
+	idle_sprite_back = rend->createUniqueSprite();
+	idle_sprite_left = rend->createUniqueSprite();
+	idle_sprite_right = rend->createUniqueSprite();
+
 	//TODO move raw sprite creation out of switch, saves space/repetition
 	switch(actor)
 	{
 	case Play::SceneCharacters::RIGGAN:
 	{
-		idle_sprite_forward = rend->createUniqueSprite();
 		idle_sprite_forward->loadTexture(charTextureStrings[0]);
-
-		idle_sprite_back = rend->createUniqueSprite();
 		idle_sprite_back->loadTexture(charTextureStrings[1]);
-
-		idle_sprite_left = rend->createUniqueSprite();
 		idle_sprite_left->loadTexture(charTextureStrings[2]);
-
-		idle_sprite_right = rend->createUniqueSprite();
 		idle_sprite_right->loadTexture(charTextureStrings[3]);
 
 		//left to right
@@ -77,16 +75,9 @@ void Character::initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend)
 	}
 	case Play::SceneCharacters::MIKE:
 	{
-		idle_sprite_forward = rend->createUniqueSprite();
 		idle_sprite_forward->loadTexture(charTextureStrings[13]);
-
-		idle_sprite_back = rend->createUniqueSprite();
 		idle_sprite_back->loadTexture(charTextureStrings[14]);
-
-		idle_sprite_left = rend->createUniqueSprite();
 		idle_sprite_left->loadTexture(charTextureStrings[15]);
-
-		idle_sprite_right = rend->createUniqueSprite();
 		idle_sprite_right->loadTexture(charTextureStrings[16]);
 
 		//left to right
@@ -109,16 +100,9 @@ void Character::initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend)
 	}
 	case Play::SceneCharacters::LAURA:
 	{
-		idle_sprite_forward = rend->createUniqueSprite();
 		idle_sprite_forward->loadTexture(charTextureStrings[26]);
-
-		idle_sprite_back = rend->createUniqueSprite();
 		idle_sprite_back->loadTexture(charTextureStrings[27]);
-
-		idle_sprite_left = rend->createUniqueSprite();
 		idle_sprite_left->loadTexture(charTextureStrings[28]);
-
-		idle_sprite_right = rend->createUniqueSprite();
 		idle_sprite_right->loadTexture(charTextureStrings[29]);
 
 		//left to right
@@ -141,16 +125,9 @@ void Character::initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend)
 	}	
 	case Play::SceneCharacters::LESLIE:
 	{
-		idle_sprite_forward = rend->createUniqueSprite();
 		idle_sprite_forward->loadTexture(charTextureStrings[39]);
-
-		idle_sprite_back = rend->createUniqueSprite();
 		idle_sprite_back->loadTexture(charTextureStrings[40]);
-
-		idle_sprite_left = rend->createUniqueSprite();
 		idle_sprite_left->loadTexture(charTextureStrings[41]);
-
-		idle_sprite_right = rend->createUniqueSprite();
 		idle_sprite_right->loadTexture(charTextureStrings[42]);
 
 		//left to right
