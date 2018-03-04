@@ -436,8 +436,6 @@ void GameState::dialogue_kitchen()
 		play_01.getAudience()->addToSad(10);
 		//add an arbitrary value to the "sad" value of the scene, this is used to determine which scene is gone to next.
 		play_01.getScene()->addToSad(1);
-		//Determines which scene the play will go to next based on the values stored in scene. Transitions and moves to that scene.
-		play_01.moveToNextScene();
 		return "apartment/sad/start0";
 	});
 
@@ -446,6 +444,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/sad/start0", "",
 		[&]()
 	{
+		play_01.moveToNextScene();
 		return play_01.getNextScene()->getDescription();
 	},
 		[&]()
@@ -528,6 +527,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/comedy/start0", "",
 		[&]()
 	{
+		play_01.moveToNextScene();
 		return play_01.getNextScene()->getDescription();
 	},
 		[&]()
@@ -605,6 +605,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/light/start0", "",
 	[&]()
 	{
+		play_01.moveToNextScene();
 		return play_01.getNextScene()->getDescription();
 	},
 	[&]()
@@ -685,6 +686,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/dark/start0", "",
 	[&]()
 	{
+		play_01.moveToNextScene();
 		return play_01.getNextScene()->getDescription();
 	},
 	[&]()
@@ -720,12 +722,13 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/dark/start25", "terri", "*Terri screams in fear*", "apartment/dark/start26");
 	dialogue_tree.addDialogue("apartment/dark/start26", "mel", "*Mel shoots Ed point blank!\nThen turn towards TerrI*", "apartment/dark/start27");
 	dialogue_tree.addDialogue("apartment/dark/start27", "mel", "Goodbye Terri....\nI'll always love you in my heart", "apartment/dark/start28");
-	dialogue_tree.addDialogue("apartment/dark/start28", "mel", "*Mel then shoots Terri 3 times in the stomach and procceds to leave the apartment*", "next_night");
+	dialogue_tree.addDialogue("apartment/dark/start28", "mel", "*Mel then shoots Terri 3 times in the stomach and procceds to leave the apartment*", "next night");
 
 	dialogue_tree.addDialogue("next night", "", [&]()
 	{
 		play_01.moveToNextNight();
 		return " ";
+
 	}, "empty");
 
 	dialogue_tree.addDialogue("empty", "", "", "empty");
