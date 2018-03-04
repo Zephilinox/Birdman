@@ -162,6 +162,7 @@
     <ClInclude Include="..\..\Source\Character.h" />
     <ClInclude Include="..\..\Source\Constants.hpp" />
     <ClInclude Include="..\..\Source\Dialogue\VisualDialogue.hpp" />
+    <ClInclude Include="..\..\Source\Messages\AudioChangeMessage.hpp" />
     <ClInclude Include="..\..\Source\Play.hpp" />
     <ClInclude Include="..\..\Source\Prop.h" />
     <ClInclude Include="..\..\Source\Rng.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="..\..\Source\Character.cpp" />
     <ClCompile Include="..\..\Source\Dialogue\VisualDialogue.cpp" />
     <ClCompile Include="..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\Source\Messages\AudioChangeMessage.cpp" />
     <ClCompile Include="..\..\Source\Play.cpp" />
     <ClCompile Include="..\..\Source\Prop.cpp" />
     <ClCompile Include="..\..\Source\Rng.cpp" />

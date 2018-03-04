@@ -58,3 +58,8 @@ void AudioManager::play(const std::string& name, bool loop)
 	//todo: pass path + name, don't worry about telling the audio engine the path?
 	audio_engine->play(std::forward<const std::string&>(name), std::forward<bool>(loop));
 }
+
+void AudioManager::reset()
+{
+	setEngineType(engine);
+}
