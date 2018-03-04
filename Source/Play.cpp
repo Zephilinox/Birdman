@@ -108,14 +108,15 @@ void Play::create()
 	scene2.initSceneCharacter(Play::SceneCharacters::MIKE);
 	scene2.initSceneCharacter(Play::SceneCharacters::LESLIE);
 
-	scene1.character_pool.at(RIGGAN)->setPosition(100.0f, 100.0f);
-	scene1.character_pool.at(RIGGAN)->setFacing(Character::CharacterFacing::SOUTH);
+	scene2.character_pool.at(RIGGAN)->setIsActive(false);
+	scene2.character_pool.at(RIGGAN)->setPosition(170, 280);
+	scene2.character_pool.at(RIGGAN)->setFacing(Character::CharacterFacing::EAST);
 
-	scene1.character_pool.at(MIKE)->setPosition(550.0f, 320.0f);
-	scene1.character_pool.at(MIKE)->setFacing(Character::CharacterFacing::EAST);
+	scene2.character_pool.at(MIKE)->setPosition(580.0f, 240.0f);
+	scene2.character_pool.at(MIKE)->setFacing(Character::CharacterFacing::EAST);
 
-	scene1.character_pool.at(LESLIE)->setPosition(614.0f, 270.0f);
-	scene1.character_pool.at(LESLIE)->setFacing(Character::CharacterFacing::SOUTH);
+	scene2.character_pool.at(LESLIE)->setPosition(650.0f, 240.0f);
+	scene2.character_pool.at(LESLIE)->setFacing(Character::CharacterFacing::WEST);
 
 	//So AnimatedSprites get drawn while the curtain is closed
 	scene3.name = "Apartment";

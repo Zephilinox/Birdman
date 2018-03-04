@@ -551,13 +551,38 @@ void GameState::dialogue_kitchen()
 	});
 
 	dialogue_tree.addDialogue("apartment/sad/start1", "ed", "Terri! Terri!\nTerri! I know you're in there!", "apartment/sad/start2");
-	dialogue_tree.addDialogue("apartment/sad/start2", "ed", "*You bang on the door loudly with force. It opens.*", "apartment/sad/start3");
+	dialogue_tree.addDialogue("apartment/sad/start2", "ed", "*You bang on the door loudly with force. It opens.*",
+		[&]()
+	{
+		auto mover = play_01.getScene()->getCharacter(Play::SceneCharacters::RIGGAN);
+		auto mike = play_01.getScene()->getCharacter(Play::SceneCharacters::MIKE);
+		mover->setIsActive(true);
+		mover->fastMoveToPosition(mover->getXPosition() + 80.0f, mover->getYPosition());
+		mike->setFacing(Character::CharacterFacing::WEST);
+		return "apartment/sad/start3";
+	});
 	dialogue_tree.addDialogue("apartment/sad/start3", "ed", "Terri????", "apartment/sad/start4");
-	dialogue_tree.addDialogue("apartment/sad/start4", "terri", "Ed!...\nWhat are you doing here?", "apartment/sad/start5");
+	dialogue_tree.addDialogue("apartment/sad/start4", "terri", "Ed!...\nWhat are you doing here?",
+		[&]()
+	{
+		auto mike = play_01.getScene()->getCharacter(Play::SceneCharacters::MIKE);
+		auto riggan = play_01.getScene()->getCharacter(Play::SceneCharacters::RIGGAN);
+		auto leslie = play_01.getScene()->getCharacter(Play::SceneCharacters::LESLIE);
+		mike->fastMoveToPosition(riggan->getXPosition() + 60.0f, riggan->getYPosition());
+		leslie->fastMoveToPosition(mike->getXPosition(), leslie->getYPosition());
+		return "apartment/sad/start5";
+	});
+		
 	dialogue_tree.addDialogue("apartment/sad/start5", "ed", "Why? I need you to tell me why.\nI lived for you, I worshipped you...", "apartment/sad/start6");
 	dialogue_tree.addDialogue("apartment/sad/start6", "mel", "Listen Ed, I know this is hard but...", "apartment/sad/start7");
 	dialogue_tree.addDialogue("apartment/sad/start7", "ed", "Fuck you.\nShut up\nFuck you!", "apartment/sad/start8");
-	dialogue_tree.addDialogue("apartment/sad/start8", "ed", "*You push Mel, he falls to the floor*", "apartment/sad/start9");
+	dialogue_tree.addDialogue("apartment/sad/start8", "ed", "*You push Mel, he falls to the floor*",
+		[&]()
+	{
+		auto mike = play_01.getScene()->getCharacter(Play::SceneCharacters::MIKE);
+		mike->fastMoveToPosition(mike->getXPosition() + 60.0f, mike->getYPosition());
+		return "apartment/sad/start9";
+	});
 	dialogue_tree.addDialogue("apartment/sad/start9", "terri", "Eddie!\nPlease!", "apartment/sad/start10");
 	dialogue_tree.addDialogue("apartment/sad/start10", "ed", "*You point the gun at Mel's head*", "apartment/sad/start11");
 	dialogue_tree.addDialogue("apartment/sad/start11", "ed", "What's wrong with me.\nWhy do I end up having to beg people to love me?", "apartment/sad/start12");
