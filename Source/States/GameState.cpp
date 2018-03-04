@@ -347,6 +347,8 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/start0", "",
 		[&]()
 	{
+		game_data->getAudioManager()->play("FF7.wav", true);
+		game_data->getMessageQueue()->sendMessage<AudioChangeMessage>("FF7.wav");
 		return play_01.getScene()->getDescription();
 	},
 		[&]()

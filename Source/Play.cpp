@@ -192,6 +192,7 @@ void Play::moveToNextNight()
 {
 	if (night < 3)
 	{
+		game_data->getAudioManager()->reset();
 		game_data->getStateManager()->push<FadeOutState>(
 		[&]()
 		{
@@ -207,6 +208,7 @@ void Play::moveToNextNight()
 		game_data->getStateManager()->push<FadeOutState>(
 		[&]()
 		{
+			game_data->getAudioManager()->reset();
 			game_data->getStateManager()->pop();
 			game_data->getStateManager()->push<GameState>();
 		});
