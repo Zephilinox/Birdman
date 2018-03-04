@@ -5,6 +5,7 @@
 #include "Scene.hpp"
 #include "States/FadeOutState.hpp"
 #include "States/GameState.hpp"
+#include "States/PlayEndState.h"
 
 Play::Play(GameData* data)
 	: audience(data)
@@ -208,15 +209,11 @@ void Play::moveToNextNight()
 		[&]()
 		{
 			game_data->getStateManager()->pop();
-			game_data->getStateManager()->push<GameState>();
+			game_data->getStateManager()->push<PlayEndState>(audience.getOverallApproval());
 		});
 	}
 }
 
-void Play::reset()
-{
-
-}
 
 Scene* Play::getScene()
 {

@@ -13,6 +13,7 @@
 #include "../Scene.hpp"
 #include "../Character.h"
 #include "PauseState.hpp"
+#include "PlayEndState.h"
 
 GameState::GameState(GameData* game_data)
 	: BaseState(game_data)
