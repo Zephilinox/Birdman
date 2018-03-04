@@ -1125,7 +1125,7 @@ void GameState::dialogue_kitchen()
 		play_01.getScene()->addToComedy(1);
 		return "kitchen/comedy/start46";
 	});
-	dialogue_tree.addPlayerOption("kitchen/option3L", "The teen gets away with only a few broken bones."
+	dialogue_tree.addPlayerOption("kitchen/option3L", "The teen gets away with only a few broken bones.",
 		[&]()
 	{
 		play_01.getAudience()->addToLight(15);
