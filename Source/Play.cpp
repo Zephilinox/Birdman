@@ -5,6 +5,8 @@
 #include "Scene.hpp"
 #include "States/FadeOutState.hpp"
 #include "States/GameState.hpp"
+#include "States/PlayEndState.h"
+#include "Messages/AudioChangeMessage.hpp"
 
 Play::Play(GameData* data)
 	: audience(data)
@@ -192,6 +194,7 @@ void Play::moveToNextNight()
 {
 	if (night < 3)
 	{
+		game_data->getAudioManager()->reset();
 		game_data->getStateManager()->push<FadeOutState>(
 		[&]()
 		{
@@ -199,19 +202,17 @@ void Play::moveToNextNight()
 			audience.varyApprovalsBetweenNights();
 			current_scene = 0;
 			next_scene = 0;
+			game_data->getAudioManager()->play("FF7.wav", true);
+			game_data->getMessageQueue()->sendMessage<AudioChangeMessage>("FF7.wav");
 		});
 	}
 	else
 	{
 		//TODO - play finished, output approval to screen?
-		game_data->getStateManager()->push<FadeOutState>(
-		[&]()
-		{
-			game_data->getStateManager()->pop();
-			game_data->getStateManager()->push<GameState>();
-		});
+		game_data->getStateManager()->push<PlayEndState>(audience.getOverallApproval());
 	}
 }
+
 
 Scene* Play::getScene()
 {

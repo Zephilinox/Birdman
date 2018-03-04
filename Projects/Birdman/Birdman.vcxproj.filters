@@ -94,6 +94,12 @@
     <Filter Include="Source Files\Architecture\Networking">
       <UniqueIdentifier>{a3b3bb10-b489-4297-95ad-d71b7b0b2023}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Messages">
+      <UniqueIdentifier>{f5ff8e5e-3877-403a-8969-67ad099884f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Messages">
+      <UniqueIdentifier>{246bd8e2-4b70-4b7c-bf75-4231aa44eb5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\stdafx.h">
@@ -228,6 +234,12 @@
     <ClInclude Include="..\..\Source\States\PauseState.hpp">
       <Filter>Header Files\States</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Messages\AudioChangeMessage.hpp">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+	 <ClInclude Include="..\..\Source\States\PlayEndState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -336,6 +348,12 @@
       <Filter>Source Files\Architecture\Networking</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\States\PauseState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Messages\AudioChangeMessage.cpp">
+      <Filter>Source Files\Messages</Filter>
+    </ClCompile>
+	<ClCompile Include="..\..\Source\States\PlayEndState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
   </ItemGroup>

@@ -13,23 +13,38 @@
 #include "../Scene.hpp"
 #include "../Character.h"
 #include "PauseState.hpp"
+#include "../Messages/AudioChangeMessage.hpp"
+#include "PlayEndState.h"
 
 GameState::GameState(GameData* game_data)
 	: BaseState(game_data)
-	, visual_dialogue(game_data, &dialogue_tree, "start_extra")
+	, visual_dialogue(game_data, &dialogue_tree, "kitchen/start0")
 	, play_01(game_data)
 	, bottom_panel(game_data->getRenderer()->createRawSprite())
 	, top_panel(game_data->getRenderer()->createRawSprite())
 {
+	game_data->getAudioManager()->reset();
+	game_data->getAudioManager()->play("FF7.wav", true);
+
 	bottom_panel->loadTexture("../../Resources/Textures/UI/BottomPanel.png");
 	bottom_panel->yPos(468);
 	
 	top_panel->loadTexture("../../Resources/Textures/UI/TopPanel.png");
 
 	play_01.create();
-	dialogue_init();
+	//dialogue_init();
 	dialogue_kitchen();
 	visual_dialogue.updateTree();
+
+	managed_con = game_data->getMessageQueue()->addListener(
+	[&](Message* msg)
+	{
+		if (msg->id == AudioChangeMessage::ID)
+		{
+			const auto* audio_msg = static_cast<AudioChangeMessage*>(msg);
+			current_music_path = audio_msg->audio_path;
+		}
+	});
 }
 
 void GameState::update(const ASGE::GameTime& gt)
@@ -44,7 +59,7 @@ void GameState::update(const ASGE::GameTime& gt)
 
 	if (game_data->getInputManager()->isActionPressed("escape"))
 	{
-		game_data->getStateManager()->push<PauseState>();
+		game_data->getStateManager()->push<PauseState>(current_music_path);
 	}
 }
 
@@ -65,7 +80,7 @@ void GameState::onInactive()
 }
 
 //This is here as a point of reference, consider it documentation.
-
+/*
 void GameState::dialogue_init()
 {
 	dialogue_tree.getActor("player")->realName = "TeamBirb";
@@ -292,7 +307,7 @@ void GameState::dialogue_init()
 	dialogue_tree.addDialogue("town/bye", DialogueTree::player, "Ah okay, bye.", "");
 	dialogue_tree.addDialogue("town/blab", "blab_npc", "We should probably ensure one convo isn't longer than\n3 lines of text. We can break it up with '\\n' but we still\nneed to make sure it doesn't go on for too long", "town/blab2");
 	dialogue_tree.addDialogue("town/blab2", "blab_npc", "If it does we can chain it like so, which is nice.\nIt's not worth the effort trying to automate any of this to be honest.\nWe'll just have to handle it all manually.", "town/start");
-}
+}*/
 
 void GameState::dialogue_kitchen()
 {
@@ -324,9 +339,6 @@ void GameState::dialogue_kitchen()
 	mel->portrait = std::move(mel_pic);
 
 	/* BIG FAT REMINDER BIG FAT REMINDER BIG FAT REMINDER BIG FAT REMINDER BIG FAT REMINDER BIG FAT REMINDER BIG FAT REMINDER BIG FAT REMINDER BIG FAT REMINDER
-	// portraits for terri
-	// UI for the current night
-	// gameover screen showing how well you did?
 	// double check all spelling/grammer
 	// link up all the dialogue to the audience stuff
 	// create the player options for each decision
@@ -376,6 +388,7 @@ void GameState::dialogue_kitchen()
 	{
 		game_data->getAudioManager()->reset();
 		game_data->getAudioManager()->play("Piano Loop.wav", true);
+		game_data->getMessageQueue()->sendMessage<AudioChangeMessage>("Piano Loop.wav");
 		auto riggan = play_01.getScene()->getCharacter(Play::RIGGAN);
 		riggan->setIsActive(true);
 		riggan->setFacing(Character::CharacterFacing::WEST);
@@ -424,8 +437,9 @@ void GameState::dialogue_kitchen()
 		play_01.getAudience()->addToSad(10);
 		//add an arbitrary value to the "sad" value of the scene, this is used to determine which scene is gone to next.
 		play_01.getScene()->addToSad(1);
+		return "apartment/sad/start0";
 		//Determines which scene the play will go to next based on the values stored in scene. Transitions and moves to that scene.
-		play_01.moveToNextScene();
+		
 		return "kitchen/option2";
 	});
 	//If Sad Option - Pick 2 -
@@ -448,6 +462,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/sad/start0", "",
 		[&]()
 	{
+		play_01.moveToNextScene();
 		return play_01.getNextScene()->getDescription();
 	},
 		[&]()
@@ -472,12 +487,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/sad/start15", "terri", "You deserve to be loved.\nYou do.", "apartment/sad/start16");
 	dialogue_tree.addDialogue("apartment/sad/start16", "ed", "I just wanted to be what you wanted.", "apartment/sad/start17");
 	dialogue_tree.addDialogue("apartment/sad/start17", "ed", "Now I spend every fucking minute praying to be somebody else.\nSomeone I'm not.\nAnyone...", "apartment/sad/start18");
-	dialogue_tree.addDialogue("apartment/sad/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"",
-		[&]()
-	{
-		play_01.moveToNextNight();
-		return "kitchen/start0";
-	});
+	dialogue_tree.addDialogue("apartment/sad/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"", "next night");
 
 	//If Sad Option - Pick 5 - ()
 	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "*Ed looks at Terri with a sad smile*", "apartment/sad/start14");
@@ -531,19 +541,16 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/comedy/start40", "terri", "You've had more than a few.", "kitchen/comedy/start41");
 	dialogue_tree.addDialogue("kitchen/comedy/start41", "nick", "Why you have to be so boring,\n we are just having a bit of fun?", "kitchen/comedy/start42");
 	dialogue_tree.addDialogue("kitchen/comedy/start42", "laura", "Don't talk like a drunk if you not...", "kitchen/comedy/start42");
-	dialogue_tree.addDialogue("kitchen/comedy/start43", "nick", "Shut up,\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"",
+	dialogue_tree.addDialogue("kitchen/comedy/start43", "nick", "Shut up,\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "apartment/comedy/start0");
 		
-		[&]()
-	{
-		play_01.moveToNextNight();
-		return "apartment/comedy/start0";
-	});
+
 
 	//If Comedy Option - Pick 4 - ()
 
 	dialogue_tree.addDialogue("apartment/comedy/start0", "",
 		[&]()
 	{
+		play_01.moveToNextScene();
 		return play_01.getNextScene()->getDescription();
 	},
 		[&]()
@@ -577,7 +584,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/comedy/start19", "ed", "*You spray water into Mel's face*", "apartment/comedy/start20");
 	dialogue_tree.addDialogue("apartment/comedy/start20", "mel", "*Mel's makeup caked face starts to run, it now shows the monster beneath*", "apartment/comedy/start21");
 	dialogue_tree.addDialogue("apartment/comedy/start21", "ed", "Oh my god, you left me for this\nI can't even look at you Terri\n I can't believe i wanted a threesome with that...", "apartment/comedy/start22");
-	dialogue_tree.addDialogue("apartment/comedy/start22", "ed", "*You walk out the room\n You are so shocked and disgusted that you might shoot yourself*", "apartment/comedy/start20");
+	dialogue_tree.addDialogue("apartment/comedy/start22", "ed", "*You walk out the room\n You are so shocked and disgusted that you might shoot yourself*", "next night");
 
 
 	//If Light Option - Pick 1 - (done)
@@ -617,21 +624,18 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/light/start40", "terri", "You've had more than a few.", "kitchen/light/start41");
 	dialogue_tree.addDialogue("kitchen/light/start41", "nick", "Common Terri relax, have some fun?", "kitchen/light/start42");
 	dialogue_tree.addDialogue("kitchen/light/start42", "laura", "Don't talk like your plan is going to get drunk then...", "kitchen/light/start42");
-	dialogue_tree.addDialogue("kitchen/light/start43", "nick", "Shut up,\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"",
+	dialogue_tree.addDialogue("kitchen/light/start43", "nick", "Shut up,\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "apartment/light/start0");
 
 
 		
-	[&]()
-	{
-		play_01.moveToNextNight();
-		return "apartment/light/start0";
-	});
+	
 
 	//If Light Option - Pick 4 - ()
 
 	dialogue_tree.addDialogue("apartment/light/start0", "",
 	[&]()
 	{
+		play_01.moveToNextScene();
 		return play_01.getNextScene()->getDescription();
 	},
 	[&]()
@@ -656,12 +660,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/light/start15", "terri", "You deserve to be loved.\n You do.", "apartment/light/start16");
 	dialogue_tree.addDialogue("apartment/light/start16", "ed", "I just wanted to be what you wanted, it all i ever wanted.\nI did it for you!.", "apartment/light/start17");
 	dialogue_tree.addDialogue("apartment/light/start17", "ed", "Now i spend every fucking minute praying to be somebody else.\nSomeone I'm not.\n I love you, after all i've done for you", "apartment/light/start18");
-	dialogue_tree.addDialogue("apartment/light/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"",
-	[&]()
-	{
-		play_01.moveToNextNight();
-		return "kitchen/start0";
-	});
+	dialogue_tree.addDialogue("apartment/light/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"", "apartment/light/start19");
 
 	//If Light Option - Pick 5 - ()
 
@@ -674,8 +673,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/light/start25", "mel", "*Mel storms out the apartment*", "apartment/light/start26");
 	dialogue_tree.addDialogue("apartment/light/start26", "ed", "Terri so does this mean...\nYou'll give me another chance?", "apartment/light/start27");
 	dialogue_tree.addDialogue("apartment/light/start27", "terri", "Yes Ed i will,\nBut if you ever hurt me again it over ok", "apartment/light/start28");
-	dialogue_tree.addDialogue("apartment/light/start28", "ed", "Don't worry I won't!\nI love you Terri!", "apartment/light/start14");
-
+	dialogue_tree.addDialogue("apartment/light/start28", "ed", "Don't worry I won't!\nI love you Terri!", "next night");
 
 	//If Dark Option - Pick 1 - (done)
 	dialogue_tree.addDialogue("kitchen/dark/start9", "nick", "He beat you?! If he did, you should\nof stuck up for yourself.\nI think if you...", "kitchen/dark/start10");
@@ -713,24 +711,21 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/dark/start40", "terri", "You say that but I've seen you drink way over your limit already.", "kitchen/dark/start41");
 	dialogue_tree.addDialogue("kitchen/dark/start41", "nick", "Fuck you Terri, let us drink in peace", "kitchen/dark/start42");
 	dialogue_tree.addDialogue("kitchen/dark/start42", "laura", "If your not drunk, stop acting like an asshole then...", "kitchen/dark/start42");
-	dialogue_tree.addDialogue("kitchen/comedy/start43", "nick", "Shut up,\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"",
+	dialogue_tree.addDialogue("kitchen/comedy/start43", "nick", "Shut up,\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "apartment/dark/start0");
 
-	[&]()
-	{
-		play_01.moveToNextNight();
-		return "apartment/dark/start0";
-	});
+
 
 	//If Dark Option - Pick 4 - ()
 
 	dialogue_tree.addDialogue("apartment/dark/start0", "",
 	[&]()
 	{
+		play_01.moveToNextScene();
 		return play_01.getNextScene()->getDescription();
 	},
 	[&]()
 	{
-		return "apartment/dark/start1";
+		return "apartment/dark/start2";
 	});
 
 	dialogue_tree.addDialogue("apartment/dark/start2", "ed", "*You bang on the door loudly with force and open the door*", "apartment/dark/start3");
@@ -749,12 +744,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/dark/start15", "terri", "You deserve to be loved.\n You do i mean it.\nCalm down please, lets just talk.", "apartment/dark/start16");
 	dialogue_tree.addDialogue("apartment/dark/start16", "ed", "I just wanted to be what you wanted\nSo why don't you want me.", "apartment/dark/start17");
 	dialogue_tree.addDialogue("apartment/dark/start17", "ed", "Now i spend every fucking minute praying to be somebody else.\nSomeone I'm not.\nAll of that for you!", "apartment/dark/start18");
-	dialogue_tree.addDialogue("apartment/dark/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore\nYou need to move on.\"",
-	[&]()
-	{
-		play_01.moveToNextNight();
-		return "kitchen/start0";
-	});
+	dialogue_tree.addDialogue("apartment/dark/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore\nYou need to move on.\"", "apartment/dark/start19");
 
 	//If Dark Option - Pick 5 - ()
 	dialogue_tree.addDialogue("apartment/dark/start19", "ed", "Terri tell me it's not true!", "apartment/dark/start20");
@@ -766,7 +756,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/dark/start25", "terri", "*Terri screams in fear*", "apartment/dark/start26");
 	dialogue_tree.addDialogue("apartment/dark/start26", "mel", "*Mel shoots Ed point blank!\nThen turn towards TerrI*", "apartment/dark/start27");
 	dialogue_tree.addDialogue("apartment/dark/start27", "mel", "Goodbye Terri....\nI'll always love you in my heart", "apartment/dark/start28");
-	dialogue_tree.addDialogue("apartment/dark/start28", "mel", "*Mel then shoots Terri 3 times in the stomach and procceds to leave the apartment*", "apartment/dark/start14");
+	dialogue_tree.addDialogue("apartment/dark/start28", "mel", "*Mel then shoots Terri 3 times in the stomach and procceds to leave the apartment*", "next night");
 
 
 	//Player Option 2
@@ -792,4 +782,13 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addPlayerOption("kitchen/option5", "Spray Mel with the water gun", "kitchen/comedy/start9");
 	dialogue_tree.addPlayerOption("kitchen/option5", "Beg Terri for another chance", "kitchen/light/start9");
 	dialogue_tree.addPlayerOption("kitchen/option5", "Let your anger take over", "kitchen/dark/start9");
+
+	dialogue_tree.addDialogue("next night", "", [&]()
+	{
+		play_01.moveToNextNight();
+		return " ";
+
+	}, "empty");
+
+	dialogue_tree.addDialogue("empty", "", "", "empty");
 }

@@ -162,6 +162,7 @@
     <ClInclude Include="..\..\Source\Character.h" />
     <ClInclude Include="..\..\Source\Constants.hpp" />
     <ClInclude Include="..\..\Source\Dialogue\VisualDialogue.hpp" />
+    <ClInclude Include="..\..\Source\Messages\AudioChangeMessage.hpp" />
     <ClInclude Include="..\..\Source\Play.hpp" />
     <ClInclude Include="..\..\Source\Prop.h" />
     <ClInclude Include="..\..\Source\Rng.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="..\..\Source\States\MenuState.hpp" />
     <ClInclude Include="..\..\Source\States\NetworkingState.hpp" />
     <ClInclude Include="..\..\Source\States\PauseState.hpp" />
+    <ClInclude Include="..\..\Source\States\PlayEndState.h" />
     <ClInclude Include="..\..\Source\States\SplashState.hpp" />
     <ClInclude Include="..\..\Source\stdafx.h" />
     <ClInclude Include="..\..\Source\targetver.h" />
@@ -201,6 +203,7 @@
     <ClCompile Include="..\..\Source\Character.cpp" />
     <ClCompile Include="..\..\Source\Dialogue\VisualDialogue.cpp" />
     <ClCompile Include="..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\Source\Messages\AudioChangeMessage.cpp" />
     <ClCompile Include="..\..\Source\Play.cpp" />
     <ClCompile Include="..\..\Source\Prop.cpp" />
     <ClCompile Include="..\..\Source\Rng.cpp" />
@@ -211,6 +214,7 @@
     <ClCompile Include="..\..\Source\States\MenuState.cpp" />
     <ClCompile Include="..\..\Source\States\NetworkingState.cpp" />
     <ClCompile Include="..\..\Source\States\PauseState.cpp" />
+    <ClCompile Include="..\..\Source\States\PlayEndState.cpp" />
     <ClCompile Include="..\..\Source\States\SplashState.cpp" />
     <ClCompile Include="..\..\Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

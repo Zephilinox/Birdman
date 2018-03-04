@@ -109,8 +109,11 @@ public:
 	{
 		for (const auto& s : slots)
 		{
-			//guaranteed valid from connect();
-			s.function(args...);
+			if (s.function)
+			{
+				//guaranteed valid from connect();
+				s.function(args...);
+			}
 		}
 	}
 
