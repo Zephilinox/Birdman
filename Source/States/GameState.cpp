@@ -457,7 +457,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/sad/start50", "nick","I told him his wife was gonna pull through,\nHe was still depressed.", "kitchen/sad/start51");
 	dialogue_tree.addDialogue("kitchen/sad/start51", "nick", "So,\nI got up to his mouth hole and asked him why", "kitchen/sad/start52");
 	dialogue_tree.addDialogue("kitchen/sad/start52", "nick", "And he told me it was because\nhe couldn't see her through the eye holes.", "kitchen/sad/start53");
-	dialogue_tree.addDialogue("kitchen/sad/start53", "nick", "Can you imagine?,\nI'm telling you, the man's heart was breaking beacuse\n he couldn't turn his goddamn head and see he goddamn wife.", "apartment/sad/start0");
+	dialogue_tree.addDialogue("kitchen/sad/start53", "nick", "Can you imagine?,\nI'm telling you, the man's heart was breaking beacuse\nhe couldn't turn his goddamn head and see he goddamn wife.", "apartment/sad/start0");
 
 	//Move scene
 	dialogue_tree.addDialogue("apartment/sad/start0", "",
@@ -642,20 +642,20 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/light/start43", "nick", "Shut up,\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "apartment/light/start0");
 
 	//If Light Option - Pick 2 -
-	dialogue_tree.addDialogue("kitchen/light/start44", "nick", "Like I was saying...\nThere this old couple, had a car wreck out on the interstate.", "kitchen/light/start45");
-	dialogue_tree.addDialogue("kitchen/light/start45", "nick", "Some drunk kid plowed his dad's pick up into their camper.", "kitchen/option3");
+	dialogue_tree.addDialogue("kitchen/light/start44", "nick", "Like I was saying...\nThere this lovely old couple,\n unfortunately they had a car wreck out on the interstate.", "kitchen/light/start45");
+	dialogue_tree.addDialogue("kitchen/light/start45", "nick", "Some young lad,\nWho was learning to drive in his dads pick up,\nWhen straight into there camper.", "kitchen/option3");
 
 	//If Light Option - Pick 3 - 
-	dialogue_tree.addDialogue("kitchen/light/start46", "nick", "Fucking teenager.\nBy the time I got to the hospital,\nThe kid was dead.", "kitchen/light/start47");
-	dialogue_tree.addDialogue("kitchen/light/start47", "nick", "He was off in a corner laid out on a gurney.\nWe took the old couple up to the O.R...", "kitchen/light/start48");
-	dialogue_tree.addDialogue("kitchen/light/start48", "nick", "They were a mess.\nWe worked like hell on them for most of the night...", "kitchen/option4");
+	dialogue_tree.addDialogue("kitchen/light/start46", "nick", "When I got to the hospital,\nI found out the young lad was fine,\nHe just had a broken collar bone.", "kitchen/light/start47");
+	dialogue_tree.addDialogue("kitchen/light/start47", "nick", "He was off in a corner just relaxing on a bed.\nSo we took the old couple up to the O.R...", "kitchen/light/start48");
+	dialogue_tree.addDialogue("kitchen/light/start48", "nick", "They were a mess.\nWe were keeping an eye on them all night...", "kitchen/option4");
 
 	//If Light Option - Pick 4 - (done)
-	dialogue_tree.addDialogue("kitchen/light/start49", "nick", "When we were done,\n we wrapped then in full body casts.\nThe husband was depressed", "kitchen/light/start50");
-	dialogue_tree.addDialogue("kitchen/light/start50", "nick", "I told him his wife was gonna pull through,\nHe was still depressed.", "kitchen/light/start51");
-	dialogue_tree.addDialogue("kitchen/light/start51", "nick", "So,\nI got up to his mouth hole and asked him why", "kitchen/sad/start52");
-	dialogue_tree.addDialogue("kitchen/light/start52", "nick", "And he told me it was because\nhe couldn't see her through the eye holes.", "kitchen/sad/start53");
-	dialogue_tree.addDialogue("kitchen/light/start53", "nick", "Can you imagine?,\nI'm telling you, the man's heart was breaking beacuse\n he couldn't turn his goddamn head and see he goddamn wife.", "apartment/light/start0");
+	dialogue_tree.addDialogue("kitchen/light/start49", "nick", "When we were done,\nLuckly the gentleman was fine.\nHe was worried his wife was going to recover", "kitchen/light/start50");
+	dialogue_tree.addDialogue("kitchen/light/start50", "nick", "I told him his wife was gonna pull through,\nAs it was only a leg break, it will heal.", "kitchen/light/start51");
+	dialogue_tree.addDialogue("kitchen/light/start51", "nick", "He still seemed worried,\nSo I ask him why?", "kitchen/sad/start52");
+	dialogue_tree.addDialogue("kitchen/light/start52", "nick", "And he told me it was because\nhe was worried it wouldn't heal properly,\n because she isn't as young as she used to be.", "kitchen/sad/start53");
+	dialogue_tree.addDialogue("kitchen/light/start53", "nick", "Can you imagine?,\nI'm telling you, the man's heart was breaking beacuse\n he carried so much about his wife's wellbeing.", "apartment/light/start0");
 
 	//Move scene
 
@@ -738,11 +738,27 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/dark/start40", "terri", "You say that but I've seen you drink way over your limit already.", "kitchen/dark/start41");
 	dialogue_tree.addDialogue("kitchen/dark/start41", "nick", "Fuck you Terri, let us drink in peace", "kitchen/dark/start42");
 	dialogue_tree.addDialogue("kitchen/dark/start42", "laura", "If your not drunk, stop acting like an asshole then...", "kitchen/dark/start42");
-	dialogue_tree.addDialogue("kitchen/comedy/start43", "nick", "Shut up,\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "apartment/dark/start0");
+	dialogue_tree.addDialogue("kitchen/dark/start43", "nick", "Shut up,\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "apartment/dark/start0");
 
+	//If Dark Option - Pick 2 -
+	dialogue_tree.addDialogue("kitchen/dark/start44", "nick", "Like I was saying...\nThere this old couple, had a car wreck out on the interstate.", "kitchen/dark/start45");
+	dialogue_tree.addDialogue("kitchen/dark/start45", "nick", "Some drunk teen rams the back of there camper\n with his dad's pick up.", "kitchen/option3");
 
+	//If Dark Option - Pick 3 - 
+	dialogue_tree.addDialogue("kitchen/dark/start46", "nick", "Stupid fucking teenagers.\nOnce i got to the hospital,\nI found out the kid died at the scene.", "kitchen/dark/start47");
+	dialogue_tree.addDialogue("kitchen/dark/start47", "nick", "I was told he ended up crashing into telephone pole,\nA lot of his body was mutilated.", "kitchen/dark/start48");
+	dialogue_tree.addDialogue("kitchen/dark/start48", "nick", "We took the old couple up to the O.R...\nThey looked a mess,\nThe womens face's was basically hanging off", "kitchen/dark/start49");
+	dialogue_tree.addDialogue("kitchen/dark/start49", "nick", "They would need work done on them the entire night...", "kitchen/option4");
 
-	//If Dark Option - Pick 4 - ()
+	//If Dark Option - Pick 4 - (done)
+	dialogue_tree.addDialogue("kitchen/dark/start49", "nick", "But then we found out,\nThey had no health insurance...\nThey couldn't afford the bills.", "kitchen/dark/start50");
+	dialogue_tree.addDialogue("kitchen/dark/start50", "nick", "I tried my best to convince the staff,\nThey didn't care though", "kitchen/dark/start51");
+	dialogue_tree.addDialogue("kitchen/dark/start51", "nick", "The couple got escorted out the hospital", "kitchen/dark/start52");
+	dialogue_tree.addDialogue("kitchen/dark/start52", "nick", "I went with them,\nThe old man told me to just leave,\nHe said thank you, but you cant do anything more for us now", "kitchen/dark/start53");
+	dialogue_tree.addDialogue("kitchen/dark/start53", "nick", "Can you imagine?,\nThis man had to just watch,\nWhile he and his wife now spend there final moments together.", "apartment/dark/start54");
+	dialogue_tree.addDialogue("kitchen/dark/start54", "nick", "On a pathway,\nAll because of a lack of insurance,\nSuch silly bastards, they'll learn for next time.", "apartment/dark/start0");
+
+	//Move scene
 
 	dialogue_tree.addDialogue("apartment/dark/start0", "",
 	[&]()
@@ -788,27 +804,27 @@ void GameState::dialogue_kitchen()
 
 	//Player Option 2
 	dialogue_tree.addPlayerOption("kitchen/option2", "Drunk teen crashes into an old couple", "kitchen/sad/start44");
-	dialogue_tree.addPlayerOption("kitchen/option2", "Drunk teen singing let it go, crashes into old couple", "kitchen/comedy/start9");
-	dialogue_tree.addPlayerOption("kitchen/option2", "Learner driver crashes into an old couple", "kitchen/light/start9");
-	dialogue_tree.addPlayerOption("kitchen/option2", "Drunk teen rams into old couple", "kitchen/dark/start9");
+	dialogue_tree.addPlayerOption("kitchen/option2", "Drunk teen singing let it go, crashes into old couple", "kitchen/comedy/start44");
+	dialogue_tree.addPlayerOption("kitchen/option2", "Learner driver crashes into an old couple", "kitchen/light/start44");
+	dialogue_tree.addPlayerOption("kitchen/option2", "Drunk teen rams into old couple", "kitchen/dark/start44");
 
 	//Player Option 3
-	dialogue_tree.addPlayerOption("kitchen/option3", "Teen does'nt make it", "kitchen/sad/start47");
-	dialogue_tree.addPlayerOption("kitchen/option3", "Teen gets high off painkillers", "kitchen/comedy/start9");
-	dialogue_tree.addPlayerOption("kitchen/option3", "Teen get away with only a few broken bones", "kitchen/light/start9");
-	dialogue_tree.addPlayerOption("kitchen/option3", "Teens body was completely mutilated in crash", "kitchen/dark/start9");
+	dialogue_tree.addPlayerOption("kitchen/option3", "Lad doesn't make it", "kitchen/sad/start47");
+	dialogue_tree.addPlayerOption("kitchen/option3", "Teen gets high off painkillers", "kitchen/comedy/start46");
+	dialogue_tree.addPlayerOption("kitchen/option3", "Teen get away with only a few broken bones", "kitchen/light/start46");
+	dialogue_tree.addPlayerOption("kitchen/option3", "Lad's body was completely mutilated in crash", "kitchen/dark/start46");
 
 	//Player Option 4
-	dialogue_tree.addPlayerOption("kitchen/option4", "Old couple is put into full body casts", "kitchen/sad/start50");
-	dialogue_tree.addPlayerOption("kitchen/option4", "Old man jokes about the situation", "kitchen/comedy/start9");
-	dialogue_tree.addPlayerOption("kitchen/option4", "Couple walk away with just a few bad bruises", "kitchen/light/start9");
-	dialogue_tree.addPlayerOption("kitchen/option4", "Couple have no insurance, so are just left for dead", "kitchen/dark/start9");
+	dialogue_tree.addPlayerOption("kitchen/option4", "Old couple is put into full body casts", "kitchen/sad/start49");
+	dialogue_tree.addPlayerOption("kitchen/option4", "Old man jokes about the situation", "kitchen/comedy/start49");
+	dialogue_tree.addPlayerOption("kitchen/option4", "Couple walk away with just a few bad bruises", "kitchen/light/start49");
+	dialogue_tree.addPlayerOption("kitchen/option4", "Couple have no insurance, so are just left for dead", "kitchen/dark/start49");
 
 	//Player Option 5
 	dialogue_tree.addPlayerOption("apartment/option1", "Take you own life", "apartment/sad/start19");
-	dialogue_tree.addPlayerOption("apartment/option1", "Spray Mel with the water gun", "kitchen/comedy/start9");
-	dialogue_tree.addPlayerOption("apartment/option1", "Beg Terri for another chance", "kitchen/light/start9");
-	dialogue_tree.addPlayerOption("apartment/option1", "Let your anger take over", "kitchen/dark/start9");
+	dialogue_tree.addPlayerOption("apartment/option1", "Spray Mel with the water gun", "kitchen/comedy/start19");
+	dialogue_tree.addPlayerOption("apartment/option1", "Beg Terri for another chance", "kitchen/light/start19");
+	dialogue_tree.addPlayerOption("apartment/option1", "Let your anger take over", "kitchen/dark/start19");
 
 	dialogue_tree.addDialogue("next night", "", [&]()
 	{
