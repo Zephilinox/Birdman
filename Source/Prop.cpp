@@ -1,6 +1,15 @@
 #include "Prop.h"
 #include <Engine\Renderer.h>
 
+Prop::~Prop()
+{
+	if(prop_sprite != nullptr)
+	{
+		delete prop_sprite;
+		prop_sprite = nullptr;
+	}
+}
+
 void Prop::setIsActive(bool new_active) 
 {
 	isActive = new_active;
@@ -26,7 +35,6 @@ void Prop::initSprite(ASGE::Renderer * rend, std::string texture_name)
 {
 	prop_sprite = rend->createRawSprite();
 	prop_sprite->loadTexture(texture_name);
-	//TODO - little bit of math to determine dimensions based on screen width / height?
 }
 
 void Prop::render(ASGE::Renderer* renderer) const

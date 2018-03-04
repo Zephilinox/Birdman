@@ -40,6 +40,8 @@ public:
 
 	void reset();
 
+	
+
 	Scene* getScene();
 	Scene* getNextScene();
 	Audience* getAudience();
@@ -50,6 +52,8 @@ private:
 	GameData* game_data;
 
 	Audience audience;
+
+	bool end_of_play = false;
 
 	std::unique_ptr<ASGE::Sprite> stage;
 
