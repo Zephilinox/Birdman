@@ -26,6 +26,7 @@ public:
 	void setEngineType(int engine);
 
 	void play(const std::string& name, bool loop = false);
+	void reset();
 
 private:
 	std::unique_ptr<AudioEngine> audio_engine;

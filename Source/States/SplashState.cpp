@@ -28,7 +28,7 @@ void SplashState::update(const ASGE::GameTime& gt)
 {
 	game_data->getStateManager()->push<GameState>();
 	game_data->getStateManager()->push<FadeInState>();
-	game_data->getAudioManager()->play("Piano Loop.wav", true);
+	game_data->getAudioManager()->play("FF7.wav", true);
 }
 
 void SplashState::render() const
