@@ -294,7 +294,6 @@ void Character::loadCharacterTextureStrings()
 
 void Character::update(float dt)
 {
-	//TODO - move this into function?
 	updateOverridePositions();
 
 	switch(char_state)
