@@ -390,7 +390,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addPlayerOption("kitchen/option1", "Try to avoid the question", "kitchen/sad/start9");
 	dialogue_tree.addPlayerOption("kitchen/option1", "Make light of the situation", "kitchen/comedy/start9");
 	dialogue_tree.addPlayerOption("kitchen/option1", "Give a sincere reply", "kitchen/light/start9");
-	dialogue_tree.addPlayerOption("kitchen/option1", "Give some poor advice on the mattere", "kitchen/dark/start9");
+	dialogue_tree.addPlayerOption("kitchen/option1", "Give some poor advice on the matter", "kitchen/dark/start9");
 
 	//If Sad Option  - Pick 1 - (done)
 
@@ -404,7 +404,7 @@ void GameState::dialogue_kitchen()
 		return "Sorry I'm late.\nI'm the wrong person to ask.\nI've only heard his name mentioned in passing.";
 	}, "kitchen/sad/start10");
 
-	dialogue_tree.addDialogue("kitchen/sad/start10", "nick", "You'd have to know the particulars,\nBut I think what you're saying is\nthat love is absolute.", "kitchen/sad/start11");
+	dialogue_tree.addDialogue("kitchen/sad/start10", "nick", "You'd have to know the particulars\nBut I think what you're saying is\nthat love is absolute.", "kitchen/sad/start11");
 	dialogue_tree.addDialogue("kitchen/sad/start11", "mel", "Yeah. The kind of love I'm talking about is...", "kitchen/sad/start12");
 	dialogue_tree.addDialogue("kitchen/sad/start12", "mel", 
 		[&]()
@@ -412,7 +412,7 @@ void GameState::dialogue_kitchen()
 		auto mel = play_01.getScene()->getCharacter(Play::MIKE);
 		mel->setFacing(Character::CharacterFacing::SOUTH);
 
-		return "The kind of love I'm talking about,\n you don't try and kill people.";
+		return "The kind of love I'm talking about\nyou don't try and kill people.";
 	}, "kitchen/sad/start13");
 	dialogue_tree.addDialogue("kitchen/sad/start13", "terri", "It was love, Mel.\nTo Eddie, it was.", "kitchen/sad/start14");
 	dialogue_tree.addDialogue("kitchen/sad/start14", "terri",
@@ -493,14 +493,14 @@ void GameState::dialogue_kitchen()
 		return  "Been what?\nI'll tell you what real love is\nThis happened a few months ago.";
 
 	}, "kitchen/sad/start36");
-	dialogue_tree.addDialogue("kitchen/sad/start36", "nick", "And it ought to make us ashamed when we talk\nlike we know what we're talking about,\nwhen we talk about love.", "kitchen/sad/start37");
+	dialogue_tree.addDialogue("kitchen/sad/start36", "nick", "And it ought to make us ashamed when we talk\nlike we know what we're talking about\nwhen we talk about love.", "kitchen/sad/start37");
 	dialogue_tree.addDialogue("kitchen/sad/start37", "laura", "Nick, for God's sake. Are you getting drunk?", "kitchen/sad/start38");
 	dialogue_tree.addDialogue("kitchen/sad/start38", "nick", "I don't have to be drunk to say what I think.", "kitchen/sad/start39");
 	dialogue_tree.addDialogue("kitchen/sad/start39", "mel", "Nobody's drunk. We're just having a few drinks", "kitchen/sad/start40");
 	dialogue_tree.addDialogue("kitchen/sad/start40", "terri", "You've had more than a few.", "kitchen/sad/start41");
 	dialogue_tree.addDialogue("kitchen/sad/start41", "nick", "What are you, counting?", "kitchen/sad/start42");
 	dialogue_tree.addDialogue("kitchen/sad/start42", "laura", "Don't talk like a drunk if you're not...", "kitchen/sad/start43");
-	dialogue_tree.addDialogue("kitchen/sad/start43", "nick", "Shut up,\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"",
+	dialogue_tree.addDialogue("kitchen/sad/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"",
 	[&]()
 	{
 		//add an arbitrary value to the "sad" value of the audience, this is applied to a multiplier, then offset by boredom.
@@ -514,29 +514,16 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/sad/start45", "nick", "Some drunk kid plowed his dad's pick up into their camper.", "kitchen/option3");
 
 	//If Sad Option - Pick 3 - 
-	dialogue_tree.addDialogue("kitchen/sad/start46", "nick", "Fucking teenager.\nBy the time I got to the hospital,\nThe kid was dead.", "kitchen/sad/start47");
-	dialogue_tree.addDialogue("kitchen/sad/start47", "nick", "He was off in a corner laid out on a gurney.\nWe took the old couple up to the O.R...",
-		[&]()
-	{
-		auto mover = play_01.getScene()->getCharacter(Play::RIGGAN);
-		mover->setFacing(Character::CharacterFacing::WEST);
-		mover->slowMoveToPosition(game_data->getWindowWidth() * 0.6f, game_data->getWindowHeight() * 0.45f);
-		return "kitchen/sad/start48";
-	});
+	dialogue_tree.addDialogue("kitchen/sad/start46", "nick", "Fucking teenager.\nBy the time I got to the hospital\nThe kid was dead.", "kitchen/sad/start47");
+	dialogue_tree.addDialogue("kitchen/sad/start47", "nick", "He was off in a corner laid out on a gurney.\nWe took the old couple up to the O.R...", "kitchen/sad/start48");
 	dialogue_tree.addDialogue("kitchen/sad/start48", "nick", "They were a mess.\nWe worked like hell on them for most of the night...", "kitchen/option4");
 
 	//If Sad Option - Pick 4 - (done)
-	dialogue_tree.addDialogue("kitchen/sad/start49", "nick","When we were done,\nwe wrapped them in full body casts.\nThe husband was depressed", "kitchen/sad/start50");
-	dialogue_tree.addDialogue("kitchen/sad/start50", "nick","I told him his wife was gonna pull through,\nHe was still depressed.",
-		[&]()
-	{
-		auto mover = play_01.getScene()->getCharacter(Play::RIGGAN);
-		mover->setFacing(Character::CharacterFacing::SOUTH);
-		return "kitchen/sad/start51"; 
-	});
-	dialogue_tree.addDialogue("kitchen/sad/start51", "nick", "So,\nI got up to his mouth hole and asked him 'why?'", "kitchen/sad/start52");
+	dialogue_tree.addDialogue("kitchen/sad/start49", "nick","When we were done\nwe wrapped then in full body casts.\nThe husband was depressed", "kitchen/sad/start50");
+	dialogue_tree.addDialogue("kitchen/sad/start50", "nick","I told him his wife was gonna pull through\nHe was still depressed.", "kitchen/sad/start51");
+	dialogue_tree.addDialogue("kitchen/sad/start51", "nick", "So\nI got up to his mouth hole and asked him why", "kitchen/sad/start52");
 	dialogue_tree.addDialogue("kitchen/sad/start52", "nick", "And he told me it was because\nhe couldn't see her through the eye holes.", "kitchen/sad/start53");
-	dialogue_tree.addDialogue("kitchen/sad/start53", "nick", "Can you imagine?,\nI'm telling you, the man's heart was breaking beacuse\nhe couldn't turn his goddamn head and see he goddamn wife.", "apartment/sad/start0");
+	dialogue_tree.addDialogue("kitchen/sad/start53", "nick", "Can you imagine?\nI'm telling you, the man's heart was breaking beacuse\nhe couldn't turn his goddamn head and see he goddamn wife.", "apartment/sad/start0");
 
 	//Move scene
 	dialogue_tree.addDialogue("apartment/sad/start0", "",
@@ -588,7 +575,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/comedy/start9", "nick", "Well if you ask me.\nSeems like the guy likes tough love.\nIf thats the case reply with tough love.", "kitchen/comedy/start10");
 	dialogue_tree.addDialogue("kitchen/comedy/start10", "nick", "if you still loved him.\nYou should of them smacked him with a pan or even a bat.", "kitchen/comedy/start11");
 	dialogue_tree.addDialogue("kitchen/comedy/start11", "mel", "This isn't something to joke about.\nThe kind of love I'm talking about is...", "kitchen/comedy/start12");
-	dialogue_tree.addDialogue("kitchen/comedy/start12", "mel", "The kind of love I'm talking about,\nyou don't try and kill people or hurt them.", "kitchen/comedy/start13");
+	dialogue_tree.addDialogue("kitchen/comedy/start12", "mel", "The kind of love I'm talking about\nyou don't try and kill people or hurt them.", "kitchen/comedy/start13");
 	dialogue_tree.addDialogue("kitchen/comedy/start13", "terri", "It was love, Mel.\nTo Eddie, it was.", "kitchen/comedy/start14");
 	dialogue_tree.addDialogue("kitchen/comedy/start14", "terri", "I don't care what anybody says.\nHe was ready to die for it.", "kitchen/comedy/start15");
 	dialogue_tree.addDialogue("kitchen/comedy/start15", "mel", "Ask her what he did after she left him.", "kitchen/comedy/start16");
@@ -603,41 +590,41 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/comedy/start24", "mel", "\"Son of a bitch. Your days are numbered.\"", "kitchen/comedy/start25");
 	
 
-	dialogue_tree.addDialogue("kitchen/comedy/start25", "mel", "The maniac shot himself right in front of us\n I rode with him in the ambulance to the hospital.", "kitchen/comedy/start26");
-	dialogue_tree.addDialogue("kitchen/comedy/start26", "terri", "I'll never get that image out of my head.\n Right before he did it, his eyes...\n they were so sad.", "kitchen/comedy/start27");
+	dialogue_tree.addDialogue("kitchen/comedy/start25", "mel", "The maniac shot himself right in front of us\nI rode with him in the ambulance to the hospital.", "kitchen/comedy/start26");
+	dialogue_tree.addDialogue("kitchen/comedy/start26", "terri", "I'll never get that image out of my head.\nRight before he did it, his eyes...\nthey were so sad.", "kitchen/comedy/start27");
 	dialogue_tree.addDialogue("kitchen/comedy/start27", "laura", "Did you have to treat him?", "kitchen/comedy/start28");
 	dialogue_tree.addDialogue("kitchen/comedy/start28", "mel", "I didn't have to, But i did.\nHe was in bad shape.", "kitchen/comedy/start29");
 	dialogue_tree.addDialogue("kitchen/comedy/start29", "mel", "His head swelled up to like twice the size of a normal head.\nI'd never seen anything like it.", "kitchen/comedy/start30");
 	dialogue_tree.addDialogue("kitchen/comedy/start30", "mel", "And I swear to God.\nThat i hope i never do again", "kitchen/comedy/start31");
 	dialogue_tree.addDialogue("kitchen/comedy/start31", "mel", "Ask Nick what real love is.\nHe'll agree with me, You watch", "kitchen/comedy/start32");
 	dialogue_tree.addDialogue("kitchen/comedy/start32", "terri", "Why don't we just head to the restaurant?", "kitchen/comedy/start33");
-	dialogue_tree.addDialogue("kitchen/comedy/start33", "laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\n He's been depressed.", "kitchen/comedy/start34");
+	dialogue_tree.addDialogue("kitchen/comedy/start33", "laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\nHe's been depressed.", "kitchen/comedy/start34");
 	dialogue_tree.addDialogue("kitchen/comedy/start34", "laura", "I'm worried about him, he's been...", "kitchen/comedy/start35");
-	dialogue_tree.addDialogue("kitchen/comedy/start35", "nick", "Been what?\nI'll tell you what real love is\nThis happened a few years ago back in 1982\n I was a teen still back then.", "kitchen/comedy/start36");
+	dialogue_tree.addDialogue("kitchen/comedy/start35", "nick", "Been what? , I'll tell you what real love is\nThis happened a few years ago back in 1982\nI was a teen still back then.", "kitchen/comedy/start36");
 	dialogue_tree.addDialogue("kitchen/comedy/start36", "nick", "And it ought to make us ashamed when we talk\nWe have forgotten how to truly love unlike back then.", "kitchen/comedy/start37");
 	dialogue_tree.addDialogue("kitchen/comedy/start37", "laura", "Nick, for God's sake. Are you getting drunk?", "kitchen/comedy/start38");
 	dialogue_tree.addDialogue("kitchen/comedy/start38", "nick", "I don't have to be drunk to think back on good memories.", "kitchen/comedy/start39");
 	dialogue_tree.addDialogue("kitchen/comedy/start39", "mel", "Nobody's drunk. We're just having a few drinks", "kitchen/comedy/start40");
 	dialogue_tree.addDialogue("kitchen/comedy/start40", "terri", "You've had more than a few.", "kitchen/comedy/start41");
-	dialogue_tree.addDialogue("kitchen/comedy/start41", "nick", "Why you have to be so boring,\n we are just having a bit of fun?", "kitchen/comedy/start42");
-	dialogue_tree.addDialogue("kitchen/comedy/start42", "laura", "Don't talk like a drunk if you not...", "kitchen/comedy/start42");
-	dialogue_tree.addDialogue("kitchen/comedy/start43", "nick", "Shut up,\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "apartment/comedy/start0");
+	dialogue_tree.addDialogue("kitchen/comedy/start41", "nick", "Why you have to be so boring\nwe are just having a bit of fun?", "kitchen/comedy/start42");
+	dialogue_tree.addDialogue("kitchen/comedy/start42", "laura", "Don't talk like a drunk if you not...", "kitchen/comedy/start43");
+	dialogue_tree.addDialogue("kitchen/comedy/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "kitchen/option2");
 
 	//If Comedy Option - Pick 2 -
 	dialogue_tree.addDialogue("kitchen/comedy/start44", "nick", "Like I was saying...\nThere this old couple, had a car wreck out on the interstate.", "kitchen/comedy/start45");
-	dialogue_tree.addDialogue("kitchen/comedy/start45", "nick", "Some drunk teen crashed into them,\n because he was to busy singing\n Let it go and not looking at the road .", "kitchen/option3");
+	dialogue_tree.addDialogue("kitchen/comedy/start45", "nick", "Some drunk teen crashed into them\nbecause he was to busy singing\nLet it go and not looking at the road .", "kitchen/option3");
 
 	//If Comedy Option - Pick 3 - 
-	dialogue_tree.addDialogue("kitchen/comedy/start46", "nick", "Fucking teenagers man.\nOnce I'd got to the hospital,\nThe kid was already high as fuck on meds.", "kitchen/comedy/start47");
+	dialogue_tree.addDialogue("kitchen/comedy/start46", "nick", "Fucking teenagers man.\nOnce I'd got to the hospital\nThe kid was already high as fuck on meds.", "kitchen/comedy/start47");
 	dialogue_tree.addDialogue("kitchen/comedy/start47", "nick", "He was off in the corner rocking back and forth.\nWe took the old couple up to the O.R...", "kitchen/comedy/start48");
 	dialogue_tree.addDialogue("kitchen/comedy/start48", "nick", "They were a mess.\nYou'd think they had a lads night out\nWe worked like hell on them for most of the night...", "kitchen/option4");
 
 	//If Comedy Option - Pick 4 - (done)
-	dialogue_tree.addDialogue("kitchen/comedy/start49", "nick", "Once we were done,\n they were wrapped in full body casts.\nThe husband was so fucking depressed", "kitchen/comedy/start50");
-	dialogue_tree.addDialogue("kitchen/comedy/start50", "nick", "I supported him saying his wife will be fine,\nHe was still depressed.", "kitchen/comedy/start51");
-	dialogue_tree.addDialogue("kitchen/comedy/start51", "nick", "So,\nI got up to his mouth hole and asked him 'why?'", "kitchen/comedy/start52");
+	dialogue_tree.addDialogue("kitchen/comedy/start49", "nick", "Once we were done\nthey were wrapped in full body casts.\nThe husband was so fucking depressed", "kitchen/comedy/start50");
+	dialogue_tree.addDialogue("kitchen/comedy/start50", "nick", "I supported him saying his wife will be fine\nHe was still depressed.", "kitchen/comedy/start51");
+	dialogue_tree.addDialogue("kitchen/comedy/start51", "nick", "So\nI got up to his mouth hole and asked him why", "kitchen/comedy/start52");
 	dialogue_tree.addDialogue("kitchen/comedy/start52", "nick", "And he told me it was because\nhe though he finally got rid of the old bag.", "kitchen/comedy/start53");
-	dialogue_tree.addDialogue("kitchen/comedy/start53", "nick", "Can you imagine?,\nI'm telling you, the man's heart was breaking beacuse\nhe though he became a free man once again, but it was a lie.", "apartment/comedy/start0");
+	dialogue_tree.addDialogue("kitchen/comedy/start53", "nick", "Can you imagine?\nI'm telling you, the man's heart was breaking beacuse\nhe though he became a free man once again, but it was a lie.", "apartment/comedy/start0");
 
 	//Move scene
 
@@ -655,30 +642,30 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/comedy/start1", "ed", "Terri!\nI know your in there, I'm coming in!", "apartment/comedy/start2");
 	dialogue_tree.addDialogue("apartment/comedy/start2", "ed", "*You enter through the door*", "apartment/comedy/start3");
 	dialogue_tree.addDialogue("apartment/comedy/start3", "ed", "How's it going", "apartment/comedy/start4");
-	dialogue_tree.addDialogue("apartment/comedy/start4", "terri", "Ed!...\n What are you doing here?", "apartment/comedy/start5");
-	dialogue_tree.addDialogue("apartment/comedy/start5", "ed", "What? Did Mel not tell you?.\n Mel knows how much i worship you...\nSo he invited me for a threesome", "apartment/comedy/start6");
-	dialogue_tree.addDialogue("apartment/comedy/start6", "mel", "Listen Ed, I know this is hard but...\n the threesome is off", "apartment/comedy/start7");
-	dialogue_tree.addDialogue("apartment/comedy/start7", "ed", "Fuck you.\n Shut up\nWhy would you do this to me!", "apartment/comedy/start8");
+	dialogue_tree.addDialogue("apartment/comedy/start4", "terri", "Ed!...\nWhat are you doing here?", "apartment/comedy/start5");
+	dialogue_tree.addDialogue("apartment/comedy/start5", "ed", "What? Did Mel not tell you?.\nMel knows how much i worship you...\nSo he invited me for a threesome", "apartment/comedy/start6");
+	dialogue_tree.addDialogue("apartment/comedy/start6", "mel", "Listen Ed, I know this is hard but...\nthe threesome is off", "apartment/comedy/start7");
+	dialogue_tree.addDialogue("apartment/comedy/start7", "ed", "Fuck you.\nShut up\nWhy would you do this to me!", "apartment/comedy/start8");
 	dialogue_tree.addDialogue("apartment/comedy/start8", "ed", "*You push Mel, he falls to the floor*", "apartment/comedy/start9");
 	dialogue_tree.addDialogue("apartment/comedy/start9", "terri", "Eddie!\nPlease don't!", "apartment/comedy/start10");
-	dialogue_tree.addDialogue("apartment/comedy/start10", "ed", "*You pull a water gun out your jacket, then point it to Mel's head*", "apartment/comedy/start11");
-	dialogue_tree.addDialogue("apartment/comedy/start11", "ed", "Why would you hurt my feelings like this.\n Why do I end up having to be the failed third wheel?", "apartment/comedy/start12");
+	dialogue_tree.addDialogue("apartment/comedy/start10", "ed", "*You pull a water gun out your jacket\n then point it to Mel's head*", "apartment/comedy/start11");
+	dialogue_tree.addDialogue("apartment/comedy/start11", "ed", "Why would you hurt my feelings like this.\nWhy do I end up having to be the failed third wheel?", "apartment/comedy/start12");
 	dialogue_tree.addDialogue("apartment/comedy/start12", "terri", "Ed.\nEddie.\nPlease..... Give me the gun.", "apartment/comedy/start13");
 	dialogue_tree.addDialogue("apartment/comedy/start13", "terri", "*Terri begin to cry*", "apartment/comedy/start14");
-	dialogue_tree.addDialogue("apartment/comedy/start14", "terri", "If you really want me, then have me.\nJust dont hurt Mel.\n I am not capable of...", "apartment/comedy/start15");
-	dialogue_tree.addDialogue("apartment/comedy/start15", "terri", "You deserve to be loved.\n You do and I even mean not as a third wheel.", "apartment/comedy/start16");
+	dialogue_tree.addDialogue("apartment/comedy/start14", "terri", "If you really want me, then have me.\nJust dont hurt Mel.\nI am not capable of...", "apartment/comedy/start15");
+	dialogue_tree.addDialogue("apartment/comedy/start15", "terri", "You deserve to be loved.\nYou do and I even mean not as a third wheel.", "apartment/comedy/start16");
 	dialogue_tree.addDialogue("apartment/comedy/start16", "ed", "I just wanted to be what you wanted.", "apartment/comedy/start17");
-	dialogue_tree.addDialogue("apartment/comedy/start17", "ed", "Now i spend every fucking minute thinking of this fake bastard.\nI can't believe you left me for him.\nAnyone else but him", "apartment/comedy/start18");
-	dialogue_tree.addDialogue("apartment/comedy/start18", "mel", "Put down the gun, Ed.\nDon't do anything stupid.", "apartment/comedy/start19");
+	dialogue_tree.addDialogue("apartment/comedy/start17", "ed", "Now i spend every fucking minute thinking\n of this fake bastard.\nI can't believe you left me for him, Anyone else but him", "apartment/comedy/start18");
+	dialogue_tree.addDialogue("apartment/comedy/start18", "mel", "Put down the gun, Ed.\nDon't do anything stupid.", "apartment/option1");
 
 	//INSERT PLAYER OPTION HERE
 
 	//If Comedy Option - Pick 5 - ()
 
 	dialogue_tree.addDialogue("apartment/comedy/start19", "ed", "*You spray water into Mel's face*", "apartment/comedy/start20");
-	dialogue_tree.addDialogue("apartment/comedy/start20", "mel", "*Mel's makeup caked face starts to run, it now shows the monster beneath*", "apartment/comedy/start21");
-	dialogue_tree.addDialogue("apartment/comedy/start21", "ed", "Oh my god, you left me for this\nI can't even look at you Terri\n I can't believe i wanted a threesome with that...", "apartment/comedy/start22");
-	dialogue_tree.addDialogue("apartment/comedy/start22", "ed", "*You walk out the room\n You are so shocked and disgusted that you might shoot yourself*", "next night");
+	dialogue_tree.addDialogue("apartment/comedy/start20", "mel", "*Mel's makeup caked face starts to run.\nIt now shows the monster beneath*", "apartment/comedy/start21");
+	dialogue_tree.addDialogue("apartment/comedy/start21", "ed", "Oh my god, you left me for this\nI can't even look at you Terri\nI can't believe i wanted a threesome with that...", "apartment/comedy/start22");
+	dialogue_tree.addDialogue("apartment/comedy/start22", "ed", "*You walk out the room\nYou are so shocked and disgusted\nYou might shoot yourself*", "next night");
 
 
 	//If Light Option - Pick 1 - (done)
@@ -700,41 +687,41 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/light/start23", "mel", "He used to call me at the hospital and say...", "kitchen/light/start24");
 	dialogue_tree.addDialogue("kitchen/light/start24", "mel", "\"Son of a bitch. Your days are numbered.\"", "kitchen/light/start25");
 
-	dialogue_tree.addDialogue("kitchen/light/start25", "mel", "The maniac shot himself right in front of us\n I rode with him in the ambulance to the hospital.", "kitchen/light/start26");
-	dialogue_tree.addDialogue("kitchen/light/start26", "terri", "I'll never get that image out of my head.\n Right before he did it, his eyes...\n they were so sad.", "kitchen/light/start27");
+	dialogue_tree.addDialogue("kitchen/light/start25", "mel", "The maniac shot himself right in front of us\nI rode with him in the ambulance to the hospital.", "kitchen/light/start26");
+	dialogue_tree.addDialogue("kitchen/light/start26", "terri", "I'll never get that image out of my head.\nRight before he did it, his eyes...\nthey were so sad.", "kitchen/light/start27");
 	dialogue_tree.addDialogue("kitchen/light/start27", "laura", "Did you have to treat him?", "kitchen/light/start28");
 	dialogue_tree.addDialogue("kitchen/light/start28", "mel", "I didn't have to, But i did.\nHe was in bad shape.", "kitchen/light/start29");
 	dialogue_tree.addDialogue("kitchen/light/start29", "mel", "His head swelled up to like twice the size of a normal head.\nI'd never seen anything like it.", "kitchen/light/start30");
 	dialogue_tree.addDialogue("kitchen/light/start30", "mel", "And I swear to God.\nThat i hope i never do again", "kitchen/light/start31");
 	dialogue_tree.addDialogue("kitchen/light/start31", "mel", "Ask Nick what real love is.\nHe'll agree with me, You watch", "kitchen/light/start32");
 	dialogue_tree.addDialogue("kitchen/light/start32", "terri", "Why don't we just head to the restaurant?", "kitchen/light/start33");
-	dialogue_tree.addDialogue("kitchen/light/start33", "laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\n He's been depressed.", "kitchen/light/start34");
+	dialogue_tree.addDialogue("kitchen/light/start33", "laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\nHe's been depressed.", "kitchen/light/start34");
 	dialogue_tree.addDialogue("kitchen/light/start34", "laura", "I'm worried about him, he's been...", "kitchen/light/start35");
-	dialogue_tree.addDialogue("kitchen/light/start35", "nick", "Been what?\n Im fine dont worry Laura,But I will tell you what real love is\n This happened some time ago.", "kitchen/light/start36");
-	dialogue_tree.addDialogue("kitchen/light/start36", "nick", "It will make us feel ashamed when we talk about love\n we talk about love as if we know it well, but that is wrong.", "kitchen/light/start37");
+	dialogue_tree.addDialogue("kitchen/light/start35", "nick", "Been what?\nIm fine dont worry Laura,But I will tell you what\n real love is this happened some time ago.", "kitchen/light/start36");
+	dialogue_tree.addDialogue("kitchen/light/start36", "nick", "It will make us feel ashamed when we talk about love\nwe talk about love as if we know it well, but that is wrong.", "kitchen/light/start37");
 	dialogue_tree.addDialogue("kitchen/light/start37", "laura", "Nick, for God's sake. Are you getting drunk?", "kitchen/light/start38");
 	dialogue_tree.addDialogue("kitchen/light/start38", "nick", "No of course not just enjoying some cocktail with my friends.", "kitchen/light/start39");
-	dialogue_tree.addDialogue("kitchen/light/start39", "mel", "Yeah nobodies getting drunk.\n We're just having a few drinks as friends", "kitchen/light/start40");
+	dialogue_tree.addDialogue("kitchen/light/start39", "mel", "Yeah nobodies getting drunk.\nWe're just having a few drinks as friends", "kitchen/light/start40");
 	dialogue_tree.addDialogue("kitchen/light/start40", "terri", "You've had more than a few.", "kitchen/light/start41");
 	dialogue_tree.addDialogue("kitchen/light/start41", "nick", "Common Terri relax, have some fun?", "kitchen/light/start42");
-	dialogue_tree.addDialogue("kitchen/light/start42", "laura", "Don't talk like your plan is going to get drunk then...", "kitchen/light/start42");
-	dialogue_tree.addDialogue("kitchen/light/start43", "nick", "Shut up,\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "apartment/light/start0");
+	dialogue_tree.addDialogue("kitchen/light/start42", "laura", "Don't talk like your plan is going to get drunk then...", "kitchen/light/start43");
+	dialogue_tree.addDialogue("kitchen/light/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "apartment/light/start0");
 
 	//If Light Option - Pick 2 -
-	dialogue_tree.addDialogue("kitchen/light/start44", "nick", "Like I was saying...\nThere this lovely old couple,\n unfortunately they had a car wreck out on the interstate.", "kitchen/light/start45");
-	dialogue_tree.addDialogue("kitchen/light/start45", "nick", "Some young lad,\nWho was learning to drive in his dads pick up,\nWhen straight into there camper.", "kitchen/option3");
+	dialogue_tree.addDialogue("kitchen/light/start44", "nick", "Like I was saying...\nThere this lovely old couple\nunfortunately they had a car wreck out on the interstate.", "kitchen/light/start45");
+	dialogue_tree.addDialogue("kitchen/light/start45", "nick", "Some young lad\nWho was learning to drive in his dads pick up\nWhen straight into there camper.", "kitchen/option3");
 
 	//If Light Option - Pick 3 - 
-	dialogue_tree.addDialogue("kitchen/light/start46", "nick", "When I got to the hospital,\nI found out the young lad was fine,\nHe just had a broken collar bone.", "kitchen/light/start47");
+	dialogue_tree.addDialogue("kitchen/light/start46", "nick", "When I got to the hospital\nI found out the young lad was fine\nHe just had a broken collar bone.", "kitchen/light/start47");
 	dialogue_tree.addDialogue("kitchen/light/start47", "nick", "He was off in a corner just relaxing on a bed.\nSo we took the old couple up to the O.R...", "kitchen/light/start48");
 	dialogue_tree.addDialogue("kitchen/light/start48", "nick", "They were a mess.\nWe were keeping an eye on them all night...", "kitchen/option4");
 
 	//If Light Option - Pick 4 - (done)
-	dialogue_tree.addDialogue("kitchen/light/start49", "nick", "When we were done,\nLuckly the gentleman was fine.\nHe was worried his wife was going to recover", "kitchen/light/start50");
-	dialogue_tree.addDialogue("kitchen/light/start50", "nick", "I told him his wife was gonna pull through,\nAs it was only a leg break, it will heal.", "kitchen/light/start51");
-	dialogue_tree.addDialogue("kitchen/light/start51", "nick", "He still seemed worried,\nSo I ask him why?", "kitchen/sad/start52");
-	dialogue_tree.addDialogue("kitchen/light/start52", "nick", "And he told me it was because\nhe was worried it wouldn't heal properly,\n because she isn't as young as she used to be.", "kitchen/sad/start53");
-	dialogue_tree.addDialogue("kitchen/light/start53", "nick", "Can you imagine?,\nI'm telling you, the man's heart was breaking beacuse\n he carried so much about his wife's wellbeing.", "apartment/light/start0");
+	dialogue_tree.addDialogue("kitchen/light/start49", "nick", "When we were done\nLuckly the gentleman was fine.\nHe was worried his wife was going to recover", "kitchen/light/start50");
+	dialogue_tree.addDialogue("kitchen/light/start50", "nick", "I told him his wife was gonna pull through\nAs it was only a leg break, it will heal.", "kitchen/light/start51");
+	dialogue_tree.addDialogue("kitchen/light/start51", "nick", "He still seemed worried\nSo I ask him why?", "kitchen/sad/start52");
+	dialogue_tree.addDialogue("kitchen/light/start52", "nick", "And he told me it was because\nhe was worried it wouldn't heal properly\nbecause she isn't as young as she used to be.", "kitchen/sad/start53");
+	dialogue_tree.addDialogue("kitchen/light/start53", "nick", "Can you imagine?\nI'm telling you, the man's heart was breaking beacuse\nhe carried so much about his wife's wellbeing.", "apartment/light/start0");
 
 	//Move scene
 
@@ -759,26 +746,26 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/light/start8", "ed", "*You push Mel, he falls to the floor*", "apartment/light/start9");
 	dialogue_tree.addDialogue("apartment/light/start9", "terri", "Eddie!\nPlease!", "apartment/light/start10");
 	dialogue_tree.addDialogue("apartment/light/start10", "ed", "*You point your gun towards Mel*", "apartment/light/start11");
-	dialogue_tree.addDialogue("apartment/light/start11", "ed", "What's wrong with me.\n Why do I end up having to beg people to love me?", "apartment/light/start12");
+	dialogue_tree.addDialogue("apartment/light/start11", "ed", "What's wrong with me.\nWhy do I end up having to beg people to love me?", "apartment/light/start12");
 	dialogue_tree.addDialogue("apartment/light/start12", "terri", "Ed.\nEddie.\nPlease..... Give me the gun.", "apartment/light/start13");
 	dialogue_tree.addDialogue("apartment/light/start13", "terri", "*Terri begin to cry*", "apartment/light/start14");
-	dialogue_tree.addDialogue("apartment/light/start14", "terri", "Just look at me.\n I was drowning.\n I was not capable of...", "apartment/light/start15");
-	dialogue_tree.addDialogue("apartment/light/start15", "terri", "You deserve to be loved.\n You do.", "apartment/light/start16");
+	dialogue_tree.addDialogue("apartment/light/start14", "terri", "Just look at me.\nI was drowning.\nI was not capable of...", "apartment/light/start15");
+	dialogue_tree.addDialogue("apartment/light/start15", "terri", "You deserve to be loved.\nYou do.", "apartment/light/start16");
 	dialogue_tree.addDialogue("apartment/light/start16", "ed", "I just wanted to be what you wanted, it all i ever wanted.\nI did it for you!.", "apartment/light/start17");
-	dialogue_tree.addDialogue("apartment/light/start17", "ed", "Now i spend every fucking minute praying to be somebody else.\nSomeone I'm not.\n I love you, after all i've done for you", "apartment/light/start18");
+	dialogue_tree.addDialogue("apartment/light/start17", "ed", "Now i spend every fucking minute praying to be somebody else.\nSomeone I'm not.\nI love you, after all i've done for you", "apartment/light/start18");
 	dialogue_tree.addDialogue("apartment/light/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"", "apartment/light/start19");
 
 	//If Light Option - Pick 5 - ()
 
-	dialogue_tree.addDialogue("apartment/light/start19", "ed", "I'm really sorry Terri\n Please just give me another chance\nI'll do anything for you i can change!", "apartment/light/start20");
-	dialogue_tree.addDialogue("apartment/light/start20", "terri", "*I don't know Ed....\n I don't want to get hurt like before...", "apartment/light/start21");
+	dialogue_tree.addDialogue("apartment/light/start19", "ed", "I'm really sorry Terri\nPlease just give me another chance\nI'll do anything for you i can change!", "apartment/light/start20");
+	dialogue_tree.addDialogue("apartment/light/start20", "terri", "*I don't know Ed....\nI don't want to get hurt like before...", "apartment/light/start21");
 	dialogue_tree.addDialogue("apartment/light/start21", "ed", "Please Terri, I'm begging you.\nPlease just give me one more chance you won't regret it.", "apartment/light/start22");
-	dialogue_tree.addDialogue("apartment/light/start22", "mel", "Terri...\n You can't seriously be thinking about it\nThat insane after everything he's just done?!", "apartment/light/start23");
+	dialogue_tree.addDialogue("apartment/light/start22", "mel", "Terri...\nYou can't seriously be thinking about it\nThat insane after everything he's just done?!", "apartment/light/start23");
 	dialogue_tree.addDialogue("apartment/light/start23", "terri", "Be quiet Mel!\nYou don't understand how much i love him.", "apartment/light/start24");
 	dialogue_tree.addDialogue("apartment/light/start24", "mel", "Fine, I'll leave!\nI don't want to be apart of this mess!", "apartment/light/start25");
 	dialogue_tree.addDialogue("apartment/light/start25", "mel", "*Mel storms out the apartment*", "apartment/light/start26");
 	dialogue_tree.addDialogue("apartment/light/start26", "ed", "Terri so does this mean...\nYou'll give me another chance?", "apartment/light/start27");
-	dialogue_tree.addDialogue("apartment/light/start27", "terri", "Yes Ed i will,\nBut if you ever hurt me again it over ok", "apartment/light/start28");
+	dialogue_tree.addDialogue("apartment/light/start27", "terri", "Yes Ed i will\nBut if you ever hurt me again it's over ok", "apartment/light/start28");
 	dialogue_tree.addDialogue("apartment/light/start28", "ed", "Don't worry I won't!\nI love you Terri!", "next night");
 
 	//If Dark Option - Pick 1 - (done)
@@ -799,43 +786,43 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/dark/start23", "mel", "He used to call me at the hospital and say...", "kitchen/dark/start24");
 
 	dialogue_tree.addDialogue("kitchen/dark/start24", "mel", "\"Son of a bitch. Your days are numbered.", "kitchen/dark/start25");
-	dialogue_tree.addDialogue("kitchen/dark/start25", "mel", "The maniac shot himself right in front of us\n I rode with him in the ambulance to the hospital.", "kitchen/dark/start26");
-	dialogue_tree.addDialogue("kitchen/dark/start26", "terri", "I'll never get that image out of my head.\n Right before he did it, his eyes...\n they were so sad.", "kitchen/dark/start27");
+	dialogue_tree.addDialogue("kitchen/dark/start25", "mel", "The maniac shot himself right in front of us\nI rode with him in the ambulance to the hospital.", "kitchen/dark/start26");
+	dialogue_tree.addDialogue("kitchen/dark/start26", "terri", "I'll never get that image out of my head.\nRight before he did it, his eyes...\nthey were so sad.", "kitchen/dark/start27");
 	dialogue_tree.addDialogue("kitchen/dark/start27", "laura", "Did you have to treat him?", "kitchen/dark/start28");
 	dialogue_tree.addDialogue("kitchen/dark/start28", "mel", "I didn't have to, But i did.\nHe was in bad shape.", "kitchen/dark/start29");
 	dialogue_tree.addDialogue("kitchen/dark/start29", "mel", "His head swelled up to like twice the size of a normal head.\nI'd never seen anything like it.", "kitchen/dark/start30");
 	dialogue_tree.addDialogue("kitchen/dark/start30", "mel", "And I swear to God.\nThat i hope i never do again", "kitchen/dark/start31");
 	dialogue_tree.addDialogue("kitchen/dark/start31", "mel", "Ask Nick what real love is.\nHe'll agree with me, You watch", "kitchen/dark/start32");
 	dialogue_tree.addDialogue("kitchen/dark/start32", "terri", "Why don't we just head to the restaurant?", "kitchen/dark/start33");
-	dialogue_tree.addDialogue("kitchen/dark/start33", "laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\n He's been depressed.", "kitchen/dark/start34");
+	dialogue_tree.addDialogue("kitchen/dark/start33", "laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\nHe's been depressed.", "kitchen/dark/start34");
 	dialogue_tree.addDialogue("kitchen/dark/start34", "laura", "I'm worried about him, he's been...", "kitchen/dark/start35");
-	dialogue_tree.addDialogue("kitchen/dark/start35", "nick", "Been what? Have you been stalking me?\n What do you know?!, But yeah real love is pain\n it first happened a few months ago.", "kitchen/dark/start36");
-	dialogue_tree.addDialogue("kitchen/dark/start36", "nick", "And it ought to make you guys ashamed to not know\n you talk about knowing what love is but you dont really know real love\n but i do now, i can show you.", "kitchen/dark/start37");
+	dialogue_tree.addDialogue("kitchen/dark/start35", "nick", "Been what? Have you been stalking me?\nWhat do you know?!, But yeah real love is pain\nit first happened a few months ago.", "kitchen/dark/start36");
+	dialogue_tree.addDialogue("kitchen/dark/start36", "nick", "And it ought to make you guys ashamed to not know you talk\nabout knowing what love is but you dont really know real love\nbut i do now, i can show you de wae of the ugandan warrior.", "kitchen/dark/start37");
 	dialogue_tree.addDialogue("kitchen/dark/start37", "laura", "Nick, for God's sake. Are you drunk?, You speaking nonse", "kitchen/dark/start38");
-	dialogue_tree.addDialogue("kitchen/dark/start38", "nick", "If I want to drink myself to death let me\n It's my problem not yours, mind your own business.", "kitchen/dark/start39");
-	dialogue_tree.addDialogue("kitchen/dark/start39", "mel", "We're just having a few drinks as mates, nobody's drunk\n Isn't that right Nick just to mates having a drink is all", "kitchen/dark/start40");
+	dialogue_tree.addDialogue("kitchen/dark/start38", "nick", "If I want to drink myself to death let me\nIt's my problem not yours, mind your own business.", "kitchen/dark/start39");
+	dialogue_tree.addDialogue("kitchen/dark/start39", "mel", "We're just having a few drinks as mates, nobody's drunk\nIsn't that right Nick just to mates having a drink is all", "kitchen/dark/start40");
 	dialogue_tree.addDialogue("kitchen/dark/start40", "terri", "You say that but I've seen you drink way over your limit already.", "kitchen/dark/start41");
 	dialogue_tree.addDialogue("kitchen/dark/start41", "nick", "Fuck you Terri, let us drink in peace", "kitchen/dark/start42");
-	dialogue_tree.addDialogue("kitchen/dark/start42", "laura", "If your not drunk, stop acting like an asshole then...", "kitchen/dark/start42");
-	dialogue_tree.addDialogue("kitchen/dark/start43", "nick", "Shut up,\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "apartment/dark/start0");
+	dialogue_tree.addDialogue("kitchen/dark/start42", "laura", "If your not drunk, stop acting like an asshole then...", "kitchen/dark/start43");
+	dialogue_tree.addDialogue("kitchen/dark/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "apartment/dark/start0");
 
 	//If Dark Option - Pick 2 -
 	dialogue_tree.addDialogue("kitchen/dark/start44", "nick", "Like I was saying...\nThere this old couple, had a car wreck out on the interstate.", "kitchen/dark/start45");
-	dialogue_tree.addDialogue("kitchen/dark/start45", "nick", "Some drunk teen rams the back of there camper\n with his dad's pick up.", "kitchen/option3");
+	dialogue_tree.addDialogue("kitchen/dark/start45", "nick", "Some drunk teen rams the back of there camper\nwith his dad's pick up.", "kitchen/option3");
 
 	//If Dark Option - Pick 3 - 
-	dialogue_tree.addDialogue("kitchen/dark/start46", "nick", "Stupid fucking teenagers.\nOnce i got to the hospital,\nI found out the kid died at the scene.", "kitchen/dark/start47");
-	dialogue_tree.addDialogue("kitchen/dark/start47", "nick", "I was told he ended up crashing into telephone pole,\nA lot of his body was mutilated.", "kitchen/dark/start48");
-	dialogue_tree.addDialogue("kitchen/dark/start48", "nick", "We took the old couple up to the O.R...\nThey looked a mess,\nThe womens face's was basically hanging off", "kitchen/dark/start49");
+	dialogue_tree.addDialogue("kitchen/dark/start46", "nick", "Stupid fucking teenagers.\nOnce i got to the hospital\nI found out the kid died at the scene.", "kitchen/dark/start47");
+	dialogue_tree.addDialogue("kitchen/dark/start47", "nick", "I was told he ended up crashing into telephone pole\nA lot of his body was mutilated.", "kitchen/dark/start48");
+	dialogue_tree.addDialogue("kitchen/dark/start48", "nick", "We took the old couple up to the O.R...\nThey looked a mess\nThe womens face's was basically hanging off", "kitchen/dark/start49");
 	dialogue_tree.addDialogue("kitchen/dark/start49", "nick", "They would need work done on them the entire night...", "kitchen/option4");
 
 	//If Dark Option - Pick 4 - (done)
-	dialogue_tree.addDialogue("kitchen/dark/start49", "nick", "But then we found out,\nThey had no health insurance...\nThey couldn't afford the bills.", "kitchen/dark/start50");
-	dialogue_tree.addDialogue("kitchen/dark/start50", "nick", "I tried my best to convince the staff,\nThey didn't care though", "kitchen/dark/start51");
-	dialogue_tree.addDialogue("kitchen/dark/start51", "nick", "The couple got escorted out the hospital", "kitchen/dark/start52");
-	dialogue_tree.addDialogue("kitchen/dark/start52", "nick", "I went with them,\nThe old man told me to just leave,\nHe said thank you, but you cant do anything more for us now", "kitchen/dark/start53");
-	dialogue_tree.addDialogue("kitchen/dark/start53", "nick", "Can you imagine?,\nThis man had to just watch,\nWhile he and his wife now spend there final moments together.", "apartment/dark/start54");
-	dialogue_tree.addDialogue("kitchen/dark/start54", "nick", "On a pathway,\nAll because of a lack of insurance,\nSuch silly bastards, they'll learn for next time.", "apartment/dark/start0");
+	dialogue_tree.addDialogue("kitchen/dark/start50", "nick", "But then we found out\nThey had no health insurance...\nThey couldn't afford the bills.", "kitchen/dark/start51");
+	dialogue_tree.addDialogue("kitchen/dark/start51", "nick", "I tried my best to convince the staff\nThey didn't care though", "kitchen/dark/start52");
+	dialogue_tree.addDialogue("kitchen/dark/start52", "nick", "The couple got escorted out the hospital", "kitchen/dark/start53");
+	dialogue_tree.addDialogue("kitchen/dark/start53", "nick", "I went with them\nThe old man told me to just leave\nHe said thank you, but you cant do anything more for us now", "kitchen/dark/start54");
+	dialogue_tree.addDialogue("kitchen/dark/start54", "nick", "Can you imagine?\nThis man had to just watch\nWhile he and his wife now spend there final moments together.", "apartment/dark/start55");
+	dialogue_tree.addDialogue("kitchen/dark/start55", "nick", "On a pathway\nAll because of a lack of insurance\nSuch silly bastards, they'll learn for next time.", "apartment/dark/start0");
 
 	//Move scene
 
@@ -852,18 +839,18 @@ void GameState::dialogue_kitchen()
 
 	dialogue_tree.addDialogue("apartment/dark/start2", "ed", "*You bang on the door loudly with force and open the door*", "apartment/dark/start3");
 	dialogue_tree.addDialogue("apartment/dark/start3", "ed", "Terri????", "apartment/dark/start4");
-	dialogue_tree.addDialogue("apartment/dark/start4", "terri", "Ed!...\n What are you doing here?", "apartment/dark/start5");
-	dialogue_tree.addDialogue("apartment/dark/start5", "ed", "Why? I need you to tell me why.\n I lived for you, I worshipped you...", "apartment/dark/start6");
+	dialogue_tree.addDialogue("apartment/dark/start4", "terri", "Ed!...\nWhat are you doing here?", "apartment/dark/start5");
+	dialogue_tree.addDialogue("apartment/dark/start5", "ed", "Why? I need you to tell me why.\nI lived for you, I worshipped you...", "apartment/dark/start6");
 	dialogue_tree.addDialogue("apartment/dark/start6", "mel", "Listen Ed, I know this is hard but...", "apartment/dark/start7");
-	dialogue_tree.addDialogue("apartment/dark/start7", "ed", "Fuck you.\n Shut up\nI'll fucking kill you!", "apartment/dark/start8");
+	dialogue_tree.addDialogue("apartment/dark/start7", "ed", "Fuck you.\nShut up\nI'll fucking kill you!", "apartment/dark/start8");
 	dialogue_tree.addDialogue("apartment/dark/start8", "ed", "*You punch Mel, he falls to the floor*", "apartment/dark/start9");
 	dialogue_tree.addDialogue("apartment/dark/start9", "terri", "Eddie!\nPlease!", "apartment/dark/start10");
 	dialogue_tree.addDialogue("apartment/dark/start10", "ed", "*You point the gun at Mel's head*", "apartment/dark/start11");
-	dialogue_tree.addDialogue("apartment/dark/start11", "ed", "What's wrong with me.\nWhat have i done wrong.\n Why don't you want me?", "apartment/dark/start12");
+	dialogue_tree.addDialogue("apartment/dark/start11", "ed", "What's wrong with me.\nWhat have i done wrong.\nWhy don't you want me?", "apartment/dark/start12");
 	dialogue_tree.addDialogue("apartment/dark/start12", "terri", "Ed.\nEddie.\nPlease..... Give me the gun.\nThen we can talk about this .", "apartment/dark/start13");
 	dialogue_tree.addDialogue("apartment/dark/start13", "terri", "*Terri begin to cry*", "apartment/dark/start14");
-	dialogue_tree.addDialogue("apartment/dark/start14", "terri", "Just look at me.\n I was drowning.\n I was not capable of...", "apartment/dark/start15");
-	dialogue_tree.addDialogue("apartment/dark/start15", "terri", "You deserve to be loved.\n You do i mean it.\nCalm down please, lets just talk.", "apartment/dark/start16");
+	dialogue_tree.addDialogue("apartment/dark/start14", "terri", "Just look at me.\nI was drowning.\nI was not capable of...", "apartment/dark/start15");
+	dialogue_tree.addDialogue("apartment/dark/start15", "terri", "You deserve to be loved.\nYou do i mean it.\nCalm down please, lets just talk.", "apartment/dark/start16");
 	dialogue_tree.addDialogue("apartment/dark/start16", "ed", "I just wanted to be what you wanted\nSo why don't you want me.", "apartment/dark/start17");
 	dialogue_tree.addDialogue("apartment/dark/start17", "ed", "Now i spend every fucking minute praying to be somebody else.\nSomeone I'm not.\nAll of that for you!", "apartment/dark/start18");
 	dialogue_tree.addDialogue("apartment/dark/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore\nYou need to move on.\"", "apartment/option1");
@@ -904,13 +891,13 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addPlayerOption("kitchen/option4", "Old couple is put into full body casts", "kitchen/sad/start49");
 	dialogue_tree.addPlayerOption("kitchen/option4", "Old man jokes about the situation", "kitchen/comedy/start49");
 	dialogue_tree.addPlayerOption("kitchen/option4", "Couple walk away with just a few bad bruises", "kitchen/light/start49");
-	dialogue_tree.addPlayerOption("kitchen/option4", "Couple have no insurance, so are just left for dead", "kitchen/dark/start49");
+	dialogue_tree.addPlayerOption("kitchen/option4", "Couple have no insurance, so are just left for dead", "kitchen/dark/start50");
 
 	//Player Option 5
 	dialogue_tree.addPlayerOption("apartment/option1", "Take you own life", "apartment/sad/start19");
-	dialogue_tree.addPlayerOption("apartment/option1", "Spray Mel with the water gun", "kitchen/comedy/start19");
-	dialogue_tree.addPlayerOption("apartment/option1", "Beg Terri for another chance", "kitchen/light/start19");
-	dialogue_tree.addPlayerOption("apartment/option1", "Let your anger take over", "kitchen/dark/start19");
+	dialogue_tree.addPlayerOption("apartment/option1", "Spray Mel with the water gun", "apartment/comedy/start19");
+	dialogue_tree.addPlayerOption("apartment/option1", "Beg Terri for another chance", "apartment/light/start19");
+	dialogue_tree.addPlayerOption("apartment/option1", "Let your anger take over", "apartment/dark/start19");
 
 	dialogue_tree.addDialogue("next night", "", [&]()
 	{
