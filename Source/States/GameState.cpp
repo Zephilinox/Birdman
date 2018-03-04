@@ -1116,7 +1116,7 @@ void GameState::dialogue_kitchen()
 		mover->slowMoveToPosition(mover->getXPosition() - 200.0f, mover->getYPosition());
 		play_01.getAudience()->addToSad(15);
 		play_01.getScene()->addToSad(1);
-		return  "kitchen/sad/start47";
+		return  "kitchen/sad/start46";
 	});
 	dialogue_tree.addPlayerOption("kitchen/option3L", "The teen gets high off of painkillers.",
 		[&]()
@@ -1142,7 +1142,7 @@ void GameState::dialogue_kitchen()
 		mover->slowMoveToPosition(mover->getXPosition() - 200.0f, mover->getYPosition());
 		play_01.getAudience()->addToSad(15);
 		play_01.getScene()->addToSad(1);
-		return  "kitchen/sad/start47";
+		return  "kitchen/sad/start46";
 	});
 	dialogue_tree.addPlayerOption("kitchen/option3S", "Teen get away with only a few broken bones",
 		[&]()
@@ -1168,7 +1168,7 @@ void GameState::dialogue_kitchen()
 		mover->slowMoveToPosition(mover->getXPosition() - 200.0f, mover->getYPosition());
 		play_01.getAudience()->addToSad(15);
 		play_01.getScene()->addToSad(1);
-		return  "kitchen/sad/start47";
+		return  "kitchen/sad/start46";
 	});
 	dialogue_tree.addPlayerOption("kitchen/option3D", "Teens body was completely mutilated in crash",
 		[&]()
