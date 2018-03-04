@@ -49,7 +49,7 @@ PauseState::PauseState(GameData* game_data)
 		if (game_data->getAudioManager()->getEngineType() == AudioManager::Engine::None)
 		{
 			game_data->getAudioManager()->setEngineType(AudioManager::Engine::IrrKlang);
-			game_data->getAudioManager()->play("Piano Loop.wav", true);
+			game_data->getAudioManager()->play("FF7.wav", true);
 		}
 		else
 		{

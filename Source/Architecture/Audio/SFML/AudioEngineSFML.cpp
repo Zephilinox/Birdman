@@ -22,5 +22,6 @@ void AudioEngineSFML::play(const std::string& name, bool loop)
 	});
 	
 	sounds.push_back(std::make_unique<sf::Sound>(buffers[name]));
+	sounds.back()->setLoop(loop);
 	sounds.back()->play();
 }

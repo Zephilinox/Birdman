@@ -372,6 +372,8 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/sad/start9", "nick",
 		[&]()
 	{
+		game_data->getAudioManager()->reset();
+		game_data->getAudioManager()->play("Piano Loop.wav", true);
 		auto riggan = play_01.getScene()->getCharacter(Play::RIGGAN);
 		riggan->setIsActive(true);
 		riggan->setFacing(Character::CharacterFacing::WEST);
