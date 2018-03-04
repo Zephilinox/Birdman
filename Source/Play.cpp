@@ -167,8 +167,12 @@ void Play::moveToNextNight()
 
 void Play::reset()
 {
-	current_scene = 0;
-	next_scene = 0;
+	game_data->getStateManager()->push<FadeOutState>(
+	[&]()
+	{
+		current_scene = 0;
+		next_scene = 0;
+	});
 }
 
 Scene* Play::getScene()

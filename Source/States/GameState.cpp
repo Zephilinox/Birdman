@@ -294,7 +294,6 @@ void GameState::dialogue_init()
 	dialogue_tree.addDialogue("town/blab2", "blab_npc", "If it does we can chain it like so, which is nice.\nIt's not worth the effort trying to automate any of this to be honest.\nWe'll just have to handle it all manually.", "town/start");
 }
 
-
 void GameState::dialogue_kitchen()
 {
 	auto nick = dialogue_tree.getActor("nick");
@@ -328,17 +327,17 @@ void GameState::dialogue_kitchen()
 	mel->portrait = std::move(mel_pic);
 
 	dialogue_tree.addDialogue("kitchen/start0", "",
-	[&]()
+		[&]()
 	{
 		return play_01.getScene()->getDescription();
 	},
-	[&]()
+		[&]()
 	{
 		return "kitchen/start";
 	});
 
 	dialogue_tree.addDialogue("kitchen/start", "leslie",
-	[&]()
+		[&]()
 	{
 		auto leslie = play_01.getScene()->getCharacter(Play::LESLIE);
 		leslie->setFacing(Character::CharacterFacing::SOUTH);
@@ -416,11 +415,11 @@ void GameState::dialogue_kitchen()
 
 	//If Sad Option - Pick 2 - (done)
 	dialogue_tree.addDialogue("apartment/sad/start0", "",
-	[&]()
+		[&]()
 	{
 		return play_01.getNextScene()->getDescription();
 	},
-	[&]()
+		[&]()
 	{
 		return "apartment/sad/start1";
 	});
@@ -443,7 +442,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/sad/start16", "riggan", "I just wanted to be what you wanted.", "apartment/sad/start17");
 	dialogue_tree.addDialogue("apartment/sad/start17", "riggan", "Now I spend every fucking minute praying to be somebody else.\nSomeone I'm not.\nAnyone...", "apartment/sad/start18");
 	dialogue_tree.addDialogue("apartment/sad/start18", "mike", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"",
-	[&]()
+		[&]()
 	{
 		play_01.reset();
 		return "kitchen/start0";
@@ -484,7 +483,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/sad/start40", "terri", "You've had more than a few.", "kitchen/sad/start41");
 	dialogue_tree.addDialogue("kitchen/sad/start41", "nick", "Why you have to be so boring,\n we are just having a bit of fun?", "kitchen/sad/start42");
 	dialogue_tree.addDialogue("kitchen/sad/start42", "laura", "Don't talk like a drunk if you not...\"",
-	[&]()
+		[&]()
 	{
 		play_01.reset();
 		return "kitchen/start0";
@@ -492,11 +491,11 @@ void GameState::dialogue_kitchen()
 
 	//If Comedy Option - Pick 2 - ()
 	dialogue_tree.addDialogue("apartment/comedy/start0", "",
-	[&]()
+		[&]()
 	{
 		return play_01.getNextScene()->getDescription();
 	},
-	[&]()
+		[&]()
 	{
 		return "apartment/comedy/start1";
 	});
@@ -526,7 +525,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/start20", "mike", "*Mel's makeup caked face starts to run, it now shows the monster beneath*", "apartment/start21");
 	dialogue_tree.addDialogue("apartment/start21", "riggan", "Oh my god, you left this for me\nI can't even look at you Terri\n I can't believe i almost had a threesome with that...", "apartment/start22");
 	dialogue_tree.addDialogue("apartment/start22", "riggan", "*You walk out the room\n You are so shocked and disgusted that you might shoot yourself*", "apartment/start20");
-	
+
 
 	//If Light Option - Pick 1 - (done)
 	dialogue_tree.addDialogue("kitchen/light/start9", "riggan", "Apologises for being late.\nWell he might of loved her deep down.\nI've only heard his name mentioned in passing.", "kitchen/light/start10");
@@ -578,7 +577,7 @@ void GameState::dialogue_kitchen()
 	[&]()
 	{
 		return "apartment/light/start1";
-	}); 
+	});
 
 	dialogue_tree.addDialogue("apartment/start1", "riggan", "Terri!\nCome answer the door Terri, we need to talk!\nI know you're in there.", "apartment/start2");
 	dialogue_tree.addDialogue("apartment/start2", "riggan", "*You repetitively knock on the door\nAs you try to force your way in\nYou find the door is open.*", "apartment/start3");
@@ -684,3 +683,4 @@ void GameState::dialogue_kitchen()
 		play_01.reset();
 		return "kitchen/start0";
 	});
+}
