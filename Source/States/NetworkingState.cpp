@@ -59,7 +59,7 @@ public:
 		, game_data(game_data)
 	{
 		entity_info.type = hash("Paddle");
-		sprite.addFrame("Portraits/blabbering_npc", 1);
+		sprite.addFrame("Laura/ppl1", 1);
 
 		if (game_data->getNetworkManager()->isServer())
 		{
@@ -119,7 +119,7 @@ public:
 		, game_data(game_data)
 	{
 		entity_info.type = hash("Ball");
-		sprite.addFrame("UI/DialogueMarker", 1);
+		sprite.addFrame("UI/DialogueMarker", 1, 0, 0, 2, 2);
 		sprite.xPos = 1280 / 2;
 		sprite.yPos = 720 / 2;
 	}
@@ -215,6 +215,8 @@ NetworkingState::NetworkingState(GameData* game_data)
 	{
 		this->game_data->getStateManager()->pop();
 	});
+
+	game_data->getAudioManager()->reset();
 }
 
 NetworkingState::~NetworkingState()
@@ -245,6 +247,11 @@ void NetworkingState::update(const ASGE::GameTime& gt)
 	else
 	{
 		menu.update();
+	}
+
+	if (game_data->getInputManager()->isActionPressed("escape"))
+	{
+		game_data->getStateManager()->pop();
 	}
 }
 
