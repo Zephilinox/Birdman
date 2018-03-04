@@ -129,18 +129,39 @@ float Audience::getOverallApproval()
 
 void Audience::updateApproval()
 {
-	overallApproval = sad_approval + light_approval + dark_approval + comedy_approval;
-	overallApproval *= 0.25f;
-	overallApproval = std::clamp(overallApproval, 0.0f, 1.0f);
+	if(light_approval > dark_approval &&
+		light_approval > sad_approval &&
+		light_approval > comedy_approval)
+	{
+		overallApproval = light_approval;
+	}
+	else if(dark_approval > sad_approval &&
+		dark_approval > comedy_approval)
+	{
+		overallApproval = dark_approval;
+	}
+	else if(sad_approval > comedy_approval)
+	{
+		overallApproval = sad_approval;
+	}
+	else
+	{
+		overallApproval = comedy_approval;
+	}
+
+	//overallApproval = sad_approval + light_approval + dark_approval + comedy_approval;
+	//overallApproval *= 0.25f;
+	//overallApproval = std::clamp(overallApproval, 0.0f, 100.0f);
 }
 
 //Takes an int, applies it to the responsiveness/multiplier then adds it to the approval
 void Audience::addToSad(float effect)
 {
+
 	sad_approval += effect * sad_multiplier;
 	updateApproval();
 	applyBoredom();
-	sad_approval = std::clamp(sad_approval, 0.0f, 1.4f);
+	sad_approval = std::clamp(sad_approval, 0.0f, 100.0f);
 }
 
 //Takes an int, applies it to the responsiveness/multiplier then adds it to the approval
@@ -149,7 +170,7 @@ void Audience::addToLight(float effect)
 	light_approval += effect * light_multiplier;
 	updateApproval();
 	applyBoredom();
-	light_approval = std::clamp(light_approval, 0.0f, 1.4f);
+	light_approval = std::clamp(light_approval, 0.0f, 100.0f);
 }
 
 //Takes an int, applies it to the responsiveness/multiplier then adds it to the approval
@@ -158,7 +179,7 @@ void Audience::addToDark(float effect)
 	dark_approval += effect * dark_multiplier;
 	updateApproval();
 	applyBoredom();
-	dark_approval = std::clamp(dark_approval, 0.0f, 1.4f);
+	dark_approval = std::clamp(dark_approval, 0.0f, 100.0f);
 }
 
 //Takes an int, applies it to the responsiveness/multiplier then adds it to the approval
@@ -167,10 +188,10 @@ void Audience::addToComedy(float effect)
 	comedy_approval += effect * comedy_multiplier;
 	updateApproval();
 	applyBoredom();
-	dark_approval = std::clamp(dark_approval, 0.0f, 1.4f);
+	comedy_approval = std::clamp(comedy_approval, 0.0f, 100.0f);
 }
 
 void Audience::applyBoredom()
 {
-	overallApproval *= 0.9f;
+	overallApproval *= 0.8f;
 }

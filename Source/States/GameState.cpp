@@ -387,10 +387,34 @@ void GameState::dialogue_kitchen()
 		return "What about you, Nick?\nDoes that sound like love to you?";
 	}, "kitchen/option1");
 
-	dialogue_tree.addPlayerOption("kitchen/option1", "Try to avoid the question", "kitchen/sad/start9");
-	dialogue_tree.addPlayerOption("kitchen/option1", "Make light of the situation", "kitchen/comedy/start9");
-	dialogue_tree.addPlayerOption("kitchen/option1", "Give a sincere reply", "kitchen/light/start9");
-	dialogue_tree.addPlayerOption("kitchen/option1", "Give some poor advice on the matter", "kitchen/dark/start9");
+	dialogue_tree.addPlayerOption("kitchen/option1", "Try to avoid the question",
+		[&]()
+	{
+		play_01.getAudience()->addToSad(15);
+		play_01.getScene()->addToSad(1);
+		return "kitchen/sad/start9";
+	});
+	dialogue_tree.addPlayerOption("kitchen/option1", "Make light of the situation",
+		[&]()
+	{
+		play_01.getAudience()->addToComedy(15);
+		play_01.getScene()->addToComedy(1);
+		return "kitchen/comedy/start9";
+	}); 
+	dialogue_tree.addPlayerOption("kitchen/option1", "Give a sincere reply",
+		[&]()
+	{
+		play_01.getAudience()->addToLight(15);
+		play_01.getScene()->addToLight(1);
+		return  "kitchen/light/start9";
+	});
+	dialogue_tree.addPlayerOption("kitchen/option1", "Give some poor advice on the matter",
+		[&]()
+	{
+		play_01.getAudience()->addToDark(15);
+		play_01.getScene()->addToDark(1);
+		return "kitchen/dark/start9";
+	}); 
 
 	//If Sad Option  - Pick 1 - (done)
 
@@ -400,7 +424,8 @@ void GameState::dialogue_kitchen()
 		game_data->getAudioManager()->reset();
 		game_data->getAudioManager()->play("Piano Loop.wav", true);
 		game_data->getMessageQueue()->sendMessage<AudioChangeMessage>("Piano Loop.wav");
-
+		play_01.getAudience()->addToSad(15);
+		play_01.getScene()->addToSad(1);
 		return "Sorry I'm late.\nI'm the wrong person to ask.\nI've only heard his name mentioned in passing.";
 	}, "kitchen/sad/start10");
 
@@ -500,15 +525,8 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/sad/start40", "terri", "You've had more than a few.", "kitchen/sad/start41");
 	dialogue_tree.addDialogue("kitchen/sad/start41", "nick", "What are you, counting?", "kitchen/sad/start42");
 	dialogue_tree.addDialogue("kitchen/sad/start42", "laura", "Don't talk like a drunk if you're not...", "kitchen/sad/start43");
-	dialogue_tree.addDialogue("kitchen/sad/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"",
-	[&]()
-	{
-		//add an arbitrary value to the "sad" value of the audience, this is applied to a multiplier, then offset by boredom.
-		play_01.getAudience()->addToSad(10);
-		//add an arbitrary value to the "sad" value of the scene, this is used to determine which scene is gone to next.
-		play_01.getScene()->addToSad(1);
-		return "kitchen/option2";		
-	});
+	dialogue_tree.addDialogue("kitchen/sad/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "kitchen/option2");
+
 	//If Sad Option - Pick 2 -
 	dialogue_tree.addDialogue("kitchen/sad/start44", "nick", "Like I was saying...\nThere this old couple, had a car wreck out on the interstate.", "kitchen/sad/start45");
 	dialogue_tree.addDialogue("kitchen/sad/start45", "nick", "Some drunk kid plowed his dad's pick up into their camper.", "kitchen/option3");
@@ -927,10 +945,34 @@ void GameState::dialogue_kitchen()
 
 
 	//Player Option 2
-	dialogue_tree.addPlayerOption("kitchen/option2", "Drunk teen crashes into an old couple", "kitchen/sad/start44");
-	dialogue_tree.addPlayerOption("kitchen/option2", "Drunk teen singing let it go, crashes into old couple", "kitchen/comedy/start44");
-	dialogue_tree.addPlayerOption("kitchen/option2", "Learner driver crashes into an old couple", "kitchen/light/start44");
-	dialogue_tree.addPlayerOption("kitchen/option2", "Drunk teen rams into old couple", "kitchen/dark/start44");
+	dialogue_tree.addPlayerOption("kitchen/option2", "Drunk teen crashes into an old couple",
+		[&]()
+	{
+		play_01.getAudience()->addToSad(15);
+		play_01.getScene()->addToSad(1);
+		return "kitchen/sad/start44";
+	});
+	dialogue_tree.addPlayerOption("kitchen/option2", "Drunk teen singing let it go, crashes into old couple",
+		[&]()
+	{
+		play_01.getAudience()->addToComedy(15);
+		play_01.getScene()->addToComedy(1);
+		return "kitchen/comedy/start44";
+	});
+	dialogue_tree.addPlayerOption("kitchen/option2", "Learner driver crashes into an old couple",
+		[&]()
+	{
+		play_01.getAudience()->addToLight(15);
+		play_01.getScene()->addToLight(1);
+		return "kitchen/light/start44";
+	});
+	dialogue_tree.addPlayerOption("kitchen/option2", "Drunk teen rams into old couple",
+		[&]()
+	{
+		play_01.getAudience()->addToDark(15);
+		play_01.getScene()->addToDark(1);
+		return "kitchen/dark/start44";
+	});
 
 	//Player Option 3
 	dialogue_tree.addPlayerOption("kitchen/option3", "Lad doesn't make it",
@@ -939,23 +981,91 @@ void GameState::dialogue_kitchen()
 		auto mover = play_01.getScene()->getCharacter(Play::RIGGAN);
 		mover->setFacing(Character::CharacterFacing::WEST);
 		mover->slowMoveToPosition(mover->getXPosition() - 200.0f, mover->getYPosition());
+		play_01.getAudience()->addToSad(15);
+		play_01.getScene()->addToSad(1);
 		return  "kitchen/sad/start47";
 	});
-	dialogue_tree.addPlayerOption("kitchen/option3", "Teen gets high off painkillers", "kitchen/comedy/start46");
-	dialogue_tree.addPlayerOption("kitchen/option3", "Teen get away with only a few broken bones", "kitchen/light/start46");
-	dialogue_tree.addPlayerOption("kitchen/option3", "Teens body was completely mutilated in crash", "kitchen/dark/start46");
+	dialogue_tree.addPlayerOption("kitchen/option3", "Teen gets high off painkillers",
+		[&]()
+	{
+		play_01.getAudience()->addToComedy(15);
+		play_01.getScene()->addToComedy(1);
+		return "kitchen/comedy/start46";
+	});
+	dialogue_tree.addPlayerOption("kitchen/option3", "Teen get away with only a few broken bones",
+		[&]()
+	{
+		play_01.getAudience()->addToLight(15);
+		play_01.getScene()->addToLight(1);
+		return "kitchen/light/start46";
+	});
+	dialogue_tree.addPlayerOption("kitchen/option3", "Teens body was completely mutilated in crash",
+		[&]()
+	{
+		play_01.getAudience()->addToDark(15);
+		play_01.getScene()->addToDark(1);
+		return "kitchen/dark/start46";
+	});
 
 	//Player Option 4
-	dialogue_tree.addPlayerOption("kitchen/option4", "Old couple is put into full body casts", "kitchen/sad/start49");
-	dialogue_tree.addPlayerOption("kitchen/option4", "Old man jokes about the situation", "kitchen/comedy/start49");
-	dialogue_tree.addPlayerOption("kitchen/option4", "Couple walk away with just a few bad bruises", "kitchen/light/start49");
-	dialogue_tree.addPlayerOption("kitchen/option4", "Couple have no insurance, so are just left for dead", "kitchen/dark/start50");
+	dialogue_tree.addPlayerOption("kitchen/option4", "Old couple is put into full body casts",
+		[&]()
+	{
+		play_01.getAudience()->addToSad(15);
+		play_01.getScene()->addToSad(1);
+		return "kitchen/sad/start49";
+	});
+	dialogue_tree.addPlayerOption("kitchen/option4", "Old man jokes about the situation",
+		[&]()
+	{
+		play_01.getAudience()->addToComedy(15);
+		play_01.getScene()->addToComedy(1);
+		return "kitchen/comedy/start49";
+	}); 
+	dialogue_tree.addPlayerOption("kitchen/option4", "Couple walk away with just a few bad bruises",
+		[&]()
+	{
+		play_01.getAudience()->addToLight(15);
+		play_01.getScene()->addToLight(1);
+		return"kitchen/light/start49";
+	}); 
+	dialogue_tree.addPlayerOption("kitchen/option4", "Couple have no insurance, so are just left for dead",
+		[&]()
+	{
+		play_01.getAudience()->addToDark(15);
+		play_01.getScene()->addToDark(1);
+		return "kitchen/dark/start50";
+	});
 
 	//Player Option 5
-	dialogue_tree.addPlayerOption("apartment/option1", "Take you own life", "apartment/sad/start19");
-	dialogue_tree.addPlayerOption("apartment/option1", "Spray Mel with the water gun", "apartment/comedy/start19");
-	dialogue_tree.addPlayerOption("apartment/option1", "Beg Terri for another chance", "apartment/light/start19");
-	dialogue_tree.addPlayerOption("apartment/option1", "Let your anger take over", "apartment/dark/start19");
+	dialogue_tree.addPlayerOption("apartment/option1", "Take you own life",
+		[&]()
+	{
+		play_01.getAudience()->addToSad(15);
+		play_01.getScene()->addToSad(1);
+		return"apartment/sad/start19";
+	}); 
+	dialogue_tree.addPlayerOption("apartment/option1", "Spray Mel with the water gun",
+		[&]()
+	{
+		play_01.getAudience()->addToComedy(15);
+		play_01.getScene()->addToComedy(1);
+		return "apartment/comedy/start19";
+	}); 
+	dialogue_tree.addPlayerOption("apartment/option1", "Beg Terri for another chance",
+		[&]()
+	{
+		play_01.getAudience()->addToLight(15);
+		play_01.getScene()->addToLight(1);
+		return "apartment/light/start19";
+	});
+	dialogue_tree.addPlayerOption("apartment/option1", "Let your anger take over",
+		[&]()
+	{
+		play_01.getAudience()->addToDark(15);
+		play_01.getScene()->addToDark(1);
+		return "apartment/dark/start19";
+	}); 
 
 	dialogue_tree.addDialogue("next night", "", [&]()
 	{
