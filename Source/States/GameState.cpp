@@ -746,11 +746,11 @@ void GameState::dialogue_kitchen()
 
 	//If Light Option - Pick 1 - (done)
 
-	dialogue_tree.addDialogue("kitchen/light/start9", "nick", "Apologies for being late.\nWell he might of loved her deep down.\nI've only heard his name mentioned in passing.", "kitchen/light/start10");
+	dialogue_tree.addDialogue("kitchen/light/start9", "nick", "Apologies for being late.\nWell he might've loved her deep down.\nI've only heard his name mentioned in passing.", "kitchen/light/start10");
 	dialogue_tree.addDialogue("kitchen/light/start10", "nick", "He didn't seem like that kind of person.\nI don't think that's really love.\nYou don't try to kill the people you love!", "kitchen/light/start11");
 	dialogue_tree.addDialogue("kitchen/light/start11", "mel", "Exactly, it's like you've read my mind.", "kitchen/light/start12");
 	dialogue_tree.addDialogue("kitchen/light/start12", "mel", "With real love, you don't try and kill people.", "kitchen/light/start13");
-	dialogue_tree.addDialogue("kitchen/light/start13", "terri", "It was love, Mel.\nTo Eddie, it was.", "kitchen/light/start14");
+	dialogue_tree.addDialogue("kitchen/light/start13", "terri", "It was love, Mel. At least, to Eddie it was.", "kitchen/light/start14");
 	dialogue_tree.addDialogue("kitchen/light/start14", "terri", "I don't care what anybody says.\nHe was ready to die for it.", "kitchen/light/start15");
 	dialogue_tree.addDialogue("kitchen/light/start15", "mel", "Ask her what he did after she left him.", "kitchen/light/start16");
 	dialogue_tree.addDialogue("kitchen/light/start16", "terri", "He shot himself in the mouth.\nBut he screwed that up, too.\nPoor Ed.", "kitchen/light/start17");
