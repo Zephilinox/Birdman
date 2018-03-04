@@ -38,8 +38,6 @@ public:
 	void moveToNextScene();
 	void moveToNextNight();
 
-	void reset();
-
 	Scene* getScene();
 	Scene* getNextScene();
 	Audience* getAudience();

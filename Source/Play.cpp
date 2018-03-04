@@ -1,11 +1,10 @@
 #include "Play.hpp"
-#include "Architecture\GameData.hpp"
-#include "States\FadeOutState.hpp"
 
 //SELF
+#include "Architecture\GameData.hpp"
 #include "Scene.hpp"
-
-
+#include "States/FadeOutState.hpp"
+#include "States/GameState.hpp"
 
 Play::Play(GameData* data): audience(data)
 {
@@ -171,25 +170,25 @@ void Play::moveToNextNight()
 {
 	if (night < 3)
 	{
-		night++;
-		audience.varyApprovalsBetweenNights();
-		current_scene = 0;
+		game_data->getStateManager()->push<FadeOutState>(
+		[&]()
+		{
+			night++;
+			audience.varyApprovalsBetweenNights();
+			current_scene = 0;
+			next_scene = 0;
+		});
 	}
 	else
 	{
 		//TODO - play finished, output approval to screen?
+		game_data->getStateManager()->push<FadeOutState>(
+		[&]()
+		{
+			game_data->getStateManager()->pop();
+			game_data->getStateManager()->push<GameState>();
+		});
 	}
-
-}
-
-void Play::reset()
-{
-	game_data->getStateManager()->push<FadeOutState>(
-	[&]()
-	{
-		current_scene = 0;
-		next_scene = 0;
-	});
 }
 
 Scene* Play::getScene()
