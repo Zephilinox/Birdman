@@ -119,6 +119,21 @@ void Play::render() const
 	game_data->getRenderer()->renderSprite(*stage);
 	scenes[current_scene].render();
 	audience.render();
+
+	switch (night)
+	{
+	case 1:
+		game_data->getRenderer()->renderText("First Preview Night", 20, 40, ASGE::COLOURS::ANTIQUEWHITE);
+		break;
+	case 2:
+		game_data->getRenderer()->renderText("Second Preview Night", 20, 40, ASGE::COLOURS::ANTIQUEWHITE);
+		break;
+	case 3:
+		game_data->getRenderer()->renderText("Opening Night", 20, 40, ASGE::COLOURS::ANTIQUEWHITE);
+		break;
+	default:
+		std::cout << "ERROR: NIGHTS IS UNDER 1 OR ABOVE 3\n";
+	}
 	//Render  VisualDialogue*
 }
 
