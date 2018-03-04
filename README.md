@@ -15,6 +15,9 @@ ESCAPE to open the pause menu
 GamePad Supported: see settings.ini for GamePad button mappings
 
 F1 for fullscreen
+
 F2 for toggle FPS
+
 F3 for toggle FPS cap
+
 F4 for secretz
