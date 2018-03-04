@@ -437,10 +437,10 @@ void GameState::dialogue_kitchen()
 		play_01.getAudience()->addToSad(10);
 		//add an arbitrary value to the "sad" value of the scene, this is used to determine which scene is gone to next.
 		play_01.getScene()->addToSad(1);
-		return "apartment/sad/start0";
+		return "kitchen/option2";
 		//Determines which scene the play will go to next based on the values stored in scene. Transitions and moves to that scene.
 		
-		return "kitchen/option2";
+		
 	});
 	//If Sad Option - Pick 2 -
 	dialogue_tree.addDialogue("kitchen/sad/start44", "nick", "Like I was saying...\nThere this old couple, had a car wreck out on the interstate.", "kitchen/sad/start45");
