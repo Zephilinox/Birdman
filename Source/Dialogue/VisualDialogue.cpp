@@ -199,7 +199,7 @@ void VisualDialogue::render() const
 
 		if (speaker->portrait)
 		{
-			speaker->portrait->xPos(740);
+			speaker->portrait->xPos(736);
 			speaker->portrait->yPos(game_data->getWindowHeight() - 185.0f);
 			game_data->getRenderer()->renderSprite(*speaker->portrait.get());
 		}
