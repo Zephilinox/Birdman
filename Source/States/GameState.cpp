@@ -438,10 +438,10 @@ void GameState::dialogue_kitchen()
 		play_01.getAudience()->addToSad(10);
 		//add an arbitrary value to the "sad" value of the scene, this is used to determine which scene is gone to next.
 		play_01.getScene()->addToSad(1);
-		return "apartment/sad/start0";
+		return "kitchen/option2";
 		//Determines which scene the play will go to next based on the values stored in scene. Transitions and moves to that scene.
 		
-		return "kitchen/option2";
+		
 	});
 	//If Sad Option - Pick 2 -
 	dialogue_tree.addDialogue("kitchen/sad/start44", "nick", "Like I was saying...\nThere this old couple, had a car wreck out on the interstate.", "kitchen/sad/start45");
@@ -488,20 +488,20 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/sad/start15", "terri", "You deserve to be loved.\nYou do.", "apartment/sad/start16");
 	dialogue_tree.addDialogue("apartment/sad/start16", "ed", "I just wanted to be what you wanted.", "apartment/sad/start17");
 	dialogue_tree.addDialogue("apartment/sad/start17", "ed", "Now I spend every fucking minute praying to be somebody else.\nSomeone I'm not.\nAnyone...", "apartment/sad/start18");
-	dialogue_tree.addDialogue("apartment/sad/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"", "next night");
+	dialogue_tree.addDialogue("apartment/sad/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"", "apartment/option1");
 
 	//If Sad Option - Pick 5 - ()
-	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "*Ed looks at Terri with a sad smile*", "apartment/sad/start14");
-	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "You don't, do you?", "apartment/sad/start14");
-	dialogue_tree.addDialogue("apartment/sad/start13", "terri", "No...", "apartment/sad/start14");
-	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "And you never will...", "apartment/sad/start14");
-	dialogue_tree.addDialogue("apartment/sad/start13", "terri", "I'm sorry Ed", "apartment/sad/start14");
-	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "I don't exist.\nI'm not even here.", "apartment/sad/start14");
-	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "I don't exist.\nNone of this matters.", "apartment/sad/start14");
-	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "*Ed points the gun at Terri...*", "apartment/sad/start14");
-	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "*Then towards Mel*", "apartment/sad/start14");
-	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "*Finally towards his own head...*", "apartment/sad/start14");
-	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "*Ed then pulls the trigger and drops to the floor dead!*", "apartment/sad/start14");
+	dialogue_tree.addDialogue("apartment/sad/start19", "ed", "*Ed looks at Terri with a sad smile*", "apartment/sad/start20");
+	dialogue_tree.addDialogue("apartment/sad/start20", "ed", "You don't, do you?", "apartment/sad/start21");
+	dialogue_tree.addDialogue("apartment/sad/start21", "terri", "No...", "apartment/sad/start22");
+	dialogue_tree.addDialogue("apartment/sad/start22", "ed", "And you never will...", "apartment/sad/start23");
+	dialogue_tree.addDialogue("apartment/sad/start23", "terri", "I'm sorry Ed", "apartment/sad/start24");
+	dialogue_tree.addDialogue("apartment/sad/start24", "ed", "I don't exist.\nI'm not even here.", "apartment/sad/start25");
+	dialogue_tree.addDialogue("apartment/sad/start25", "ed", "I don't exist.\nNone of this matters.", "apartment/sad/start26");
+	dialogue_tree.addDialogue("apartment/sad/start26", "ed", "*Ed points the gun at Terri...*", "apartment/sad/start27");
+	dialogue_tree.addDialogue("apartment/sad/start27", "ed", "*Then towards Mel*", "apartment/sad/start28");
+	dialogue_tree.addDialogue("apartment/sad/start28", "ed", "*Finally towards his own head...*", "apartment/sad/start29");
+	dialogue_tree.addDialogue("apartment/sad/start29", "ed", "*Ed then pulls the trigger and drops to the floor dead!*", "next night");
 
 
 	//If Comedy Option - Pick 1 - (done)
@@ -745,7 +745,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/dark/start15", "terri", "You deserve to be loved.\n You do i mean it.\nCalm down please, lets just talk.", "apartment/dark/start16");
 	dialogue_tree.addDialogue("apartment/dark/start16", "ed", "I just wanted to be what you wanted\nSo why don't you want me.", "apartment/dark/start17");
 	dialogue_tree.addDialogue("apartment/dark/start17", "ed", "Now i spend every fucking minute praying to be somebody else.\nSomeone I'm not.\nAll of that for you!", "apartment/dark/start18");
-	dialogue_tree.addDialogue("apartment/dark/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore\nYou need to move on.\"", "apartment/dark/start19");
+	dialogue_tree.addDialogue("apartment/dark/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore\nYou need to move on.\"", "apartment/option1");
 
 	//If Dark Option - Pick 5 - ()
 	dialogue_tree.addDialogue("apartment/dark/start19", "ed", "Terri tell me it's not true!", "apartment/dark/start20");
@@ -779,10 +779,10 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addPlayerOption("kitchen/option4", "Couple have no insurance, so are just left for dead", "kitchen/dark/start9");
 
 	//Player Option 5
-	dialogue_tree.addPlayerOption("kitchen/option5", "Take you own life", "apartment/sad/start14");
-	dialogue_tree.addPlayerOption("kitchen/option5", "Spray Mel with the water gun", "kitchen/comedy/start9");
-	dialogue_tree.addPlayerOption("kitchen/option5", "Beg Terri for another chance", "kitchen/light/start9");
-	dialogue_tree.addPlayerOption("kitchen/option5", "Let your anger take over", "kitchen/dark/start9");
+	dialogue_tree.addPlayerOption("apartment/option1", "Take you own life", "apartment/sad/start19");
+	dialogue_tree.addPlayerOption("apartment/option1", "Spray Mel with the water gun", "kitchen/comedy/start9");
+	dialogue_tree.addPlayerOption("apartment/option1", "Beg Terri for another chance", "kitchen/light/start9");
+	dialogue_tree.addPlayerOption("apartment/option1", "Let your anger take over", "kitchen/dark/start9");
 
 	dialogue_tree.addDialogue("next night", "", [&]()
 	{
