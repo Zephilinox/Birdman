@@ -185,7 +185,7 @@ void Character::slowMoveToPosition(float x, float y)
 	horizontal_walk_sprite.play();
 	backward_walk_sprite.play();
 	forward_walk_sprite.play();
-	move_speed = 20.0f;
+	move_speed = 30.0f;
 	target_x_position = x;
 	target_y_position = y;
 }
@@ -196,7 +196,7 @@ void Character::fastMoveToPosition(float x, float y)
 	horizontal_walk_sprite.play();
 	backward_walk_sprite.play();
 	forward_walk_sprite.play();
-	move_speed = 35.0f;
+	move_speed = 50.0f;
 	target_x_position = x;
 	target_y_position = y;
 }
