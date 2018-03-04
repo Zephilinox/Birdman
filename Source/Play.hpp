@@ -23,8 +23,8 @@ public:
 	enum SceneCharacters
 	{
 		RIGGAN =0,
-		LESLIE,
 		MIKE,
+		LESLIE,
 		LAURA,
 	};
 

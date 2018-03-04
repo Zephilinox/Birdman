@@ -47,6 +47,7 @@ void Play::create()
 	Scene& scene8 = scenes[7];
 	scene8.scene_id = 7;
 	Scene& scene9 = scenes[8];
+	scene9.scene_id = 8;
 	Scene& scene10 = scenes[9];
 
 	//Set values and links of each scene
@@ -58,26 +59,27 @@ void Play::create()
 
 	//Set up the characters for the scene
 	scene1.initSceneCharacter(Play::SceneCharacters::RIGGAN);
+	scene1.character_pool.at(0)->setIsActive(false);
 	scene1.initSceneCharacter(Play::SceneCharacters::MIKE);
 	scene1.initSceneCharacter(Play::SceneCharacters::LESLIE);
 	scene1.initSceneCharacter(Play::SceneCharacters::LAURA);
 
 	//Set each character's position
-	scene1.character_pool.at(0)->setPosition(100.0f, 100.0f);
-	scene1.character_pool.at(0)->setFacing(Character::CharacterFacing::SOUTH);
-	scene1.character_pool.at(1)->setPosition(300.0f, 100.0f);
-	scene1.character_pool.at(1)->setFacing(Character::CharacterFacing::SOUTH);
-	scene1.character_pool.at(2)->setPosition(400.0f, 200.0f);
-	scene1.character_pool.at(2)->setFacing(Character::CharacterFacing::WEST);
-	scene1.character_pool.at(3)->setPosition(200.0f, 300.0f);
-	scene1.character_pool.at(3)->setFacing(Character::CharacterFacing::NORTH);
+	scene1.character_pool.at(RIGGAN)->setPosition(100.0f, 100.0f);
+	scene1.character_pool.at(RIGGAN)->setFacing(Character::CharacterFacing::SOUTH);
 
+	scene1.character_pool.at(MIKE)->setPosition(550.0f, 320.0f);
+	scene1.character_pool.at(MIKE)->setFacing(Character::CharacterFacing::EAST);
 
-	scene1.character_pool.at(3)->slowMoveToPosition(1000.0f, 700.0f);
+	scene1.character_pool.at(LESLIE)->setPosition(614.0f, 270.0f);
+	scene1.character_pool.at(LESLIE)->setFacing(Character::CharacterFacing::SOUTH);
+
+	scene1.character_pool.at(LAURA)->setPosition(680.0f, 325.0f);
+	scene1.character_pool.at(LAURA)->setFacing(Character::CharacterFacing::WEST);
+
 
 	scene1.comedy.stage_description = "comedy path 1";
 	scene1.comedy.scene = &scene2;
-
 	scene1.light.stage_description = "light path 1";
 	scene1.light.scene = &scene3;
 
