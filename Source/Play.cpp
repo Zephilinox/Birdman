@@ -117,7 +117,9 @@ void Play::render() const
 {
 	//Render stage background
 	game_data->getRenderer()->renderSprite(*stage);
+	//render scene
 	scenes[current_scene].render();
+	//render audience
 	audience.render();
 
 	switch (night)
@@ -134,7 +136,6 @@ void Play::render() const
 	default:
 		std::cout << "ERROR: NIGHTS IS UNDER 1 OR ABOVE 3\n";
 	}
-	//Render  VisualDialogue*
 }
 
 void Play::moveToNextScene()
@@ -178,6 +179,7 @@ void Play::moveToNextNight()
 	else
 	{
 		//TODO - play finished, output approval to screen?
+		end_of_play = true;
 	}
 
 }
