@@ -862,17 +862,61 @@ void GameState::dialogue_kitchen()
 
 	dialogue_tree.addDialogue("kitchen/light/start9", "nick", "Apologies for being late.\nWell he might've loved her deep down.\nI've only heard his name mentioned in passing.", "kitchen/light/start10");
 	dialogue_tree.addDialogue("kitchen/light/start10", "nick", "He didn't seem like that kind of person.\nI don't think that's really love.\nYou don't try to kill the people you love!", "kitchen/light/start11");
-	dialogue_tree.addDialogue("kitchen/light/start11", "mel", "Exactly, it's like you've read my mind.", "kitchen/light/start12");
+	dialogue_tree.addDialogue("kitchen/light/start11", "mel", "Exactly, it's like you've read my mind.", [&]()
+	{
+		auto mike = play_01.getScene()->getCharacter(Play::MIKE);
+		mike->setFacing(Character::CharacterFacing::SOUTH);
+		return "kitchen/light/start12";
+	});
+
 	dialogue_tree.addDialogue("kitchen/light/start12", "mel", "With real love, you don't try and kill people.", "kitchen/light/start13");
-	dialogue_tree.addDialogue("kitchen/light/start13", "terri", "It was love, Mel. At least, to Eddie it was.", "kitchen/light/start14");
+	dialogue_tree.addDialogue("kitchen/light/start13", "terri", "It was love, Mel. At least, to Eddie it was.", [&]()
+	{
+		auto leslie = play_01.getScene()->getCharacter(Play::LESLIE);
+		leslie->setFacing(Character::CharacterFacing::WEST);
+		leslie->fastMoveToPosition(leslie->getXPosition() - 100.0f, leslie->getYPosition());
+		auto riggan = play_01.getScene()->getCharacter(Play::RIGGAN);
+		riggan->setFacing(Character::CharacterFacing::SOUTH);
+		return "kitchen/light/start14";
+	});
+
 	dialogue_tree.addDialogue("kitchen/light/start14", "terri", "I don't care what anybody says.\nHe was ready to die for it.", "kitchen/light/start15");
-	dialogue_tree.addDialogue("kitchen/light/start15", "mel", "Ask her what he did after she left him.", "kitchen/light/start16");
+	dialogue_tree.addDialogue("kitchen/light/start15", "mel", "Ask her what he did after she left him.",
+		[&]()
+	{
+		auto leslie = play_01.getScene()->getCharacter(Play::LESLIE);
+		leslie->setFacing(Character::CharacterFacing::SOUTH);
+		return "kitchen/light/start16";
+	});
+
 	dialogue_tree.addDialogue("kitchen/light/start16", "terri", "He shot himself in the mouth.\nBut he screwed that up, too.\nPoor Ed.", "kitchen/light/start17");
-	dialogue_tree.addDialogue("kitchen/light/start17", "mel", "\"Poor Ed\" my ass. The guy was dangerous.", "kitchen/light/start18");
-	dialogue_tree.addDialogue("kitchen/light/start18", "laura", "How'd he screw it up if he shot himself in the mouth?", "kitchen/light/start19");
+	dialogue_tree.addDialogue("kitchen/light/start17", "mel", "\"Poor Ed\" my ass. The guy was dangerous.",
+		[&]()
+	{
+		auto mike = play_01.getScene()->getCharacter(Play::MIKE);
+		mike->setFacing(Character::CharacterFacing::EAST);
+		return "kitchen/light/start18";
+	});
+
+	dialogue_tree.addDialogue("kitchen/light/start18", "laura", "How'd he screw it up if he shot himself in the mouth?", [&]()
+	{
+		auto leslie = play_01.getScene()->getCharacter(Play::LESLIE);
+		leslie->setFacing(Character::CharacterFacing::EAST);
+		leslie->fastMoveToPosition(leslie->getXPosition() + 100.0f, leslie->getYPosition());
+		return  "kitchen/light/start19";
+	});
+
 	dialogue_tree.addDialogue("kitchen/light/start19", "mel", "He used to carry this twenty-two.\nWe lived like fugitives those days.\n", "kitchen/light/start20");
 	dialogue_tree.addDialogue("kitchen/light/start20", "mel", "I never knew if he was going to come out of the bushes\nor from behind a car and just start shooting.", "kitchen/light/start21");
-	dialogue_tree.addDialogue("kitchen/light/start21", "mel", "The man was crazy. He was capable of anything.", "kitchen/light/start22");
+	dialogue_tree.addDialogue("kitchen/light/start21", "mel", "The man was crazy. He was capable of anything.", [&]()
+	{
+		auto leslie = play_01.getScene()->getCharacter(Play::LESLIE);
+		leslie->setFacing(Character::CharacterFacing::SOUTH);
+		auto riggan = play_01.getScene()->getCharacter(Play::RIGGAN);
+		riggan->setFacing(Character::CharacterFacing::SOUTH);
+		return   "kitchen/light/start22";
+	});
+
 	dialogue_tree.addDialogue("kitchen/light/start22", "laura", "Christ. What a nightmare...", "kitchen/light/start23");
 	dialogue_tree.addDialogue("kitchen/light/start23", "mel", "He used to call me at the hospital and say...", "kitchen/light/start24");
 	dialogue_tree.addDialogue("kitchen/light/start24", "mel", "\"Son of a bitch. Your days are numbered.\"", "kitchen/light/start25");
@@ -887,7 +931,15 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/light/start32", "terri", "Why don't we just head to the restaurant?", "kitchen/light/start33");
 	dialogue_tree.addDialogue("kitchen/light/start33", "laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\nHe's been depressed.", "kitchen/light/start34");
 	dialogue_tree.addDialogue("kitchen/light/start34", "laura", "I'm worried about him, he's been...", "kitchen/light/start35");
-	dialogue_tree.addDialogue("kitchen/light/start35", "nick", "Been what?\nI'm fine, don't worry Laura, but I will tell you what\nreal love is. This happened some time ago...", "kitchen/light/start36");
+	dialogue_tree.addDialogue("kitchen/light/start35", "nick", "Been what?\nI'm fine, don't worry Laura, but I will tell you what\nreal love is. This happened some time ago...",
+		[&]()
+	{
+		auto riggan = play_01.getScene()->getCharacter(Play::RIGGAN);
+		riggan->setFacing(Character::CharacterFacing::SOUTH);
+		riggan->fastMoveToPosition(riggan->getXPosition(), riggan->getYPosition() + 70.0f);
+		return "kitchen/light/start36";
+	});
+
 	dialogue_tree.addDialogue("kitchen/light/start36", "nick", "It will make us feel ashamed when we talk about love.\nWe talk about love as if we know it well, but that's wrong.", "kitchen/light/start37");
 	dialogue_tree.addDialogue("kitchen/light/start37", "laura", "Nick, for God's sake. Are you getting drunk?", "kitchen/light/start38");
 	dialogue_tree.addDialogue("kitchen/light/start38", "nick", "No of course not.\nI'm just enjoying some cocktails with my friends...", "kitchen/light/start39");
@@ -927,8 +979,26 @@ void GameState::dialogue_kitchen()
 	});
 
 	dialogue_tree.addDialogue("apartment/light/start1", "ed", "Terri! Answer the door Terri, we need to talk!\nI know you're in there!", "apartment/light/start2");
-	dialogue_tree.addDialogue("apartment/light/start2", "ed", "*You repetitively knock on the door. As you try to force\nyour way in you find the door is open.*", "apartment/light/start3");
-	dialogue_tree.addDialogue("apartment/light/start3", "ed", "Terri????", "apartment/light/start4");
+	dialogue_tree.addDialogue("apartment/light/start2", "ed", "*You repetitively knock on the door. As you try to force\nyour way in you find the door is open.*", [&]()
+	{
+		auto riggan = play_01.getScene()->getCharacter(Play::RIGGAN);
+		riggan->setIsActive(true);
+		riggan->setFacing(Character::CharacterFacing::EAST);
+		riggan->fastMoveToPosition(riggan->getXPosition() + 80.0f, riggan->getYPosition());
+		return "apartment/light/start3";
+	});
+
+	dialogue_tree.addDialogue("apartment/light/start3", "ed", "Terri????",
+		[&]()
+	{
+		auto riggan = play_01.getScene()->getCharacter(Play::RIGGAN);
+		auto mike = play_01.getScene()->getCharacter(Play::MIKE);
+		mike->setIsActive(true);
+		mike->setFacing(Character::CharacterFacing::WEST);
+		mike->fastMoveToPosition(riggan->getXPosition() + 90.0f, riggan->getYPosition());
+		return "apartment/comedy/start4";
+	});
+
 	dialogue_tree.addDialogue("apartment/light/start4", "terri", "Ed!...\nWhat are you doing here?", "apartment/light/start5");
 	dialogue_tree.addDialogue("apartment/light/start5", "ed", "I need you to tell me why. Why would you do this to me!\nI lived for you... I worshipped you...", "apartment/light/start6");
 	dialogue_tree.addDialogue("apartment/light/start6", "mel", "Listen Ed, I know you're in a bad place right now...", "apartment/light/start7");
@@ -1163,7 +1233,7 @@ void GameState::dialogue_kitchen()
 		mover->slowMoveToPosition(mover->getXPosition() - 200.0f, mover->getYPosition());
 		play_01.getAudience()->addToSad(15);
 		play_01.getScene()->addToSad(1);
-		return  "kitchen/sad/start47";
+		return  "kitchen/sad/start46";
 	});
 	dialogue_tree.addPlayerOption("kitchen/option3L", "The teen gets high off of painkillers.",
 		[&]()
@@ -1189,7 +1259,7 @@ void GameState::dialogue_kitchen()
 		mover->slowMoveToPosition(mover->getXPosition() - 200.0f, mover->getYPosition());
 		play_01.getAudience()->addToSad(15);
 		play_01.getScene()->addToSad(1);
-		return  "kitchen/sad/start47";
+		return  "kitchen/sad/start46";
 	});
 	dialogue_tree.addPlayerOption("kitchen/option3S", "Teen get away with only a few broken bones",
 		[&]()
@@ -1215,7 +1285,7 @@ void GameState::dialogue_kitchen()
 		mover->slowMoveToPosition(mover->getXPosition() - 200.0f, mover->getYPosition());
 		play_01.getAudience()->addToSad(15);
 		play_01.getScene()->addToSad(1);
-		return  "kitchen/sad/start47";
+		return  "kitchen/sad/start46";
 	});
 	dialogue_tree.addPlayerOption("kitchen/option3D", "Teens body was completely mutilated in crash",
 		[&]()
