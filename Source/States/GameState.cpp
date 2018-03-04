@@ -23,6 +23,7 @@ GameState::GameState(GameData* game_data)
 	, bottom_panel(game_data->getRenderer()->createRawSprite())
 	, top_panel(game_data->getRenderer()->createRawSprite())
 {
+
 	game_data->getAudioManager()->reset();
 	game_data->getAudioManager()->play("FF7.wav", true);
 
@@ -65,10 +66,10 @@ void GameState::update(const ASGE::GameTime& gt)
 
 void GameState::render() const
 {
-	game_data->getRenderer()->renderSprite(*bottom_panel);
+	game_data->getRenderer()->renderSprite(*bottom_panel, Z_ORDER_LAYER::PANELS);
 	visual_dialogue.render();
 	play_01.render();
-	game_data->getRenderer()->renderSprite(*top_panel);
+	game_data->getRenderer()->renderSprite(*top_panel, Z_ORDER_LAYER::PANELS);
 }
 
 void GameState::onActive()

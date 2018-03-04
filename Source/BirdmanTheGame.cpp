@@ -34,7 +34,7 @@ bool BirdmanTheGame::init()
 	renderer->setWindowTitle("Birbie");
 	float cArray[] = { 0.08f, 0.08f, 0.08f };
 	renderer->setClearColour(std::move(cArray));
-	renderer->setSpriteMode(ASGE::SpriteSortMode::IMMEDIATE);
+	renderer->setSpriteMode(ASGE::SpriteSortMode::FRONT_TO_BACK);
 
 	key_handler_id = inputs->addCallbackFnc(ASGE::EventType::E_KEY, &BirdmanTheGame::keyHandler, this);
 

@@ -5,6 +5,7 @@
 #include "GameState.hpp"
 #include "../Architecture/Timer.hpp"
 #include "../Messages/AudioChangeMessage.hpp"
+#include "..\Constants.hpp"
 
 PauseState::PauseState(GameData* game_data, std::string current_music_path)
 	: BaseState(game_data, true)
@@ -89,9 +90,10 @@ void PauseState::update(const ASGE::GameTime &)
 
 void PauseState::render() const
 {
-	game_data->getRenderer()->renderSprite(*dim_background);
-	game_data->getRenderer()->renderSprite(*pause_image);
-	menu.render();
+	menu.render(Z_ORDER_LAYER::PANELS_HIGHER_TEXT);
+	game_data->getRenderer()->renderSprite(*dim_background, Z_ORDER_LAYER::PANELS_HIGHER);
+	game_data->getRenderer()->renderSprite(*pause_image,Z_ORDER_LAYER::PANELS_HIGHER + 100);
+
 }
 
 void PauseState::onActive()

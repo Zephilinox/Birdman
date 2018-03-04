@@ -8,6 +8,8 @@
 #include "States/PlayEndState.h"
 #include "Messages/AudioChangeMessage.hpp"
 
+#include "Constants.hpp"
+
 Play::Play(GameData* data)
 	: audience(data)
 {
@@ -135,39 +137,37 @@ void Play::update(float dt)
 void Play::render() const
 {
 	//Render stage background
-	game_data->getRenderer()->renderSprite(*stage);
+	game_data->getRenderer()->renderSprite(*stage, Z_ORDER_LAYER::STAGE);
 	//render scene
 	scenes[current_scene].render();
 	//render audience
 	audience.render();
 
-	game_data->getRenderer()->renderSprite(*top_left_panel);
+	game_data->getRenderer()->renderSprite(*top_left_panel, Z_ORDER_LAYER::PANELS);
 
 	switch (night)
 	{
 	case 1:
-		game_data->getRenderer()->renderText("First Preview Night", 20, 37);
+		game_data->getRenderer()->renderText("First Preview Night", 20, 37, 1.0f, dark, Z_ORDER_LAYER::PANELS_TEXT);
 		break;
 	case 2:
-		game_data->getRenderer()->renderText("Second Preview Night", 20, 37);
+		game_data->getRenderer()->renderText("Second Preview Night", 20, 37, 1.0f, dark, Z_ORDER_LAYER::PANELS_TEXT);
 		break;
 	case 3:
-		game_data->getRenderer()->renderText("Opening Night", 20, 37);
+		game_data->getRenderer()->renderText("Opening Night", 20, 37, 1.0f, dark, Z_ORDER_LAYER::PANELS_TEXT);
 		break;
 	default:
 		std::cout << "ERROR: NIGHTS IS UNDER 1 OR ABOVE 3\n";
 	}
 	
-	game_data->getRenderer()->renderText(scenes[current_scene].name, 20, 75);
+	game_data->getRenderer()->renderText(scenes[current_scene].name, 20, 75, 1.0f, dark, Z_ORDER_LAYER::PANELS_TEXT);
 
 	underline->xPos(20);
 	underline->yPos(45);
-	game_data->getRenderer()->renderSprite(*underline);
+	game_data->getRenderer()->renderSprite(*underline, Z_ORDER_LAYER::PANELS_TEXT);
 
 	underline->yPos(83);
-	game_data->getRenderer()->renderSprite(*underline);
-
-	game_data->getRenderer()->renderText(std::to_string(current_scene), game_data->getWindowWidth() * 0.5f, game_data->getWindowHeight() * 0.1f, ASGE::COLOURS::ANTIQUEWHITE);
+	game_data->getRenderer()->renderSprite(*underline, Z_ORDER_LAYER::PANELS_TEXT);
 }
 
 void Play::moveToNextScene()

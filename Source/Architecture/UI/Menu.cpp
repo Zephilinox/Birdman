@@ -3,6 +3,7 @@
 //SELF
 #include "../GameData.hpp"
 #include "../Managers/InputManager.hpp"
+#include "..\..\Constants.hpp"
 
 Menu::Menu(GameData* game_data, bool vertical)
 	: game_data(game_data)
@@ -50,17 +51,17 @@ void Menu::update()
 	}
 }
 
-void Menu::render() const
+void Menu::render(int z_order) const
 {
 	for (const Button& b : buttons)
 	{
-		b.render(game_data);
+		b.render(game_data, z_order);
 
 		if (b.isSelected() && selection_image)
 		{
 			selection_image->xPos(b.getPosX() - 8 - selection_image->width());
 			selection_image->yPos(b.getPosY() + 2 - selection_image->height());
-			game_data->getRenderer()->renderSprite(*selection_image);
+			game_data->getRenderer()->renderSprite(*selection_image, z_order);
 		}
 	}
 }

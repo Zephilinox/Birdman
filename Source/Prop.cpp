@@ -1,5 +1,6 @@
 #include "Prop.h"
 #include <Engine\Renderer.h>
+#include "Constants.hpp"
 
 void Prop::setIsActive(bool new_active) 
 {
@@ -32,6 +33,6 @@ void Prop::render(ASGE::Renderer* renderer) const
 {
 	if (prop_sprite)
 	{
-		renderer->renderSprite(*prop_sprite.get());
+		renderer->renderSprite(*prop_sprite.get(), Z_ORDER_LAYER::PROPS);
 	}
 }

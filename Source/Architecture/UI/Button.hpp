@@ -10,13 +10,14 @@
 //SELF
 #include "../GameData.hpp"
 #include "../Signals/Signal.hpp"
+#include "..\..\Constants.hpp"
 
 class Button
 {
 public:
 	Button() noexcept;
 
-	void render(GameData* game_data) const;
+	void render(GameData* game_data, int z_order = Z_ORDER_LAYER::PANELS_TEXT) const;
 
 	bool isSelected() const noexcept;
 	void setSelected(bool selected) noexcept;

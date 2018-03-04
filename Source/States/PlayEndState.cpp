@@ -1,6 +1,7 @@
 #include "PlayEndState.h"
 #include "FadeOutState.hpp"
 #include "GameState.hpp"
+#include "..\Constants.hpp"
 
 PlayEndState::PlayEndState(GameData * game_data, float score)
 	: BaseState(game_data, true),
@@ -54,12 +55,12 @@ void PlayEndState::update(const ASGE::GameTime &)
 
 void PlayEndState::render() const
 {
-	game_data->getRenderer()->renderSprite(*dim_background);
-	game_data->getRenderer()->renderSprite(*score_panel);
-	ok_popup.render();
+	game_data->getRenderer()->renderSprite(*dim_background, Z_ORDER_LAYER::PANELS);
+	game_data->getRenderer()->renderSprite(*score_panel, Z_ORDER_LAYER::PANELS + 1);
+	ok_popup.render(Z_ORDER_LAYER::PANELS_HIGHER_TEXT);
 	std::string output_score = "Final Score: " + std::to_string(final_score);
 	const float c[3] = { 0.917, 0.768, 0.615 };
-	game_data->getRenderer()->renderText(output_score, (game_data->getWindowWidth() / 2) - 80, (game_data->getWindowHeight() / 2) -40, c);
+	game_data->getRenderer()->renderText(output_score, (game_data->getWindowWidth() / 2) - 80, (game_data->getWindowHeight() / 2) -40, 1.0f, c, Z_ORDER_LAYER::PANELS_TEXT);
 }
 
 void PlayEndState::onActive()

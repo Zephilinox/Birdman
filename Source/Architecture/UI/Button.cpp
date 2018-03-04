@@ -3,22 +3,23 @@
 //SELF
 #include "../GameData.hpp"
 #include "../Managers/FontManager.hpp"
+#include "..\..\Constants.hpp"
 
 Button::Button() noexcept
 {
 }
 
-void Button::render(GameData* game_data) const
+void Button::render(GameData* game_data, int z_order) const
 {
 	game_data->getFontManager()->setFont("Dialogue");
 
 	if (selected)
 	{
-		game_data->getRenderer()->renderText(name.c_str(), pos_x, pos_y, 1.0f, selected_colour);
+		game_data->getRenderer()->renderText(name.c_str(), pos_x, pos_y, 1.0f, selected_colour, z_order);
 	}
 	else
 	{
-		game_data->getRenderer()->renderText(name.c_str(), pos_x, pos_y, 1.0f, colour);
+		game_data->getRenderer()->renderText(name.c_str(), pos_x, pos_y, 1.0f, colour, z_order);
 	}
 }
 

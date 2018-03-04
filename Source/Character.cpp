@@ -1,7 +1,7 @@
 #include "Character.h"
 #include "Play.hpp"
 #include <Engine\Renderer.h>
-
+#include "Constants.hpp"
 
 
 Character::Character(ASGE::Renderer* rend) :
@@ -353,22 +353,22 @@ void Character::render(ASGE::Renderer* renderer) const
 				{
 					case NORTH:
 					{
-						renderer->renderSprite(*idle_sprite_back);
+						renderer->renderSprite(*idle_sprite_back, Z_ORDER_LAYER::CHARACTERS + this->y_position);
 						break;
 					}
 					case EAST:
 					{
-						renderer->renderSprite(*idle_sprite_right);
+						renderer->renderSprite(*idle_sprite_right, Z_ORDER_LAYER::CHARACTERS + this->y_position);
 						break;
 					}
 					case SOUTH:
 					{
-						renderer->renderSprite(*idle_sprite_forward);
+						renderer->renderSprite(*idle_sprite_forward, Z_ORDER_LAYER::CHARACTERS + this->y_position);
 						break;
 					}
 					case WEST:
 					{
-						renderer->renderSprite(*idle_sprite_left);
+						renderer->renderSprite(*idle_sprite_left, Z_ORDER_LAYER::CHARACTERS + this->y_position);
 						break;
 					}
 				}
@@ -381,7 +381,7 @@ void Character::render(ASGE::Renderer* renderer) const
 				{
 					case NORTH:
 					{
-						renderer->renderSprite(*backward_walk_sprite.getCurrentFrameSprite());
+						renderer->renderSprite(*backward_walk_sprite.getCurrentFrameSprite(), Z_ORDER_LAYER::CHARACTERS + this->y_position);
 						break;
 					}
 					case EAST:
@@ -390,12 +390,12 @@ void Character::render(ASGE::Renderer* renderer) const
 						{
 							horizontal_walk_sprite.getCurrentFrameSprite()->setFlipFlags(ASGE::Sprite::FlipFlags::NORMAL);
 						}
-						renderer->renderSprite(*horizontal_walk_sprite.getCurrentFrameSprite());
+						renderer->renderSprite(*horizontal_walk_sprite.getCurrentFrameSprite(), Z_ORDER_LAYER::CHARACTERS + this->y_position);
 						break;
 					}
 					case SOUTH:
 					{
-						renderer->renderSprite(*forward_walk_sprite.getCurrentFrameSprite());
+						renderer->renderSprite(*forward_walk_sprite.getCurrentFrameSprite(), Z_ORDER_LAYER::CHARACTERS + this->y_position);
 						break;
 					}
 					case WEST:
@@ -404,7 +404,7 @@ void Character::render(ASGE::Renderer* renderer) const
 						{
 							horizontal_walk_sprite.getCurrentFrameSprite()->setFlipFlags(ASGE::Sprite::FlipFlags::FLIP_X);
 						}
-						renderer->renderSprite(*horizontal_walk_sprite.getCurrentFrameSprite());
+						renderer->renderSprite(*horizontal_walk_sprite.getCurrentFrameSprite(), Z_ORDER_LAYER::CHARACTERS + this->y_position);
 						break;
 					}
 				}

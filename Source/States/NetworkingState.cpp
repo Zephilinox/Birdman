@@ -4,6 +4,7 @@
 #include "../Architecture/GameData.hpp"
 #include "../States/MenuState.hpp"
 #include "../States/FadeOutState.hpp"
+#include "..\Constants.hpp"
 
 struct EntityInfo
 {

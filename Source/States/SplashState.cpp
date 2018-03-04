@@ -6,6 +6,7 @@
 #include "../States/FadeInState.hpp"
 #include "../States/GameState.hpp"
 #include "../Messages/AudioChangeMessage.hpp"
+#include "..\Constants.hpp"
 
 SplashState::SplashState(GameData* game_data)
 	: BaseState(game_data)
@@ -33,8 +34,8 @@ void SplashState::update(const ASGE::GameTime& gt)
 
 void SplashState::render() const
 {
-	game_data->getRenderer()->renderSprite(*left_curtain);
-	game_data->getRenderer()->renderSprite(*right_curtain);
+	game_data->getRenderer()->renderSprite(*left_curtain, Z_ORDER_LAYER::CURTAINS);
+	game_data->getRenderer()->renderSprite(*right_curtain, Z_ORDER_LAYER::CURTAINS);
 }
 
 void SplashState::onActive()

@@ -31,17 +31,17 @@ void Scene::initSceneProps(Play::SceneProps layout)
 		case Play::SceneProps::KITCHEN:
 		{
 			props_pool.at(0).setIsActive(true);
-			props_pool.at(0).setPosition(int((game_data->getWindowWidth() * 0.5f) - (props_pool.at(0).getSprite()->width() * 0.5f)), int(game_data->getWindowHeight() * 0.2f));
+			props_pool.at(0).setPosition((int)((game_data->getWindowWidth() * 0.5f) - (props_pool.at(0).getSprite()->width() * 0.5f)), (int)(game_data->getWindowHeight() * 0.2f));
 			props_pool.at(1).setIsActive(true);
-			props_pool.at(1).setPosition(int((game_data->getWindowWidth() * 0.5f) - (props_pool.at(1).getSprite()->width() * 0.5f)), int(game_data->getWindowHeight() * 0.4f));
+			props_pool.at(1).setPosition((int)((game_data->getWindowWidth() * 0.5f) - (props_pool.at(1).getSprite()->width() * 0.5f)), (int)(game_data->getWindowHeight() * 0.4f));
 			break;
 		}
 		case Play::SceneProps::APARTMENT_BEDROOM:
 		{
 			props_pool.at(2).setIsActive(true);
-			props_pool.at(2).setPosition(int((game_data->getWindowWidth() * 0.5f) - (props_pool.at(2).getSprite()->width() * 0.5f)), int(game_data->getWindowHeight() * 0.15f));
+			props_pool.at(2).setPosition((int)((game_data->getWindowWidth() * 0.5f) - (props_pool.at(2).getSprite()->width() * 0.5f)), (int)(game_data->getWindowHeight() * 0.15f));
 			props_pool.at(3).setIsActive(true);
-			props_pool.at(3).setPosition(int((game_data->getWindowWidth() * 0.5f) - (props_pool.at(3).getSprite()->width() * 0.5f)), int(game_data->getWindowHeight() * 0.25f));
+			props_pool.at(3).setPosition((int)((game_data->getWindowWidth() * 0.5f) - (props_pool.at(3).getSprite()->width() * 0.5f)), (int)(game_data->getWindowHeight() * 0.25f));
 			break;
 		}
 		case Play::SceneProps::ALLEYWAY:

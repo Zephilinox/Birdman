@@ -2,6 +2,7 @@
 #include "Rng.h"
 #include "Architecture\GameData.hpp"
 #include <algorithm>
+#include "Constants.hpp"
 
 //STD
 #include <random>
@@ -66,6 +67,7 @@ void Audience::varyApprovalsBetweenNights()
 	dark_approval = 20.0f;
 	light_approval = 20.0f;
 	comedy_approval = 20.0f;
+	overallApproval = 20.0f;
 }
 
 void Audience::loadAudienceSprites()
@@ -103,19 +105,19 @@ void Audience::render() const
 {
 	if(overallApproval >= 75.0f)
 	{
-		game_data->getRenderer()->renderSprite(*perfect_sprite);
+		game_data->getRenderer()->renderSprite(*perfect_sprite, Z_ORDER_LAYER::PANELS_TEXT);
 	}
 	else if(overallApproval >= 50.0f)
 	{
-		game_data->getRenderer()->renderSprite(*great_sprite);
+		game_data->getRenderer()->renderSprite(*great_sprite, Z_ORDER_LAYER::PANELS_TEXT);
 	}
 	else if(overallApproval >= 25.0f)
 	{
-		game_data->getRenderer()->renderSprite(*good_sprite);
+		game_data->getRenderer()->renderSprite(*good_sprite, Z_ORDER_LAYER::PANELS_TEXT);
 	}
 	else
 	{
-		game_data->getRenderer()->renderSprite(*indifferent_sprite);
+		game_data->getRenderer()->renderSprite(*indifferent_sprite, Z_ORDER_LAYER::PANELS_TEXT);
 	}
 }
 

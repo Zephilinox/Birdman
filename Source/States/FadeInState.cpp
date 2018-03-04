@@ -47,8 +47,8 @@ void FadeInState::update(const ASGE::GameTime& gt)
 
 void FadeInState::render() const
 {
-	game_data->getRenderer()->renderSprite(*left_curtain);
-	game_data->getRenderer()->renderSprite(*right_curtain);
+	game_data->getRenderer()->renderSprite(*left_curtain, Z_ORDER_LAYER::CURTAINS);
+	game_data->getRenderer()->renderSprite(*right_curtain, Z_ORDER_LAYER::CURTAINS);
 }
 
 void FadeInState::onActive()

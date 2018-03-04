@@ -83,8 +83,6 @@ void VisualDialogue::interact()
 
 void VisualDialogue::setupPlayerOptions()
 {
-	const float dark[3] = { 0.4, 0.349, 0.317 };
-
 	has_set_player_options = true;
 	int validOptions = 0;
 	for (size_t i = 0; i < dialogue_tree->current_player_options.size(); ++i)
@@ -176,8 +174,6 @@ void VisualDialogue::updateTree()
 
 void VisualDialogue::render() const
 {
-	const float dark[3] = { 0.4, 0.349, 0.317 };
-
 	game_data->getFontManager()->setFont("Dialogue");
 	game_data->getRenderer()->setDefaultTextColour(dark);
 
@@ -190,26 +186,26 @@ void VisualDialogue::render() const
 	if (speaker)
 	{
 		//There is no way to know the length of a name in pixels, so we can't center this
-		game_data->getRenderer()->renderText(speaker->realName.c_str(), 740, game_data->getWindowHeight() - 210);
+		game_data->getRenderer()->renderText(speaker->realName.c_str(), 740, game_data->getWindowHeight() - 210, 1.0f, dark, Z_ORDER_LAYER::PANELS_TEXT);
 		
 		if (speaker->realName != "")
 		{
-			game_data->getRenderer()->renderSprite(*speaker_underline);
+			game_data->getRenderer()->renderSprite(*speaker_underline,Z_ORDER_LAYER::PANELS_TEXT);
 		}
 
 		if (speaker->portrait)
 		{
 			speaker->portrait->xPos(736);
 			speaker->portrait->yPos(game_data->getWindowHeight() - 185.0f);
-			game_data->getRenderer()->renderSprite(*speaker->portrait.get());
+			game_data->getRenderer()->renderSprite(*speaker->portrait.get(), Z_ORDER_LAYER::PANELS_TEXT);
 		}
 	}
 
-	game_data->getRenderer()->renderText(dialogue_text.substr(0, dialogue_text_characters).c_str(), 20, game_data->getWindowHeight() - 220);
+	game_data->getRenderer()->renderText(dialogue_text.substr(0, dialogue_text_characters).c_str(), 20, game_data->getWindowHeight() - 220, 1.0f, dark, Z_ORDER_LAYER::PANELS_TEXT);
 
 	if (dialogue_text != "" && dialogue_text_characters >= dialogue_text.length())
 	{
-		game_data->getRenderer()->renderSprite(*dialogue_finished_marker.getCurrentFrameSprite());
+		game_data->getRenderer()->renderSprite(*dialogue_finished_marker.getCurrentFrameSprite(), Z_ORDER_LAYER::PANELS_TEXT);
 	}
 
 	options.render();
