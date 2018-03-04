@@ -354,6 +354,7 @@ void GameState::dialogue_kitchen()
 	}, "kitchen/start1");
 
 	//Intro Scene
+
 	dialogue_tree.addDialogue("kitchen/start1", "mel", "Yeah. He loved her so much he tried to kill her.", "kitchen/start2");
 	dialogue_tree.addDialogue("kitchen/start2", "laura", "He tried to kill you?", "kitchen/start3");
 	dialogue_tree.addDialogue("kitchen/start3", "terri", "No.\nOkay, well he did beat me up one night.", "kitchen/start4");
@@ -369,6 +370,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addPlayerOption("kitchen/option1", "Disagree", "kitchen/dark/start9");
 
 	//If Sad Option  - Pick 1 - (done)
+
 	dialogue_tree.addDialogue("kitchen/sad/start9", "nick",
 		[&]()
 	{
@@ -427,6 +429,7 @@ void GameState::dialogue_kitchen()
 	});
 
 	//If Sad Option - Pick 2 - (done)
+
 	dialogue_tree.addDialogue("apartment/sad/start0", "",
 		[&]()
 	{
@@ -449,7 +452,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/sad/start10", "ed", "*You point the gun at Mel's head*", "apartment/sad/start11");
 	dialogue_tree.addDialogue("apartment/sad/start11", "ed", "What's wrong with me.\nWhy do I end up having to beg people to love me?", "apartment/sad/start12");
 	dialogue_tree.addDialogue("apartment/sad/start12", "terri", "Ed.\nEddie.\nPlease..... Give me the gun.", "apartment/sad/start13");
-	dialogue_tree.addDialogue("apartment/sad/start13", "terri", "*terri begins to cry*", "apartment/sad/start14");
+	dialogue_tree.addDialogue("apartment/sad/start13", "terri", "*Terri begins to cry*", "apartment/sad/start14");
 	dialogue_tree.addDialogue("apartment/sad/start14", "terri", "Just look at me.\nI was drowning.\nI was not capable of...", "apartment/sad/start15");
 	dialogue_tree.addDialogue("apartment/sad/start15", "terri", "You deserve to be loved.\nYou do.", "apartment/sad/start16");
 	dialogue_tree.addDialogue("apartment/sad/start16", "ed", "I just wanted to be what you wanted.", "apartment/sad/start17");
@@ -461,7 +464,22 @@ void GameState::dialogue_kitchen()
 		return "kitchen/start0";
 	});
 
+	//If Sad Option - Pick 3 - ()
+	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "*Ed looks at Terri with a sad smile*", "apartment/sad/start14");
+	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "You don't, do you?", "apartment/sad/start14");
+	dialogue_tree.addDialogue("apartment/sad/start13", "terri", "No...", "apartment/sad/start14");
+	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "And you never will...", "apartment/sad/start14");
+	dialogue_tree.addDialogue("apartment/sad/start13", "terri", "I'm sorry Ed", "apartment/sad/start14");
+	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "I don't exist.\nI'm not even here.", "apartment/sad/start14");
+	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "I don't exist.\nNone of this matters.", "apartment/sad/start14");
+	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "*Ed points the gun at Terri...*", "apartment/sad/start14");
+	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "*Then towards Mel*", "apartment/sad/start14");
+	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "*Finally towards his own head...*", "apartment/sad/start14");
+	dialogue_tree.addDialogue("apartment/sad/start13", "ed", "*Ed then pulls the trigger and drops to the floor dead!*", "apartment/sad/start14");
+
+
 	//If Comedy Option - Pick 1 - (done)
+
 	dialogue_tree.addDialogue("kitchen/comedy/start9", "nick", "Well if you ask me.\nSeems like the guy likes tough love.\nIf thats the case reply with tough love.", "kitchen/comedy/start10");
 	dialogue_tree.addDialogue("kitchen/comedy/start10", "nick", "if you still loved him.\nYou should of them smacked him with a pan or even a bat.", "kitchen/comedy/start11");
 	dialogue_tree.addDialogue("kitchen/comedy/start11", "mel", "This isn't something to joke about.\nThe kind of love I'm talking about is...", "kitchen/comedy/start12");
@@ -503,6 +521,7 @@ void GameState::dialogue_kitchen()
 	});
 
 	//If Comedy Option - Pick 2 - ()
+
 	dialogue_tree.addDialogue("apartment/comedy/start0", "",
 		[&]()
 	{
@@ -525,7 +544,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/comedy/start10", "ed", "*You pull a water gun out your jacket, then point it to Mel's head*", "apartment/comedy/start11");
 	dialogue_tree.addDialogue("apartment/comedy/start11", "ed", "Why would you hurt my feelings like this.\n Why do I end up having to be the failed third wheel?", "apartment/comedy/start12");
 	dialogue_tree.addDialogue("apartment/comedy/start12", "terri", "Ed.\nEddie.\nPlease..... Give me the gun.", "apartment/comedy/start13");
-	dialogue_tree.addDialogue("apartment/comedy/start13", "terri", "*terri begin to cry*", "apartment/comedy/start14");
+	dialogue_tree.addDialogue("apartment/comedy/start13", "terri", "*Terri begin to cry*", "apartment/comedy/start14");
 	dialogue_tree.addDialogue("apartment/comedy/start14", "terri", "If you really want me, then have me.\nJust dont hurt Mel.\n I am not capable of...", "apartment/comedy/start15");
 	dialogue_tree.addDialogue("apartment/comedy/start15", "terri", "You deserve to be loved.\n You do and I even mean not as a third wheel.", "apartment/comedy/start16");
 	dialogue_tree.addDialogue("apartment/comedy/start16", "ed", "I just wanted to be what you wanted.", "apartment/comedy/start17");
@@ -543,6 +562,7 @@ void GameState::dialogue_kitchen()
 
 
 	//If Light Option - Pick 1 - (done)
+
 	dialogue_tree.addDialogue("kitchen/light/start9", "nick", "Apologises for being late.\nWell he might of loved her deep down.\nI've only heard his name mentioned in passing.", "kitchen/light/start10");
 	dialogue_tree.addDialogue("kitchen/light/start10", "nick", "He didnt seem like to bad a man then.\nBut I don't think that's really love.\nYou don't try to kill people you love!", "kitchen/light/start11");
 	dialogue_tree.addDialogue("kitchen/light/start11", "mel", "Exactly, it's like you've read my mind.", "kitchen/light/start12");
@@ -584,6 +604,7 @@ void GameState::dialogue_kitchen()
 	});
 
 	//If Light Option - Pick 2 - ()
+
 	dialogue_tree.addDialogue("apartment/light/start0", "",
 	[&]()
 	{
@@ -606,7 +627,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/light/start10", "ed", "*You point your gun towards Mel*", "apartment/light/start11");
 	dialogue_tree.addDialogue("apartment/light/start11", "ed", "What's wrong with me.\n Why do I end up having to beg people to love me?", "apartment/light/start12");
 	dialogue_tree.addDialogue("apartment/light/start12", "terri", "Ed.\nEddie.\nPlease..... Give me the gun.", "apartment/light/start13");
-	dialogue_tree.addDialogue("apartment/light/start13", "terri", "*terri begin to cry*", "apartment/light/start14");
+	dialogue_tree.addDialogue("apartment/light/start13", "terri", "*Terri begin to cry*", "apartment/light/start14");
 	dialogue_tree.addDialogue("apartment/light/start14", "terri", "Just look at me.\n I was drowning.\n I was not capable of...", "apartment/light/start15");
 	dialogue_tree.addDialogue("apartment/light/start15", "terri", "You deserve to be loved.\n You do.", "apartment/light/start16");
 	dialogue_tree.addDialogue("apartment/light/start16", "ed", "I just wanted to be what you wanted, it all i ever wanted.\nI did it for you!.", "apartment/light/start17");
@@ -617,6 +638,20 @@ void GameState::dialogue_kitchen()
 		play_01.moveToNextNight();
 		return "kitchen/start0";
 	});
+
+	//If Light Option - Pick 3 - ()
+
+	dialogue_tree.addDialogue("apartment/light/start19", "ed", "I'm really sorry Terri\n Please just give me another chance\nI'll do anything for you i can change!", "apartment/light/start20");
+	dialogue_tree.addDialogue("apartment/light/start20", "terri", "*I don't know Ed....\n I don't want to get hurt like before...", "apartment/light/start21");
+	dialogue_tree.addDialogue("apartment/light/start21", "ed", "Please Terri, I'm begging you.\nPlease just give me one more chance you won't regret it.", "apartment/light/start22");
+	dialogue_tree.addDialogue("apartment/light/start22", "mel", "Terri...\n You can't seriously be thinking about it\nThat insane after everything he's just done?!", "apartment/light/start23");
+	dialogue_tree.addDialogue("apartment/light/start23", "terri", "Be quiet Mel!\nYou don't understand how much i love him.", "apartment/light/start24");
+	dialogue_tree.addDialogue("apartment/light/start24", "mel", "Fine, I'll leave!\nI don't want to be apart of this mess!", "apartment/light/start25");
+	dialogue_tree.addDialogue("apartment/light/start25", "mel", "*Mel storms out the apartment*", "apartment/light/start26");
+	dialogue_tree.addDialogue("apartment/light/start26", "ed", "Terri so does this mean...\nYou'll give me another chance?", "apartment/light/start27");
+	dialogue_tree.addDialogue("apartment/light/start27", "terri", "Yes Ed i will,\nBut if you ever hurt me again it over ok", "apartment/light/start28");
+	dialogue_tree.addDialogue("apartment/light/start28", "ed", "Don't worry I won't!\nI love you Terri!", "apartment/light/start14");
+
 
 	//If Dark Option - Pick 1 - (done)
 	dialogue_tree.addDialogue("kitchen/dark/start9", "nick", "He beat you?! If he did, you should\nof stuck up for yourself.\nI think if you...", "kitchen/dark/start10");
@@ -660,6 +695,7 @@ void GameState::dialogue_kitchen()
 	});
 
 	//If Dark Option - Pick 2 - ()
+
 	dialogue_tree.addDialogue("apartment/dark/start0", "",
 	[&]()
 	{
@@ -681,7 +717,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/dark/start10", "ed", "*You point the gun at Mel's head*", "apartment/dark/start11");
 	dialogue_tree.addDialogue("apartment/dark/start11", "ed", "What's wrong with me.\nWhat have i done wrong.\n Why don't you want me?", "apartment/dark/start12");
 	dialogue_tree.addDialogue("apartment/dark/start12", "terri", "Ed.\nEddie.\nPlease..... Give me the gun.\nThen we can talk about this .", "apartment/dark/start13");
-	dialogue_tree.addDialogue("apartment/dark/start13", "terri", "*terri begin to cry*", "apartment/dark/start14");
+	dialogue_tree.addDialogue("apartment/dark/start13", "terri", "*Terri begin to cry*", "apartment/dark/start14");
 	dialogue_tree.addDialogue("apartment/dark/start14", "terri", "Just look at me.\n I was drowning.\n I was not capable of...", "apartment/dark/start15");
 	dialogue_tree.addDialogue("apartment/dark/start15", "terri", "You deserve to be loved.\n You do i mean it.\nCalm down please, lets just talk.", "apartment/dark/start16");
 	dialogue_tree.addDialogue("apartment/dark/start16", "ed", "I just wanted to be what you wanted\nSo why don't you want me.", "apartment/dark/start17");
@@ -692,4 +728,20 @@ void GameState::dialogue_kitchen()
 		play_01.moveToNextNight();
 		return "kitchen/start0";
 	});
+
+	//If Dark Option - Pick 3 - ()
+	dialogue_tree.addDialogue("apartment/dark/start19", "ed", "Terri tell me it's not true!", "apartment/dark/start20");
+	dialogue_tree.addDialogue("apartment/dark/start20", "terri", "I'm sorry Ed.\nI've moved on, I'm with Mel now.", "apartment/dark/start21");
+	dialogue_tree.addDialogue("apartment/dark/start21", "ed", "After all I've done.\nThis is what you fucking do to me!!", "apartment/dark/start22");
+	dialogue_tree.addDialogue("apartment/dark/start22", "mel", "Please calm down Ed!", "apartment/dark/start23");
+	dialogue_tree.addDialogue("apartment/dark/start23", "ed", "Shut up you bastard!\nI'm going to fucking kill you all!!", "apartment/dark/start24");
+	dialogue_tree.addDialogue("apartment/dark/start24", "mel", "*No Ed don't!!", "apartment/dark/start25");
+	dialogue_tree.addDialogue("apartment/dark/start25", "terri", "*Terri screams in fear*", "apartment/dark/start26");
+	dialogue_tree.addDialogue("apartment/dark/start26", "mel", "*Mel shoots Ed point blank!\nThen turn towards TerrI*", "apartment/dark/start27");
+	dialogue_tree.addDialogue("apartment/dark/start27", "mel", "Goodbye Terri....\nI'll always love you in my heart", "apartment/dark/start28");
+	dialogue_tree.addDialogue("apartment/dark/start28", "mel", "*Mel then shoots Terri 3 times in the stomach and procceds to leave the apartment*", "apartment/dark/start14");
+
+
+
+
 }
