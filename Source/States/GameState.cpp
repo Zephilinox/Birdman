@@ -70,7 +70,7 @@ void GameState::dialogue_init()
 {
 	dialogue_tree.getActor("player")->realName = "TeamBirb";
 	auto spr = game_data->getRenderer()->createUniqueSprite();
-	spr->loadTexture("../../Resources/Textures/Mike/spl1.png");
+	spr->loadTexture("../../Resources/Textures/mel/spl1.png");
 	dialogue_tree.getActor("player")->portrait = std::move(spr);
 
 	dialogue_tree.getActor("strange_npc")->realName = "Stranger";
@@ -318,11 +318,6 @@ void GameState::dialogue_kitchen()
 	laura_pic->loadTexture("../../Resources/Textures/Laura/ppl1.png");
 	laura->portrait = std::move(laura_pic);
 
-	auto mike = dialogue_tree.getActor("mike");
-	auto mike_pic = game_data->getRenderer()->createUniqueSprite();
-	mike_pic->loadTexture("../../Resources/Textures/Mike/spl1.png");
-	mike->portrait = std::move(mike_pic);
-
 	auto mel = dialogue_tree.getActor("mel");
 	auto mel_pic = game_data->getRenderer()->createUniqueSprite();
 	mel_pic->loadTexture("../../Resources/Textures/Mike/spl1.png");
@@ -445,7 +440,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/sad/start3", "ed", "Terri????", "apartment/sad/start4");
 	dialogue_tree.addDialogue("apartment/sad/start4", "terri", "Ed!...\nWhat are you doing here?", "apartment/sad/start5");
 	dialogue_tree.addDialogue("apartment/sad/start5", "ed", "Why? I need you to tell me why.\nI lived for you, I worshipped you...", "apartment/sad/start6");
-	dialogue_tree.addDialogue("apartment/sad/start6", "mike", "Listen Ed, I know this is hard but...", "apartment/sad/start7");
+	dialogue_tree.addDialogue("apartment/sad/start6", "mel", "Listen Ed, I know this is hard but...", "apartment/sad/start7");
 	dialogue_tree.addDialogue("apartment/sad/start7", "ed", "Fuck you.\nShut up\nFuck you!", "apartment/sad/start8");
 	dialogue_tree.addDialogue("apartment/sad/start8", "ed", "*You push Mel, he falls to the floor*", "apartment/sad/start9");
 	dialogue_tree.addDialogue("apartment/sad/start9", "terri", "Eddie!\nPlease!", "apartment/sad/start10");
@@ -457,7 +452,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/sad/start15", "terri", "You deserve to be loved.\nYou do.", "apartment/sad/start16");
 	dialogue_tree.addDialogue("apartment/sad/start16", "ed", "I just wanted to be what you wanted.", "apartment/sad/start17");
 	dialogue_tree.addDialogue("apartment/sad/start17", "ed", "Now I spend every fucking minute praying to be somebody else.\nSomeone I'm not.\nAnyone...", "apartment/sad/start18");
-	dialogue_tree.addDialogue("apartment/sad/start18", "mike", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"",
+	dialogue_tree.addDialogue("apartment/sad/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"",
 		[&]()
 	{
 		play_01.moveToNextNight();
@@ -521,7 +516,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/comedy/start3", "ed", "How's it going", "apartment/comedy/start4");
 	dialogue_tree.addDialogue("apartment/comedy/start4", "terri", "Ed!...\n What are you doing here?", "apartment/comedy/start5");
 	dialogue_tree.addDialogue("apartment/comedy/start5", "ed", "What? Did Mel not tell you?.\n Mel knows how much i worship you...\nSo he invited me for a threesome", "apartment/comedy/start6");
-	dialogue_tree.addDialogue("apartment/comedy/start6", "mike", "Listen Ed, I know this is hard but...\n the threesome is off", "apartment/comedy/start7");
+	dialogue_tree.addDialogue("apartment/comedy/start6", "mel", "Listen Ed, I know this is hard but...\n the threesome is off", "apartment/comedy/start7");
 	dialogue_tree.addDialogue("apartment/comedy/start7", "ed", "Fuck you.\n Shut up\nWhy would you do this to me!", "apartment/comedy/start8");
 	dialogue_tree.addDialogue("apartment/comedy/start8", "ed", "*You push Mel, he falls to the floor*", "apartment/comedy/start9");
 	dialogue_tree.addDialogue("apartment/comedy/start9", "terri", "Eddie!\nPlease don't!", "apartment/comedy/start10");
@@ -533,14 +528,14 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/comedy/start15", "terri", "You deserve to be loved.\n You do and I even mean not as a third wheel.", "apartment/comedy/start16");
 	dialogue_tree.addDialogue("apartment/comedy/start16", "ed", "I just wanted to be what you wanted.", "apartment/comedy/start17");
 	dialogue_tree.addDialogue("apartment/comedy/start17", "ed", "Now i spend every fucking minute thinking of this fake bastard.\nI can't believe you left me for him.\nAnyone else but him", "apartment/comedy/start18");
-	dialogue_tree.addDialogue("apartment/comedy/start18", "mike", "Put down the gun, Ed.\nDon't do anything stupid.", "apartment/comedy/start19");
+	dialogue_tree.addDialogue("apartment/comedy/start18", "mel", "Put down the gun, Ed.\nDon't do anything stupid.", "apartment/comedy/start19");
 
 	//INSERT PLAYER OPTION HERE
 
 	//If Comedy Option - Pick 3 - ()
 
 	dialogue_tree.addDialogue("apartment/comedy/start19", "ed", "*You spray water into Mel's face*", "apartment/comedy/start20");
-	dialogue_tree.addDialogue("apartment/comedy/start20", "mike", "*Mel's makeup caked face starts to run, it now shows the monster beneath*", "apartment/comedy/start21");
+	dialogue_tree.addDialogue("apartment/comedy/start20", "mel", "*Mel's makeup caked face starts to run, it now shows the monster beneath*", "apartment/comedy/start21");
 	dialogue_tree.addDialogue("apartment/comedy/start21", "ed", "Oh my god, you left this for me\nI can't even look at you Terri\n I can't believe i almost had a threesome with that...", "apartment/comedy/start22");
 	dialogue_tree.addDialogue("apartment/comedy/start22", "ed", "*You walk out the room\n You are so shocked and disgusted that you might shoot yourself*", "apartment/comedy/start20");
 
@@ -602,7 +597,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/light/start3", "ed", "Terri????", "apartment/light/start4");
 	dialogue_tree.addDialogue("apartment/light/start4", "terri", "Ed!...\nWhat are you doing here?", "apartment/light/start5");
 	dialogue_tree.addDialogue("apartment/light/start5", "ed", "I need you to tell me why.\nWhy would you do this to me\nI lived for you, I worshipped you...", "apartment/light/start6");
-	dialogue_tree.addDialogue("apartment/light/start6", "mike", "Listen Ed, I know you're in a bad place right now...", "apartment/light/start7");
+	dialogue_tree.addDialogue("apartment/light/start6", "mel", "Listen Ed, I know you're in a bad place right now...", "apartment/light/start7");
 	dialogue_tree.addDialogue("apartment/light/start7", "ed", "Shut up\nI don't want to hear anything from you!", "apartment/light/start8");
 	dialogue_tree.addDialogue("apartment/light/start8", "ed", "*You push Mel, he falls to the floor*", "apartment/light/start9");
 	dialogue_tree.addDialogue("apartment/light/start9", "terri", "Eddie!\nPlease!", "apartment/light/start10");
@@ -614,7 +609,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/light/start15", "terri", "You deserve to be loved.\n You do.", "apartment/light/start16");
 	dialogue_tree.addDialogue("apartment/light/start16", "ed", "I just wanted to be what you wanted, it all i ever wanted.\nI did it for you!.", "apartment/light/start17");
 	dialogue_tree.addDialogue("apartment/light/start17", "ed", "Now i spend every fucking minute praying to be somebody else.\nSomeone I'm not.\n I love you, after all i've done for you", "apartment/light/start18");
-	dialogue_tree.addDialogue("apartment/light/start18", "mike", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"",
+	dialogue_tree.addDialogue("apartment/light/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"",
 	[&]()
 	{
 		play_01.moveToNextNight();
@@ -677,7 +672,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/dark/start3", "ed", "Terri????", "apartment/dark/start4");
 	dialogue_tree.addDialogue("apartment/dark/start4", "terri", "Ed!...\n What are you doing here?", "apartment/dark/start5");
 	dialogue_tree.addDialogue("apartment/dark/start5", "ed", "Why? I need you to tell me why.\n I lived for you, I worshipped you...", "apartment/dark/start6");
-	dialogue_tree.addDialogue("apartment/dark/start6", "mike", "Listen Ed, I know this is hard but...", "apartment/dark/start7");
+	dialogue_tree.addDialogue("apartment/dark/start6", "mel", "Listen Ed, I know this is hard but...", "apartment/dark/start7");
 	dialogue_tree.addDialogue("apartment/dark/start7", "ed", "Fuck you.\n Shut up\nI'll fucking kill you!", "apartment/dark/start8");
 	dialogue_tree.addDialogue("apartment/dark/start8", "ed", "*You punch Mel, he falls to the floor*", "apartment/dark/start9");
 	dialogue_tree.addDialogue("apartment/dark/start9", "terri", "Eddie!\nPlease!", "apartment/dark/start10");
@@ -689,7 +684,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/dark/start15", "terri", "You deserve to be loved.\n You do i mean it.\nCalm down please, lets just talk.", "apartment/dark/start16");
 	dialogue_tree.addDialogue("apartment/dark/start16", "ed", "I just wanted to be what you wanted\nSo why don't you want me.", "apartment/dark/start17");
 	dialogue_tree.addDialogue("apartment/dark/start17", "ed", "Now i spend every fucking minute praying to be somebody else.\nSomeone I'm not.\nAll of that for you!", "apartment/dark/start18");
-	dialogue_tree.addDialogue("apartment/dark/start18", "mike", "Put down the gun, Ed.\nShe just doesn't love you anymore\nYou need to move on.\"",
+	dialogue_tree.addDialogue("apartment/dark/start18", "mel", "Put down the gun, Ed.\nShe just doesn't love you anymore\nYou need to move on.\"",
 	[&]()
 	{
 		play_01.moveToNextNight();
