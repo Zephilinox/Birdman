@@ -25,4 +25,7 @@ public:
 private:
 	std::unique_ptr<ASGE::Sprite> left_curtain;
 	std::unique_ptr<ASGE::Sprite> right_curtain;
+	std::unique_ptr<ASGE::Sprite> tutorial_image;
+
+	bool tutorial = true;
 };
