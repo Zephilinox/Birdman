@@ -14,6 +14,7 @@
 #include "States/FadeInState.hpp"
 #include "States/GameState.hpp"
 #include "Architecture/Messages/FunctionMessage.hpp"
+#include "States/NetworkingState.hpp"
 
 BirdmanTheGame::~BirdmanTheGame()
 {
@@ -106,6 +107,11 @@ void BirdmanTheGame::update(const ASGE::GameTime& gt)
 	{
 		capFPS = !capFPS;
 		std::cout << "capFPS = " << capFPS << "\n";
+	}
+
+	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_F4))
+	{
+		game_data->getStateManager()->push<NetworkingState>();
 	}
 
 	if (renderer->exit() || this->exit || game_data->exit || game_data->getStateManager()->empty())

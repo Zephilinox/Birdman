@@ -19,6 +19,7 @@ namespace ASGE
 		constexpr int KEY_F1 = 290;
 		constexpr int KEY_F2 = 291;
 		constexpr int KEY_F3 = 292;
+		constexpr int KEY_F4 = 293;
 		constexpr int KEY_LAST = 512; /**< GLFW defines it as 348 however I want to be safe. */
 	}
 }
