@@ -34,7 +34,6 @@ bool BirdmanTheGame::init()
 	float cArray[] = { 0.08f, 0.08f, 0.08f };
 	renderer->setClearColour(std::move(cArray));
 	renderer->setSpriteMode(ASGE::SpriteSortMode::IMMEDIATE);
-	//toggleFPS();
 
 	key_handler_id = inputs->addCallbackFnc(ASGE::EventType::E_KEY, &BirdmanTheGame::keyHandler, this);
 
@@ -80,7 +79,7 @@ void BirdmanTheGame::update(const ASGE::GameTime& gt)
 {
 	//Sleep if our FPS is too high so we avoid too much wasted CPU usage (2k+ fps)
 
-	if (5 - gt.delta_time.count() > 0)
+	if (capFPS && 5 - gt.delta_time.count() > 0)
 	{
 		std::this_thread::sleep_for(
 			std::chrono::duration<double, std::milli>(5 - gt.delta_time.count())
@@ -98,6 +97,17 @@ void BirdmanTheGame::update(const ASGE::GameTime& gt)
 		toggleFullscreen();
 	}
 	
+	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_F2))
+	{
+		toggleFPS();
+	}
+
+	if (game_data->getInputManager()->isKeyPressed(ASGE::KEYS::KEY_F3))
+	{
+		capFPS = !capFPS;
+		std::cout << "capFPS = " << capFPS << "\n";
+	}
+
 	if (renderer->exit() || this->exit || game_data->exit || game_data->getStateManager()->empty())
 	{
 		signalExit();

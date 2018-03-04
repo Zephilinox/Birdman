@@ -5,7 +5,6 @@ class Prop
 {
 public:
 	Prop() = default;
-	~Prop();
 
 	void setIsActive(bool new_active);
 	bool getIsActive() const;
@@ -18,5 +17,5 @@ public:
 
 private:
 	bool isActive = false;
-	ASGE::Sprite* prop_sprite;
+	std::unique_ptr<ASGE::Sprite> prop_sprite = nullptr;
 };

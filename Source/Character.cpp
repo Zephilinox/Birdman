@@ -152,6 +152,8 @@ void Character::initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend)
 		break;
 	}
 
+
+	//TODO - upscale sprites in animated sprites
 	float wid = idle_sprite_forward->width() * 3.0f;
 	float hite = idle_sprite_forward->height() * 3.0f;
 

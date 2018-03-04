@@ -77,11 +77,10 @@ void Scene::initSceneProps(Play::SceneProps layout)
 
 void Scene::initSceneCharacter(Play::SceneCharacters chars)
 {
-	std::unique_ptr<Character> R(new Character(game_data->getRenderer()));
-	R->initCharacter(chars, game_data->getRenderer());
-	R->setIsActive(true);
-	R->setFacing(Character::CharacterFacing::EAST);
-	character_pool.push_back(std::move(R));
+	character_pool.push_back(std::make_unique<Character>(game_data->getRenderer()));
+	character_pool.back()->initCharacter(chars, game_data->getRenderer());
+	character_pool.back()->setIsActive(true);
+	character_pool.back()->setFacing(Character::CharacterFacing::EAST);
 }
 
 void Scene::loadPropTextureStrings()
@@ -98,15 +97,13 @@ void Scene::loadPropTextureStrings()
 	propTextureStrings[9] = "../../Resources/Textures/10.png";
 }
 
-
-
 void Scene::populateProps()
 {
 	for(unsigned int i = 0; i < number_of_props; i++)
 	{
-		Prop* p = new Prop();
-		p->initSprite(game_data->getRenderer(), propTextureStrings[i]);
-		props_pool.push_back(std::move(*p));
+		Prop p;
+		p.initSprite(game_data->getRenderer(), propTextureStrings[i]);
+		props_pool.emplace_back(std::move(p));
 	}
 }
 
@@ -142,9 +139,9 @@ Character* Scene::getCharacter(Play::SceneCharacters character)
 
 void Scene::update(float dt)
 {
-	for(auto& current_character : character_pool)
+	for (auto& current_character : character_pool)
 	{
-		if(current_character->getIsActive())
+		if (current_character->getIsActive())
 		{
 			current_character->update(dt);
 		}
@@ -153,17 +150,17 @@ void Scene::update(float dt)
 
 void Scene::render() const
 {
-	for (auto& current_prop : props_pool)
+	for (const auto& current_prop : props_pool)
 	{
-		if(current_prop.getIsActive())
+		if (current_prop.getIsActive())
 		{
 			current_prop.render(game_data->getRenderer());
 		}
 	}
 
-	for (auto& current_character : character_pool)
+	for (const auto& current_character : character_pool)
 	{
-		if(current_character->getIsActive())
+		if (current_character->getIsActive())
 		{
 			current_character->render(game_data->getRenderer());
 		}
