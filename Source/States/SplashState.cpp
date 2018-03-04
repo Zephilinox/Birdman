@@ -5,6 +5,7 @@
 #include "../States/FadeOutState.hpp"
 #include "../States/FadeInState.hpp"
 #include "../States/GameState.hpp"
+#include "../Messages/AudioChangeMessage.hpp"
 
 SplashState::SplashState(GameData* game_data)
 	: BaseState(game_data)
@@ -29,6 +30,7 @@ void SplashState::update(const ASGE::GameTime& gt)
 	game_data->getStateManager()->push<GameState>();
 	game_data->getStateManager()->push<FadeInState>();
 	game_data->getAudioManager()->play("FF7.wav", true);
+	game_data->getMessageQueue()->sendMessage<AudioChangeMessage>("FF7.wav");
 }
 
 void SplashState::render() const

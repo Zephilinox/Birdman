@@ -4,12 +4,14 @@
 #include "FadeOutState.hpp"
 #include "GameState.hpp"
 #include "../Architecture/Timer.hpp"
+#include "../Messages/AudioChangeMessage.hpp"
 
-PauseState::PauseState(GameData* game_data)
+PauseState::PauseState(GameData* game_data, std::string current_music_path)
 	: BaseState(game_data, true)
 	, menu(game_data)
 	, dim_background(game_data->getRenderer()->createRawSprite())
 	, pause_image(game_data->getRenderer()->createRawSprite())
+	, current_music_path(current_music_path)
 {
 	if (!dim_background->loadTexture("../../Resources/Textures/BlackScreen.png"))
 	{
@@ -44,12 +46,12 @@ PauseState::PauseState(GameData* game_data)
 		});
 	});
 
-	menu.getButton(2).on_click.connect([game_data]()
+	menu.getButton(2).on_click.connect([this, game_data]()
 	{
 		if (game_data->getAudioManager()->getEngineType() == AudioManager::Engine::None)
 		{
 			game_data->getAudioManager()->setEngineType(AudioManager::Engine::IrrKlang);
-			game_data->getAudioManager()->play("FF7.wav", true);
+			game_data->getAudioManager()->play(this->current_music_path, true);
 		}
 		else
 		{

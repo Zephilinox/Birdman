@@ -13,10 +13,11 @@
 #include "../Scene.hpp"
 #include "../Character.h"
 #include "PauseState.hpp"
+#include "../Messages/AudioChangeMessage.hpp"
 
 GameState::GameState(GameData* game_data)
 	: BaseState(game_data)
-	, visual_dialogue(game_data, &dialogue_tree, "start_extra")
+	, visual_dialogue(game_data, &dialogue_tree, "kitchen/start0")
 	, play_01(game_data)
 	, bottom_panel(game_data->getRenderer()->createRawSprite())
 	, top_panel(game_data->getRenderer()->createRawSprite())
@@ -27,9 +28,19 @@ GameState::GameState(GameData* game_data)
 	top_panel->loadTexture("../../Resources/Textures/UI/TopPanel.png");
 
 	play_01.create();
-	dialogue_init();
+	//dialogue_init();
 	dialogue_kitchen();
 	visual_dialogue.updateTree();
+
+	managed_con = game_data->getMessageQueue()->addListener(
+	[&](Message* msg)
+	{
+		if (msg->id == AudioChangeMessage::ID)
+		{
+			const auto* audio_msg = static_cast<AudioChangeMessage*>(msg);
+			current_music_path = audio_msg->audio_path;
+		}
+	});
 }
 
 void GameState::update(const ASGE::GameTime& gt)
@@ -44,7 +55,7 @@ void GameState::update(const ASGE::GameTime& gt)
 
 	if (game_data->getInputManager()->isActionPressed("escape"))
 	{
-		game_data->getStateManager()->push<PauseState>();
+		game_data->getStateManager()->push<PauseState>(current_music_path);
 	}
 }
 
@@ -65,7 +76,7 @@ void GameState::onInactive()
 }
 
 //This is here as a point of reference, consider it documentation.
-
+/*
 void GameState::dialogue_init()
 {
 	dialogue_tree.getActor("player")->realName = "TeamBirb";
@@ -292,7 +303,7 @@ void GameState::dialogue_init()
 	dialogue_tree.addDialogue("town/bye", DialogueTree::player, "Ah okay, bye.", "");
 	dialogue_tree.addDialogue("town/blab", "blab_npc", "We should probably ensure one convo isn't longer than\n3 lines of text. We can break it up with '\\n' but we still\nneed to make sure it doesn't go on for too long", "town/blab2");
 	dialogue_tree.addDialogue("town/blab2", "blab_npc", "If it does we can chain it like so, which is nice.\nIt's not worth the effort trying to automate any of this to be honest.\nWe'll just have to handle it all manually.", "town/start");
-}
+}*/
 
 void GameState::dialogue_kitchen()
 {
@@ -376,6 +387,7 @@ void GameState::dialogue_kitchen()
 	{
 		game_data->getAudioManager()->reset();
 		game_data->getAudioManager()->play("Piano Loop.wav", true);
+		game_data->getMessageQueue()->sendMessage<AudioChangeMessage>("Piano Loop.wav");
 		auto riggan = play_01.getScene()->getCharacter(Play::RIGGAN);
 		riggan->setIsActive(true);
 		riggan->setFacing(Character::CharacterFacing::WEST);

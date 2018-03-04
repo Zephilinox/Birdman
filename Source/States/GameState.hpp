@@ -24,7 +24,7 @@ public:
 
 private:
 	void dialogue_kitchen();
-	void dialogue_init();
+	//void dialogue_init();
 
 	DialogueTree dialogue_tree;
 	VisualDialogue visual_dialogue;
@@ -32,4 +32,7 @@ private:
 
 	std::unique_ptr<ASGE::Sprite> bottom_panel;
 	std::unique_ptr<ASGE::Sprite> top_panel;
+
+	ManagedConnection managed_con;
+	std::string current_music_path;
 };
