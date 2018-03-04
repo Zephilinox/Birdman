@@ -859,10 +859,10 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/dark/start37", "laura", "Nick, for God's sake. Are you drunk?, You speaking nonse", "kitchen/dark/start38");
 	dialogue_tree.addDialogue("kitchen/dark/start38", "nick", "If I want to drink myself to death let me\nIt's my problem not yours, mind your own business.", "kitchen/dark/start39");
 	dialogue_tree.addDialogue("kitchen/dark/start39", "mel", "We're just having a few drinks as mates, nobody's drunk\nIsn't that right Nick just to mates having a drink is all", "kitchen/dark/start40");
-	dialogue_tree.addDialogue("kitchen/dark/start40", "terri", "You say that but I've seen you drink way over your limit already.", "kitchen/dark/start41");
+	dialogue_tree.addDialogue("kitchen/dark/start40", "terri", "You say that but...\nI've seen you drink way over your limit already.", "kitchen/dark/start41");
 	dialogue_tree.addDialogue("kitchen/dark/start41", "nick", "Fuck you Terri, let us drink in peace", "kitchen/dark/start42");
 	dialogue_tree.addDialogue("kitchen/dark/start42", "laura", "If your not drunk, stop acting like an asshole then...", "kitchen/dark/start43");
-	dialogue_tree.addDialogue("kitchen/dark/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "apartment/dark/start0");
+	dialogue_tree.addDialogue("kitchen/dark/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "kitchen/option2");
 
 	//If Dark Option - Pick 2 -
 	dialogue_tree.addDialogue("kitchen/dark/start44", "nick", "Like I was saying...\nThere this old couple, had a car wreck out on the interstate.", "kitchen/dark/start45");
@@ -879,7 +879,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/dark/start51", "nick", "I tried my best to convince the staff\nThey didn't care though", "kitchen/dark/start52");
 	dialogue_tree.addDialogue("kitchen/dark/start52", "nick", "The couple got escorted out the hospital", "kitchen/dark/start53");
 	dialogue_tree.addDialogue("kitchen/dark/start53", "nick", "I went with them\nThe old man told me to just leave\nHe said thank you, but you cant do anything more for us now", "kitchen/dark/start54");
-	dialogue_tree.addDialogue("kitchen/dark/start54", "nick", "Can you imagine?\nThis man had to just watch\nWhile he and his wife now spend there final moments together.", "apartment/dark/start55");
+	dialogue_tree.addDialogue("kitchen/dark/start54", "nick", "Can you imagine?\nThis man had to just watch\nWhile he and his wife now spend their final moments together.", "kitchen/dark/start55");
 	dialogue_tree.addDialogue("kitchen/dark/start55", "nick", "On a pathway\nAll because of a lack of insurance\nSuch silly bastards, they'll learn for next time.", "apartment/dark/start0");
 
 	//Move scene
@@ -905,7 +905,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/dark/start9", "terri", "Eddie!\nPlease!", "apartment/dark/start10");
 	dialogue_tree.addDialogue("apartment/dark/start10", "ed", "*You point the gun at Mel's head*", "apartment/dark/start11");
 	dialogue_tree.addDialogue("apartment/dark/start11", "ed", "What's wrong with me.\nWhat have i done wrong.\nWhy don't you want me?", "apartment/dark/start12");
-	dialogue_tree.addDialogue("apartment/dark/start12", "terri", "Ed.\nEddie.\nPlease..... Give me the gun.\nThen we can talk about this .", "apartment/dark/start13");
+	dialogue_tree.addDialogue("apartment/dark/start12", "terri", "Ed.\nEddie.\nPlease..... Give me the gun, Then we can talk about this .", "apartment/dark/start13");
 	dialogue_tree.addDialogue("apartment/dark/start13", "terri", "*Terri begin to cry*", "apartment/dark/start14");
 	dialogue_tree.addDialogue("apartment/dark/start14", "terri", "Just look at me.\nI was drowning.\nI was not capable of...", "apartment/dark/start15");
 	dialogue_tree.addDialogue("apartment/dark/start15", "terri", "You deserve to be loved.\nYou do i mean it.\nCalm down please, lets just talk.", "apartment/dark/start16");
@@ -923,7 +923,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/dark/start25", "terri", "*Terri screams in fear*", "apartment/dark/start26");
 	dialogue_tree.addDialogue("apartment/dark/start26", "mel", "*Mel shoots Ed point blank!\nThen turn towards TerrI*", "apartment/dark/start27");
 	dialogue_tree.addDialogue("apartment/dark/start27", "mel", "Goodbye Terri....\nI'll always love you in my heart", "apartment/dark/start28");
-	dialogue_tree.addDialogue("apartment/dark/start28", "mel", "*Mel then shoots Terri 3 times in the stomach and procceds to leave the apartment*", "next night");
+	dialogue_tree.addDialogue("apartment/dark/start28", "mel", "*Mel then shoots Terri 3 times in the stomach\n Then procceds to leave the apartment*", "next night");
 
 
 	//Player Option 2
