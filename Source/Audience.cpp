@@ -61,6 +61,11 @@ void Audience::varyApprovalsBetweenNights()
 	comedy_multiplier = std::clamp(comedy_multiplier, 0.1f, 1.4f);
 	light_multiplier = std::clamp(light_multiplier, 0.1f, 1.4f);
 	dark_multiplier = std::clamp(dark_multiplier, 0.1f, 1.4f);
+
+	sad_approval = 20.0f;
+	dark_approval = 20.0f;
+	light_approval = 20.0f;
+	comedy_approval = 20.0f;
 }
 
 void Audience::loadAudienceSprites()
@@ -157,7 +162,6 @@ void Audience::updateApproval()
 //Takes an int, applies it to the responsiveness/multiplier then adds it to the approval
 void Audience::addToSad(float effect)
 {
-
 	sad_approval += effect * sad_multiplier;
 	updateApproval();
 	applyBoredom();
