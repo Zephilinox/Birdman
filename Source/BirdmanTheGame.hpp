@@ -84,5 +84,7 @@ private:
 private:
 	int key_handler_id = -1;  /**< Input Callback ID. The callback ID assigned by the game engine. */
 	std::unique_ptr<GameData> game_data;
+
+	bool capFPS = true;
 };
 
