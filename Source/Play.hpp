@@ -58,4 +58,5 @@ private:
 	int night = 1;
 
 	std::unique_ptr<ASGE::Sprite> top_left_panel;
+	std::unique_ptr<ASGE::Sprite> underline;
 };

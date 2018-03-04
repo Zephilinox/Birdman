@@ -25,6 +25,10 @@ void Play::create()
 	top_left_panel = std::move(game_data->getRenderer()->createUniqueSprite());
 	top_left_panel->loadTexture("../../Resources/Textures/UI/TopLeftPanel.png");
 
+	underline = std::move(game_data->getRenderer()->createUniqueSprite());
+	underline->loadTexture("../../Resources/Textures/UI/SpeakerUnderline.png");
+	underline->width(210);
+
 	//TODO implement scene linked list creation here
 	//Call functions here based on the play to instanciate
 	for (int i = 0; i < number_of_scenes; i++)
@@ -132,19 +136,26 @@ void Play::render() const
 	switch (night)
 	{
 	case 1:
-		game_data->getRenderer()->renderText("First Preview Night", 20, 40);
+		game_data->getRenderer()->renderText("First Preview Night", 20, 37);
 		break;
 	case 2:
-		game_data->getRenderer()->renderText("Second Preview Night", 20, 40);
+		game_data->getRenderer()->renderText("Second Preview Night", 20, 37);
 		break;
 	case 3:
-		game_data->getRenderer()->renderText("Opening Night", 20, 40);
+		game_data->getRenderer()->renderText("Opening Night", 20, 37);
 		break;
 	default:
 		std::cout << "ERROR: NIGHTS IS UNDER 1 OR ABOVE 3\n";
 	}
+	
+	game_data->getRenderer()->renderText(scenes[current_scene].name, 20, 75);
 
-	game_data->getRenderer()->renderText(scenes[current_scene].name, 20, 80);
+	underline->xPos(20);
+	underline->yPos(45);
+	game_data->getRenderer()->renderSprite(*underline);
+
+	underline->yPos(83);
+	game_data->getRenderer()->renderSprite(*underline);
 }
 
 void Play::moveToNextScene()
