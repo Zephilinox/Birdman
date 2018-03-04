@@ -460,7 +460,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/sad/start18", "mike", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"",
 		[&]()
 	{
-		play_01.reset();
+		play_01.moveToNextNight();
 		return "kitchen/start0";
 	});
 
@@ -501,7 +501,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/comedy/start42", "laura", "Don't talk like a drunk if you not...\"",
 		[&]()
 	{
-		play_01.reset();
+		play_01.moveToNextNight();
 		return "apartment/comedy/start0";
 	});
 
@@ -582,7 +582,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/light/start42", "laura", "Don't talk like your plan is going to get drunk then...\"",
 	[&]()
 	{
-		play_01.reset();
+		play_01.moveToNextNight();
 		return "apartment/light/start0";
 	});
 
@@ -617,7 +617,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/light/start18", "mike", "Put down the gun, Ed.\nShe just doesn't love you anymore.\"",
 	[&]()
 	{
-		play_01.reset();
+		play_01.moveToNextNight();
 		return "kitchen/start0";
 	});
 
@@ -658,7 +658,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/dark/start42", "laura", "If your not drunk, stop acting like an asshole then...\"",
 	[&]()
 	{
-		play_01.reset();
+		play_01.moveToNextNight();
 		return "apartment/dark/start0";
 	});
 
@@ -692,7 +692,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("apartment/dark/start18", "mike", "Put down the gun, Ed.\nShe just doesn't love you anymore\nYou need to move on.\"",
 	[&]()
 	{
-		play_01.reset();
+		play_01.moveToNextNight();
 		return "kitchen/start0";
 	});
 }
