@@ -5,8 +5,7 @@ class Prop
 {
 public:
 	Prop() = default;
-	//TODO Ricardo, this needed?
-	~Prop() { delete prop_sprite; }
+	~Prop();
 
 	void setIsActive(bool new_active);
 	bool getIsActive() const;
