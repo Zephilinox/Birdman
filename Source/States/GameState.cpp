@@ -528,7 +528,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/sad/start43", "nick", "Shut up.\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "kitchen/sad/start44");
 
 	//If Sad Option - Pick 2 -
-	dialogue_tree.addDialogue("kitchen/sad/start44", "nick", "Like I was saying...\nThere this old couple.\nUnfortunately they had a car wreck out on the interstate", "kitchen/option2S");
+	dialogue_tree.addDialogue("kitchen/sad/start44", "nick", "Like I was saying...\nThere was this old couple.\nUnfortunately they had a car wreck out on the interstate", "kitchen/option2S");
 	dialogue_tree.addDialogue("kitchen/sad/start45", "nick", "Some drunk kid plowed his dad's pick up into their camper.", "kitchen/option3S");
 
 	//If Sad Option - Pick 3 - 
@@ -537,7 +537,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/sad/start48", "nick", "They were a mess.\nWe worked like hell on them for most of the night...", "kitchen/option4S");
 
 	//If Sad Option - Pick 4 - (done)
-	dialogue_tree.addDialogue("kitchen/sad/start49", "nick", "When we were done\nwe wrapped then in full body casts.\nThe husband was depressed", "kitchen/sad/start50");
+	dialogue_tree.addDialogue("kitchen/sad/start49", "nick", "When we were done\nwe wrapped them in full body casts.\nThe husband was depressed", "kitchen/sad/start50");
 	dialogue_tree.addDialogue("kitchen/sad/start50", "nick", "I told him his wife was gonna pull through\nHe was still depressed.", "kitchen/sad/start51");
 	dialogue_tree.addDialogue("kitchen/sad/start51", "nick", "So\nI got up to his mouth hole and asked him why", "kitchen/sad/start52");
 	dialogue_tree.addDialogue("kitchen/sad/start52", "nick", "And he told me it was because\nhe couldn't see her through the eye holes.", "kitchen/sad/start53");
@@ -761,7 +761,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/comedy/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "kitchen/comedy/start44");
 
 	//If Comedy Option - Pick 2 -
-	dialogue_tree.addDialogue("kitchen/comedy/start44", "nick", "Like I was saying...\nThere this old couple.\nUnfortunately they had a car wreck out on the interstate.", "kitchen/option2C");
+	dialogue_tree.addDialogue("kitchen/comedy/start44", "nick", "Like I was saying...\nThere was this old couple.\nUnfortunately they had a car wreck out on the interstate.", "kitchen/option2C");
 	dialogue_tree.addDialogue("kitchen/comedy/start45", "nick", "Some drunk teen crashed into them\nbecause he was to busy singing\nLet it go and not looking at the road .", "kitchen/option3C");
 
 	//If Comedy Option - Pick 3 - 
@@ -964,7 +964,7 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/light/start43", "nick", "Shut up!\nFor once in your life.\nWill you do me a favor and shut up for a minute?", "kitchen/light/start44");
 
 	//If Light Option - Pick 2 -
-	dialogue_tree.addDialogue("kitchen/light/start44", "nick", "Like I was saying...\nThere this lovely old couple.\nUnfortunately they had a car wreck out on the interstate.", "kitchen/option2L");
+	dialogue_tree.addDialogue("kitchen/light/start44", "nick", "Like I was saying...\nThere was this lovely old couple.\nUnfortunately they had a car wreck out on the interstate.", "kitchen/option2L");
 	dialogue_tree.addDialogue("kitchen/light/start45", "nick", "Some young lad who was learning to drive in his dads'\npickup drove straight into their camper.", "kitchen/option3L");
 
 	//If Light Option - Pick 3 - 
@@ -1083,7 +1083,7 @@ void GameState::dialogue_kitchen()
 
 	//If Dark Option - Pick 1 - (done)
 	dialogue_tree.addDialogue("kitchen/dark/start9", "nick", "He beat you?! If he did, you should\nof stuck up for yourself.\nI think if you...", "kitchen/dark/start10");
-	dialogue_tree.addDialogue("kitchen/dark/start10", "nick", "had beaten him till he\nwas on deaths door, he would learnt his lesson\nHe deserves it.", "kitchen/dark/start11");
+	dialogue_tree.addDialogue("kitchen/dark/start10", "nick", "had beaten him till he\nwas on deaths door, he would of learnt his lesson\nHe deserves it.", "kitchen/dark/start11");
 	dialogue_tree.addDialogue("kitchen/dark/start11", "mel", "I don't think that's the correct thing to do...", "kitchen/dark/start12");
 	dialogue_tree.addDialogue("kitchen/dark/start12", "mel",
 		[&]()
@@ -1178,13 +1178,13 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/dark/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "kitchen/dark/start44");
 
 	//If Dark Option - Pick 2 -
-	dialogue_tree.addDialogue("kitchen/dark/start44", "nick", "Like I was saying...\nThere this old couple.\nUnfortunately they had a car wreck out on the interstate.", "kitchen/option2D");
+	dialogue_tree.addDialogue("kitchen/dark/start44", "nick", "Like I was saying...\nThere was this old couple.\nUnfortunately they had a car wreck out on the interstate.", "kitchen/option2D");
 	dialogue_tree.addDialogue("kitchen/dark/start45", "nick", "Some drunk teen rams the back of there camper\nwith his dad's pick up.", "kitchen/option3D");
 
 	//If Dark Option - Pick 3 - 
 	dialogue_tree.addDialogue("kitchen/dark/start46", "nick", "Stupid fucking teenagers.\nOnce i got to the hospital\nI found out the kid died at the scene.", "kitchen/dark/start47");
-	dialogue_tree.addDialogue("kitchen/dark/start47", "nick", "I was told he ended up crashing into telephone pole\nA lot of his body was mutilated.", "kitchen/dark/start48");
-	dialogue_tree.addDialogue("kitchen/dark/start48", "nick", "We took the old couple up to the O.R...\nThey looked a mess\nThe womens face's was basically hanging off", "kitchen/dark/start49");
+	dialogue_tree.addDialogue("kitchen/dark/start47", "nick", "I was told he ended up crashing into a telephone pole\nA lot of his body was mutilated.", "kitchen/dark/start48");
+	dialogue_tree.addDialogue("kitchen/dark/start48", "nick", "We took the old couple up to the O.R...\nThey looked a mess\nThe womans face's was basically hanging off", "kitchen/dark/start49");
 	dialogue_tree.addDialogue("kitchen/dark/start49", "nick", "They would need work done on them the entire night...", "kitchen/option4D");
 
 	//If Dark Option - Pick 4 - (done)
@@ -1276,7 +1276,7 @@ void GameState::dialogue_kitchen()
 		riggan->setFacing(Character::CharacterFacing::NORTH);
 		return  "apartment/dark/start26";
 	}); 
-	dialogue_tree.addDialogue("apartment/dark/start26", "mel", "*Mel shoots Ed point blank!\nThen turn towards TerrI*",
+	dialogue_tree.addDialogue("apartment/dark/start26", "mel", "*Mel shoots Ed point blank!\nThen turn towards Terri*",
 		[&]()
 	{
 		auto riggan = play_01.getScene()->getCharacter(Play::SceneCharacters::RIGGAN);
@@ -1567,7 +1567,7 @@ void GameState::dialogue_kitchen()
 		play_01.getScene()->addToSad(1);
 		return"apartment/sad/start19";
 	});
-	dialogue_tree.addPlayerOption("apartment/option1L", "Pull a water gun out, then spray Mel.",
+	dialogue_tree.addPlayerOption("apartment/option1L", "Pull a water gun out, then you spray Mel.",
 		[&]()
 	{
 		play_01.getAudience()->addToComedy(15);
