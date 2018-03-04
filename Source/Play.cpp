@@ -101,7 +101,7 @@ void Play::create()
 	scene1.dark.scene = &scene2;
 
 	scene2.name = "Apartment";
-	scene2.scene_description = "*Enter apartment description here*";
+	scene2.scene_description = "*Flashback to a dimly lit apartment*";
 	//Set props to scene type
 	scene2.initSceneProps(Play::APARTMENT_BEDROOM);
 
