@@ -754,50 +754,50 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/light/start14", "terri", "I don't care what anybody says.\nHe was ready to die for it.", "kitchen/light/start15");
 	dialogue_tree.addDialogue("kitchen/light/start15", "mel", "Ask her what he did after she left him.", "kitchen/light/start16");
 	dialogue_tree.addDialogue("kitchen/light/start16", "terri", "He shot himself in the mouth.\nBut he screwed that up, too.\nPoor Ed.", "kitchen/light/start17");
-	dialogue_tree.addDialogue("kitchen/light/start17", "mel", "Poor Ed, my ass.\nThe guy was dangerous.", "kitchen/light/start18");
+	dialogue_tree.addDialogue("kitchen/light/start17", "mel", "\"Poor Ed\" my ass. The guy was dangerous.", "kitchen/light/start18");
 	dialogue_tree.addDialogue("kitchen/light/start18", "laura", "How'd he screw it up if he shot himself in the mouth?", "kitchen/light/start19");
 	dialogue_tree.addDialogue("kitchen/light/start19", "mel", "He used to carry this twenty-two.\nWe lived like fugitives those days.\n", "kitchen/light/start20");
-	dialogue_tree.addDialogue("kitchen/light/start20", "mel", "I never knew if he was going to come\nout of the bushes or from behind\na car and just start shooting.", "kitchen/light/start21");
-	dialogue_tree.addDialogue("kitchen/light/start21", "mel", "The man was crazy.\nHe was capable of anything.", "kitchen/light/start22");
+	dialogue_tree.addDialogue("kitchen/light/start20", "mel", "I never knew if he was going to come out of the bushes\nor from behind a car and just start shooting.", "kitchen/light/start21");
+	dialogue_tree.addDialogue("kitchen/light/start21", "mel", "The man was crazy. He was capable of anything.", "kitchen/light/start22");
 	dialogue_tree.addDialogue("kitchen/light/start22", "laura", "Christ. What a nightmare...", "kitchen/light/start23");
 	dialogue_tree.addDialogue("kitchen/light/start23", "mel", "He used to call me at the hospital and say...", "kitchen/light/start24");
 	dialogue_tree.addDialogue("kitchen/light/start24", "mel", "\"Son of a bitch. Your days are numbered.\"", "kitchen/light/start25");
 
 	dialogue_tree.addDialogue("kitchen/light/start25", "mel", "The maniac shot himself right in front of us!\nI rode with him in the ambulance to the hospital.", "kitchen/light/start26");
-	dialogue_tree.addDialogue("kitchen/light/start26", "terri", "I'll never get that image out of my head.\nRight before he did it, his eyes...\nthey were so sad.", "kitchen/light/start27");
+	dialogue_tree.addDialogue("kitchen/light/start26", "terri", "I'll never get that image out of my head.\nRight before he did it, his eyes...\nThey were so sad.", "kitchen/light/start27");
 	dialogue_tree.addDialogue("kitchen/light/start27", "laura", "Did you have to treat him?", "kitchen/light/start28");
-	dialogue_tree.addDialogue("kitchen/light/start28", "mel", "I didn't have to, But I did.\nHe was in bad shape.", "kitchen/light/start29");
-	dialogue_tree.addDialogue("kitchen/light/start29", "mel", "His head swelled up to twice the size.\nI'd never seen anything like it.", "kitchen/light/start30");
-	dialogue_tree.addDialogue("kitchen/light/start30", "mel", "And I swear to God.\nThat I hope I never do again", "kitchen/light/start31");
-	dialogue_tree.addDialogue("kitchen/light/start31", "mel", "Ask Nick what real love is.\nHe'll agree with me, you watch", "kitchen/light/start32");
+	dialogue_tree.addDialogue("kitchen/light/start28", "mel", "I didn't have to, but I did.\nHe was in bad shape.", "kitchen/light/start29");
+	dialogue_tree.addDialogue("kitchen/light/start29", "mel", "His head swelled up to twice the size.\nI'd never seen anything like it...", "kitchen/light/start30");
+	dialogue_tree.addDialogue("kitchen/light/start30", "mel", "and I swear to God that I hope I never do again.", "kitchen/light/start31");
+	dialogue_tree.addDialogue("kitchen/light/start31", "mel", "Ask Nick what real love is.\nHe'll agree with me, you watch.", "kitchen/light/start32");
 	dialogue_tree.addDialogue("kitchen/light/start32", "terri", "Why don't we just head to the restaurant?", "kitchen/light/start33");
 	dialogue_tree.addDialogue("kitchen/light/start33", "laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\nHe's been depressed.", "kitchen/light/start34");
 	dialogue_tree.addDialogue("kitchen/light/start34", "laura", "I'm worried about him, he's been...", "kitchen/light/start35");
 	dialogue_tree.addDialogue("kitchen/light/start35", "nick", "Been what?\nI'm fine, don't worry Laura, but I will tell you what\nreal love is. This happened some time ago...", "kitchen/light/start36");
 	dialogue_tree.addDialogue("kitchen/light/start36", "nick", "It will make us feel ashamed when we talk about love.\nWe talk about love as if we know it well, but that's wrong.", "kitchen/light/start37");
 	dialogue_tree.addDialogue("kitchen/light/start37", "laura", "Nick, for God's sake. Are you getting drunk?", "kitchen/light/start38");
-	dialogue_tree.addDialogue("kitchen/light/start38", "nick", "No of course not\nJust enjoying some cocktails with my friends...", "kitchen/light/start39");
-	dialogue_tree.addDialogue("kitchen/light/start39", "mel", "Yeah nobody's getting drunk.\nWe're just having a few drinks, as friends.", "kitchen/light/start40");
+	dialogue_tree.addDialogue("kitchen/light/start38", "nick", "No of course not.\nI'm just enjoying some cocktails with my friends...", "kitchen/light/start39");
+	dialogue_tree.addDialogue("kitchen/light/start39", "mel", "Yeah nobody's getting drunk.\nWe're just having a few drinks, that's all.", "kitchen/light/start40");
 	dialogue_tree.addDialogue("kitchen/light/start40", "terri", "You've had more than a few.", "kitchen/light/start41");
-	dialogue_tree.addDialogue("kitchen/light/start41", "nick", "Common Terri, relax, have some fun?", "kitchen/light/start42");
+	dialogue_tree.addDialogue("kitchen/light/start41", "nick", "Come on Terri, relax, have some fun?", "kitchen/light/start42");
 	dialogue_tree.addDialogue("kitchen/light/start42", "laura", "Don't talk as if your plan is to get drunk then...", "kitchen/light/start43");
 	dialogue_tree.addDialogue("kitchen/light/start43", "nick", "Shut up!\nFor once in your life.\nWill you do me a favor and shut up for a minute?", "kitchen/light/start44");
 
 	//If Light Option - Pick 2 -
 	dialogue_tree.addDialogue("kitchen/light/start44", "nick", "Like I was saying...\nThere this lovely old couple.\nUnfortunately they had a car wreck out on the interstate.", "kitchen/option2L");
-	dialogue_tree.addDialogue("kitchen/light/start45", "nick", "Some young lad\nWho was learning to drive in his dads' pickup\nWent straight into their camper.", "kitchen/option3L");
+	dialogue_tree.addDialogue("kitchen/light/start45", "nick", "Some young lad who was learning to drive in his dads'\npickup drove straight into their camper.", "kitchen/option3L");
 
 	//If Light Option - Pick 3 - 
-	dialogue_tree.addDialogue("kitchen/light/start46", "nick", "When I got to the hospital\nI found out the young lad was fine\nHe just had a broken collar bone.", "kitchen/light/start47");
+	dialogue_tree.addDialogue("kitchen/light/start46", "nick", "When I got to the hospital I found out the young lad\nwas fine, he just had a broken collar bone.", "kitchen/light/start47");
 	dialogue_tree.addDialogue("kitchen/light/start47", "nick", "He was off in a corner just relaxing on a bed.\nSo we took the old couple up to the O.R...", "kitchen/light/start48");
 	dialogue_tree.addDialogue("kitchen/light/start48", "nick", "They were a mess.\nWe were keeping an eye on them all night...", "kitchen/option4L");
 
 	//If Light Option - Pick 4 - (done)
-	dialogue_tree.addDialogue("kitchen/light/start49", "nick", "When we were done\nLuckly the gentleman was fine.\nHe was worried his wife wasn't going to recover.", "kitchen/light/start50");
-	dialogue_tree.addDialogue("kitchen/light/start50", "nick", "I told him his wife was gonna pull through\nAs it was only a leg break, it will heal.", "kitchen/light/start51");
-	dialogue_tree.addDialogue("kitchen/light/start51", "nick", "He still seemed worried\nSo I asked him why?", "kitchen/light/start52");
-	dialogue_tree.addDialogue("kitchen/light/start52", "nick", "And he told me it was because\nhe was worried it wouldn't heal properly\nbecause she isn't as young as she used to be.", "kitchen/light/start53");
-	dialogue_tree.addDialogue("kitchen/light/start53", "nick", "Can you imagine?\nI'm telling you, the mans heart was breaking because\nhe cared so much about his wifes wellbeing.", "apartment/light/start0");
+	dialogue_tree.addDialogue("kitchen/light/start49", "nick", "When we were done, luckily the gentleman was fine.\nHe was worried his wife wasn't going to recover.", "kitchen/light/start50");
+	dialogue_tree.addDialogue("kitchen/light/start50", "nick", "I told him his wife was gonna pull through as it was\nonly a leg break. It will heal.", "kitchen/light/start51");
+	dialogue_tree.addDialogue("kitchen/light/start51", "nick", "He still seemed worried, so I asked him why?", "kitchen/light/start52");
+	dialogue_tree.addDialogue("kitchen/light/start52", "nick", "He told me it was because he was worried it wouldn't heal\nproperly as she isn't as young as she used to be.", "kitchen/light/start53");
+	dialogue_tree.addDialogue("kitchen/light/start53", "nick", "Can you imagine? I'm telling you, the mans heart was\nbreaking because he cared so much about his wifes wellbeing.", "apartment/light/start0");
 
 	//Move scene
 
@@ -961,21 +961,21 @@ void GameState::dialogue_kitchen()
 	});
 	
 	//Player Option 2 Light Line
-	dialogue_tree.addPlayerOption("kitchen/option2L", "A drunk teen crashed in to the old couple",
+	dialogue_tree.addPlayerOption("kitchen/option2L", "A drunk teen crashed into the old couple.",
 		[&]()
 	{
 		play_01.getAudience()->addToSad(15);
 		play_01.getScene()->addToSad(1);
 		return "kitchen/sad/start45";
 	});
-	dialogue_tree.addPlayerOption("kitchen/option2L", "A drunk teen singing \"let it go\" crashed into the old couple",
+	dialogue_tree.addPlayerOption("kitchen/option2L", "A drunk teen singing \"let it go\" crashed into the old couple.",
 		[&]()
 	{
 		play_01.getAudience()->addToComedy(15);
 		play_01.getScene()->addToComedy(1);
 		return "kitchen/comedy/start45";
 	});
-	dialogue_tree.addPlayerOption("kitchen/option2L", "A learner driver crashed into the old couple",
+	dialogue_tree.addPlayerOption("kitchen/option2L", "A learner driver crashed into the old couple.",
 		[&]()
 	{
 		play_01.getAudience()->addToLight(15);
@@ -1041,7 +1041,7 @@ void GameState::dialogue_kitchen()
 	});
 
 	//Player Option 3 Light Line
-	dialogue_tree.addPlayerOption("kitchen/option3L", "Lad doesn't make it",
+	dialogue_tree.addPlayerOption("kitchen/option3L", "The teen doesn't make it.",
 		[&]
 	{
 		auto mover = play_01.getScene()->getCharacter(Play::RIGGAN);
@@ -1051,14 +1051,14 @@ void GameState::dialogue_kitchen()
 		play_01.getScene()->addToSad(1);
 		return  "kitchen/sad/start47";
 	});
-	dialogue_tree.addPlayerOption("kitchen/option3L", "Teen gets high off painkillers",
+	dialogue_tree.addPlayerOption("kitchen/option3L", "The eeen gets high off of painkillers.",
 		[&]()
 	{
 		play_01.getAudience()->addToComedy(15);
 		play_01.getScene()->addToComedy(1);
 		return "kitchen/comedy/start46";
 	});
-	dialogue_tree.addPlayerOption("kitchen/option3L", "Teen get away with only a few broken bones",
+	dialogue_tree.addPlayerOption("kitchen/option3L", "The teen gets away with only a few broken bones."
 		[&]()
 	{
 		play_01.getAudience()->addToLight(15);
@@ -1129,21 +1129,21 @@ void GameState::dialogue_kitchen()
 	
 
 	//Player Option 4 Light Line
-	dialogue_tree.addPlayerOption("kitchen/option4L", "Old couple is put into full body casts",
+	dialogue_tree.addPlayerOption("kitchen/option4L", "The old couple is put into full body casts.",
 		[&]()
 	{
 		play_01.getAudience()->addToSad(15);
 		play_01.getScene()->addToSad(1);
 		return "kitchen/sad/start49";
 	});
-	dialogue_tree.addPlayerOption("kitchen/option4L", "Old man jokes about the situation",
+	dialogue_tree.addPlayerOption("kitchen/option4L", "The old man cracks a joke about the situation.",
 		[&]()
 	{
 		play_01.getAudience()->addToComedy(15);
 		play_01.getScene()->addToComedy(1);
 		return "kitchen/comedy/start49";
 	});
-	dialogue_tree.addPlayerOption("kitchen/option4L", "Couple walk away with just a few bad bruises",
+	dialogue_tree.addPlayerOption("kitchen/option4L", "The couple walks away with just a few bad bruises.",
 		[&]()
 	{
 		play_01.getAudience()->addToLight(15);
