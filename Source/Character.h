@@ -28,8 +28,8 @@ public:
 	void setFacing(CharacterFacing new_facing);
 	void setState(CharacterState new_state);
 
-	float getXPosition(){ return x_position; }
-	float getYPosition() { return y_position; }
+	float getXPosition() const { return x_position; }
+	float getYPosition() const { return y_position; }
 
 	void setIsActive(bool new_active);
 	bool getIsActive() const;

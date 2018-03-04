@@ -166,8 +166,6 @@ void Play::render() const
 
 	underline->yPos(83);
 	game_data->getRenderer()->renderSprite(*underline);
-
-	game_data->getRenderer()->renderText(std::to_string(current_scene), game_data->getWindowWidth() * 0.5f, game_data->getWindowHeight() * 0.1f, ASGE::COLOURS::ANTIQUEWHITE);
 }
 
 void Play::moveToNextScene()
