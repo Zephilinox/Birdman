@@ -1018,7 +1018,7 @@ void GameState::dialogue_kitchen()
 	//If Light Option - Pick 5 - ()
 
 	dialogue_tree.addDialogue("apartment/light/start19", "ed", "I'm really sorry Terri. Please just give me another chance.\nI'll do anything for you. I can change!", "apartment/light/start20");
-	dialogue_tree.addDialogue("apartment/light/start20", "terri", "*I don't know Ed... I don't want to get hurt like before.", "apartment/light/start21");
+	dialogue_tree.addDialogue("apartment/light/start20", "terri", "I don't know Ed... I don't want to get hurt like before.", "apartment/light/start21");
 	dialogue_tree.addDialogue("apartment/light/start21", "ed", "Please Terri, I'm begging you.\nPlease just give me one more chance! you won't regret it.", "apartment/light/start22");
 	dialogue_tree.addDialogue("apartment/light/start22", "mel", "Terri... you can't seriously be considering it\nThat's insane! after everything he's just done?!", "apartment/light/start23");
 	dialogue_tree.addDialogue("apartment/light/start23", "terri", "Be quiet Mel!\nYou don't understand how much I love him.", "apartment/light/start24");
