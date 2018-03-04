@@ -999,7 +999,7 @@ void GameState::dialogue_kitchen()
 		play_01.getScene()->addToLight(1);
 		return "kitchen/light/start44";
 	});
-	dialogue_tree.addPlayerOption("kitchen/option2S", "Drunk teen rams into old couple",
+	dialogue_tree.addPlayerOption("kitchen/option2S", "Drunk teen rams intentionally into an old couple",
 		[&]()
 	{
 		play_01.getAudience()->addToDark(15);
@@ -1016,7 +1016,7 @@ void GameState::dialogue_kitchen()
 		return "kitchen/sad/start44";
 	});
 	
-	dialogue_tree.addPlayerOption("kitchen/option2D", "Drunk teen rams into old couple",
+	dialogue_tree.addPlayerOption("kitchen/option2D", "Drunk teen rams intentionally into an old couple",
 		[&]()
 	{
 		play_01.getAudience()->addToDark(15);
