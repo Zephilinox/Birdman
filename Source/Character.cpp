@@ -39,6 +39,8 @@ bool Character::getIsActive() const
 
 void Character::initCharacter(Play::SceneCharacters actor, ASGE::Renderer* rend)
 {
+
+	//TODO move raw sprite creation out of switch, saves space/repetition
 	switch(actor)
 	{
 	case Play::SceneCharacters::RIGGAN:
@@ -204,7 +206,7 @@ void Character::slowMoveToPosition(float x, float y)
 	horizontal_walk_sprite.play();
 	backward_walk_sprite.play();
 	forward_walk_sprite.play();
-	move_speed = 3.0f;
+	move_speed = 20.0f;
 	target_x_position = x;
 	target_y_position = y;
 }
@@ -215,7 +217,7 @@ void Character::fastMoveToPosition(float x, float y)
 	horizontal_walk_sprite.play();
 	backward_walk_sprite.play();
 	forward_walk_sprite.play();
-	move_speed = 5.0f;
+	move_speed = 35.0f;
 	target_x_position = x;
 	target_y_position = y;
 }
@@ -316,27 +318,7 @@ void Character::loadCharacterTextureStrings()
 void Character::update(float dt)
 {
 	//TODO - move this into function?
-	//update all sprites positions to the same values
-	idle_sprite_forward->xPos(x_position);
-	idle_sprite_forward->yPos(y_position);
-
-	idle_sprite_right->xPos(x_position);
-	idle_sprite_right->yPos(y_position);
-
-	idle_sprite_back->xPos(x_position);
-	idle_sprite_back->yPos(y_position);
-
-	idle_sprite_left->xPos(x_position);
-	idle_sprite_left->yPos(y_position);
-
-	//update anim sprite poses
-	forward_walk_sprite.xPos = x_position;
-	backward_walk_sprite.xPos = x_position;
-	horizontal_walk_sprite.xPos = x_position;
-
-	forward_walk_sprite.yPos = y_position;
-	backward_walk_sprite.yPos = y_position;
-	horizontal_walk_sprite.yPos = y_position;
+	updateOverridePositions();
 
 	switch(char_state)
 	{
@@ -355,11 +337,11 @@ void Character::update(float dt)
 		bool xPosMatched = false;
 		bool yPosMatched = false;
 
-			if(x_position < target_x_position)
+			if((target_x_position - x_position) >= 0.1f)
 			{
 				x_position += move_speed * dt;
 			}
-			else if(x_position > target_x_position)
+			else if((x_position - target_x_position) >= 0.1f)
 			{
 				x_position -= move_speed * dt;
 			}
@@ -368,11 +350,11 @@ void Character::update(float dt)
 				xPosMatched = true;
 			}
 
-			if(y_position < target_y_position)
+			if((target_y_position - y_position) >= 0.1f)
 			{
 				y_position += move_speed * dt;
 			}
-			else if(y_position > target_y_position)
+			else if((y_position - target_y_position) >= 0.1f)
 			{
 				y_position -= move_speed * dt;
 			}
@@ -446,6 +428,10 @@ void Character::render(ASGE::Renderer* renderer) const
 					}
 					case EAST:
 					{
+						if(horizontal_walk_sprite.getCurrentFrameSprite()->isFlippedOnX())
+						{
+							horizontal_walk_sprite.getCurrentFrameSprite()->setFlipFlags(ASGE::Sprite::FlipFlags::NORMAL);
+						}
 						renderer->renderSprite(*horizontal_walk_sprite.getCurrentFrameSprite());
 						break;
 					}
@@ -456,6 +442,10 @@ void Character::render(ASGE::Renderer* renderer) const
 					}
 					case WEST:
 					{
+						if(!horizontal_walk_sprite.getCurrentFrameSprite()->isFlippedOnX())
+						{
+							horizontal_walk_sprite.getCurrentFrameSprite()->setFlipFlags(ASGE::Sprite::FlipFlags::FLIP_X);
+						}
 						renderer->renderSprite(*horizontal_walk_sprite.getCurrentFrameSprite());
 						break;
 					}
@@ -468,4 +458,29 @@ void Character::render(ASGE::Renderer* renderer) const
 				break;
 			}
 		}
+}
+
+void Character::updateOverridePositions()
+{
+	//update all sprites positions to the same values
+	idle_sprite_forward->xPos(x_position);
+	idle_sprite_forward->yPos(y_position);
+
+	idle_sprite_right->xPos(x_position);
+	idle_sprite_right->yPos(y_position);
+
+	idle_sprite_back->xPos(x_position);
+	idle_sprite_back->yPos(y_position);
+
+	idle_sprite_left->xPos(x_position);
+	idle_sprite_left->yPos(y_position);
+
+	//update anim sprite poses
+	forward_walk_sprite.xPos = x_position;
+	backward_walk_sprite.xPos = x_position;
+	horizontal_walk_sprite.xPos = x_position;
+
+	forward_walk_sprite.yPos = y_position;
+	backward_walk_sprite.yPos = y_position;
+	horizontal_walk_sprite.yPos = y_position;
 }

@@ -374,7 +374,17 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addPlayerOption("kitchen/option1", "Disagree", "kitchen/dark/start9");
 
 	//If Sad Option  - Pick 1 - (done)
-	dialogue_tree.addDialogue("kitchen/sad/start9", "nick", "Sorry I'm late.\nI'm the wrong person to ask.\nI've only heard his name mentioned in passing.", "kitchen/sad/start10");
+	dialogue_tree.addDialogue("kitchen/sad/start9", "nick",
+		[&]()
+	{
+		auto riggan = play_01.getScene()->getCharacter(Play::RIGGAN);
+		riggan->setIsActive(true);
+		riggan->setFacing(Character::CharacterFacing::WEST);
+		riggan->setPosition(1100, 280);
+		riggan->fastMoveToPosition(730, 280);
+
+		return "Sorry I'm late.\nI'm the wrong person to ask.\nI've only heard his name mentioned in passing.";
+	}, "kitchen/sad/start10");
 	dialogue_tree.addDialogue("kitchen/sad/start10", "nick", "You'd have to know the particulars\nBut I think what you're saying is\nthat love is absolute.", "kitchen/sad/start11");
 	dialogue_tree.addDialogue("kitchen/sad/start11", "mel", "Yeah. The kind of love I'm talking about is...", "kitchen/sad/start12");
 	dialogue_tree.addDialogue("kitchen/sad/start12", "mel", "The kind of love I'm talking about, you don't try and kill people.", "kitchen/sad/start13");

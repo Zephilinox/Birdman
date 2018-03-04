@@ -47,6 +47,7 @@ private:
 
 	std::string charTextureStrings[70];
 
+	void updateOverridePositions();
 
 	float x_position = 0.0f;
 	float y_position = 0.0f;
