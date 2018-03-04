@@ -58,7 +58,8 @@ void PlayEndState::render() const
 	game_data->getRenderer()->renderSprite(*score_panel);
 	ok_popup.render();
 	std::string output_score = "Final Score: " + std::to_string(final_score);
-	game_data->getRenderer()->renderText(output_score, (game_data->getWindowWidth() / 2) - 80, (game_data->getWindowHeight() / 2) -40, ASGE::COLOURS::DARKBLUE);
+	const float c[3] = { 0.917, 0.768, 0.615 };
+	game_data->getRenderer()->renderText(output_score, (game_data->getWindowWidth() / 2) - 80, (game_data->getWindowHeight() / 2) -40, c);
 }
 
 void PlayEndState::onActive()
