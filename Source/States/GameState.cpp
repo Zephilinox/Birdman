@@ -747,7 +747,7 @@ void GameState::dialogue_kitchen()
 	//If Light Option - Pick 1 - (done)
 
 	dialogue_tree.addDialogue("kitchen/light/start9", "nick", "Apologies for being late.\nWell he might of loved her deep down.\nI've only heard his name mentioned in passing.", "kitchen/light/start10");
-	dialogue_tree.addDialogue("kitchen/light/start10", "nick", "He didn't seem like that kind of persin.\nI don't think that's really love.\nYou don't try to kill the people you love!", "kitchen/light/start11");
+	dialogue_tree.addDialogue("kitchen/light/start10", "nick", "He didn't seem like that kind of person.\nI don't think that's really love.\nYou don't try to kill the people you love!", "kitchen/light/start11");
 	dialogue_tree.addDialogue("kitchen/light/start11", "mel", "Exactly, it's like you've read my mind.", "kitchen/light/start12");
 	dialogue_tree.addDialogue("kitchen/light/start12", "mel", "With real love, you don't try and kill people.", "kitchen/light/start13");
 	dialogue_tree.addDialogue("kitchen/light/start13", "terri", "It was love, Mel.\nTo Eddie, it was.", "kitchen/light/start14");
@@ -773,18 +773,18 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/light/start32", "terri", "Why don't we just head to the restaurant?", "kitchen/light/start33");
 	dialogue_tree.addDialogue("kitchen/light/start33", "laura", "Don't get him started, Mel.\nYou haven't seen how he's been lately.\nHe's been depressed.", "kitchen/light/start34");
 	dialogue_tree.addDialogue("kitchen/light/start34", "laura", "I'm worried about him, he's been...", "kitchen/light/start35");
-	dialogue_tree.addDialogue("kitchen/light/start35", "nick", "Been what?\nI'm fine, don't worry Laura, but I will tell you what\n real love is, this happened some time ago.", "kitchen/light/start36");
-	dialogue_tree.addDialogue("kitchen/light/start36", "nick", "It will make us feel ashamed when we talk about love\nwe talk about love as if we know it well, but that is wrong.", "kitchen/light/start37");
+	dialogue_tree.addDialogue("kitchen/light/start35", "nick", "Been what?\nI'm fine, don't worry Laura, but I will tell you what\nreal love is. This happened some time ago...", "kitchen/light/start36");
+	dialogue_tree.addDialogue("kitchen/light/start36", "nick", "It will make us feel ashamed when we talk about love.\nWe talk about love as if we know it well, but that's wrong.", "kitchen/light/start37");
 	dialogue_tree.addDialogue("kitchen/light/start37", "laura", "Nick, for God's sake. Are you getting drunk?", "kitchen/light/start38");
-	dialogue_tree.addDialogue("kitchen/light/start38", "nick", "No of course not, just enjoying some cocktails with my friends.", "kitchen/light/start39");
+	dialogue_tree.addDialogue("kitchen/light/start38", "nick", "No of course not\nJust enjoying some cocktails with my friends...", "kitchen/light/start39");
 	dialogue_tree.addDialogue("kitchen/light/start39", "mel", "Yeah nobody's getting drunk.\nWe're just having a few drinks, as friends.", "kitchen/light/start40");
 	dialogue_tree.addDialogue("kitchen/light/start40", "terri", "You've had more than a few.", "kitchen/light/start41");
 	dialogue_tree.addDialogue("kitchen/light/start41", "nick", "Common Terri, relax, have some fun?", "kitchen/light/start42");
 	dialogue_tree.addDialogue("kitchen/light/start42", "laura", "Don't talk as if your plan is to get drunk then...", "kitchen/light/start43");
-	dialogue_tree.addDialogue("kitchen/light/start43", "nick", "Shut up!\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "kitchen/option2L");
+	dialogue_tree.addDialogue("kitchen/light/start43", "nick", "Shut up!\nFor once in your life.\nWill you do me a favor and shut up for a minute?", "kitchen/light/start44");
 
 	//If Light Option - Pick 2 -
-	dialogue_tree.addDialogue("kitchen/light/start44", "nick", "Like I was saying...\nThere this lovely old couple\nunfortunately they had a car wreck out on the interstate.", "kitchen/light/start45");
+	dialogue_tree.addDialogue("kitchen/light/start44", "nick", "Like I was saying...\nThere this lovely old couple.\nUnfortunately they had a car wreck out on the interstate.", "kitchen/option2L");
 	dialogue_tree.addDialogue("kitchen/light/start45", "nick", "Some young lad\nWho was learning to drive in his dads' pickup\nWent straight into their camper.", "kitchen/option3L");
 
 	//If Light Option - Pick 3 - 
@@ -961,26 +961,26 @@ void GameState::dialogue_kitchen()
 	});
 	
 	//Player Option 2 Light Line
-	dialogue_tree.addPlayerOption("kitchen/option2L", "Drunk teen crashes into an old couple",
+	dialogue_tree.addPlayerOption("kitchen/option2L", "A drunk teen crashed in to the old couple",
 		[&]()
 	{
 		play_01.getAudience()->addToSad(15);
 		play_01.getScene()->addToSad(1);
-		return "kitchen/sad/start44";
+		return "kitchen/sad/start45";
 	});
-	dialogue_tree.addPlayerOption("kitchen/option2L", "Drunk teen singing let it go, crashes into old couple",
+	dialogue_tree.addPlayerOption("kitchen/option2L", "A drunk teen singing \"let it go\" crashed into the old couple",
 		[&]()
 	{
 		play_01.getAudience()->addToComedy(15);
 		play_01.getScene()->addToComedy(1);
-		return "kitchen/comedy/start44";
+		return "kitchen/comedy/start45";
 	});
-	dialogue_tree.addPlayerOption("kitchen/option2L", "Learner driver crashes into an old couple",
+	dialogue_tree.addPlayerOption("kitchen/option2L", "A learner driver crashed into the old couple",
 		[&]()
 	{
 		play_01.getAudience()->addToLight(15);
 		play_01.getScene()->addToLight(1);
-		return "kitchen/light/start44";
+		return "kitchen/light/start45";
 	});
 	
 	//Player Option 2 Sad Line
