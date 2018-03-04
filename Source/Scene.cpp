@@ -86,7 +86,6 @@ void Scene::initSceneCharacter(Play::SceneCharacters chars)
 
 void Scene::loadPropTextureStrings()
 {
-	//TODO find a nice way of doing this if pos?
 	propTextureStrings[0] = "../../Resources/Textures/1.png";
 	propTextureStrings[1] = "../../Resources/Textures/2.png";
 	propTextureStrings[2] = "../../Resources/Textures/3.png";
@@ -154,8 +153,7 @@ void Scene::update(float dt)
 
 void Scene::render() const
 {
-	//TODO render all ACTIVE props and characters
-	for (const Prop& current_prop : props_pool)
+	for (auto& current_prop : props_pool)
 	{
 		if(current_prop.getIsActive())
 		{
