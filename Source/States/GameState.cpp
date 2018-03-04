@@ -525,10 +525,10 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/sad/start40", "terri", "You've had more than a few.", "kitchen/sad/start41");
 	dialogue_tree.addDialogue("kitchen/sad/start41", "nick", "What are you, counting?", "kitchen/sad/start42");
 	dialogue_tree.addDialogue("kitchen/sad/start42", "laura", "Don't talk like a drunk if you're not...", "kitchen/sad/start43");
-	dialogue_tree.addDialogue("kitchen/sad/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "kitchen/option2S");
+	dialogue_tree.addDialogue("kitchen/sad/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "kitchen/sad/start44");
 
 	//If Sad Option - Pick 2 -
-	dialogue_tree.addDialogue("kitchen/sad/start44", "nick", "Like I was saying...\nThere this old couple, had a car wreck out on the interstate.", "kitchen/sad/start45");
+	dialogue_tree.addDialogue("kitchen/sad/start44", "nick", "Like I was saying...\nThere this old couple.\nUnfortunately they had a car wreck out on the interstate", "kitchen/option2S");
 	dialogue_tree.addDialogue("kitchen/sad/start45", "nick", "Some drunk kid plowed his dad's pick up into their camper.", "kitchen/option3S");
 
 	//If Sad Option - Pick 3 - 
@@ -684,10 +684,10 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/comedy/start40", "terri", "You've had more than a few.", "kitchen/comedy/start41");
 	dialogue_tree.addDialogue("kitchen/comedy/start41", "nick", "Why you have to be so boring\nwe are just having a bit of fun?", "kitchen/comedy/start42");
 	dialogue_tree.addDialogue("kitchen/comedy/start42", "laura", "Don't talk like a drunk if you not...", "kitchen/comedy/start43");
-	dialogue_tree.addDialogue("kitchen/comedy/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "kitchen/option2C");
+	dialogue_tree.addDialogue("kitchen/comedy/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "kitchen/comedy/start44");
 
 	//If Comedy Option - Pick 2 -
-	dialogue_tree.addDialogue("kitchen/comedy/start44", "nick", "Like I was saying...\nThere this old couple, had a car wreck out on the interstate.", "kitchen/comedy/start45");
+	dialogue_tree.addDialogue("kitchen/comedy/start44", "nick", "Like I was saying...\nThere this old couple.\nUnfortunately they had a car wreck out on the interstate.", "kitchen/option2C");
 	dialogue_tree.addDialogue("kitchen/comedy/start45", "nick", "Some drunk teen crashed into them\nbecause he was to busy singing\nLet it go and not looking at the road .", "kitchen/option3C");
 
 	//If Comedy Option - Pick 3 - 
@@ -880,10 +880,10 @@ void GameState::dialogue_kitchen()
 	dialogue_tree.addDialogue("kitchen/dark/start40", "terri", "You say that but...\nI've seen you drink way over your limit already.", "kitchen/dark/start41");
 	dialogue_tree.addDialogue("kitchen/dark/start41", "nick", "Fuck you Terri, let us drink in peace", "kitchen/dark/start42");
 	dialogue_tree.addDialogue("kitchen/dark/start42", "laura", "If your not drunk, stop acting like an asshole then...", "kitchen/dark/start43");
-	dialogue_tree.addDialogue("kitchen/dark/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "kitchen/option2D");
+	dialogue_tree.addDialogue("kitchen/dark/start43", "nick", "Shut up\nFor once in your life.\nWill you do me a favor and shut up for a minute?\"", "kitchen/dark/start44");
 
 	//If Dark Option - Pick 2 -
-	dialogue_tree.addDialogue("kitchen/dark/start44", "nick", "Like I was saying...\nThere this old couple, had a car wreck out on the interstate.", "kitchen/dark/start45");
+	dialogue_tree.addDialogue("kitchen/dark/start44", "nick", "Like I was saying...\nThere this old couple.\nUnfortunately they had a car wreck out on the interstate.", "kitchen/option2D");
 	dialogue_tree.addDialogue("kitchen/dark/start45", "nick", "Some drunk teen rams the back of there camper\nwith his dad's pick up.", "kitchen/option3D");
 
 	//If Dark Option - Pick 3 - 
@@ -950,14 +950,14 @@ void GameState::dialogue_kitchen()
 	{
 		play_01.getAudience()->addToComedy(15);
 		play_01.getScene()->addToComedy(1);
-		return "kitchen/comedy/start44";
+		return "kitchen/comedy/start45";
 	});
 	dialogue_tree.addPlayerOption("kitchen/option2C", "Learner driver crashes into an old couple",
 		[&]()
 	{
 		play_01.getAudience()->addToLight(15);
 		play_01.getScene()->addToLight(1);
-		return "kitchen/light/start44";
+		return "kitchen/light/start45";
 	});
 	
 	//Player Option 2 Light Line
@@ -989,7 +989,7 @@ void GameState::dialogue_kitchen()
 	{
 		play_01.getAudience()->addToSad(15);
 		play_01.getScene()->addToSad(1);
-		return "kitchen/sad/start44";
+		return "kitchen/sad/start45";
 	});
 	
 	dialogue_tree.addPlayerOption("kitchen/option2S", "Learner driver crashes into an old couple",
@@ -997,14 +997,14 @@ void GameState::dialogue_kitchen()
 	{
 		play_01.getAudience()->addToLight(15);
 		play_01.getScene()->addToLight(1);
-		return "kitchen/light/start44";
+		return "kitchen/light/start45";
 	});
 	dialogue_tree.addPlayerOption("kitchen/option2S", "Drunk teen rams intentionally into an old couple",
 		[&]()
 	{
 		play_01.getAudience()->addToDark(15);
 		play_01.getScene()->addToDark(1);
-		return "kitchen/dark/start44";
+		return "kitchen/dark/start45";
 	});
 
 	//Player Option 2 Dark Line
@@ -1013,7 +1013,7 @@ void GameState::dialogue_kitchen()
 	{
 		play_01.getAudience()->addToSad(15);
 		play_01.getScene()->addToSad(1);
-		return "kitchen/sad/start44";
+		return "kitchen/sad/start45";
 	});
 	
 	dialogue_tree.addPlayerOption("kitchen/option2D", "Drunk teen rams intentionally into an old couple",
@@ -1021,7 +1021,7 @@ void GameState::dialogue_kitchen()
 	{
 		play_01.getAudience()->addToDark(15);
 		play_01.getScene()->addToDark(1);
-		return "kitchen/dark/start44";
+		return "kitchen/dark/start45";
 	});
 
 	//Player Option 3 Comedy Line
